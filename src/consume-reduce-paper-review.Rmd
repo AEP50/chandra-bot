@@ -68,15 +68,22 @@ to_join_df <- working_df %>%
   bind_cols(paper_numbers_df, .) %>%
   select(paper_number, article_title)
 
-review_details_df <- left_join(to_join_df, working_df, by = c("article_title"))
+review_details_df <- left_join(to_join_df, working_df, by = c("article_title")) %>%
+  type_convert(., col_types = cols(.default = col_character(),
+                                   required_reviewers = col_integer(),
+                                   reviewer_number = col_integer(),
+                                   review_complete = col_logical(),
+                                   overall_score_for_presentation = col_integer())) %>%
+  mutate(confidential_comments = gsub("\r?\n|\r", " ", confidential_comments)) %>%
+  mutate(reviewer_comments_to_author = gsub("\r?\n|\r", " ", reviewer_comments_to_author))
 
-remove(working_df, raw_df, to_join_df)
+remove(working_df, to_join_df)
   
 
 ```
 
 # Data Write
 ```{r data-write}
-write_csv(review_details_df, path = output_for_tableau_file_name)
+write.csv(review_details_df, file = output_for_tableau_file_name, quote = TRUE, row.names = FALSE)
 ```
 
