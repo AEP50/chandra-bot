@@ -32,6 +32,15 @@ local_xlxs_file_name <- paste0(external_dir, "editorial_manager/", google_drive_
 
 ```
 
+# Parameters
+```{r parameters}
+MAX_SCORE <- 5L
+ACCEPT_WORD <- "Accept"
+ACCEPT_DEFAULT_SCORE <- 4L
+REJECT_DEFAULT_SCORE <- 2L
+```
+
+
 # Data Reads
 ```{r data-read}
 drive_download(file = paste0(google_drive_path, google_drive_file_name),
@@ -48,6 +57,12 @@ paper_numbers_df <- raw_df %>%
   filter(str_detect(A, "20-")) %>%
   select(paper_number = A)
 
+check_dups_df <- paper_numbers_df %>%
+  group_by(paper_number) %>%
+  summarise(count = n()) %>%
+  ungroup() %>%
+  filter(count > 1)
+
 working_df <- raw_df %>%
   filter(str_detect(B, "Presentation")) %>%
   rename(article_title = A,
@@ -61,23 +76,27 @@ working_df <- raw_df %>%
          editorial_status = I,
          overall_score_for_presentation = J)
   
-to_join_df <- working_df %>%
-  group_by(article_title, article_type) %>%
-  summarise(count = n()) %>%
-  ungroup() %>%
-  bind_cols(paper_numbers_df, .) %>%
-  select(paper_number, article_title)
+article_title_df <- tibble(article_title = unique(working_df$article_title)) %>%
+  bind_cols(., paper_numbers_df)
 
-review_details_df <- left_join(to_join_df, working_df, by = c("article_title")) %>%
+review_details_df <- left_join(article_title_df, working_df, by = c("article_title")) %>%
   type_convert(., col_types = cols(.default = col_character(),
                                    required_reviewers = col_integer(),
                                    reviewer_number = col_integer(),
                                    review_complete = col_logical(),
                                    overall_score_for_presentation = col_integer())) %>%
   mutate(confidential_comments = gsub("\r?\n|\r", " ", confidential_comments)) %>%
-  mutate(reviewer_comments_to_author = gsub("\r?\n|\r", " ", reviewer_comments_to_author))
+  mutate(reviewer_comments_to_author = gsub("\r?\n|\r", " ", reviewer_comments_to_author)) %>%
+  mutate(overall_score_for_presentation = if_else(overall_score_for_presentation > MAX_SCORE,
+                                                  if_else(reviewer_recommendation == ACCEPT_WORD, 
+                                                          ACCEPT_DEFAULT_SCORE, 
+                                                          REJECT_DEFAULT_SCORE),
+                                                  overall_score_for_presentation))
 
-remove(working_df, to_join_df)
+check_high_scores_df <- review_details_df %>%
+  filter(overall_score_for_presentation > 5)
+
+remove(working_df, article_title_df)
   
 
 ```
