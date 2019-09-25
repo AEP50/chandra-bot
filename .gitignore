@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+data/external/editorial_manager/paper_review_details_2019.xlsx
+data/interim/paper_review_for_tableau.csv

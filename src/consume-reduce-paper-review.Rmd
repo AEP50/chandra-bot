@@ -1,0 +1,82 @@
+---
+title: "Consume and Reduce Paper Review Spreadsheet"
+output: html_notebook
+---
+
+# Overhead
+```{r overhead, include = FALSE}
+packages_vector <- c("tidyverse",
+                     "googledrive",
+                     "readxl")
+
+need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
+
+if (length(need_to_install)) install.packages(need_to_install)
+
+for (package in packages_vector){
+  library(package, character.only = TRUE)
+}
+
+```
+
+# Remote I-O
+```{r remote-io}
+external_dir <- "../data/external/"
+interim_dir <- "../data/interim/"
+google_drive_path <- "~/project_chandra_bot/"
+google_drive_file_name <- "paper_review_details_2019.xlsx"
+
+output_for_tableau_file_name <- paste0(interim_dir, "paper_review_for_tableau.csv")
+
+local_xlxs_file_name <- paste0(external_dir, "editorial_manager/", google_drive_file_name)
+
+```
+
+# Data Reads
+```{r data-read}
+drive_download(file = paste0(google_drive_path, google_drive_file_name),
+               path = local_xlxs_file_name,
+               overwrite = TRUE)
+
+raw_df <- read_excel(path = local_xlxs_file_name, col_names = LETTERS[1:10])
+
+```
+
+# Data Reduction
+```{r data-reduction}
+paper_numbers_df <- raw_df %>%
+  filter(str_detect(A, "20-")) %>%
+  select(paper_number = A)
+
+working_df <- raw_df %>%
+  filter(str_detect(B, "Presentation")) %>%
+  rename(article_title = A,
+         article_type = B,
+         required_reviewers = C,
+         reviewer_number = D,
+         confidential_comments = E,
+         reviewer_comments_to_author = F,
+         reviewer_recommendation = G,
+         review_complete = H,
+         editorial_status = I,
+         overall_score_for_presentation = J)
+  
+to_join_df <- working_df %>%
+  group_by(article_title, article_type) %>%
+  summarise(count = n()) %>%
+  ungroup() %>%
+  bind_cols(paper_numbers_df, .) %>%
+  select(paper_number, article_title)
+
+review_details_df <- left_join(to_join_df, working_df, by = c("article_title"))
+
+remove(working_df, raw_df, to_join_df)
+  
+
+```
+
+# Data Write
+```{r data-write}
+write_csv(review_details_df, path = output_for_tableau_file_name)
+```
+
