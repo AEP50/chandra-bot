@@ -7,3 +7,4 @@ data/external/editorial_manager/paper_review_details_2019.xlsx
 data/interim/paper_review_for_tableau.csv
 notebooks/Review Summaries.twb
 notebooks/.~Review Summaries__75349.twbr
+data/interim/session_groups.csv

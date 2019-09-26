@@ -30,12 +30,15 @@ output_for_tableau_file_name <- paste0(interim_dir, "paper_review_for_tableau.cs
 
 local_xlxs_file_name <- paste0(external_dir, "editorial_manager/", google_drive_file_name)
 
+session_groups_file_name <- paste0(interim_dir, "session_groups.csv")
+
 ```
 
 # Parameters
 ```{r parameters}
 MAX_SCORE <- 5L
 ACCEPT_WORD <- "Accept"
+REJECT_WORD <- "Reject"
 ACCEPT_DEFAULT_SCORE <- 4L
 REJECT_DEFAULT_SCORE <- 2L
 ```
@@ -48,6 +51,8 @@ drive_download(file = paste0(google_drive_path, google_drive_file_name),
                overwrite = TRUE)
 
 raw_df <- read_excel(path = local_xlxs_file_name, col_names = LETTERS[1:10])
+
+session_groups_df <- read_csv(session_groups_file_name, col_types = "cic")
 
 ```
 
@@ -91,10 +96,18 @@ review_details_df <- left_join(article_title_df, working_df, by = c("article_tit
                                                   if_else(reviewer_recommendation == ACCEPT_WORD, 
                                                           ACCEPT_DEFAULT_SCORE, 
                                                           REJECT_DEFAULT_SCORE),
-                                                  overall_score_for_presentation))
+                                                  overall_score_for_presentation)) %>%
+  mutate(accepts = if_else(reviewer_recommendation == ACCEPT_WORD, 1L, 0L)) %>%
+  mutate(accepts = if_else(is.na(accepts), 0L, accepts)) %>%
+  mutate(valid_reviews = if_else(reviewer_recommendation %in% c(ACCEPT_WORD, REJECT_WORD), 1L, 0L)) %>%
+  group_by(paper_number, article_title) %>%
+  mutate(acceptance_rate = sum(accepts) / sum(valid_reviews)) %>%
+  ungroup() %>%
+  select(-accepts, -valid_reviews) %>%
+  left_join(., session_groups_df, by = c("paper_number"))
 
 check_high_scores_df <- review_details_df %>%
-  filter(overall_score_for_presentation > 5)
+  filter(overall_score_for_presentation > MAX_SCORE)
 
 remove(working_df, article_title_df)
   
