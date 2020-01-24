@@ -30,7 +30,7 @@ output_for_tableau_file_name <- paste0(interim_dir, "paper_review_for_tableau.cs
 
 local_xlxs_file_name <- paste0(external_dir, "editorial_manager/", google_drive_file_name)
 
-session_groups_file_name <- paste0(interim_dir, "session_groups.csv")
+session_groups_file_name <- paste0(interim_dir, "session_groups_number_2.csv")
 
 ```
 
