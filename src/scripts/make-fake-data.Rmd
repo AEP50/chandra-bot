@@ -30,13 +30,23 @@ last_name_file_name <- "https://raw.githubusercontent.com/smashew/NameDatabases/
 
 article_titles_file_name <- paste0(external_dir, "random_article_titles.txt")
 
+# https://tatoeba.org/eng/downloads
+sentence_file_name <- paste0(external_dir, "sentences.csv")
+
+# https://ope.ed.gov/dapip/#/download-data-files
+university_file_name <- paste0(external_dir, "InstitutionCampus.csv")
+
 output_file_name <- "fake_data.csv"
 
 ```
 
 # Parameters
 ```{r parameters}
-
+NUMBER_HUMANS <- 500
+NUMBER_PAPERS <- 200
+MAX_AUTHORS_PER_PAPER <- 7
+REVIEWERS_PER_PAPER <- 5
+MAX_REVIEW_LENGTH <- 20
 ```
 
 article_title = A,
@@ -60,6 +70,11 @@ raw_last_names_df <- read_csv(last_name_file_name, col_names = FALSE, col_types 
 input_line <- readLines(article_titles_file_name)
 raw_article_titles_df <- tibble(title = input_line)
 
+input_line <- readLines(sentence_file_name)
+raw_sentence_df <- tibble(line_text = input_line)
+
+raw_university_df <- read_csv(university_file_name, col_types = cols(.default = col_character()))
+
 ```
 
 # Clean Data
@@ -72,17 +87,125 @@ last_names_df <- raw_last_names_df %>%
 
 article_titles_df <- raw_article_titles_df %>%
   mutate(length = str_length(title)) %>%
-  filter(length > 4)
+  filter(length > 4) %>%
+  select(article_title = title, -length) 
 
-remove(raw_first_names_df, raw_last_names_df, raw_article_titles_df)
+sentence_df <- raw_sentence_df %>%
+  separate(., line_text, into = c("index", "language", "sentence"), sep = "\t", remove = TRUE) %>%
+  filter(language == "eng")
+
+university_df <- raw_university_df %>%
+  select(affiliation = LocationName)
+  
+
+remove(raw_first_names_df, raw_last_names_df, raw_article_titles_df, raw_sentence_df)
 
 ```
 
-# TODO:
-1. Use random sentences for reviews.
-2. Build methods to create a name
-3. Start with database of finite set of humans
-4. Combine N humans to write a paper
-5. Reviewers get random sentences
-6. Write a method to create a database entry, then make a million of them
+# Methods
+```{r  methods}
+select_first_n_random <- function(input_df, input_n) {
+  
+  return_df <- input_df %>%
+    bind_cols(., tibble(random = runif(nrow(.), min = 0.0, max = 1.0))) %>%
+    arrange(-random) %>%
+    head(input_n) %>%
+    select(-random)
+  
+  return(return_df)
+
+}
+
+create_universe_of_humans <- function(input_first_df, input_last_df, input_university_df, input_size) {
+  
+  working_first_df <- select_first_n_random(input_first_df, input_size) 
+  
+  working_last_df <- select_first_n_random(input_last_df, input_size)
+  
+  working_university_df <- select_first_n_random(input_university_df, input_size)
+    
+  return_df <- bind_cols(working_first_df, working_last_df, working_university_df)
+  
+  return(return_df)
+  
+}
+
+create_papers <- function(input_humans_df, input_articles_df, input_size, input_max_authors) {
+  
+  working_title_df <- select_first_n_random(input_articles_df, input_size) %>%
+    mutate(paper_number = row_number())
+  
+  number_authors_df <- tibble(authors = runif(input_size, min = 0, max = input_max_authors)) %>%
+    mutate(authors = as.integer(ceiling(authors))) %>%
+    mutate(paper_number = row_number())
+  
+  authors_df <- expand.grid(paper_number = seq(1:input_size), author_number = seq(1:input_max_authors)) %>%
+    left_join(., number_authors_df, by = c("paper_number")) %>%
+    filter(author_number <= authors) %>%
+    select(paper_number, author_number) %>%
+    arrange(paper_number, author_number)
+  
+  working_humans_df <- input_humans_df
+  while (nrow(working_humans_df) < nrow(authors_df)) {
+    working_humans_df <- bind_rows(working_humans_df, working_humans_df)
+    
+  }
+  
+  return_df <- authors_df %>%
+    bind_cols(., head(working_humans_df, nrow(authors_df))) %>%
+    left_join(., working_title_df, by = c("paper_number"))
+  
+  return(return_df)
+  
+}
+
+create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df, input_reviews_per, input_max_length){
+  
+  input_humans_df <- humans_df
+  input_papers_df <- papers_df
+  input_sentence_df <- sentence_df
+  input_reviews_per <- REVIEWERS_PER_PAPER
+  input_max_length <- MAX_REVIEW_LENGTH
+  
+  reviews_per_buffer <- input_reviews_per + 5
+  
+  reviewers_df <- expand.grid(paper_number = seq(1:nrow(input_papers_df)),
+                              reviewer_number = seq(1:reviews_per_buffer),
+                              comments = seq(1:input_max_length)) %>%
+    arrange(paper_number, reviewer_number, comments) %>%
+    mutate(index = row_number())
+  
+  working_humans_df <- input_humans_df 
+  while (nrow(working_humans_df) < nrow(reviewers_df)) {
+    working_humans_df <- bind_rows(working_humans_df, working_humans_df)
+  }
+  
+  reviewers_df <- bind_cols(reviewers_df, select_first_n_random(working_humans_df, nrow(reviewers_df))) %>%
+    rename(reviewer_first = first, reviewer_last = last, reviewer_affiliation = affiliation)
+  
+  # START HERE
+  # 1. redo the above humon join, suppressing the comments column
+  # 2. add review text, both comments to author and confidential, by joining random sentences
+  # to each review comment, do twice, for each comment type
+  # 4. check if the reviewers are the authors, if so, flag and remove
+  # 5. select a random number of reviews per paper, between MIN and MAX
+  # 6. select a random number of sentences for each comment type
+  # 7. group_by and paste to concatenate the comments into text blocks
+  # 8. align the variable names with the above canonical names
+  # 9. sync with sijia to make the fake data align with the input spec
+
+  
+  
+  
+  
+}
+```
+
+# Make Data
+```{r make-data}
+humans_df <- create_universe_of_humans(first_names_df, last_names_df, university_df, NUMBER_HUMANS)
+papers_df <- create_papers(humans_df, article_titles_df, NUMBER_PAPERS, MAX_AUTHORS_PER_PAPER)
+# reviews_df <- create_reviews(humans_df, papers_df, sentence_df, REVIEWERS_PER_PAPER, MAX_REVIEW_LENGTH)
+```
+
 
