@@ -3,16 +3,18 @@ title: "Make Fake Data"
 output: html_notebook
 ---
 
+# TODO
+1. Apply year after year with same humans
+
 # Overhead
 ```{r overhead, include = FALSE}
-packages_vector <- c("tidyverse",
-                     "googledrive")
+packages_vector <- c("tidyverse")
 
 need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
 
 if (length(need_to_install)) install.packages(need_to_install)
 
-for (package in packages_vector){
+for (package in packages_vector) {
   library(package, character.only = TRUE)
 }
 
@@ -22,7 +24,6 @@ for (package in packages_vector){
 ```{r remote-io}
 external_dir <- "../../data/external/"
 interim_dir <- "../../data/interim/"
-google_drive_path <- "~/project_chandra_bot/"
 
 first_name_file_name <- "https://raw.githubusercontent.com/smashew/NameDatabases/master/NamesDatabases/first%20names/us.txt"
 
@@ -30,8 +31,8 @@ last_name_file_name <- "https://raw.githubusercontent.com/smashew/NameDatabases/
 
 article_titles_file_name <- paste0(external_dir, "random_article_titles.txt")
 
-# https://tatoeba.org/eng/downloads
-sentence_file_name <- paste0(external_dir, "sentences.csv")
+# see `make-english-sentence-db.Rmd
+sentence_file_name <- paste0(interim_dir, "english-sentences.RDS")
 
 # https://ope.ed.gov/dapip/#/download-data-files
 university_file_name <- paste0(external_dir, "InstitutionCampus.csv")
@@ -70,8 +71,7 @@ raw_last_names_df <- read_csv(last_name_file_name, col_names = FALSE, col_types 
 input_line <- readLines(article_titles_file_name)
 raw_article_titles_df <- tibble(title = input_line)
 
-input_line <- readLines(sentence_file_name)
-raw_sentence_df <- tibble(line_text = input_line)
+sentence_df <- readRDS(sentence_file_name)
 
 raw_university_df <- read_csv(university_file_name, col_types = cols(.default = col_character()))
 
@@ -90,15 +90,11 @@ article_titles_df <- raw_article_titles_df %>%
   filter(length > 4) %>%
   select(article_title = title, -length) 
 
-sentence_df <- raw_sentence_df %>%
-  separate(., line_text, into = c("index", "language", "sentence"), sep = "\t", remove = TRUE) %>%
-  filter(language == "eng")
-
 university_df <- raw_university_df %>%
   select(affiliation = LocationName)
   
 
-remove(raw_first_names_df, raw_last_names_df, raw_article_titles_df, raw_sentence_df)
+remove(raw_first_names_df, raw_last_names_df, raw_article_titles_df)
 
 ```
 
@@ -124,7 +120,8 @@ create_universe_of_humans <- function(input_first_df, input_last_df, input_unive
   
   working_university_df <- select_first_n_random(input_university_df, input_size)
     
-  return_df <- bind_cols(working_first_df, working_last_df, working_university_df)
+  return_df <- bind_cols(working_first_df, working_last_df, working_university_df) %>%
+    mutate(human_id = paste0(first, "---", last, "---", affiliation))
   
   return(return_df)
   
@@ -153,7 +150,8 @@ create_papers <- function(input_humans_df, input_articles_df, input_size, input_
   
   return_df <- authors_df %>%
     bind_cols(., head(working_humans_df, nrow(authors_df))) %>%
-    left_join(., working_title_df, by = c("paper_number"))
+    left_join(., working_title_df, by = c("paper_number")) %>%
+    select(paper_number, article_title, author_number, author_human_id = human_id)
   
   return(return_df)
   
@@ -169,11 +167,17 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df, 
   
   reviews_per_buffer <- input_reviews_per + 5
   
-  reviewers_df <- expand.grid(paper_number = seq(1:nrow(input_papers_df)),
+  reviewers_comments_df <- expand.grid(paper_number = seq(1:nrow(input_papers_df)),
                               reviewer_number = seq(1:reviews_per_buffer),
                               comments = seq(1:input_max_length)) %>%
     arrange(paper_number, reviewer_number, comments) %>%
-    mutate(index = row_number())
+    bind_cols(., select_first_n_random(sentence_df, nrow(.))) %>%
+    rename(to_author = sentence) %>%
+    bind_cols(., select_first_n_random(sentence_df, nrow(.))) %>%
+    rename(to_chair = sentence)
+  
+  reviewers_df <- reviewers_comments_df %>%
+    distinct(paper_number, reviewer_number)
   
   working_humans_df <- input_humans_df 
   while (nrow(working_humans_df) < nrow(reviewers_df)) {
@@ -181,23 +185,75 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df, 
   }
   
   reviewers_df <- bind_cols(reviewers_df, select_first_n_random(working_humans_df, nrow(reviewers_df))) %>%
-    rename(reviewer_first = first, reviewer_last = last, reviewer_affiliation = affiliation)
+    select(paper_number, reviewer_number, reviewer_human_id = human_id)
   
+  # remove authors that are the paper
+  reviewer_check_df <- reviewers_df %>%
+    distinct(reviewer_human_id, paper_number) %>%
+    mutate(reviewer = TRUE) %>%
+    select(human_id = reviewer_human_id, paper_number, reviewer)
+  
+  author_check_df <- papers_df %>%
+    distinct(author_human_id, paper_number) %>%
+    mutate(author = TRUE) %>%
+    select(human_id = author_human_id, paper_number, author)
+  
+  check_df <- left_join(reviewer_check_df, author_check_df, by = c("human_id", "paper_number")) %>%
+    mutate(reviewer = replace_na(reviewer, FALSE)) %>%
+    mutate(author = replace_na(author, FALSE)) %>%
+    filter(author & reviewer) %>%
+    mutate(remove = TRUE) %>%
+    select(reviewer_human_id = human_id, paper_number,remove)
+  
+  working_df <- left_join(reviewers_df, check_df, by = c("reviewer_human_id", "paper_number")) %>%
+    mutate(remove = replace_na(remove, FALSE)) %>%
+    filter(!remove) %>%
+    select(-remove) %>%
+    bind_cols(., tibble(number_to_author = runif(nrow(.), min = 0.0, max = input_max_length))) %>%
+    mutate(number_to_author = as.integer(ceiling(number_to_author))) %>%
+    bind_cols(., tibble(number_to_chair = runif(nrow(.), min = 0.0, max = input_max_length))) %>%
+    mutate(number_to_chair = as.integer(ceiling(number_to_chair))) %>%
+    left_join(reviewers_comments_df, ., by = c("paper_number", "reviewer_number")) %>%
+    filter(!is.na(reviewer_human_id))
+  
+  comments_to_author_df <- working_df %>%
+    select(paper_number, reviewer_number, comments, to_author, reviewer_human_id, number_to_author) %>%
+    filter(comments <= number_to_author) %>%
+    group_by(paper_number, reviewer_human_id) %>%
+    summarise(reviewer_comments_to_author = paste(to_author, collapse = " ")) %>%
+    ungroup()
+  
+  comments_to_chair_df <- working_df %>%
+    select(paper_number, reviewer_number, comments, to_chair, reviewer_human_id, number_to_chair) %>%
+    filter(comments <= number_to_chair) %>%
+    group_by(paper_number, reviewer_human_id) %>%
+    summarise(confidential_comments = paste(to_chair, collapse = " ")) %>%
+    ungroup()
+  
+  reviews_per_paper_df <- input_papers_df %>%
+    distinct(paper_number) %>%
+    bind_cols(., 
+              tibble(number_of_reviews = runif(nrow(.), 
+                                               min = input_reviews_per - 1, 
+                                               max = input_reviews_per + 1))) %>%
+    mutate(number_of_reviews = as.integer(ceiling(number_of_reviews)))
+  
+  return_df <- working_df %>%
+    distinct(paper_number, reviewer_human_id) %>%
+    group_by(paper_number) %>%
+    mutate(reviewer_number = row_number()) %>%
+    ungroup() %>%
+    left_join(., reviews_per_paper_df, by = c("paper_number")) %>%
+    filter(reviewer_number <= number_of_reviews) %>%
+    left_join(., comments_to_author_df, by = c("paper_number", "reviewer_human_id")) %>%
+    left_join(., comments_to_chair_df, by = c("paper_number", "reviewer_human_id"))
+    
   # START HERE
-  # 1. redo the above humon join, suppressing the comments column
-  # 2. add review text, both comments to author and confidential, by joining random sentences
-  # to each review comment, do twice, for each comment type
-  # 4. check if the reviewers are the authors, if so, flag and remove
-  # 5. select a random number of reviews per paper, between MIN and MAX
-  # 6. select a random number of sentences for each comment type
-  # 7. group_by and paste to concatenate the comments into text blocks
-  # 8. align the variable names with the above canonical names
-  # 9. sync with sijia to make the fake data align with the input spec
-
-  
-  
-  
-  
+  # 1. Need these variables: reviewer_recommendation, review_complete, editorial_status, overall_score_for_presentation
+  # 2. add them, then clean up data frame
+  # 3. apply for 20 years with same set of humans
+  # 4. test, test
+  # 5. ping sijia for code review
 }
 ```
 
