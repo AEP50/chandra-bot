@@ -3,9 +3,6 @@ title: "Make Fake Data"
 output: html_notebook
 ---
 
-# TODO
-1. Apply year after year with same humans
-
 # Overhead
 ```{r overhead, include = FALSE}
 packages_vector <- c("tidyverse")
@@ -24,20 +21,22 @@ for (package in packages_vector) {
 ```{r remote-io}
 external_dir <- "../../data/external/"
 interim_dir <- "../../data/interim/"
+processed_dir <- "../../data/processed/"
 
-first_name_file_name <- "https://raw.githubusercontent.com/smashew/NameDatabases/master/NamesDatabases/first%20names/us.txt"
-
-last_name_file_name <- "https://raw.githubusercontent.com/smashew/NameDatabases/master/NamesDatabases/surnames/us.txt"
+# see make-names-df
+first_name_file_name <- paste0(interim_dir, "first-names.RDS")
+last_name_file_name <- paste0(interim_dir, "last-names.RDS")
 
 article_titles_file_name <- paste0(external_dir, "random_article_titles.txt")
 
-# see `make-english-sentence-db.Rmd
+# see make-english-sentence-db.Rmd
 sentence_file_name <- paste0(interim_dir, "english-sentences.RDS")
 
 # https://ope.ed.gov/dapip/#/download-data-files
 university_file_name <- paste0(external_dir, "InstitutionCampus.csv")
 
-output_file_name <- "fake_data.csv"
+output_paper_file_name <- paste0(processed_dir, "fake_paper_series.csv")
+output_review_file_name <- paste0(processed_dir, "fake_review_series.csv")
 
 ```
 
@@ -48,24 +47,17 @@ NUMBER_PAPERS <- 200
 MAX_AUTHORS_PER_PAPER <- 7
 REVIEWERS_PER_PAPER <- 5
 MAX_REVIEW_LENGTH <- 20
-```
+MIN_PRESENTATION_SCORE <- 1
+MAX_PRESENTATION_SCORE <- 5
+ACCEPT_WORD <- "Accept" 
+REJECT_WORD <- "Reject"
 
-article_title = A,
-         article_type = B,
-         required_reviewers = C,
-         reviewer_number = D,
-         confidential_comments = E,
-         reviewer_comments_to_author = F,
-         reviewer_recommendation = G,
-         review_complete = H,
-         editorial_status = I,
-         overall_score_for_presentation = 
-         reviewer_name
+```
 
 # Data Reads
 ```{r data-reads}
-raw_first_names_df <- read_csv(first_name_file_name, col_names = FALSE, col_types = "c")
-raw_last_names_df <- read_csv(last_name_file_name, col_names = FALSE, col_types = "c")
+first_names_df <- readRDS(first_name_file_name)
+last_names_df <- readRDS(last_name_file_name)
 
 # titles data not in quotes
 input_line <- readLines(article_titles_file_name)
@@ -79,12 +71,6 @@ raw_university_df <- read_csv(university_file_name, col_types = cols(.default = 
 
 # Clean Data
 ```{r clean-data}
-first_names_df <- raw_first_names_df %>%
-  rename(first = X1)
-
-last_names_df <- raw_last_names_df %>%
-  rename(last = X1)
-
 article_titles_df <- raw_article_titles_df %>%
   mutate(length = str_length(title)) %>%
   filter(length > 4) %>%
@@ -93,8 +79,7 @@ article_titles_df <- raw_article_titles_df %>%
 university_df <- raw_university_df %>%
   select(affiliation = LocationName)
   
-
-remove(raw_first_names_df, raw_last_names_df, raw_article_titles_df)
+remove(raw_university_df, raw_article_titles_df)
 
 ```
 
@@ -157,13 +142,8 @@ create_papers <- function(input_humans_df, input_articles_df, input_size, input_
   
 }
 
-create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df, input_reviews_per, input_max_length){
-  
-  input_humans_df <- humans_df
-  input_papers_df <- papers_df
-  input_sentence_df <- sentence_df
-  input_reviews_per <- REVIEWERS_PER_PAPER
-  input_max_length <- MAX_REVIEW_LENGTH
+create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df, 
+                           input_reviews_per, input_max_length){
   
   reviews_per_buffer <- input_reviews_per + 5
   
@@ -230,11 +210,24 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df, 
     summarise(confidential_comments = paste(to_chair, collapse = " ")) %>%
     ungroup()
   
+  presentation_score_df <- working_df %>%
+    distinct(paper_number, reviewer_human_id) %>%
+    bind_cols(., tibble(random = runif(nrow(.), min = MIN_PRESENTATION_SCORE - 1, max = MAX_PRESENTATION_SCORE))) %>%
+    mutate(score = as.integer(ceiling(random))) %>%
+    select(paper_number, reviewer_human_id, overall_score_for_presentation = score)  
+  
+  accept_reject_df <- presentation_score_df %>%
+    bind_cols(., tibble(random = runif(nrow(.), min = 0, max = 1.0))) %>%
+    
+    mutate(review_recommendation = if_else(random < 0.500 & overall_score_for_presentation >= 3, 
+                                           ACCEPT_WORD, REJECT_WORD)) %>%
+    select(paper_number, reviewer_human_id, review_recommendation)
+  
   reviews_per_paper_df <- input_papers_df %>%
     distinct(paper_number) %>%
     bind_cols(., 
               tibble(number_of_reviews = runif(nrow(.), 
-                                               min = input_reviews_per - 1, 
+                                               min = input_reviews_per - 2, 
                                                max = input_reviews_per + 1))) %>%
     mutate(number_of_reviews = as.integer(ceiling(number_of_reviews)))
   
@@ -246,22 +239,48 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df, 
     left_join(., reviews_per_paper_df, by = c("paper_number")) %>%
     filter(reviewer_number <= number_of_reviews) %>%
     left_join(., comments_to_author_df, by = c("paper_number", "reviewer_human_id")) %>%
-    left_join(., comments_to_chair_df, by = c("paper_number", "reviewer_human_id"))
+    left_join(., comments_to_chair_df, by = c("paper_number", "reviewer_human_id")) %>%
+    left_join(., accept_reject_df, by = c("paper_number", "reviewer_human_id")) %>%
+    left_join(., presentation_score_df, by = c("paper_number", "reviewer_human_id"))
+  
+  return(return_df)
     
-  # START HERE
-  # 1. Need these variables: reviewer_recommendation, review_complete, editorial_status, overall_score_for_presentation
-  # 2. add them, then clean up data frame
-  # 3. apply for 20 years with same set of humans
-  # 4. test, test
-  # 5. ping sijia for code review
 }
 ```
 
 # Make Data
 ```{r make-data}
 humans_df <- create_universe_of_humans(first_names_df, last_names_df, university_df, NUMBER_HUMANS)
-papers_df <- create_papers(humans_df, article_titles_df, NUMBER_PAPERS, MAX_AUTHORS_PER_PAPER)
-# reviews_df <- create_reviews(humans_df, papers_df, sentence_df, REVIEWERS_PER_PAPER, MAX_REVIEW_LENGTH)
+
+start_year <- 2000
+end_year <- 2020
+for (year in seq(from = start_year, to = end_year)) {
+  
+  papers_df <- create_papers(humans_df, article_titles_df, NUMBER_PAPERS, MAX_AUTHORS_PER_PAPER) %>%
+    mutate(year = year)
+  reviews_df <- create_reviews(humans_df, papers_df, sentence_df, REVIEWERS_PER_PAPER, MAX_REVIEW_LENGTH) %>%
+    mutate(year = year)
+  
+  if (year == start_year) {
+    
+    running_papers_df <- papers_df
+    running_reviews_df <- reviews_df
+    
+  } else {
+    
+    running_papers_df <- bind_rows(running_papers_df, papers_df)
+    running_reviews_df <- bind_rows(running_reviews_df, reviews_df)
+    
+  }
+  
+}
+
+```
+
+# Write
+```{r write}
+write_csv(running_papers_df, path = output_paper_file_name)
+write_csv(running_reviews_df, path = output_review_file_name)
 ```
 
 
