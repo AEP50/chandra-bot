@@ -289,11 +289,20 @@ for (year_counter in seq(from = start_year, to = end_year)) {
   
 }
 
+# append review recommendation and overall score to paper DB
+output_papers_df <- running_reviews_df %>%
+  group_by(paper_id) %>%
+  mutate(accept_is_1 = if_else(review_recommendation == ACCEPT_WORD, 1L, 0L)) %>%
+  summarise(mean_overall_score_for_presentation = mean(overall_score_for_presentation),
+            mean_acceptance_rate = mean(accept_is_1)) %>%
+  ungroup() %>%
+  left_join(running_papers_df, ., by = c("paper_id"))
+
 ```
 
 # Write
 ```{r write}
-write_csv(running_papers_df, path = output_paper_file_name)
+write_csv(output_papers_df, path = output_paper_file_name)
 write_csv(running_reviews_df, path = output_review_file_name)
 ```
 
