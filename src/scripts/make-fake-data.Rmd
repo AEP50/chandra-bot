@@ -5,8 +5,7 @@ output: html_notebook
 
 # Overhead
 ```{r overhead, include = FALSE}
-packages_vector <- c("tidyverse",
-                     "digest")
+packages_vector <- c("tidyverse")
 
 need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
 
@@ -20,6 +19,8 @@ for (package in packages_vector) {
 
 # Remote I-O
 ```{r remote-io}
+source("hash-method.R")
+
 external_dir <- "../../data/external/"
 interim_dir <- "../../data/interim/"
 processed_dir <- "../../data/processed/"
@@ -80,10 +81,27 @@ article_titles_df <- raw_article_titles_df %>%
   filter(length > 4) %>%
   select(article_title = title, -length) 
 
+remove_word_vector <- c("Community", "Vocational", "Inc", "Ltd", "Beauty", "Cosmetology",
+                        "Hair", "Visual", "Technical", "Training", "Technical",
+                        "Junior", "Barber", "Montessori", "Bible", "Animal", "Tractor",
+                        "Art", "Design", "Career", "Professional", "Learning", 
+                        "Nail", "Salon", "Culinary", "Film", "Language",
+                        "English", "Medical", "Paul Mitchell", "Nursing", "Theological",
+                        "Business", "Trade", "Applied", "Divinity")
+
 university_df <- raw_university_df %>%
-  select(affiliation = LocationName)
+  filter(LocationType == "Institution") %>%
+  select(affiliation = LocationName) %>%
+  distinct(affiliation)
+
+for (remove_word in remove_word_vector) {
   
-remove(raw_university_df, raw_article_titles_df)
+  university_df <- university_df %>%
+    filter(!str_detect(affiliation, remove_word))
+  
+}
+  
+remove(raw_university_df, raw_article_titles_df, remove_word_vector)
 
 ```
 
@@ -116,7 +134,7 @@ create_universe_of_humans <- function(input_first_df, input_last_df, input_unive
     
   return_df <- bind_cols(working_first_df, working_last_df, working_university_df) %>%
     rowwise() %>%
-    mutate(hash = sha1(paste0(first, SEPARATOR, last, SEPARATOR, affiliation))) %>%
+    mutate(hash = hash_method(first, last, affiliation)) %>%
     ungroup()
   
   return(return_df)
