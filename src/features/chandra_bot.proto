@@ -68,13 +68,11 @@ message Review {
   Reviewer reviewer = 1;
   Paper paper = 2;
   float presentation_score = 3;
-  //float publication_score = 4;
   Content commentary_to_author = 4;
   Content commentary_to_chair = 5;
-  bool consistent_with_decision = 6;
 
-  PRESENTATION_REC presentation_recommend = 7;
-  PUBLICATION_REC publication_recommend = 8;
+  PRESENTATION_REC presentation_recommend = 6;
+  PUBLICATION_REC publication_recommend = 7;
   //get_normalized_presentation_score()
   //get_normalized_publication_score()
 }
