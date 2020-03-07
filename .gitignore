@@ -1,6 +1,7 @@
-
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
 .DS_Store
 data/external/sentences.csv
-src/scripts/.Rhistory
-src/scripts/.Rproj.user
-src/scripts/hash-method.R
+
