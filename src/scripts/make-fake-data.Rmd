@@ -135,7 +135,8 @@ create_universe_of_humans <- function(input_first_df, input_last_df, input_unive
   return_df <- bind_cols(working_first_df, working_last_df, working_university_df) %>%
     rowwise() %>%
     mutate(hash = hash_method(first, last, affiliation)) %>%
-    ungroup()
+    ungroup() %>%
+    mutate(author_id = row_number())
   
   return(return_df)
   
@@ -196,7 +197,7 @@ create_papers <- function(input_humans_df,
     bind_cols(., head(working_humans_df, nrow(authors_df))) %>%
     left_join(., working_title_df, by = c("paper_number")) %>%
     left_join(., abstracts_df, by = c("paper_number")) %>%
-    select(paper_number, article_title, abstract, author_number, author_hash = hash)
+    select(paper_number, article_title, abstract, author_number, author_id)
   
   return(return_df)
   
@@ -240,9 +241,10 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df,
     select(hash = reviewer_hash, paper_number, reviewer)
   
   author_check_df <- input_papers_df %>%
-    distinct(author_hash, paper_number) %>%
+    distinct(author_id, paper_number) %>%
+    left_join(., input_humans_df, by = c("author_id")) %>%
     mutate(author = TRUE) %>%
-    select(hash = author_hash, paper_number, author)
+    select(hash, paper_number, author)
   
   check_df <- left_join(reviewer_check_df, author_check_df, by = c("hash", "paper_number")) %>%
     mutate(reviewer = replace_na(reviewer, FALSE)) %>%
@@ -403,17 +405,70 @@ for (year_counter in seq(from = start_year, to = end_year)) {
 }
 
 # append review recommendation and overall score to paper DB
-output_papers_df <- left_join(running_papers_df, humans_df, by = c("author_hash" = "hash")) %>%
-  rename(author_first = first, author_last = last, author_affiliation = affiliation) %>%
-  select(-author_hash)
+output_papers_df <- left_join(running_papers_df, 
+                              humans_df, 
+                              by = c("author_id")) %>%
+  mutate(author = paste0(first, " ", last),
+         body = as.character(NA)) %>%
+  rename(title = article_title,
+         committee_presentation_decision = present_decision,
+         committee_publication_decision = publish_decision) %>%
+  select(paper_id, year, title, author, author_id, committee_presentation_decision,
+         committee_publication_decision, abstract, body) %>%
+  group_by(paper_id, year, title, committee_presentation_decision,
+           committee_publication_decision, abstract, body) %>%
+  mutate(authors = paste0(author, collapse = ","),
+         author_ids = paste0(author_id, collapse = ",")) %>%
+  ungroup() %>%
+  select(paper_id,
+         authors, 
+         author_ids,
+         title,
+         year,
+         committee_presentation_decision,
+         committee_publication_decision,
+         abstract,
+         body)
+         
+
+output_reviews_df <- running_reviews_df %>%
+  select(paper_id, 
+         presentation_score = rating,
+         commentary_to_author = reviewer_comments_to_author,
+         commentary_to_chair = confidential_comments,
+         reviewer_human_hash_id = reviewer_hash,
+         presentation_recommendation,
+         publication_recommendation)
+  
+output_humans_df <- humans_df %>%
+  mutate(name = paste0(first, " ", last),
+         aliases = as.character(NA),
+         previous_affiliation = as.character(NA),
+         phd_affiliation = as.character(NA),
+         google_scholar_url = as.character(NA),
+         google_scholar_citations = as.integer(NA),
+         google_scholar_h_index = as.integer(NA),
+         google_scholar_i10_index = as.integer(NA)) %>%
+  select(name, 
+         aliases, 
+         hash_id = hash, 
+         current_affiliation = affiliation,
+         previous_affiliation,
+         phd_affiliation,
+         google_scholar_url,
+         google_scholar_citations,
+         google_scholar_h_index,
+         google_scholar_i10_index,
+         author_id)
+         
 
 ```
 
 # Write
 ```{r write}
 write_csv(output_papers_df, path = output_paper_file_name)
-write_csv(running_reviews_df, path = output_review_file_name)
-write_csv(humans_df, path = output_human_file_name)
+write_csv(output_reviews_df, path = output_review_file_name)
+write_csv(output_humans_df, path = output_human_file_name)
 ```
 
 
