@@ -28,9 +28,9 @@ message Paper {
   string title = 4;
   int32 year = 5;
   bool committee_presentation_decision = 6;
-  //bool publication = 7;
-  Content abstract = 7;
-  Content body = 8;
+  bool committee_publication_decision = 7;
+  Content abstract = 8;
+  Content body = 9;
 }
 
 message Author {
