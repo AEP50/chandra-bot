@@ -10,3 +10,8 @@ data/interim/session_groups_number_2.csv
 src/scripts/hash-method.R
 data/external/sentences.csv
 
+data/external/editorial_manager/ADB40 2020 papers.xlsx
+data/processed/confidential*
+data/external/adb40-annual-meeting-2020-decisions.csv
+
+notebooks/confidential-review-summaries.twb
