@@ -2,19 +2,18 @@ syntax = "proto3";
 
 package chandra_bot_data_model;
 
-message University {
+message Affiliation {
   string name = 1;
   repeated string aliases = 2;
-  int32 usnews_ranking = 3;
 }
 
 message Human {
   string name = 1;
   repeated string aliases = 2;
   string hash_id = 3;
-  University current_affiliation = 4;
-  repeated University previous_affiliation = 5;
-  University phd_affiliation = 6;
+  Affiliation current_affiliation = 4;
+  repeated Affiliation previous_affiliation = 5;
+  Affiliation phd_affiliation = 6;
   string google_scholar_url = 7;
   int32 google_scholar_citations = 8;
   int32 google_scholar_h_index = 9;
@@ -91,8 +90,8 @@ message HumanBook {
   repeated Human human = 1;
 }
 
-message UniversityBook {
-  repeated University university = 1;
+message AffiliationBook {
+  repeated Affiliation affiliation = 1;
 }
 
 message AuthorBook {
