@@ -5,3 +5,4 @@
 .DS_Store
 data/external/sentences.csv
 
+src/scripts/hash-method.R
