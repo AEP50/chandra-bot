@@ -25,17 +25,18 @@ external_dir <- "../../data/external/"
 interim_dir <- "../../data/interim/"
 processed_dir <- "../../data/processed/"
 
-# see make-names-df
+# see make-names-db
 first_name_file_name <- paste0(interim_dir, "first-names.RDS")
 last_name_file_name <- paste0(interim_dir, "last-names.RDS")
 
-article_titles_file_name <- paste0(external_dir, "random_article_titles.txt")
+# see make-article-titles-db
+article_titles_file_name <- paste0(interim_dir, "article-titles.RDS")
 
-# see make-english-sentence-db.Rmd
+# see make-english-sentence-db
 sentence_file_name <- paste0(interim_dir, "english-sentences.RDS")
 
-# https://ope.ed.gov/dapip/#/download-data-files
-university_file_name <- paste0(external_dir, "InstitutionCampus.csv")
+# see make-affiliations-db
+university_file_name <- paste0(interim_dir, "affiliations.RDS")
 
 output_paper_file_name <- paste0(processed_dir, "fake_paper_series.csv")
 output_review_file_name <- paste0(processed_dir, "fake_review_series.csv")
@@ -64,44 +65,11 @@ SEPARATOR <- "/"
 first_names_df <- readRDS(first_name_file_name)
 last_names_df <- readRDS(last_name_file_name)
 
-# titles data not in quotes
-input_line <- readLines(article_titles_file_name)
-raw_article_titles_df <- tibble(title = input_line)
+article_titles_df <- readRDS(article_titles_file_name)
 
 sentence_df <- readRDS(sentence_file_name)
 
-raw_university_df <- read_csv(university_file_name, col_types = cols(.default = col_character()))
-
-```
-
-# Clean Data
-```{r clean-data}
-article_titles_df <- raw_article_titles_df %>%
-  mutate(length = str_length(title)) %>%
-  filter(length > 4) %>%
-  select(article_title = title, -length) 
-
-remove_word_vector <- c("Community", "Vocational", "Inc", "Ltd", "Beauty", "Cosmetology",
-                        "Hair", "Visual", "Technical", "Training", "Technical",
-                        "Junior", "Barber", "Montessori", "Bible", "Animal", "Tractor",
-                        "Art", "Design", "Career", "Professional", "Learning", 
-                        "Nail", "Salon", "Culinary", "Film", "Language",
-                        "English", "Medical", "Paul Mitchell", "Nursing", "Theological",
-                        "Business", "Trade", "Applied", "Divinity")
-
-university_df <- raw_university_df %>%
-  filter(LocationType == "Institution") %>%
-  select(affiliation = LocationName) %>%
-  distinct(affiliation)
-
-for (remove_word in remove_word_vector) {
-  
-  university_df <- university_df %>%
-    filter(!str_detect(affiliation, remove_word))
-  
-}
-  
-remove(raw_university_df, raw_article_titles_df, remove_word_vector)
+university_df <- readRDS(university_file_name)
 
 ```
 
