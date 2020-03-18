@@ -13,7 +13,7 @@ message Human {
   string hash_id = 3;
   Affiliation current_affiliation = 4;
   repeated Affiliation previous_affiliation = 5;
-  Affiliation phd_affiliation = 6;
+  Affiliation last_degree_affiliation = 6;
   string google_scholar_url = 7;
   int32 google_scholar_citations = 8;
   int32 google_scholar_h_index = 9;
