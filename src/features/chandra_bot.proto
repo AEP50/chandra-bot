@@ -34,22 +34,11 @@ message Paper {
 message Author {
   Human human = 1;
   repeated Paper papers = 2;
-  //get_frequent_coauthors()
-  //get_number_of_submittals()
-  //get_presentation_acceptance_percentage()
-  //get_publication_acceptance_percentage()
 }
 
 message Reviewer {
   Human human = 1;
   repeated Review reviews = 2;
-  //get_mean_publication_score()
-  //get_mean_presentation_score()
-  //get_publication_acceptance_percentage()
-  //get_presentation_acceptance_percentage(
-  //get_consistent_with_publication_decision_percentage()
-  //get_consistent_with_presentation_decision_percentage()
-  //get_mean_content_grammar_score()
 }
 
 enum PRESENTATION_REC {
@@ -71,8 +60,6 @@ message Review {
 
   PRESENTATION_REC presentation_recommend = 6;
   PUBLICATION_REC publication_recommend = 7;
-  //get_normalized_presentation_score()
-  //get_normalized_publication_score()
 }
 
 message Content {
