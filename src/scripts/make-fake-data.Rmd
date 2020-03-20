@@ -94,17 +94,21 @@ create_universe_of_humans <- function(input_first_df, input_last_df, input_unive
   # input_university_df <- university_df
   # input_size <- NUMBER_HUMANS
   
-  working_first_df <- select_first_n_random(input_first_df, input_size) 
+  first_df <- select_first_n_random(input_first_df, input_size) 
   
-  working_last_df <- select_first_n_random(input_last_df, input_size)
+  last_df <- select_first_n_random(input_last_df, input_size)
   
-  working_university_df <- select_first_n_random(input_university_df, input_size)
+  university_df <- select_first_n_random(input_university_df, input_size)
+  
+  last_degree_df <- select_first_n_random(input_university_df, input_size) %>%
+    rename(last_degree_affiliation = affiliation)
     
-  return_df <- bind_cols(working_first_df, working_last_df, working_university_df) %>%
-    rowwise() %>%
-    mutate(hash = hash_method(first, last, affiliation)) %>%
-    ungroup() %>%
+  return_df <- bind_cols(first_df, last_df, university_df, last_degree_df) %>%
     mutate(author_id = row_number()) %>%
+    mutate(orcid = sprintf("0000-0000-0000-00%02d", author_id)) %>%
+    rowwise() %>%
+    mutate(hash = hash_method(paste0(first, " ", last), last_degree_affiliation, orcid)) %>%
+    ungroup() %>%
     bind_cols(., 
               tibble(mean_score = rnorm(nrow(.), mean = 3.0,  sd = 0.75))) %>%
     bind_cols(., tibble(sd_score = runif(nrow(.), min = 0.5, max = 2.0)))
@@ -405,8 +409,7 @@ output_papers_df <- left_join(running_papers_df,
          committee_publication_decision,
          abstract,
          body)
-         
-
+        
 output_reviews_df <- running_reviews_df %>%
   select(paper_id, 
          presentation_score = rating,
@@ -420,24 +423,19 @@ output_humans_df <- humans_df %>%
   mutate(name = paste0(first, " ", last),
          aliases = as.character(NA),
          previous_affiliation = as.character(NA),
-         phd_affiliation = as.character(NA),
-         google_scholar_url = as.character(NA),
-         google_scholar_citations = as.integer(NA),
-         google_scholar_h_index = as.integer(NA),
-         google_scholar_i10_index = as.integer(NA)) %>%
+         last_degree_affiliation = as.character(NA),
+         orcid_url = as.character(NA),
+         orcid) %>%
   select(name, 
          aliases, 
          hash_id = hash, 
          current_affiliation = affiliation,
          previous_affiliation,
-         phd_affiliation,
-         google_scholar_url,
-         google_scholar_citations,
-         google_scholar_h_index,
-         google_scholar_i10_index,
+         last_degree_affiliation,
+         orcid_url,
+         orcid,
          author_id)
          
-
 ```
 
 # Write
