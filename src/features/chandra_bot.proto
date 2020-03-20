@@ -14,10 +14,8 @@ message Human {
   Affiliation current_affiliation = 4;
   repeated Affiliation previous_affiliation = 5;
   Affiliation last_degree_affiliation = 6;
-  string google_scholar_url = 7;
-  int32 google_scholar_citations = 8;
-  int32 google_scholar_h_index = 9;
-  int32 google_scholar_i10_index = 10;
+  string orcid_url = 7;
+  string orcid = 8;
 }
 
 message Paper {
