@@ -2,56 +2,41 @@ syntax = "proto3";
 
 package chandra_bot_data_model;
 
-message University {
+message Affiliation {
   string name = 1;
   repeated string aliases = 2;
-  int32 usnews_ranking = 3;
 }
 
 message Human {
   string name = 1;
   repeated string aliases = 2;
   string hash_id = 3;
-  University current_affiliation = 4;
-  repeated University previous_affiliation = 5;
-  University phd_affiliation = 6;
-  string google_scholar_url = 7;
-  int32 google_scholar_citations = 8;
-  int32 google_scholar_h_index = 9;
-  int32 google_scholar_i10_index = 10;
+  Affiliation current_affiliation = 4;
+  repeated Affiliation previous_affiliation = 5;
+  Affiliation last_degree_affiliation = 6;
+  string orcid_url = 7;
+  string orcid = 8;
 }
 
 message Paper {
   repeated Author authors = 1;
-  repeated Reviewer reviewers = 2;
-  repeated Review reviews = 3;
-  string title = 4;
-  int32 year = 5;
-  bool committee_presentation_decision = 6;
-  bool committee_publication_decision = 7;
-  Content abstract = 8;
-  Content body = 9;
+  repeated Review reviews = 2;
+  string title = 3;
+  int32 year = 4;
+  bool committee_presentation_decision = 5;
+  bool committee_publication_decision = 6;
+  Content abstract = 7;
+  Content body = 8;
 }
 
 message Author {
   Human human = 1;
   repeated Paper papers = 2;
-  //get_frequent_coauthors()
-  //get_number_of_submittals()
-  //get_presentation_acceptance_percentage()
-  //get_publication_acceptance_percentage()
 }
 
 message Reviewer {
   Human human = 1;
   repeated Review reviews = 2;
-  //get_mean_publication_score()
-  //get_mean_presentation_score()
-  //get_publication_acceptance_percentage()
-  //get_presentation_acceptance_percentage(
-  //get_consistent_with_publication_decision_percentage()
-  //get_consistent_with_presentation_decision_percentage()
-  //get_mean_content_grammar_score()
 }
 
 enum PRESENTATION_REC {
@@ -73,8 +58,6 @@ message Review {
 
   PRESENTATION_REC presentation_recommend = 6;
   PUBLICATION_REC publication_recommend = 7;
-  //get_normalized_presentation_score()
-  //get_normalized_publication_score()
 }
 
 message Content {
@@ -92,8 +75,8 @@ message HumanBook {
   repeated Human human = 1;
 }
 
-message UniversityBook {
-  repeated University university = 1;
+message AffiliationBook {
+  repeated Affiliation affiliation = 1;
 }
 
 message AuthorBook {
