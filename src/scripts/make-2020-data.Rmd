@@ -5,9 +5,11 @@ output: html_notebook
 
 # Overhead
 ```{r overhead, include = FALSE}
-packages_vector <- c("tidyverse",
+packages_vector <- c("httpuv",
+                     "rorcid",
                      "googledrive",
-                     "readxl")
+                     "readxl",
+                     "tidyverse")
 
 need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
 
@@ -25,7 +27,8 @@ source("hash-method.R")
 
 external_dir <- "../../data/external/"
 interim_dir <- "../../data/interim/"
-processed_dir <- "../../data/processed/"
+confidential_dir <- "~/Documents/Confidential/"
+secrets_dir <- "~/Documents/s"
 
 canonical_human_file_name <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGm3PUsUUSFAuXHPGl_gFwHAqnAOaSWCTwrSI6IgKNHWSHWZvt3cS67GNB40mqHYsuoH_FOA3SPRhO/pub?gid=0&single=true&output=csv"
 
@@ -36,12 +39,12 @@ private_editorial_board_database <- "ADB40 2020 papers.xlsx"
 private_committee_decisions_file_name <- "adb40-annual-meeting-2020-decisions"
 
 local_editorial_board_database_file_name <- 
-  paste0(external_dir, "editorial_manager/", private_editorial_board_database)
-local_committee_decisions_file_name <- paste0(external_dir, "adb40-annual-meeting-2020-decisions.csv")
+  paste0(confidential_dir, private_editorial_board_database)
+local_committee_decisions_file_name <- paste0(confidential_dir, "adb40-annual-meeting-2020-decisions.csv")
 
-output_humans_file_name <- paste0(processed_dir, "confidential-humans-2020.csv")
-output_reviews_file_name <- paste0(processed_dir, "confidential-reviews-2020.csv")
-output_papers_file_name <- paste0(processed_dir, "confidential-papers-2020.csv")
+output_humans_file_name <- paste0(confidential_dir, "confidential-humans-2020.csv")
+output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews-2020.csv")
+output_papers_file_name <- paste0(confidential_dir, "confidential-papers-2020.csv")
 ```
 
 # Parameters
@@ -61,6 +64,8 @@ pub_decision_dict_df <- tibble(bot_names = c("ACCEPT",
                                                    "With Editor"))
 ```
 
+https://github.com/tidyverse/googledrive/issues/299
+Problem with googledrive methods
 
 # Data Reads
 ```{r data-reads}
@@ -108,16 +113,51 @@ reviews_df <- working_df %>%
 remove(working_df)
 ```
 
+# Experiment with ORCID
+```{r test}
+# rorcid::orcid_auth()
+
+# test_df <- select(canonical_human_df, canonical_name, orcid_url) %>%
+#   mutate(orcid_id = str_sub(orcid_url, start = -19L, end = -1L)) %>%
+#   filter(!is.na(orcid_id)) %>%
+#   head(., n = -20)
+# 
+# first <- TRUE
+# for (subject_orc_id in test_df$orcid_id) {
+#   
+#   works_df <- rorcid::works(x = subject_orc_id)
+#     
+#   if (first) {
+#     running_df <- works_df
+#   }
+#   else {
+#     running_df <- bind_rows(running_df, works_df)
+#     first <- FALSE
+#   } 
+#   
+# }
+#   
+# count_works_df <- running_df %>%
+#   mutate(orcid_extract = str_sub(path, start = 2L, end = 20L)) %>%
+#   group_by(orcid_extract) %>%
+#   summarise(works = n()) %>%
+#   ungroup()
+```
+
+
 # Reconcile Humans with Canonical
 ```{r reconcile}
-key_human_df <- select(canonical_human_df, canonical_name, affiliation) %>%
+key_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                       orcid_url, last_degree_affiliation) %>%
   mutate(join_name = canonical_name)
 
-alias_01_human_df <- select(canonical_human_df, canonical_name, affiliation, alias_01) %>%
+alias_01_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                            orcid_url, last_degree_affiliation, alias_01) %>%
   filter(!is.na(alias_01)) %>%
   rename(join_name = alias_01)
 
-alias_02_human_df <- select(canonical_human_df, canonical_name, affiliation, alias_02) %>%
+alias_02_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                            orcid_url, last_degree_affiliation, alias_02) %>%
   filter(!is.na(alias_02)) %>%
   rename(join_name = alias_02)
 
@@ -127,7 +167,7 @@ review_human_df <- distinct(reviews_df, reviewer_name)
 
 working_df <- left_join(review_human_df, join_human_df, by = c("reviewer_name" = "join_name")) %>%
   rowwise() %>%
-  mutate(hash = hash_function(canonical_name, affiliation)) %>%
+  mutate(hash = hash_function(canonical_name, orcid_url, last_degree_affiliation)) %>%
   ungroup()
 
 output_review_df <- left_join(reviews_df, working_df, by = c("reviewer_name")) %>%
@@ -159,17 +199,20 @@ join_aliases_df <- canonical_human_df %>%
                                       sep = ",")) %>%
   select(canonical_name, aliases, affiliation, previous_affiliation)
            
-output_human_df <- left_join(select(working_df, canonical_name, affiliation, hash),
-                             join_aliases_df, by = c("canonical_name", "affiliation")) %>%
+output_human_df <- left_join(
+  select(working_df, canonical_name, affiliation, orcid_url, last_degree_affiliation, hash),
+  join_aliases_df, by = c("canonical_name", "affiliation")) %>%
   select(name = canonical_name,
          current_affiliation = affiliation,
          aliases,
          previous_affiliation,
+         orcid_url,
+         last_degree_affiliation,
          hash_id = hash)
 
 output_paper_df <- committee_decisions_df %>%
   select(paper_id, prez_dec = committee_decision) %>%
-  left_join(select(reviews_df, paper_id, year, title, pub_dec = editorial_status),
+  left_join(distinct(reviews_df, paper_id, year, title, pub_dec = editorial_status),
             .,
             by = c("paper_id")) %>%
   mutate(prez_dec = toupper(prez_dec)) %>%
