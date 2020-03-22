@@ -46,15 +46,15 @@ output_human_file_name <- paste0(processed_dir, "fake_human.csv")
 
 # Parameters
 ```{r parameters}
-NUMBER_HUMANS <- 500
-NUMBER_PAPERS <- 200
-MAX_AUTHORS_PER_PAPER <- 7
-REVIEWERS_PER_PAPER <- 5
-MAX_REVIEW_NUMBER_SENTENCES <- 20
-MIN_PRESENTATION_SCORE <- 1
-MAX_PRESENTATION_SCORE <- 5
-MIN_ABSTRACT_LENGTH <- 5
-MAX_ABSTRACT_LENGTH <- 20
+NUMBER_HUMANS <- 500L
+NUMBER_PAPERS <- 200L
+MAX_AUTHORS_PER_PAPER <- 7L
+REVIEWERS_PER_PAPER <- 5L
+MAX_REVIEW_NUMBER_SENTENCES <- 20L
+MIN_PRESENTATION_SCORE <- 1L
+MAX_PRESENTATION_SCORE <- 5L
+MIN_ABSTRACT_LENGTH <- 5L
+MAX_ABSTRACT_LENGTH <- 20L
 ACCEPT_WORD <- "Accept" 
 REJECT_WORD <- "Reject"
 SEPARATOR <- "/"
@@ -91,20 +91,27 @@ create_universe_of_humans <- function(input_first_df, input_last_df, input_unive
   
   # input_first_df <- first_names_df
   # input_last_df <- last_names_df
-  # input_university_df <- university_df 
+  # input_university_df <- university_df
   # input_size <- NUMBER_HUMANS
   
-  working_first_df <- select_first_n_random(input_first_df, input_size) 
+  first_df <- select_first_n_random(input_first_df, input_size) 
   
-  working_last_df <- select_first_n_random(input_last_df, input_size)
+  last_df <- select_first_n_random(input_last_df, input_size)
   
-  working_university_df <- select_first_n_random(input_university_df, input_size)
+  university_df <- select_first_n_random(input_university_df, input_size)
+  
+  last_degree_df <- select_first_n_random(input_university_df, input_size) %>%
+    rename(last_degree_affiliation = affiliation)
     
-  return_df <- bind_cols(working_first_df, working_last_df, working_university_df) %>%
+  return_df <- bind_cols(first_df, last_df, university_df, last_degree_df) %>%
+    mutate(author_id = row_number()) %>%
+    mutate(orcid = sprintf("0000-0000-0000-00%02d", author_id)) %>%
     rowwise() %>%
-    mutate(hash = hash_method(first, last, affiliation)) %>%
+    mutate(hash = hash_method(paste0(first, " ", last), last_degree_affiliation, orcid)) %>%
     ungroup() %>%
-    mutate(author_id = row_number())
+    bind_cols(., 
+              tibble(mean_score = rnorm(nrow(.), mean = 3.0,  sd = 0.75))) %>%
+    bind_cols(., tibble(sd_score = runif(nrow(.), min = 0.5, max = 2.0)))
   
   return(return_df)
   
@@ -180,7 +187,7 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df,
   # input_reviews_per <- REVIEWERS_PER_PAPER
   # input_max_length <- MAX_REVIEW_NUMBER_SENTENCES
   
-  reviews_per_buffer <- input_reviews_per + 5
+  reviews_per_buffer <- input_reviews_per + 5L
   
   reviewers_comments_df <- expand.grid(paper_number = seq(1:nrow(input_papers_df)),
                               reviewer_number = seq(1:reviews_per_buffer),
@@ -202,7 +209,7 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df,
   reviewers_df <- bind_cols(reviewers_df, select_first_n_random(working_humans_df, nrow(reviewers_df))) %>%
     select(paper_number, reviewer_number, reviewer_hash = hash)
   
-  # remove authors that are the paper
+  # check if authors are reveiwing their own paper
   reviewer_check_df <- reviewers_df %>%
     distinct(reviewer_hash, paper_number) %>%
     mutate(reviewer = TRUE) %>%
@@ -248,10 +255,15 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df,
   
   presentation_score_df <- working_df %>%
     distinct(paper_number, reviewer_hash) %>%
-    bind_cols(., tibble(random = runif(nrow(.), 
-                                       min = MIN_PRESENTATION_SCORE - 1, 
-                                       max = MAX_PRESENTATION_SCORE))) %>%
-    mutate(score = as.integer(ceiling(random))) %>%
+    left_join(., 
+              select(input_humans_df, hash, mean_score, sd_score), 
+              by = c("reviewer_hash" = "hash")) %>%
+    rowwise() %>%
+    mutate(score = rnorm(1, mean = mean_score, sd = sd_score)) %>%
+    ungroup() %>%
+    mutate(score = as.integer(ceiling(score))) %>%
+    mutate(score = if_else(score < MIN_PRESENTATION_SCORE, MIN_PRESENTATION_SCORE, score)) %>%
+    mutate(score = if_else(score > MAX_PRESENTATION_SCORE, MAX_PRESENTATION_SCORE, score)) %>%
     select(paper_number, reviewer_hash, rating = score)  
   
   threshold <- (MIN_PRESENTATION_SCORE + MAX_PRESENTATION_SCORE) / 2.0
@@ -259,14 +271,14 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df,
   accept_reject_presentation_df <- presentation_score_df %>%
     bind_cols(., tibble(random = runif(nrow(.), min = 0, max = 1.0))) %>%
     mutate(presentation_recommendation = 
-             if_else(random < 0.500 & rating >= threshold,
+             if_else(((random < 0.500 & rating >= threshold) | (random < 0.100 & rating >= (threshold - 1))),
                      ACCEPT_WORD, REJECT_WORD)) %>%
     select(paper_number, reviewer_hash, presentation_recommendation)
   
   accept_reject_publication_df <- presentation_score_df %>%
     bind_cols(., tibble(random = runif(nrow(.), min = 0, max = 1.0))) %>%
     mutate(publication_recommendation = 
-             if_else(random < 0.500 & rating >= threshold,
+             if_else(((random < 0.400 & rating >= threshold) | (random < 0.050 & rating >= (threshold - 1))),
                      ACCEPT_WORD, REJECT_WORD)) %>%
     select(paper_number, reviewer_hash, publication_recommendation)
   
@@ -397,8 +409,7 @@ output_papers_df <- left_join(running_papers_df,
          committee_publication_decision,
          abstract,
          body)
-         
-
+        
 output_reviews_df <- running_reviews_df %>%
   select(paper_id, 
          presentation_score = rating,
@@ -412,24 +423,19 @@ output_humans_df <- humans_df %>%
   mutate(name = paste0(first, " ", last),
          aliases = as.character(NA),
          previous_affiliation = as.character(NA),
-         phd_affiliation = as.character(NA),
-         google_scholar_url = as.character(NA),
-         google_scholar_citations = as.integer(NA),
-         google_scholar_h_index = as.integer(NA),
-         google_scholar_i10_index = as.integer(NA)) %>%
+         last_degree_affiliation = as.character(NA),
+         orcid_url = as.character(NA),
+         orcid) %>%
   select(name, 
          aliases, 
          hash_id = hash, 
          current_affiliation = affiliation,
          previous_affiliation,
-         phd_affiliation,
-         google_scholar_url,
-         google_scholar_citations,
-         google_scholar_h_index,
-         google_scholar_i10_index,
+         last_degree_affiliation,
+         orcid_url,
+         orcid,
          author_id)
          
-
 ```
 
 # Write
