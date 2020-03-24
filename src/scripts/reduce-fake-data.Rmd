@@ -1,0 +1,68 @@
+---
+title: "Fake Data Summaries"
+output: html_notebook
+---
+
+# Overhead
+```{r overhead, include = FALSE}
+packages_vector <- c("tidyverse")
+
+need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
+
+if (length(need_to_install)) install.packages(need_to_install)
+
+for (package in packages_vector) {
+  library(package, character.only = TRUE)
+}
+
+```
+
+# Remote I-O
+```{r remote-io}
+processed_dir <- "../../data/processed/"
+
+paper_file_name <- paste0(processed_dir, "fake_paper_series")
+review_file_name <- paste0(processed_dir, "fake_review_series")
+human_file_name <- paste0(processed_dir, "fake_human")
+
+
+
+```
+
+# Parameters
+```{r parameters}
+```
+
+# Data Reads
+```{r data-reads}
+paper_df <- readRDS(paste0(paper_file_name, ".RDS"))
+review_df <- readRDS(paste0(review_file_name, ".RDS"))
+human_df <- readRDS(paste0(review_file_name, ".RDS"))
+
+```
+
+# Reduction 01: Normalize scores by reviewer scales
+```{r reduction-01}
+# step one: create mean reviews
+# step two: normalize score
+# step three: render in tableau, same notebook, just with added field
+
+mean_reviews_df <- review_df %>%
+  group_by(reviewer_human_hash_id) %>%
+  summarise(total_reviews = n(), reviewer_mean_score = mean(presentation_score)) %>%
+  ungroup()
+
+output_normal_df <- left_join(review_df, mean_reviews_df, by = c("reviewer_human_hash_id")) %>%
+  mutate(score_diff_mean = presentation_score - reviewer_mean_score,
+         score_div_mean = presentation_score / reviewer_mean_score)
+
+```
+
+
+
+# Write
+```{r write}
+
+```
+
+

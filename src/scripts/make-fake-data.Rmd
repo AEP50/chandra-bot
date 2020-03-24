@@ -38,9 +38,9 @@ sentence_file_name <- paste0(interim_dir, "english-sentences.RDS")
 # see make-affiliations-db
 university_file_name <- paste0(interim_dir, "affiliations.RDS")
 
-output_paper_file_name <- paste0(processed_dir, "fake_paper_series.csv")
-output_review_file_name <- paste0(processed_dir, "fake_review_series.csv")
-output_human_file_name <- paste0(processed_dir, "fake_human.csv")
+output_paper_file_name <- paste0(processed_dir, "fake_paper_series")
+output_review_file_name <- paste0(processed_dir, "fake_review_series")
+output_human_file_name <- paste0(processed_dir, "fake_human")
 
 ```
 
@@ -440,9 +440,13 @@ output_humans_df <- humans_df %>%
 
 # Write
 ```{r write}
-write_csv(output_papers_df, path = output_paper_file_name)
-write_csv(output_reviews_df, path = output_review_file_name)
-write_csv(output_humans_df, path = output_human_file_name)
+write_csv(output_papers_df, path = paste0(output_paper_file_name, ".csv"))
+write_csv(output_reviews_df, path = paste0(output_review_file_name, ".csv"))
+write_csv(output_humans_df, path = paste0(output_human_file_name, ".csv"))
+
+saveRDS(output_papers_df, file = paste0(output_paper_file_name, ".RDS"))
+saveRDS(output_reviews_df, file = paste0(output_review_file_name, ".RDS"))
+saveRDS(output_humans_df, file = paste0(output_human_file_name, ".RDS"))
 ```
 
 
