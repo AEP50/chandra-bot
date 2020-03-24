@@ -35,22 +35,26 @@ canonical_human_file_name <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vT
 local_canonical_human_file_name <- paste0(interim_dir, "canonical_humans.csv")
 
 private_google_drive_path <- "~/project_chandra_bot/"
-private_editorial_board_database <- "ADB40 2020 papers.xlsx"
-private_committee_decisions_file_name <- "adb40-annual-meeting-2020-decisions"
+private_2019_editorial_board_database <- "ADB40 2019 papers.xlsx"
+private_2020_editorial_board_database <- "ADB40 2020 papers.xlsx"
 
-local_editorial_board_database_file_name <- 
-  paste0(confidential_dir, private_editorial_board_database)
-local_committee_decisions_file_name <- paste0(confidential_dir, "adb40-annual-meeting-2020-decisions.csv")
+private_2019_committee_decisions_file_name <- "adb40-annual-meeting-2019-decisions"
+private_2020_committee_decisions_file_name <- "adb40-annual-meeting-2020-decisions"
 
-output_humans_file_name <- paste0(confidential_dir, "confidential-humans-2020.csv")
-output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews-2020.csv")
-output_papers_file_name <- paste0(confidential_dir, "confidential-papers-2020.csv")
+local_2019_editorial_file_name <- paste0(confidential_dir, private_2019_editorial_board_database)
+local_2020_editorial_file_name <- paste0(confidential_dir, private_2020_editorial_board_database)
+
+local_2019_committee_file_name <- paste0(confidential_dir, "adb40-annual-meeting-2019-decisions.csv")
+local_2020_committee_file_name <- paste0(confidential_dir, "adb40-annual-meeting-2020-decisions.csv")
+
+output_humans_file_name <- paste0(confidential_dir, "confidential-humans.csv")
+output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews.csv")
+output_papers_file_name <- paste0(confidential_dir, "confidential-papers.csv")
 ```
 
 # Parameters
 ```{r parameters}
 MAX_SCORE <- 5L
-YEAR <- 2020
 
 pub_decision_dict_df <- tibble(bot_names = c("ACCEPT",
                                              "REJECT",
@@ -76,22 +80,33 @@ drive_download(file = paste0(private_google_drive_path, private_editorial_board_
                path = local_editorial_board_database_file_name,
                overwrite = TRUE)
 
-input_reviews_df <- read_excel(path = local_editorial_board_database_file_name, 
+input_2020_reviews_df <- read_excel(path = local_2020_editorial_file_name, 
+                               col_names = LETTERS[1:12])
+
+input_2019_reviews_df <- read_excel(path = local_2019_editorial_file_name, 
                                col_names = LETTERS[1:12])
 
 drive_download(file = paste0(private_google_drive_path, private_committee_decisions_file_name),
                path = local_committee_decisions_file_name,
                overwrite = TRUE)
 
-committee_decisions_df <- read_csv(local_committee_decisions_file_name, col_types = "ccc")
+committee_decisions_df <- bind_rows(read_csv(local_2019_committee_file_name, col_types = "ccc"),
+                                    read_csv(local_2020_committee_file_name, col_types = "ccc"))
 
 ```
 
 # Build Reviews Database
 ```{r build-review}
-working_df <- slice(input_reviews_df, 5:n())
-colnames(working_df) <- slice(input_reviews_df, 4:4)
-reviews_df <- working_df %>%
+working_2020_df <- slice(input_2020_reviews_df, 5:n())
+colnames(working_2020_df) <- slice(input_2020_reviews_df, 4:4)
+working_2020_df <- mutate(working_2020_df, year = 2020)
+
+working_2019_df <- slice(input_2019_reviews_df, 5:n())
+colnames(working_2019_df) <- slice(input_2019_reviews_df, 4:4)
+working_2019_df <- mutate(working_2019_df, year = 2019)
+
+
+reviews_df <- bind_rows(working_2020_df, working_2019_df) %>%
   select(paper_id = 'Manuscript Number',
          title = 'Article Title',
          reviewer_name = 'Reviewer Name',
@@ -99,18 +114,18 @@ reviews_df <- working_df %>%
          commentary_to_author = 'Reviewer Comments to Author',
          presentation_recommend = 'Reviewer Recommendation',
          editorial_status = 'Editorial Status',
-         presentation_score = 'Overall score for Presentation') %>%
+         presentation_score = 'Overall score for Presentation',
+         year) %>%
   mutate(presentation_score = as.numeric(presentation_score)) %>%
   mutate(presentation_score = if_else(presentation_score > MAX_SCORE, 
                                       presentation_score / 2.0, 
                                       presentation_score)) %>%
-  mutate(year = YEAR) %>%
   mutate(reviewer_name = gsub("[a-zA-z]{3}[0-9]{2}", "", reviewer_name, ignore.case = TRUE)) %>%
   mutate(reviewer_name = gsub("[a-zA-z]{2}[0-9]{3}", "", reviewer_name, ignore.case = TRUE)) %>%
   mutate(reviewer_name = gsub("[\\(][0-9][\\)]", "", reviewer_name)) %>%
   mutate(reviewer_name = trimws(reviewer_name))
 
-remove(working_df)
+remove(working_2019_df, working_2020_df)
 ```
 
 # Experiment with ORCID
@@ -170,7 +185,17 @@ working_df <- left_join(review_human_df, join_human_df, by = c("reviewer_name" =
   mutate(hash = hash_function(canonical_name, orcid_url, last_degree_affiliation)) %>%
   ungroup()
 
-output_review_df <- left_join(reviews_df, working_df, by = c("reviewer_name")) %>%
+missing_humans_df <- filter(working_df, is.na(canonical_name))
+
+matched_humans_df <- working_df
+
+remove(key_human_df, alias_01_human_df, alias_02_human_df, join_human_df, review_human_df,
+       working_df)
+```
+
+# Prepare Outputs
+```{r prepare-outputs}
+output_review_df <- left_join(reviews_df, matched_humans_df, by = c("reviewer_name")) %>%
   select(year, paper_id, title, reviewer_hash = hash,
          commentary_to_chair, commentary_to_author,
          presentation_recommend, presentation_score, 
@@ -200,7 +225,7 @@ join_aliases_df <- canonical_human_df %>%
   select(canonical_name, aliases, affiliation, previous_affiliation)
            
 output_human_df <- left_join(
-  select(working_df, canonical_name, affiliation, orcid_url, last_degree_affiliation, hash),
+  select(matched_humans_df, canonical_name, affiliation, orcid_url, last_degree_affiliation, hash),
   join_aliases_df, by = c("canonical_name", "affiliation")) %>%
   select(name = canonical_name,
          current_affiliation = affiliation,
