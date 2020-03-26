@@ -1758,13 +1758,15 @@ summary {
 <h1>Remote I-O</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJvY2Vzc2VkX2RpciA8LSBcIi4uLy4uL2RhdGEvcHJvY2Vzc2VkL1wiXG5cbnBhcGVyX2ZpbGVfbmFtZSA8LSBwYXN0ZTAocHJvY2Vzc2VkX2RpciwgXCJmYWtlX3BhcGVyX3Nlcmllc1wiKVxucmV2aWV3X2ZpbGVfbmFtZSA8LSBwYXN0ZTAocHJvY2Vzc2VkX2RpciwgXCJmYWtlX3Jldmlld19zZXJpZXNcIilcbmh1bWFuX2ZpbGVfbmFtZSA8LSBwYXN0ZTAocHJvY2Vzc2VkX2RpciwgXCJmYWtlX2h1bWFuXCIpXG5cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJvY2Vzc2VkX2RpciA8LSBcIi4uLy4uL2RhdGEvcHJvY2Vzc2VkL1wiXG5pbnRlcmltX2RpciA8LSBcIi4uLy4uL2RhdGEvaW50ZXJpbS9cIlxuXG5wYXBlcl9maWxlX25hbWUgPC0gcGFzdGUwKHByb2Nlc3NlZF9kaXIsIFwiZmFrZV9wYXBlcl9zZXJpZXNcIilcbnJldmlld19maWxlX25hbWUgPC0gcGFzdGUwKHByb2Nlc3NlZF9kaXIsIFwiZmFrZV9yZXZpZXdfc2VyaWVzXCIpXG5odW1hbl9maWxlX25hbWUgPC0gcGFzdGUwKHByb2Nlc3NlZF9kaXIsIFwiZmFrZV9odW1hblwiKVxuXG5vdXRwdXRfbm9ybWFsX3Jldmlld3NfZmlsZV9uYW1lIDwtIHBhc3RlMChpbnRlcmltX2RpciwgXCJ0YWJsZWF1LW5vcm1hbC1yZXZpZXdzLmNzdlwiKVxuYGBgIn0= -->
 <pre class="r"><code>processed_dir &lt;- &quot;../../data/processed/&quot;
+interim_dir &lt;- &quot;../../data/interim/&quot;
 
 paper_file_name &lt;- paste0(processed_dir, &quot;fake_paper_series&quot;)
 review_file_name &lt;- paste0(processed_dir, &quot;fake_review_series&quot;)
 human_file_name &lt;- paste0(processed_dir, &quot;fake_human&quot;)
-</code></pre>
+
+output_normal_reviews_file_name &lt;- paste0(interim_dir, &quot;tableau-normal-reviews.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1793,17 +1795,23 @@ human_df &lt;- readRDS(paste0(review_file_name, &quot;.RDS&quot;))
 <h1>Reduction 01: Normalize scores by reviewer scales</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzdGVwIG9uZTogY3JlYXRlIG1lYW4gcmV2aWV3c1xuIyBzdGVwIHR3bzogbm9ybWFsaXplIHNjb3JlXG4jIHN0ZXAgdGhyZWU6IHJlbmRlciBpbiB0YWJsZWF1LCBzYW1lIG5vdGVib29rLCBqdXN0IHdpdGggYWRkZWQgZmllbGRcblxubWVhbl9yZXZpZXdzX2RmIDwtIHJldmlld19kZiAlPiVcbiAgZ3JvdXBfYnkocmV2aWV3ZXJfaHVtYW5faGFzaF9pZCkgJT4lXG4gIHN1bW1hcmlzZSh0b3RhbF9yZXZpZXdzID0gbigpLCByZXZpZXdlcl9tZWFuX3Njb3JlID0gbWVhbihwcmVzZW50YXRpb25fc2NvcmUpKSAlPiVcbiAgdW5ncm91cCgpXG5cbm91dHB1dF9ub3JtYWxfZGYgPC0gbGVmdF9qb2luKHJldmlld19kZiwgbWVhbl9yZXZpZXdzX2RmLCBieSA9IGMoXCJyZXZpZXdlcl9odW1hbl9oYXNoX2lkXCIpKVxuXG5gYGAifQ== -->
-<pre class="r"><code># step one: create mean reviews
-# step two: normalize score
-# step three: render in tableau, same notebook, just with added field
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVEhSRVNIT0xEIDwtIDEwXG5cbm1lYW5fcmV2aWV3c19kZiA8LSByZXZpZXdfZGYgJT4lXG4gIGdyb3VwX2J5KHJldmlld2VyX2h1bWFuX2hhc2hfaWQpICU+JVxuICBzdW1tYXJpc2UodG90YWxfcmV2aWV3cyA9IG4oKSwgXG4gICAgICAgICAgICByZXZpZXdlcl9tZWFuX3Njb3JlID0gbWVhbihwcmVzZW50YXRpb25fc2NvcmUpLFxuICAgICAgICAgICAgcmV2aWV3ZXJfc2Rfc2NvcmUgPSBzZChwcmVzZW50YXRpb25fc2NvcmUpKSAlPiVcbiAgdW5ncm91cCgpXG5cbm91dHB1dF9ub3JtYWxfZGYgPC0gbGVmdF9qb2luKHJldmlld19kZiwgbWVhbl9yZXZpZXdzX2RmLCBieSA9IGMoXCJyZXZpZXdlcl9odW1hbl9oYXNoX2lkXCIpKSAlPiVcbiAgbXV0YXRlKHNjb3JlX2RpZmZfbWVhbiA9IGlmX2Vsc2UodG90YWxfcmV2aWV3cyA+IFRIUkVTSE9MRCwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHByZXNlbnRhdGlvbl9zY29yZSAtIHJldmlld2VyX21lYW5fc2NvcmUsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcy5udW1lcmljKE5BKSkpICU+JVxuICBtdXRhdGUoc2NvcmVfZGlzdF9tZWFuID0gaWZfZWxzZSh0b3RhbF9yZXZpZXdzID4gVEhSRVNIT0xELCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2NvcmVfZGlmZl9tZWFuIC8gcmV2aWV3ZXJfc2Rfc2NvcmUsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcy5udW1lcmljKE5BKSkpXG5cbmBgYCJ9 -->
+<pre class="r"><code>THRESHOLD &lt;- 10
 
 mean_reviews_df &lt;- review_df %&gt;%
   group_by(reviewer_human_hash_id) %&gt;%
-  summarise(total_reviews = n(), reviewer_mean_score = mean(presentation_score)) %&gt;%
+  summarise(total_reviews = n(), 
+            reviewer_mean_score = mean(presentation_score),
+            reviewer_sd_score = sd(presentation_score)) %&gt;%
   ungroup()
 
-output_normal_df &lt;- left_join(review_df, mean_reviews_df, by = c(&quot;reviewer_human_hash_id&quot;))
+output_normal_df &lt;- left_join(review_df, mean_reviews_df, by = c(&quot;reviewer_human_hash_id&quot;)) %&gt;%
+  mutate(score_diff_mean = if_else(total_reviews &gt; THRESHOLD, 
+                                   presentation_score - reviewer_mean_score, 
+                                   as.numeric(NA))) %&gt;%
+  mutate(score_dist_mean = if_else(total_reviews &gt; THRESHOLD, 
+                                   score_diff_mean / reviewer_sd_score, 
+                                   as.numeric(NA)))
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -1813,12 +1821,15 @@ output_normal_df &lt;- left_join(review_df, mean_reviews_df, by = c(&quot;review
 <h1>Write</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud3JpdGVfY3N2KG91dHB1dF9ub3JtYWxfZGYsIHBhdGggPSBvdXRwdXRfbm9ybWFsX3Jldmlld3NfZmlsZV9uYW1lKVxuYGBgIn0= -->
+<pre class="r"><code>write_csv(output_normal_df, path = output_normal_reviews_file_name)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmFrZSBEYXRhIFN1bW1hcmllcyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBPdmVyaGVhZApgYGB7ciBvdmVyaGVhZCwgaW5jbHVkZSA9IEZBTFNFfQpwYWNrYWdlc192ZWN0b3IgPC0gYygidGlkeXZlcnNlIikKCm5lZWRfdG9faW5zdGFsbCA8LSBwYWNrYWdlc192ZWN0b3JbIShwYWNrYWdlc192ZWN0b3IgJWluJSBpbnN0YWxsZWQucGFja2FnZXMoKVssIlBhY2thZ2UiXSldCgppZiAobGVuZ3RoKG5lZWRfdG9faW5zdGFsbCkpIGluc3RhbGwucGFja2FnZXMobmVlZF90b19pbnN0YWxsKQoKZm9yIChwYWNrYWdlIGluIHBhY2thZ2VzX3ZlY3RvcikgewogIGxpYnJhcnkocGFja2FnZSwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKQp9CgpgYGAKCiMgUmVtb3RlIEktTwpgYGB7ciByZW1vdGUtaW99CnByb2Nlc3NlZF9kaXIgPC0gIi4uLy4uL2RhdGEvcHJvY2Vzc2VkLyIKCnBhcGVyX2ZpbGVfbmFtZSA8LSBwYXN0ZTAocHJvY2Vzc2VkX2RpciwgImZha2VfcGFwZXJfc2VyaWVzIikKcmV2aWV3X2ZpbGVfbmFtZSA8LSBwYXN0ZTAocHJvY2Vzc2VkX2RpciwgImZha2VfcmV2aWV3X3NlcmllcyIpCmh1bWFuX2ZpbGVfbmFtZSA8LSBwYXN0ZTAocHJvY2Vzc2VkX2RpciwgImZha2VfaHVtYW4iKQoKCgpgYGAKCiMgUGFyYW1ldGVycwpgYGB7ciBwYXJhbWV0ZXJzfQpgYGAKCiMgRGF0YSBSZWFkcwpgYGB7ciBkYXRhLXJlYWRzfQpwYXBlcl9kZiA8LSByZWFkUkRTKHBhc3RlMChwYXBlcl9maWxlX25hbWUsICIuUkRTIikpCnJldmlld19kZiA8LSByZWFkUkRTKHBhc3RlMChyZXZpZXdfZmlsZV9uYW1lLCAiLlJEUyIpKQpodW1hbl9kZiA8LSByZWFkUkRTKHBhc3RlMChyZXZpZXdfZmlsZV9uYW1lLCAiLlJEUyIpKQoKYGBgCgojIFJlZHVjdGlvbiAwMTogTm9ybWFsaXplIHNjb3JlcyBieSByZXZpZXdlciBzY2FsZXMKYGBge3IgcmVkdWN0aW9uLTAxfQojIHN0ZXAgb25lOiBjcmVhdGUgbWVhbiByZXZpZXdzCiMgc3RlcCB0d286IG5vcm1hbGl6ZSBzY29yZQojIHN0ZXAgdGhyZWU6IHJlbmRlciBpbiB0YWJsZWF1LCBzYW1lIG5vdGVib29rLCBqdXN0IHdpdGggYWRkZWQgZmllbGQKCm1lYW5fcmV2aWV3c19kZiA8LSByZXZpZXdfZGYgJT4lCiAgZ3JvdXBfYnkocmV2aWV3ZXJfaHVtYW5faGFzaF9pZCkgJT4lCiAgc3VtbWFyaXNlKHRvdGFsX3Jldmlld3MgPSBuKCksIHJldmlld2VyX21lYW5fc2NvcmUgPSBtZWFuKHByZXNlbnRhdGlvbl9zY29yZSkpICU+JQogIHVuZ3JvdXAoKQoKb3V0cHV0X25vcm1hbF9kZiA8LSBsZWZ0X2pvaW4ocmV2aWV3X2RmLCBtZWFuX3Jldmlld3NfZGYsIGJ5ID0gYygicmV2aWV3ZXJfaHVtYW5faGFzaF9pZCIpKSAlPiUKICBtdXRhdGUoc2NvcmVfZGlmZl9tZWFuID0gcHJlc2VudGF0aW9uX3Njb3JlIC0gcmV2aWV3ZXJfbWVhbl9zY29yZSwKICAgICAgICAgc2NvcmVfZGl2X21lYW4gPSBwcmVzZW50YXRpb25fc2NvcmUgLyByZXZpZXdlcl9tZWFuX3Njb3JlKQoKYGBgCgoKCiMgV3JpdGUKYGBge3Igd3JpdGV9CgpgYGAKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmFrZSBEYXRhIFN1bW1hcmllcyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBPdmVyaGVhZApgYGB7ciBvdmVyaGVhZCwgaW5jbHVkZSA9IEZBTFNFfQpwYWNrYWdlc192ZWN0b3IgPC0gYygidGlkeXZlcnNlIikKCm5lZWRfdG9faW5zdGFsbCA8LSBwYWNrYWdlc192ZWN0b3JbIShwYWNrYWdlc192ZWN0b3IgJWluJSBpbnN0YWxsZWQucGFja2FnZXMoKVssIlBhY2thZ2UiXSldCgppZiAobGVuZ3RoKG5lZWRfdG9faW5zdGFsbCkpIGluc3RhbGwucGFja2FnZXMobmVlZF90b19pbnN0YWxsKQoKZm9yIChwYWNrYWdlIGluIHBhY2thZ2VzX3ZlY3RvcikgewogIGxpYnJhcnkocGFja2FnZSwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKQp9CgpgYGAKCiMgUmVtb3RlIEktTwpgYGB7ciByZW1vdGUtaW99CnByb2Nlc3NlZF9kaXIgPC0gIi4uLy4uL2RhdGEvcHJvY2Vzc2VkLyIKaW50ZXJpbV9kaXIgPC0gIi4uLy4uL2RhdGEvaW50ZXJpbS8iCgpwYXBlcl9maWxlX25hbWUgPC0gcGFzdGUwKHByb2Nlc3NlZF9kaXIsICJmYWtlX3BhcGVyX3NlcmllcyIpCnJldmlld19maWxlX25hbWUgPC0gcGFzdGUwKHByb2Nlc3NlZF9kaXIsICJmYWtlX3Jldmlld19zZXJpZXMiKQpodW1hbl9maWxlX25hbWUgPC0gcGFzdGUwKHByb2Nlc3NlZF9kaXIsICJmYWtlX2h1bWFuIikKCm91dHB1dF9ub3JtYWxfcmV2aWV3c19maWxlX25hbWUgPC0gcGFzdGUwKGludGVyaW1fZGlyLCAidGFibGVhdS1ub3JtYWwtcmV2aWV3cy5jc3YiKQpgYGAKCiMgUGFyYW1ldGVycwpgYGB7ciBwYXJhbWV0ZXJzfQpgYGAKCiMgRGF0YSBSZWFkcwpgYGB7ciBkYXRhLXJlYWRzfQpwYXBlcl9kZiA8LSByZWFkUkRTKHBhc3RlMChwYXBlcl9maWxlX25hbWUsICIuUkRTIikpCnJldmlld19kZiA8LSByZWFkUkRTKHBhc3RlMChyZXZpZXdfZmlsZV9uYW1lLCAiLlJEUyIpKQpodW1hbl9kZiA8LSByZWFkUkRTKHBhc3RlMChyZXZpZXdfZmlsZV9uYW1lLCAiLlJEUyIpKQoKYGBgCgojIFJlZHVjdGlvbiAwMTogTm9ybWFsaXplIHNjb3JlcyBieSByZXZpZXdlciBzY2FsZXMKYGBge3IgcmVkdWN0aW9uLTAxfQpUSFJFU0hPTEQgPC0gMTAKCm1lYW5fcmV2aWV3c19kZiA8LSByZXZpZXdfZGYgJT4lCiAgZ3JvdXBfYnkocmV2aWV3ZXJfaHVtYW5faGFzaF9pZCkgJT4lCiAgc3VtbWFyaXNlKHRvdGFsX3Jldmlld3MgPSBuKCksIAogICAgICAgICAgICByZXZpZXdlcl9tZWFuX3Njb3JlID0gbWVhbihwcmVzZW50YXRpb25fc2NvcmUpLAogICAgICAgICAgICByZXZpZXdlcl9zZF9zY29yZSA9IHNkKHByZXNlbnRhdGlvbl9zY29yZSkpICU+JQogIHVuZ3JvdXAoKQoKb3V0cHV0X25vcm1hbF9kZiA8LSBsZWZ0X2pvaW4ocmV2aWV3X2RmLCBtZWFuX3Jldmlld3NfZGYsIGJ5ID0gYygicmV2aWV3ZXJfaHVtYW5faGFzaF9pZCIpKSAlPiUKICBtdXRhdGUoc2NvcmVfZGlmZl9tZWFuID0gaWZfZWxzZSh0b3RhbF9yZXZpZXdzID4gVEhSRVNIT0xELCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwcmVzZW50YXRpb25fc2NvcmUgLSByZXZpZXdlcl9tZWFuX3Njb3JlLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcy5udW1lcmljKE5BKSkpICU+JQogIG11dGF0ZShzY29yZV9kaXN0X21lYW4gPSBpZl9lbHNlKHRvdGFsX3Jldmlld3MgPiBUSFJFU0hPTEQsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNjb3JlX2RpZmZfbWVhbiAvIHJldmlld2VyX3NkX3Njb3JlLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcy5udW1lcmljKE5BKSkpCgpyZW1vdmUobWVhbl9yZXZpZXdzX2RmKQoKYGBgCgojIFdyaXRlCmBgYHtyIHdyaXRlfQp3cml0ZV9jc3Yob3V0cHV0X25vcm1hbF9kZiwgcGF0aCA9IG91dHB1dF9ub3JtYWxfcmV2aWV3c19maWxlX25hbWUpCmBgYAoKCg==</div>
 
 
 
