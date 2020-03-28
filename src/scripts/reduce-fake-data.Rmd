@@ -26,7 +26,7 @@ paper_file_name <- paste0(processed_dir, "fake_paper_series")
 review_file_name <- paste0(processed_dir, "fake_review_series")
 human_file_name <- paste0(processed_dir, "fake_human")
 
-output_normal_reviews_file_name <- paste0(interim_dir, "tableau-normal-reviews.csv")
+output_reduced_reviews_file_name <- paste0(interim_dir, "tableau-reduced-reviews.csv")
 ```
 
 # Parameters
@@ -37,12 +37,12 @@ output_normal_reviews_file_name <- paste0(interim_dir, "tableau-normal-reviews.c
 ```{r data-reads}
 paper_df <- readRDS(paste0(paper_file_name, ".RDS"))
 review_df <- readRDS(paste0(review_file_name, ".RDS"))
-human_df <- readRDS(paste0(review_file_name, ".RDS"))
+human_df <- readRDS(paste0(human_file_name, ".RDS"))
 
 ```
 
 # Reduction 01: Normalize scores by reviewer scales
-```{r reduction-01}
+```{r 01-normal}
 THRESHOLD <- 10
 
 mean_reviews_df <- review_df %>%
@@ -64,9 +64,74 @@ remove(mean_reviews_df)
 
 ```
 
+# Reduction 02: Reviews by co-authors
+```{r 02-co-authors}
+authors_df <- select(paper_df, paper_id, author_ids, year) %>%
+  separate(., author_ids, 
+           into = sprintf("author_id_%02d", seq(1:10)), 
+           sep = ",",
+           convert = TRUE,
+           fill = "right") %>%
+  pivot_longer(., -c(paper_id, year), names_to = "remove", values_to = "author_id") %>%
+  filter(!is.na(author_id)) %>%
+  select(paper_id, year, author_id) %>%
+  left_join(., select(human_df, hash_id, author_id), by = c("author_id")) %>%
+  select(paper_id, year, author_hash = hash_id)
+
+reviewers_df <- select(review_df, paper_id, hash_id = reviewer_human_hash_id) %>%
+  left_join(., select(human_df, hash_id), by = c("hash_id")) %>%
+  select(paper_id, reviewer_hash = hash_id)
+
+author_reviewer_pairs_df <- left_join(authors_df, reviewers_df, by = c("paper_id")) %>%
+  group_by(author_hash, reviewer_hash) %>%
+  summarise(author_reviewer_count = n()) %>%
+  ungroup()
+
+author_pairs_df <- full_join(select(authors_df, paper_id, year, author_01 = author_hash), 
+                             select(authors_df, paper_id, year, author_02 = author_hash),
+                             by = c("paper_id", "year")) %>%
+  filter(!(author_01 == author_02)) %>%
+  group_by(author_01, author_02) %>%
+  summarise(coauthor_count = n(), year_of_first_collab = min(year)) %>%
+  ungroup()
+
+conflicted_reviewers_df <- left_join(author_reviewer_pairs_df, 
+                        author_pairs_df, 
+                        by = c("author_hash" = "author_01", "reviewer_hash" = "author_02")) %>%
+  filter(!is.na(coauthor_count))
+
+conflicted_reviews_df <- left_join(authors_df, reviewers_df, by = c("paper_id")) %>%
+  left_join(., conflicted_reviewers_df, by = c("author_hash", "reviewer_hash")) %>%
+  filter(!is.na(author_reviewer_count)) %>%
+  filter(year_of_first_collab <= year) %>%
+  select(paper_id, reviewer_human_hash_id = reviewer_hash, coauthor_count) %>%
+  group_by(paper_id, reviewer_human_hash_id) %>%
+  summarise(sum_caauthor_count = sum(coauthor_count)) %>%
+  ungroup()
+
+output_coauthor_reviews_df <- left_join(review_df, 
+                                        conflicted_reviews_df, 
+                                        by = c("paper_id", "reviewer_human_hash_id")) %>%
+  mutate(sum_caauthor_count = replace_na(sum_caauthor_count, 0L))
+
+remove(authors_df, reviewers_df, author_reviewer_pairs_df, author_pairs_df, 
+       conflicted_reviewers_df, conflicted_reviews_df)
+
+```
+
+# Combine Output
+```{r combine}
+output_review_df <- left_join(output_normal_df, 
+                              select(output_coauthor_reviews_df, 
+                                     paper_id, reviewer_human_hash_id, sum_caauthor_count),
+                              by = c("paper_id", "reviewer_human_hash_id"))
+```
+
+
+
 # Write
 ```{r write}
-write_csv(output_normal_df, path = output_normal_reviews_file_name)
+write_csv(output_review_df, path = output_reduced_reviews_file_name)
 ```
 
 
