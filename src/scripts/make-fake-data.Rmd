@@ -309,11 +309,12 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df,
 
 make_present_publish_decision <- function(input_papers_with_reviews_df) {
   
-  input_papers_with_reviews_df <- papers_with_reviews_df
+  # input_papers_with_reviews_df <- papers_with_reviews_df
   
   threshold <- (MIN_PRESENTATION_SCORE + MAX_PRESENTATION_SCORE) / 2.0
-   
-  return_df <- input_papers_with_reviews_df %>%
+  
+  decision_df <- input_papers_with_reviews_df %>%
+    distinct(paper_id, mean_rating) %>%
     bind_cols(., tibble(random = runif(nrow(.), min = -1.0, max = 1.0))) %>%
     mutate(present_decision = if_else((mean_rating + random) > threshold * 1.15,
                                       ACCEPT_WORD, REJECT_WORD)) %>%
@@ -321,9 +322,11 @@ make_present_publish_decision <- function(input_papers_with_reviews_df) {
     bind_cols(., tibble(random = runif(nrow(.), min = -1.0, max = 1.0))) %>%
     mutate(publish_decision = if_else((mean_rating + random) > threshold * 1.35,
                                       ACCEPT_WORD, REJECT_WORD)) %>%
-    select(-random)
-    
-    return(return_df)
+    select(-random, -mean_rating)
+  
+  return_df <- left_join(input_papers_with_reviews_df, decision_df, by = c("paper_id"))
+  
+  return(return_df)
   
 }
 ```

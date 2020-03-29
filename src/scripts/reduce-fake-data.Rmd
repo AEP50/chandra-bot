@@ -26,6 +26,7 @@ paper_file_name <- paste0(processed_dir, "fake_paper_series")
 review_file_name <- paste0(processed_dir, "fake_review_series")
 human_file_name <- paste0(processed_dir, "fake_human")
 
+output_reduced_papers_file_name <- paste0(interim_dir, "tableau-reduced-papers.csv")
 output_reduced_reviews_file_name <- paste0(interim_dir, "tableau-reduced-reviews.csv")
 ```
 
@@ -41,89 +42,129 @@ human_df <- readRDS(paste0(human_file_name, ".RDS"))
 
 ```
 
-# Reduction 01: Normalize scores by reviewer scales
-```{r 01-normal}
-THRESHOLD <- 10
+# Method 01: Normalize scores by reviewer scales
+```{r method-01-normal}
+append_normalized_scores <- function(input_review_df, min_review_threshold) {
+  
+  mean_reviews_df <- input_review_df %>%
+    group_by(reviewer_human_hash_id) %>%
+    summarise(total_reviews = n(), 
+              reviewer_mean_score = mean(presentation_score),
+              reviewer_sd_score = sd(presentation_score)) %>%
+    ungroup()
+  
+  return_df <- left_join(review_df, mean_reviews_df, by = c("reviewer_human_hash_id")) %>%
+    mutate(score_diff_mean = if_else(total_reviews > min_review_threshold, 
+                                     presentation_score - reviewer_mean_score, 
+                                     as.numeric(NA))) %>%
+    mutate(score_dist_mean = if_else(total_reviews > min_review_threshold, 
+                                     score_diff_mean / reviewer_sd_score, 
+                                     as.numeric(NA)))
+  
+  return(return_df)
+  
+}
+```
 
-mean_reviews_df <- review_df %>%
-  group_by(reviewer_human_hash_id) %>%
-  summarise(total_reviews = n(), 
-            reviewer_mean_score = mean(presentation_score),
-            reviewer_sd_score = sd(presentation_score)) %>%
-  ungroup()
-
-output_normal_df <- left_join(review_df, mean_reviews_df, by = c("reviewer_human_hash_id")) %>%
-  mutate(score_diff_mean = if_else(total_reviews > THRESHOLD, 
-                                   presentation_score - reviewer_mean_score, 
-                                   as.numeric(NA))) %>%
-  mutate(score_dist_mean = if_else(total_reviews > THRESHOLD, 
-                                   score_diff_mean / reviewer_sd_score, 
-                                   as.numeric(NA)))
-
-remove(mean_reviews_df)
+# Method 02: Reviews by co-authors
+```{r method-02-co-authors}
+append_former_coauthor_count <- function(input_paper_df, input_review_df, input_human_df) {
+  
+  authors_df <- select(input_paper_df, paper_id, author_ids, year) %>%
+    separate(., author_ids, 
+             into = sprintf("author_id_%02d", seq(1:10)), 
+             sep = ",",
+             convert = TRUE,
+             fill = "right") %>%
+    pivot_longer(., -c(paper_id, year), names_to = "remove", values_to = "author_id") %>%
+    filter(!is.na(author_id)) %>%
+    select(paper_id, year, author_id) %>%
+    left_join(., select(input_human_df, hash_id, author_id), by = c("author_id")) %>%
+    select(paper_id, year, author_hash = hash_id)
+  
+  reviewers_df <- select(input_review_df, paper_id, hash_id = reviewer_human_hash_id) %>%
+    left_join(., select(input_human_df, hash_id), by = c("hash_id")) %>%
+    select(paper_id, reviewer_hash = hash_id)
+  
+  
+  author_reviewer_pairs_df <- left_join(authors_df, reviewers_df, by = c("paper_id")) %>%
+    group_by(author_hash, reviewer_hash) %>%
+    summarise(author_reviewer_count = n()) %>%
+    ungroup()
+  
+  author_pairs_df <- full_join(select(authors_df, paper_id, year, author_01 = author_hash), 
+                               select(authors_df, paper_id, year, author_02 = author_hash),
+                               by = c("paper_id", "year")) %>%
+    filter(!(author_01 == author_02)) %>%
+    group_by(author_01, author_02) %>%
+    summarise(coauthor_count = n(), year_of_first_collab = min(year)) %>%
+    ungroup()
+  
+  conflicted_reviewers_df <- left_join(author_reviewer_pairs_df, 
+                                       author_pairs_df, 
+                                       by = c("author_hash" = "author_01", "reviewer_hash" = "author_02")) %>%
+    filter(!is.na(coauthor_count))
+  
+  conflicted_reviews_df <- left_join(authors_df, reviewers_df, by = c("paper_id")) %>%
+    left_join(., conflicted_reviewers_df, by = c("author_hash", "reviewer_hash")) %>%
+    filter(!is.na(author_reviewer_count)) %>%
+    filter(year_of_first_collab <= year) %>%
+    select(paper_id, reviewer_human_hash_id = reviewer_hash, coauthor_count) %>%
+    group_by(paper_id, reviewer_human_hash_id) %>%
+    summarise(sum_caauthor_count = sum(coauthor_count)) %>%
+    ungroup()
+  
+  return_df <- left_join(input_review_df, 
+                         conflicted_reviews_df, 
+                         by = c("paper_id", "reviewer_human_hash_id")) %>%
+    mutate(sum_caauthor_count = replace_na(sum_caauthor_count, 0L))
+  
+  return(return_df)
+  
+  
+}
 
 ```
 
-# Reduction 02: Reviews by co-authors
-```{r 02-co-authors}
-authors_df <- select(paper_df, paper_id, author_ids, year) %>%
-  separate(., author_ids, 
-           into = sprintf("author_id_%02d", seq(1:10)), 
-           sep = ",",
-           convert = TRUE,
-           fill = "right") %>%
-  pivot_longer(., -c(paper_id, year), names_to = "remove", values_to = "author_id") %>%
-  filter(!is.na(author_id)) %>%
-  select(paper_id, year, author_id) %>%
-  left_join(., select(human_df, hash_id, author_id), by = c("author_id")) %>%
-  select(paper_id, year, author_hash = hash_id)
+# Method 03: Dreyer's English
+```{r method-03-dreyers}
+dreyer_words_vector <- c("very", "really", "rather", "quite", "so", "of course", "in fact")
 
-reviewers_df <- select(review_df, paper_id, hash_id = reviewer_human_hash_id) %>%
-  left_join(., select(human_df, hash_id), by = c("hash_id")) %>%
-  select(paper_id, reviewer_hash = hash_id)
-
-author_reviewer_pairs_df <- left_join(authors_df, reviewers_df, by = c("paper_id")) %>%
-  group_by(author_hash, reviewer_hash) %>%
-  summarise(author_reviewer_count = n()) %>%
-  ungroup()
-
-author_pairs_df <- full_join(select(authors_df, paper_id, year, author_01 = author_hash), 
-                             select(authors_df, paper_id, year, author_02 = author_hash),
-                             by = c("paper_id", "year")) %>%
-  filter(!(author_01 == author_02)) %>%
-  group_by(author_01, author_02) %>%
-  summarise(coauthor_count = n(), year_of_first_collab = min(year)) %>%
-  ungroup()
-
-conflicted_reviewers_df <- left_join(author_reviewer_pairs_df, 
-                        author_pairs_df, 
-                        by = c("author_hash" = "author_01", "reviewer_hash" = "author_02")) %>%
-  filter(!is.na(coauthor_count))
-
-conflicted_reviews_df <- left_join(authors_df, reviewers_df, by = c("paper_id")) %>%
-  left_join(., conflicted_reviewers_df, by = c("author_hash", "reviewer_hash")) %>%
-  filter(!is.na(author_reviewer_count)) %>%
-  filter(year_of_first_collab <= year) %>%
-  select(paper_id, reviewer_human_hash_id = reviewer_hash, coauthor_count) %>%
-  group_by(paper_id, reviewer_human_hash_id) %>%
-  summarise(sum_caauthor_count = sum(coauthor_count)) %>%
-  ungroup()
-
-output_coauthor_reviews_df <- left_join(review_df, 
-                                        conflicted_reviews_df, 
-                                        by = c("paper_id", "reviewer_human_hash_id")) %>%
-  mutate(sum_caauthor_count = replace_na(sum_caauthor_count, 0L))
-
-remove(authors_df, reviewers_df, author_reviewer_pairs_df, author_pairs_df, 
-       conflicted_reviewers_df, conflicted_reviews_df)
+count_dreyer_words <- function(input_text_vector){
+  
+#  input_text_vector <- paper_df$abstract
+  
+  return_vector <- tibble(text = input_text_vector) %>%
+    rowwise() %>%
+    mutate(dreyer_count = sum(str_count(text, dreyer_words_vector))) %>%
+    ungroup() %>%
+    .$dreyer_count
+  
+  return(return_vector)
+}
 
 ```
 
-# Combine Output
+# Apply Methods
 ```{r combine}
-output_review_df <- left_join(output_normal_df, 
-                              select(output_coauthor_reviews_df, 
-                                     paper_id, reviewer_human_hash_id, sum_caauthor_count),
+# Papers
+paper_dreyer_df <- bind_cols(paper_df, tibble(abstract_dreyer_count = count_dreyer_words(paper_df$abstract)))
+output_paper_df <- paper_dreyer_df
+
+# Reviews
+committee_recs_df <- 
+  select(paper_df, paper_id, committee_presentation_decision, committee_publication_decision)
+review_normal_df <- append_normalized_scores(review_df, 10L)
+review_coauthor_df <- append_former_coauthor_count(paper_df, review_df, human_df)
+review_dreyer_df <- 
+  bind_cols(review_df,
+            tibble(comment_dreyer_count = count_dreyer_words(review_df$commentary_to_author)))
+
+output_review_df <- left_join(review_normal_df, committee_recs_df, by = c("paper_id")) %>%
+  left_join(., select(review_coauthor_df, paper_id, reviewer_human_hash_id, sum_caauthor_count),
+                              by = c("paper_id", "reviewer_human_hash_id")) %>%
+  left_join(., 
+            select(review_dreyer_df, paper_id, reviewer_human_hash_id, comment_dreyer_count),
                               by = c("paper_id", "reviewer_human_hash_id"))
 ```
 
@@ -131,6 +172,7 @@ output_review_df <- left_join(output_normal_df,
 
 # Write
 ```{r write}
+write_csv(output_paper_df, path = output_reduced_papers_file_name)
 write_csv(output_review_df, path = output_reduced_reviews_file_name)
 ```
 
