@@ -58,6 +58,7 @@ MAX_ABSTRACT_LENGTH <- 20L
 ACCEPT_WORD <- "Accept" 
 REJECT_WORD <- "Reject"
 SEPARATOR <- "/"
+VERIFIED_REVIEWERS <- 10
 ```
 
 # Data Reads
@@ -112,6 +113,8 @@ create_universe_of_humans <- function(input_first_df, input_last_df, input_unive
     bind_cols(., 
               tibble(mean_score = rnorm(nrow(.), mean = 3.0,  sd = 0.75))) %>%
     bind_cols(., tibble(sd_score = runif(nrow(.), min = 0.5, max = 2.0)))
+  
+  # add verified reviewer tag here
   
   return(return_df)
   
