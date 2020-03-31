@@ -288,7 +288,7 @@
       <column aggregation='None' caption='Dreyer Count in Author Commentary (bin)' datatype='integer' name='[Dreyer Count in Author Commentary (bin)]' role='dimension' type='ordinal'>
         <calculation class='bin' decimals='0' formula='[comment_dreyer_count]' peg='0' size='2' />
       </column>
-      <column caption='Length Author Commentary (bin)' datatype='integer' name='[Length Author Commentary (bin)]' role='dimension' type='ordinal'>
+      <column aggregation='None' caption='Length Author Commentary (bin)' datatype='integer' name='[Length Author Commentary (bin)]' role='dimension' type='ordinal'>
         <calculation class='bin' decimals='2' formula='[Calculation_4870431924390477824]' peg='0' size='100' />
       </column>
       <column aggregation='None' caption='Normalized Rating (bin)' datatype='integer' name='[Normalized Rating (bin)]' role='dimension' type='ordinal'>
@@ -445,7 +445,7 @@
             <column caption='Agree with Committee Presentation' datatype='integer' name='[Calculation_5553782799806771200]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='IF ([committee_presentation_decision]==[presentation_recommendation]) then   &#10;1&#10;ELSE&#10;0&#10;END' />
             </column>
-            <column caption='Length Author Commentary (bin)' datatype='integer' name='[Length Author Commentary (bin)]' role='dimension' type='ordinal'>
+            <column aggregation='None' caption='Length Author Commentary (bin)' datatype='integer' name='[Length Author Commentary (bin)]' role='dimension' type='ordinal'>
               <calculation class='bin' decimals='2' formula='[Calculation_4870431924390477824]' peg='0' size='100' />
             </column>
             <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
@@ -844,7 +844,7 @@
             <column caption='Length Author Commentary' datatype='integer' name='[Calculation_4870431924390477824]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='LEN([commentary_to_author])' />
             </column>
-            <column caption='Length Author Commentary (bin)' datatype='integer' name='[Length Author Commentary (bin)]' role='dimension' type='ordinal'>
+            <column aggregation='None' caption='Length Author Commentary (bin)' datatype='integer' name='[Length Author Commentary (bin)]' role='dimension' type='ordinal'>
               <calculation class='bin' decimals='2' formula='[Calculation_4870431924390477824]' peg='0' size='100' />
             </column>
             <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
@@ -1536,7 +1536,7 @@
       </viewpoint>
       <simple-id uuid='{D8E24EDE-1A57-4EDD-B2DF-6CFC8B7DBA8D}' />
     </window>
-    <window class='worksheet' name='reviewer means'>
+    <window class='worksheet' maximized='true' name='reviewer means'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1606,15 +1606,13 @@
       </viewpoint>
       <simple-id uuid='{98E5A275-7548-43DB-893A-8821B68754A8}' />
     </window>
-    <window class='worksheet' maximized='true' name='agree with committee dreyer'>
+    <window class='worksheet' name='agree with committee dreyer'>
       <cards>
         <edge name='left'>
           <strip size='160'>
             <card type='pages' />
             <card type='filters' />
             <card type='marks' />
-            <card pane-specification-id='9' param='[federated.1nawq6311896uk1funhyk0r0s810].[:Measure Names]' type='color' />
-            <card pane-specification-id='9' param='[federated.1nawq6311896uk1funhyk0r0s810].[sum:Number of Records:qk]' type='size' />
           </strip>
         </edge>
         <edge name='top'>

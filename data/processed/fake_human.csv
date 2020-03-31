@@ -1,501 +1,501 @@
-name,aliases,hash_id,current_affiliation,previous_affiliation,last_degree_affiliation,orcid_url,orcid,author_id
-Lindsy Scow,NA,47e48e7232ea03b1f0ed0a2c32a4dc523913e584,North Florida Academy,NA,NA,NA,0000-0000-0000-0001,1
-Glenda Buffington,NA,e449232c188bdd96f3cd1ce46a3f07a348a8b971,William Howard Taft University,NA,NA,NA,0000-0000-0000-0002,2
-Lauretta Schucker,NA,75c2be34b7b557efd63924c510d5373f7b0e46f6,North-West College - Pasadena,NA,NA,NA,0000-0000-0000-0003,3
-Gerri Bissell,NA,afee80f0d25e8fbc692d8da3f481145136c22be4,Dale Carnegie of Northeast Ohio,NA,NA,NA,0000-0000-0000-0004,4
-Bruna Highfill,NA,bec86a3071ba7c1dff0728dbf2825e57200d87ce,Virginia College School of Construction,NA,NA,NA,0000-0000-0000-0005,5
-Karla Bolka,NA,c247d752cb5097830f12447011a595406c45ab40,LaGrange College,NA,NA,NA,0000-0000-0000-0006,6
-Lyndia Glowka,NA,85b23818c0306048a8de8891b7ca4773c24e6b44,Brenau University,NA,NA,NA,0000-0000-0000-0007,7
-Kandra Muncie,NA,727ac0a6145ab5aec39599ca6bdc62c41a2218ca,Evangelical Seminary of Puerto Rico,NA,NA,NA,0000-0000-0000-0008,8
-Wendi Knoll,NA,03aa5821eff7a9fcdf7b7e1cfbd00e0449f7d37d,Mitchell-Hamline School of Law,NA,NA,NA,0000-0000-0000-0009,9
-Brigid Sporysz,NA,a98b3d654a8e933a4485f34c02dc858c2bdf8a9f,Columbia College Hollywood,NA,NA,NA,0000-0000-0000-0010,10
-Johanne Nolte,NA,bb76c1ba9dee67a03ab9f04b0c17e0ff17d7afdf,Drexel University,NA,NA,NA,0000-0000-0000-0011,11
-Tari Accomando,NA,a903c40fc5f7affe1fd7280c5204a79a587a17e6,ICDC College - Huntington Park,NA,NA,NA,0000-0000-0000-0012,12
-Lon Overbey,NA,4ed20d21249e42a64a610f8c0dbb7d3fe9392204,Manor College,NA,NA,NA,0000-0000-0000-0013,13
-Tomiko Garcea,NA,5e4114e58dcac5ccd975e2468c357a172a848aa6,Sarasota University,NA,NA,NA,0000-0000-0000-0014,14
-Hellen Kingry,NA,ec92d3e25035290c50092d517d9f9775432fabff,Newbridge College-Monterey Park,NA,NA,NA,0000-0000-0000-0015,15
-Isidro Rosmarin,NA,bf01fd241ee19c9157c60b5b9b4f93bb821df182,TechSkills - Raleigh,NA,NA,NA,0000-0000-0000-0016,16
-Venus Bazel,NA,739b2e7869fa38c5e8fd4c0396d3c82b00744500,Assumption College,NA,NA,NA,0000-0000-0000-0017,17
-Jorge Sierer,NA,e89f53249c3ef69e2416bca28fa1e22666a2009b,Michigan Radiologic and Imaging Sciences Consortium (MiRIS),NA,NA,NA,0000-0000-0000-0018,18
-Shizuko Haboush,NA,7a509182963b06765cb4578c82948444714d5b1e,The Chicago School for Piano Technology,NA,NA,NA,0000-0000-0000-0019,19
-Myrtle Mayerle,NA,7daee1a2b19684cfcd9a33fc51042fa20c75ecea,South Seattle College,NA,NA,NA,0000-0000-0000-0020,20
-Timika Mirmow,NA,48d0976dc64b452bd4f1d7d11c958c75ea62859f,Sacred Heart Seminary and School of Theology,NA,NA,NA,0000-0000-0000-0021,21
-Eusebia Sopha,NA,15b5e18f5af1997b23e5b8734e7374af17b23986,South Texas Vo-Tech Institute,NA,NA,NA,0000-0000-0000-0022,22
-Jenni Rozo,NA,e2919dd050663bd80cf029934e9ab56176002709,Saint Joseph's Seminary,NA,NA,NA,0000-0000-0000-0023,23
-Eula Crary,NA,aba1f10541c5be13e89aaf4c5feb6f77abcff9e0,Whitworth University,NA,NA,NA,0000-0000-0000-0024,24
-Wanda Karstens,NA,bb565ea04591c2bbe387230a239ab2cc569a825e,Berean Institute,NA,NA,NA,0000-0000-0000-0025,25
-Delphine Defiglio,NA,805f62d5a6b18fddcb77da97b1c8e4c22d7867a3,William R. Moore College of Technology,NA,NA,NA,0000-0000-0000-0026,26
-Cinda Kabel,NA,1ee83f8355bd9b5c44dd0d692d6dd8e65d4d9a12,Monterey County Behavioral Health,NA,NA,NA,0000-0000-0000-0027,27
-Wilbur Stonebrook,NA,1212456c26c3b25612107cb60f1669600371984e,Bellus Academy,NA,NA,NA,0000-0000-0000-0028,28
-Rufina Elchert,NA,3c87747a5835219119d06edecc92a5598f59f575,Knowledge Systems Institute,NA,NA,NA,0000-0000-0000-0029,29
-Viola Rubendall,NA,7799d331278e920120968b470bd4d63305bbac31,University of Southern Maine,NA,NA,NA,0000-0000-0000-0030,30
-Lisha Wilhelms,NA,13072def4378120a6e68a16ee8dd45d2c3381950,Oikos University,NA,NA,NA,0000-0000-0000-0031,31
-Dewitt Bullocks,NA,fd59ddba663799cd3c7b9e755b5ddd46b2012e57,American Jewish University,NA,NA,NA,0000-0000-0000-0032,32
-Eldon Civale,NA,ec8cad2d8fca67bfc95b9f5c60242321a434c831,Pacific States University,NA,NA,NA,0000-0000-0000-0033,33
-Dawn Redstone,NA,c00d70582a04aeb46f050e41655443fb26513a8f,Center for Allied Health Education,NA,NA,NA,0000-0000-0000-0034,34
-Claretha Zaxas,NA,a5c801940c451465049868213598e8263af7eb60,Southeastern Institute - North Charleston,NA,NA,NA,0000-0000-0000-0035,35
-Alexandra Leghorn,NA,c3390d85bb1f594461b7a809e60fb14cc532764e,College of DuPage,NA,NA,NA,0000-0000-0000-0036,36
-Blondell Silguero,NA,6c1c2f5cdb147e4659662efd1efe1d9760356682,"Kings Colleges USA, LLC, d/b/a Kings Education",NA,NA,NA,0000-0000-0000-0037,37
-Marceline Frumkin,NA,ba9a9fee7a6a3ca9165a7cd479f5252e5f28d610,Pasadena City College,NA,NA,NA,0000-0000-0000-0038,38
-Les Auldridge,NA,764264a68d4e62f1ba012fe308b5ede75f60a678,Orange County EMT,NA,NA,NA,0000-0000-0000-0039,39
-Randy Fisk,NA,ab6e8f4481e7f76c5fb81b8718bb5c42a50accb6,Welch College,NA,NA,NA,0000-0000-0000-0040,40
-Lottie Tomilson,NA,f9315193986c49139bb5a9066096d642f90931d0,Blush School of Makeup,NA,NA,NA,0000-0000-0000-0041,41
-Hermelinda Cua,NA,555d9df13be9ea448241518afc47dc99da6f74a2,ACT College - Arlington,NA,NA,NA,0000-0000-0000-0042,42
-Mae Cimaglia,NA,fc0e3caf7c5d92a1d332c1cb2b4f4af03e67fbb3,Seton Hall University,NA,NA,NA,0000-0000-0000-0043,43
-Tora Sayres,NA,c4afeba29326970367476635c632140b67ab6902,Army Logistics University,NA,NA,NA,0000-0000-0000-0044,44
-Nola Colavito,NA,b3dd8c49180c286465067771db72ee792babe369,Florida Coastal School of Law,NA,NA,NA,0000-0000-0000-0045,45
-Zoe Siegwarth,NA,a185f7c435f4d41936068edd66bc386166fb5362,Carnegie Mellon University,NA,NA,NA,0000-0000-0000-0046,46
-An Hutmacher,NA,9a6daacb837f75cba522d3f78cc34cb5df785d39,Torah Temimah Talmudical Seminary,NA,NA,NA,0000-0000-0000-0047,47
-Marlo Natalia,NA,40474008c655ac5f753c7ea54fdb899ff817bbba,Texas Christian University,NA,NA,NA,0000-0000-0000-0048,48
-Precious Langloss,NA,bdf52e38779b2f415ba52eae9eabf90a5cd84c96,Glenville State College,NA,NA,NA,0000-0000-0000-0049,49
-Leontine Rundlett,NA,5d33faf2d946a72fab5e5e0686cd533a3640210e,American Broadcasting School,NA,NA,NA,0000-0000-0000-0050,50
-Krystal Dence,NA,d594cae1d3eea0908e3803237c50ab2d8147f024,Snow College,NA,NA,NA,0000-0000-0000-0051,51
-Galen Slutzky,NA,4f558263e5617b5aa9c410fbdfcd13be8bc834af,Internexus Orlando,NA,NA,NA,0000-0000-0000-0052,52
-Hildegard Peckler,NA,603a41b36b2f2b6e62df65629f43c0f95158cc35,American Institute of Alternative Medicine,NA,NA,NA,0000-0000-0000-0053,53
-Clemente Boissoneault,NA,4c794d2389c9ae72e0ef5131805558227315137b,Los Angeles County ROP,NA,NA,NA,0000-0000-0000-0054,54
-Conception Loubier,NA,98e9ba85484d33212214f43dd976210a07c338c4,Pacifica Graduate Institute,NA,NA,NA,0000-0000-0000-0055,55
-Truman Loughry,NA,a6fead694864e410bc82c3e5406f3e4b3dea25df,Cephas Center for Health Sciences,NA,NA,NA,0000-0000-0000-0056,56
-Olen Racca,NA,90a4d0efdffea53bfad1ef7c46963de393a28225,Monterey Peninsula College,NA,NA,NA,0000-0000-0000-0057,57
-Marcene Rolins,NA,91ec23e98240e40edec45c5a509e6ca634ef8003,IHM HEALTH STUDIES CENTER,NA,NA,NA,0000-0000-0000-0058,58
-Bernie Roytek,NA,fe6215e8edd8d025f2c3610fbab20dc18efbb5f1,Lees-McRae College,NA,NA,NA,0000-0000-0000-0059,59
-Keven Riippi,NA,e44d93acdf0aade87c5680ea719ee2478b189ac3,Adult and Continuing Education - Cleveland Extension,NA,NA,NA,0000-0000-0000-0060,60
-Lynnette Kuhlmey,NA,1dc6db632dbae6c834d25dfb7495fc6ba4c989cb,IITR Truck Schools,NA,NA,NA,0000-0000-0000-0061,61
-Petrina Sypniewski,NA,102c8979ef8e67e290474788015866f5518082e7,Los Medanos College,NA,NA,NA,0000-0000-0000-0062,62
-Dario Stuckmeyer,NA,a7c1925b0843ece7cb06809e9a7eb54da257f730,Crafton Hills College,NA,NA,NA,0000-0000-0000-0063,63
-Lanita Rende,NA,ec46285db7240ab6a51607eccd235ee2049dd5b1,California State University - Monterey Bay,NA,NA,NA,0000-0000-0000-0064,64
-Emile Letko,NA,9d35a3eca9cec191910561c381a573480610b1a0,South Dakota State University,NA,NA,NA,0000-0000-0000-0065,65
-Aundrea Friedberg,NA,e53f346efd1db6f152fc023fd705d5cb8c70407a,Delaware School of Hotel Management,NA,NA,NA,0000-0000-0000-0066,66
-Jannie Alverson,NA,9ae7ed212af5d2a61ae561eccda5f45c18f19bb3,The New School Center for Media,NA,NA,NA,0000-0000-0000-0067,67
-Wanetta Cockreham,NA,32e3797062ec1110c6d249c035c06639f5a94e42,Tennessee Wesleyan University,NA,NA,NA,0000-0000-0000-0068,68
-Zena Stinchfield,NA,30a2dd4ac3b28f8cfb2a943963c2545798b93e16,McDaniel College,NA,NA,NA,0000-0000-0000-0069,69
-Clarice Parmentier,NA,4963506e704914d42972467a1186a7834bd8f118,The New York Seminary,NA,NA,NA,0000-0000-0000-0070,70
-Jim Rusteberg,NA,b40cb664673ea2680aea6cade869c4179bd09a40,Phoenix Therapeutic Massage College - Flagstaff,NA,NA,NA,0000-0000-0000-0071,71
-Dolly Huhta,NA,715efe88f15e1b03ee95430832bddafc4153a50a,North Central Texas College,NA,NA,NA,0000-0000-0000-0072,72
-Tamra Gargis,NA,d6e21c22f9b87b6bcab8e676d7c321a7caf1d399,Yeshiva and Kollel Harbotzas Torah,NA,NA,NA,0000-0000-0000-0073,73
-Judson Essa,NA,4fd814c73adfd7bd86e2aaf183763bf7f595b19c,Bamberg Job Corps Center,NA,NA,NA,0000-0000-0000-0074,74
-Wava Asal,NA,add690b33c5899e10f5f6eb3147802c6ca3efd6c,Belmont Abbey College,NA,NA,NA,0000-0000-0000-0075,75
-Chauncey Vanvalen,NA,5b87997049109cfa15c09687c8db01d1580f7cef,Bob Jones University,NA,NA,NA,0000-0000-0000-0076,76
-Janene Tarella,NA,0148772dacc4d99fd4c83c1ef5dff66eeee0e8cc,University of Baltimore,NA,NA,NA,0000-0000-0000-0077,77
-Rico Orford,NA,22a4c2e7055fdcc1cdca4bfb4d469aa1b3eb8d52,Southern Adventist University,NA,NA,NA,0000-0000-0000-0078,78
-Dylan Butte,NA,40b492d367e8248824e8335d978a3088c60f6969,Liliane S. Kaufmann School - Montefiore Hospital,NA,NA,NA,0000-0000-0000-0079,79
-Vasiliki Francey,NA,7b1f291a04be6978e01e77cdfbe83cb0fca5d463,Zaytuna College,NA,NA,NA,0000-0000-0000-0080,80
-Olevia Ulerio,NA,b1d37cc980c2100bff0254f123d2cf8f105f461f,Southwestern College,NA,NA,NA,0000-0000-0000-0081,81
-Madalyn Hardigan,NA,568bbdd6d7334a96f283f635ea210f6715c42861,Chadron State College,NA,NA,NA,0000-0000-0000-0082,82
-Brendon Aschmann,NA,ced8a4447bcbac89725095cbadbaa92fc9ba7661,Brandon College,NA,NA,NA,0000-0000-0000-0083,83
-Seymour Videtto,NA,62cccfb89f66b1c2e06a21ab73fe945b4c010d20,American School of Technology,NA,NA,NA,0000-0000-0000-0084,84
-Raisa Kind,NA,6513732d7739da9be4d84e124cb42eeaee424dbb,The Apprentice School - Newport News Shipbuilding,NA,NA,NA,0000-0000-0000-0085,85
-Drusilla Armbrester,NA,93a2821d8cd2c59df61060539ec4bc6b07186586,Family of Faith Christian University,NA,NA,NA,0000-0000-0000-0086,86
-Patti Caffey,NA,98d807bea22d0f4a50e97f022325ae51c227a0af,"Cutting Edge Academy, LLC",NA,NA,NA,0000-0000-0000-0087,87
-Evia Boshart,NA,1911b841681cd3c93fd85772ac7a4a36a911ae54,Huntington Beach Adult School,NA,NA,NA,0000-0000-0000-0088,88
-Cammy Fahning,NA,03e26545d5fa2ef66226e0506b6701d64d6151ad,Purdue University Fort Wayne,NA,NA,NA,0000-0000-0000-0089,89
-Renna Fortun,NA,a948284c07ebab458fc7f0bfd9d5d1fb96090231,University of Maine at Presque Isle,NA,NA,NA,0000-0000-0000-0090,90
-Melissa Clayborn,NA,4b56f477ae3a8cccbb615db76b79b70913723ccc,Colegio Universitario de San Juan,NA,NA,NA,0000-0000-0000-0091,91
-Dollie Rames,NA,fbd1dce2c37f1cd540717e8ce6516045052f674d,Remington College - New Orleans Campus,NA,NA,NA,0000-0000-0000-0092,92
-Ilda Quinnett,NA,b9a8af9ee5eb984e4ef9c400290fdbd11e31828f,Great Lakes Christian College,NA,NA,NA,0000-0000-0000-0093,93
-Joya Rogas,NA,7080b48c6fea171095d1bd0090eb12228b1f0c9b,Villa Maria College Buffalo,NA,NA,NA,0000-0000-0000-0094,94
-Augustine Donkervoet,NA,483e193a32c2b10374e5cb8e25afd5dd3360eb5e,University of Northern Virginia,NA,NA,NA,0000-0000-0000-0095,95
-Luvenia Cookey,NA,6f059e8de20674a0d0ed64e520e7a840f8027808,Washington County Adult Skill Center,NA,NA,NA,0000-0000-0000-0096,96
-Jina Mexicano,NA,f43ffcac94614fd5cc967443c2aa9b3c8bbd2db2,Study Group: Higher Education North America,NA,NA,NA,0000-0000-0000-0097,97
-Rosalie Paoletti,NA,e102dad6fbb3f33d212cd543011944eb035b2624,National Cryptologic School,NA,NA,NA,0000-0000-0000-0098,98
-Judie Weiglein,NA,c3cfab62f26c80e2d48f4ef519488a96e1f71671,San Joaquin Valley College,NA,NA,NA,0000-0000-0000-0099,99
-Allison Loxton,NA,4d70df98236b096bb0d4c5ddfd6e095a1d2a0a82,Northeastern Seminary at Roberts Wesleyan College,NA,NA,NA,0000-0000-0000-00100,100
-Jesica Fluty,NA,41abfc109c20a50a45a12a1624d1dd1a7391f5b4,Gates College,NA,NA,NA,0000-0000-0000-00101,101
-Pamella Teichman,NA,cbaa95e5377b7cd6b4adcc12181e609a9a68aa46,Adelphi University,NA,NA,NA,0000-0000-0000-00102,102
-Caren Reekie,NA,48e46e56a93b07436425754c1e49e61db089d4b5,Nebraska Wesleyan University,NA,NA,NA,0000-0000-0000-00103,103
-Chung Liebherr,NA,e7561e4c1940597288bcce7d4ad9b002f5baa795,New World Symphony,NA,NA,NA,0000-0000-0000-00104,104
-Stefania Madkins,NA,3a03516ac7c48615e33e564d0ede496801cbefc2,Husson University,NA,NA,NA,0000-0000-0000-00105,105
-Yukiko Towson,NA,7f688ee7451c9010a6bdba3a2c888d6d5a1ef399,Mount St. Joseph University,NA,NA,NA,0000-0000-0000-00106,106
-Alesha Catalani,NA,8688fdf2b6d315647a84b683d92e3cbde5640d30,Tap This Valley Works CET,NA,NA,NA,0000-0000-0000-00107,107
-Henrietta Meroney,NA,ee87bd0580399f92da9b2cf453c71e71a39583d5,Southern California State University,NA,NA,NA,0000-0000-0000-00108,108
-Gayla Ravi,NA,492e33dda5744f1c4be3c7fd2d19495eda936b7d,Planned Parenthood Federation of America,NA,NA,NA,0000-0000-0000-00109,109
-Magda Delone,NA,04f165e9fe7b6f32421a76cead8451273c8d2c0d,Colorado Media School,NA,NA,NA,0000-0000-0000-00110,110
-Juliann Sydow,NA,a1a8488546005e8af3d91d6daba80a86d6fa4867,J'Renee College,NA,NA,NA,0000-0000-0000-00111,111
-Milan Harby,NA,4773a442510aabe576a13ac25fcc9bafaeecca82,Institute of Production and Recording,NA,NA,NA,0000-0000-0000-00112,112
-Haywood Madise,NA,62837ce9b234a0b2b1848b2d45b87063464a073f,Los Angeles College of Music,NA,NA,NA,0000-0000-0000-00113,113
-Sophia Milardo,NA,20b0062aec8b7aa8ff44bd1f91631bc9659b2409,Salus University,NA,NA,NA,0000-0000-0000-00114,114
-Brendan Zeidan,NA,7c2fad02fc3fa8fbaaedad7a3ee138299fe49a91,Catholic University of America,NA,NA,NA,0000-0000-0000-00115,115
-Noelia Howkins,NA,ecf467226a746424e9bd63b6c17e88c0cbfc214d,El Camino Hospital,NA,NA,NA,0000-0000-0000-00116,116
-Sergio Gastelo,NA,353aba1b969248b1a7e80f61f50fb23f874be601,Champion Christian College,NA,NA,NA,0000-0000-0000-00117,117
-Ariel Fie,NA,1997ab2931003beb2aa35c7a2f6510ca5163bd18,Otsego  Northern Catskills  BOCES,NA,NA,NA,0000-0000-0000-00118,118
-Pansy Standing,NA,faa0a915f69cafa1b905d3891ffec771c291cd49,California State University - San Bernardino,NA,NA,NA,0000-0000-0000-00119,119
-Larita Currier,NA,4d46926b006d54401f4a18882a280f5655fafe33,University of Notre Dame,NA,NA,NA,0000-0000-0000-00120,120
-Marica Gray,NA,f753e90ce2a54ecea058c88bda5ed95f47ba7c00,Hobart Institute of Welding Technology,NA,NA,NA,0000-0000-0000-00121,121
-Jade Pulos,NA,4255a88d2f7f4694e55631f75f70e9db436ef076,Airman's Proficiency Center,NA,NA,NA,0000-0000-0000-00122,122
-Rodolfo Smallidge,NA,b728189b3b3bb203508b124dbc59fedddfb87785,Kiamichi Technology Center - Antlers,NA,NA,NA,0000-0000-0000-00123,123
-Chiquita Blankenburg,NA,aba69ee694c3ec9f0483f1e56b56cd7abedc8753,Morton College,NA,NA,NA,0000-0000-0000-00124,124
-Charlsie Chamblee,NA,7676e13f42e656d7f3043925d78cd5a020654492,California Health Sciences University,NA,NA,NA,0000-0000-0000-00125,125
-Efrain Edison,NA,ea05b217d90547b186bb8cd78bea86cdf79aef6b,Claremont School of Theology,NA,NA,NA,0000-0000-0000-00126,126
-Naoma Rowsey,NA,39e96f54ca9f53357096f0c5ff2cc62fc6973c70,Transpacific Hawaii College,NA,NA,NA,0000-0000-0000-00127,127
-Carmen Redford,NA,7dd1dcd22bf2aba66081205a1831eae28c43d7ce,Hendrix College,NA,NA,NA,0000-0000-0000-00128,128
-Germaine Raybon,NA,a444e0b5c62f3cce062a7b6a3035c49f2953fd02,Christine Valmy International School for Esthetics,NA,NA,NA,0000-0000-0000-00129,129
-Virgen Pecora,NA,6958e7b0307e3688d659d5309cbf8b2c492aa76c,Knox College,NA,NA,NA,0000-0000-0000-00130,130
-Coretta Chiaramonte,NA,8d4f3ea1b7f170e5570fa7e8dda15981e409c3fe,North-West College - Riverside,NA,NA,NA,0000-0000-0000-00131,131
-Latesha Bonenfant,NA,72cc3ec67cb2d22bff97f9b1bf03331709d07017,Universidad Central Del Caribe,NA,NA,NA,0000-0000-0000-00132,132
-Dee Beachamp,NA,279dac8b0fdd301e3d5fdc2d3b44b4f593c4b6f4,Morris College,NA,NA,NA,0000-0000-0000-00133,133
-Apolonia Sodhi,NA,f426f7ad74a324c91df3a78a757b124a5ab60bba,Dale Carnegie of Georgia,NA,NA,NA,0000-0000-0000-00134,134
-Lucie Gerwe,NA,0d3b5154ecde1a9127139f59a5ddc55b7e83cab6,U.S. Army Ordnance Munitions and Electronics Maintence School,NA,NA,NA,0000-0000-0000-00135,135
-Mellisa Renfroe,NA,927703c559482012788cb7998167bf902b2edc15,Blue Ridge Job Corps Center,NA,NA,NA,0000-0000-0000-00136,136
-Merri Boyance,NA,8fb245c0487911bc42027f75a2728a3a6ffd9199,Samra University of Oriental Medicine,NA,NA,NA,0000-0000-0000-00137,137
-Annamarie Francillon,NA,595761c96c413d6b41e3b6dea4255b58f785ac07,Texas A&M University,NA,NA,NA,0000-0000-0000-00138,138
-Ernie Kahrs,NA,df846c1471815ac7eacd257e7566262e9a419541,Catholic Distance University,NA,NA,NA,0000-0000-0000-00139,139
-Corene Miyagawa,NA,3b11a385541dee1abb24f845cfcb38897b6dc223,Arkansas Baptist College,NA,NA,NA,0000-0000-0000-00140,140
-Arica Shapiro,NA,10ed429ca3b45fb4c6abf3b633f0ab97cbc27a5d,La Salle University,NA,NA,NA,0000-0000-0000-00141,141
-Gustavo Agosto,NA,3a4b2283b17a3c017a60d1255d7ac00e1673fd49,George Mason University,NA,NA,NA,0000-0000-0000-00142,142
-Destiny Netolicky,NA,cae94d06cabfc1a33ff0402922b2c404373ca861,The University of Alabama,NA,NA,NA,0000-0000-0000-00143,143
-Leigha Dubrow,NA,32d93a337e28f0a3cd9cd903541f6ea31b365b03,Asher College,NA,NA,NA,0000-0000-0000-00144,144
-Ola Harte,NA,10356326062c5cb6eac20ff48e13ddaaf40b99a5,Kernel University,NA,NA,NA,0000-0000-0000-00145,145
-Regan Dellarose,NA,f6c0cd97b2017b059751776e006f86134d89e747,Mexican American Opportunity Foundation (MAOF),NA,NA,NA,0000-0000-0000-00146,146
-Margot Jurczyk,NA,8ef248679d29d305e532b5362e0711ded876a53e,Del Mar College,NA,NA,NA,0000-0000-0000-00147,147
-Lance Lampkin,NA,f79422fe43d092fdddb00de8d3588a1b9e1dc393,National Louis University,NA,NA,NA,0000-0000-0000-00148,148
-Sindy Shaddox,NA,d6e72831db865fafd5749f8da179a9a66376d22a,University of Jamestown,NA,NA,NA,0000-0000-0000-00149,149
-Kemberly Kaines,NA,4851bec3f7c3701952775686c546ecdfbd799884,Framingham State University,NA,NA,NA,0000-0000-0000-00150,150
-Delores Kucinski,NA,76bdda8972d16c1885fc9b8b6a08d3cbad2d5ade,Aaniiih Nakoda College,NA,NA,NA,0000-0000-0000-00151,151
-Dakota Dam,NA,e60e0a79d07725adabb15032379580179b9097bb,Santa Fe College,NA,NA,NA,0000-0000-0000-00152,152
-Georgann Specking,NA,8218a8189a9d7327c48b2f390b5401e3aac1825b,Bryan University,NA,NA,NA,0000-0000-0000-00153,153
-Earlie Sicinski,NA,85a44ece98c8829980b176c34cb05ef64bbcdea1,Shorter University,NA,NA,NA,0000-0000-0000-00154,154
-Imogene Decarolis,NA,f19e925d104935866ecc9e70a3ad26bb11fe2336,Downeast School of Massage,NA,NA,NA,0000-0000-0000-00155,155
-Laronda Trawick,NA,fa567e6d54c0baf962e44f9ebe777d81cd457cd0,Centura College - Virginia Beach,NA,NA,NA,0000-0000-0000-00156,156
-Tana Merriott,NA,06c0e11c74fcd8f8631de1606c27d36714579707,Vatterott College - Memphis,NA,NA,NA,0000-0000-0000-00157,157
-Donnette Demmon,NA,2293276585b9e403b717cf7a5511c2ae33461224,Meridian Institute,NA,NA,NA,0000-0000-0000-00158,158
-Lynn Schildknecht,NA,7322649442ac434ac1f926d691ab7c1f8ea21d40,Ashford University,NA,NA,NA,0000-0000-0000-00159,159
-Claris Asbill,NA,f6f5d2768d4fa58a6989996d08635e9f67a42cfe,Bradley University,NA,NA,NA,0000-0000-0000-00160,160
-Long Gerringer,NA,d974bcf9bc1b75f1c1d695bfdb37b36bc3905e39,Spring Hill College,NA,NA,NA,0000-0000-0000-00161,161
-Cris Valencia,NA,46ce3edce93a9b96953ea62e5e46c2ba79f26960,Yeshiva Yesodei HaTorah,NA,NA,NA,0000-0000-0000-00162,162
-Loreen Tomasetti,NA,1e102d60d0fcdc7f6b0439aeed4a6172f03a4f8d,Western Texas College,NA,NA,NA,0000-0000-0000-00163,163
-Lucretia Jonas,NA,1d9e7150e60d33e9105a4143cfd5d591b2934611,Marymount University,NA,NA,NA,0000-0000-0000-00164,164
-Deja Bazzle,NA,0aee2a94ee426c772275227bb03842788973234f,Green Mountain College,NA,NA,NA,0000-0000-0000-00165,165
-Michel Guedesse,NA,46ea26f8c9f9e4e068851c8a6e2d704babaa0ec3,Strayer University,NA,NA,NA,0000-0000-0000-00166,166
-Shirleen Mcgillicuddy,NA,e9c0efa020715d69ba83c0a16393d4fbd23b693e,Rasmussen College - Topeka,NA,NA,NA,0000-0000-0000-00167,167
-Ruthie Daubs,NA,b8eed0f29391fc88ba9e0ffd5788a5e5ed92752c,Northern Virginia School of Therapeutic Massage,NA,NA,NA,0000-0000-0000-00168,168
-Ching Jimenes,NA,afbf30348856a596ecacacac1c5edbb35449cc74,Bluefield State College,NA,NA,NA,0000-0000-0000-00169,169
-Jessia Ledon,NA,229f8878d8bdd96c5bc2fb431f73ffd5dcaea90e,Ohlone College,NA,NA,NA,0000-0000-0000-00170,170
-Edgardo Seabury,NA,d7f58bef41dad32753968f263ac13b1d83eeed0b,Northwest Christian University,NA,NA,NA,0000-0000-0000-00171,171
-Shawna Colegrove,NA,fa7a624475016bbc1c5df436937d27b7fc310d4b,U-Haul University,NA,NA,NA,0000-0000-0000-00172,172
-Hye Farrant,NA,609f0accbccc54a26b6460128a1cce4a0e0dea5b,Rice University,NA,NA,NA,0000-0000-0000-00173,173
-Noah Menck,NA,2ed06e59862df57910853032cbc8510381a09f41,Abraham Lincoln University,NA,NA,NA,0000-0000-0000-00174,174
-Jillian Fouracre,NA,c1aa97ff14d432fd4db195514be4244438bdac80,Atlanta Job Corps Center,NA,NA,NA,0000-0000-0000-00175,175
-Greta Droski,NA,39bd9580bab0dc6346a7d41abd31086f843460aa,Southwest Minnesota State University,NA,NA,NA,0000-0000-0000-00176,176
-Fredericka Facenda,NA,c559c4547dbec3d092fe2cbfa8ec89d1525775cb,inlingua Washington DC,NA,NA,NA,0000-0000-0000-00177,177
-Jutta Patneaude,NA,f489e9eed0b24dd60f10fca80cfcea5145d9cddd,Cuyamaca College,NA,NA,NA,0000-0000-0000-00178,178
-Yulanda Nickol,NA,8cb9f90c05e1854055c69900026dc9178e941b10,SUNY College of Technology at Delhi,NA,NA,NA,0000-0000-0000-00179,179
-Na Dehl,NA,4817c1a1497bedaf8e2a774acf90c41d1487d2e8,Academy Education Services,NA,NA,NA,0000-0000-0000-00180,180
-Pamala Bartus,NA,b12758e54cabbcd2aa1e1ed947766efdb010f8a1,University of Virginia,NA,NA,NA,0000-0000-0000-00181,181
-Bridgett Pretti,NA,c76d87571af74d38ede746f3ca25dcc0e074a3eb,Thomas Aquinas College,NA,NA,NA,0000-0000-0000-00182,182
-Kylie Grahm,NA,281813c60cd568d9378301e227fd32ff8283c49d,Southern Oregon University,NA,NA,NA,0000-0000-0000-00183,183
-Jimmy Munning,NA,301e6276631fc8f5dd19eb969a252b4c0d80fc88,Associated Beth Rivkah Schools,NA,NA,NA,0000-0000-0000-00184,184
-Jamee Caiazzo,NA,ad30266f69fbfab88a41642ad12cef3da7326ff7,Clark College,NA,NA,NA,0000-0000-0000-00185,185
-Creola Sorbera,NA,db57449f24318440380d6fe6af968248c24caac8,Spa Tech Institute - Plymouth,NA,NA,NA,0000-0000-0000-00186,186
-Elina Jagher,NA,11f354ab5bb81d1658bc42d3c37e02196b527647,Williston State College,NA,NA,NA,0000-0000-0000-00187,187
-Etta Allessi,NA,78ac5042c7a7aacd89091ba86e5fe0b289b18487,Com-Tec Institute,NA,NA,NA,0000-0000-0000-00188,188
-Milton Chumley,NA,855a96f9daf2e6204b835e0dc020856e73d1bc1b,Southern California Health Institute,NA,NA,NA,0000-0000-0000-00189,189
-Sulema Arenivas,NA,19ef22d6dea38d2acde6ed33f69427bf44300e4f,Court Reporting Institute of St. Louis,NA,NA,NA,0000-0000-0000-00190,190
-Beula Gorney,NA,7fd98355f609f7588b547e3ab263697c2c882946,Ashland University,NA,NA,NA,0000-0000-0000-00191,191
-Manuela Tory,NA,13b3e095de259e27fc096576676f51019262240e,Capital University,NA,NA,NA,0000-0000-0000-00192,192
-Joy Ekis,NA,60bddba8e4ef6bff43f5ac53d967a6370f32d51e,Eureka College,NA,NA,NA,0000-0000-0000-00193,193
-Cyndy Kennell,NA,f8f96e0130bb7925177a74ab4b9bc69953ad38bf,East Tennessee State University,NA,NA,NA,0000-0000-0000-00194,194
-Jeane Romrell,NA,bb709409f8bd4989fcdc589613c9d9f6739c060f,University of Wisconsin - Green Bay,NA,NA,NA,0000-0000-0000-00195,195
-Zenobia Stoltenburg,NA,ba6e45c8ea8faf8c566ec7db4dc1903698d3dd0e,Atlanta Institute of Music and Media,NA,NA,NA,0000-0000-0000-00196,196
-Nereida Trevor,NA,58386b0540f983158d10f50cd606e5ada5df91a0,Gardner-Webb University,NA,NA,NA,0000-0000-0000-00197,197
-Jamika Walston,NA,d7d4b7223e0047a9dac0fba30e8477c00cc3207b,Milan Institute - Palm Desert,NA,NA,NA,0000-0000-0000-00198,198
-Martin Pali,NA,a47e64418cacecbed60c3b83e2f8151e208c1b87,Center of Advanced Therapeutics,NA,NA,NA,0000-0000-0000-00199,199
-Vannessa Ocampo,NA,5d0f992b176e12a7a7dd5114af46bd3210b74454,Everest Institute - Grand Rapids,NA,NA,NA,0000-0000-0000-00200,200
-Elbert Toten,NA,90eaa5be5a2c4e421b9cd2fa3b88b0bae0961bc9,Southeast Missouri State University,NA,NA,NA,0000-0000-0000-00201,201
-Linette Sumerall,NA,1664fbcc4c6140b99d088ad7726e051b9bb8417c,LAL Boston,NA,NA,NA,0000-0000-0000-00202,202
-Omer Seley,NA,32dd590fd5a3a931229e5dd252af2c4a608f65b7,UPPER BUCKS COUNTY AREA VOCATIONAL TECHNICAL SCH,NA,NA,NA,0000-0000-0000-00203,203
-Fannie Freudenburg,NA,dd97ec69d25a5c422a7d4b7868397138f6199b54,High Expectations,NA,NA,NA,0000-0000-0000-00204,204
-Annabelle Tangabekyan,NA,29a573a9aa7f4249c32084107e99c013d544f8d2,North-West College-West Covina,NA,NA,NA,0000-0000-0000-00205,205
-Shavon Wolkowiecki,NA,0d4313b1f4d653dcd34c64f06e978bcb6385a94a,Heritage University,NA,NA,NA,0000-0000-0000-00206,206
-Felipe Mccanna,NA,247d2dfb99e03ce3fa4c362c9266bef5fe1dd497,Fairfield-Suisun Adult School,NA,NA,NA,0000-0000-0000-00207,207
-Danelle Founds,NA,18bf0fd5f28d9d70fdc1081f620849ece916fbbf,FastTrain College - Plantation,NA,NA,NA,0000-0000-0000-00208,208
-Cliff Throgmorton,NA,bbc466de43abf3bdf9de9b7bf852b994bbd21eee,Talmudic College of Florida,NA,NA,NA,0000-0000-0000-00209,209
-Katheleen Lama,NA,68de9d9e29e12e102e9b749d28ff36c6ddf0db35,Divas Unlimited Academy,NA,NA,NA,0000-0000-0000-00210,210
-Hosea Marlar,NA,62fde2417380ff506da720b0b41c59628493c7ae,Gene Juarez Academy South Seattle,NA,NA,NA,0000-0000-0000-00211,211
-Nadene Saddat,NA,10c8fb2c4ca80e1d80dfc9820c4073b43c5793a8,Everest College - Anaheim,NA,NA,NA,0000-0000-0000-00212,212
-Kaitlin Yockers,NA,2657926785e2b29a3cebf17a4519394c3f139620,Roger Williams University School of Law,NA,NA,NA,0000-0000-0000-00213,213
-Nichole Lirette,NA,c9bead8c5ae5cad3459ee034acc1b6eeca290181,Cairn University,NA,NA,NA,0000-0000-0000-00214,214
-Ina Toto,NA,46cec76da7296e7b1d4cb5ba3ab6b355af0766b4,Marian Court College,NA,NA,NA,0000-0000-0000-00215,215
-Lida Marsingill,NA,51bc2dde17e3651ded96b5af3771958ed756787b,Luther Rice College and Seminary,NA,NA,NA,0000-0000-0000-00216,216
-Filiberto Secore,NA,93b4cf8231061121da4fbc1467199b23158ebb1e,Valparaiso University,NA,NA,NA,0000-0000-0000-00217,217
-Lucienne Cuthill,NA,e4cc7b6f480bfe7182ec293de4ec8883c391ec09,Court Reporting Institute - Seattle,NA,NA,NA,0000-0000-0000-00218,218
-Jan Piela,NA,87d346878d822d261ae16a50aa8adb2e3bd00866,MILA Orlando,NA,NA,NA,0000-0000-0000-00219,219
-Katy Wicinsky,NA,2c0a21d13a7fc8123d7ab5771a0769c127a0f55f,American College of Healthcare and Technology,NA,NA,NA,0000-0000-0000-00220,220
-Lesha Klinefelter,NA,0939f448f0d0045f85d2d367e335a2e93b91b902,Target International Student Center,NA,NA,NA,0000-0000-0000-00221,221
-Lesa Twombley,NA,2a02e186df5be62609e565b5937ebb8c4f8017e7,Healing Oasis Wellness Center,NA,NA,NA,0000-0000-0000-00222,222
-Lindy Kemerly,NA,e599aee69b83d098fc1d9435fec02e9035c27d30,Little Priest Tribal College,NA,NA,NA,0000-0000-0000-00223,223
-Nakisha Hingston,NA,0b9b5daee755dde8d3b8ce656f84151cb370811d,Portland State University,NA,NA,NA,0000-0000-0000-00224,224
-Mardell Schaeffler,NA,85c49f73c4b09c15e3961d83a213e14b771db17e,SUNY College at Cortland,NA,NA,NA,0000-0000-0000-00225,225
-Moira Daniele,NA,9ff202d358d34eda7503084f114f1e3cdc6ff6a4,Sullivan University - Dupont Circle,NA,NA,NA,0000-0000-0000-00226,226
-Lasandra Marn,NA,a8d42ece4473bde7f265e3f50bcf19bb4c3992e4,East Side Union High School District Adult School,NA,NA,NA,0000-0000-0000-00227,227
-Karyl Flieller,NA,b1bf70c96af8342d0c4eb2a777b5e378177a6860,Great Lakes Boat Building School,NA,NA,NA,0000-0000-0000-00228,228
-Thad Huskin,NA,ff2d72026158fecf96422bc30c186bee173d9c19,New Orleans Job Corps Center,NA,NA,NA,0000-0000-0000-00229,229
-Argentina Crecelius,NA,23d3ac34546affa8402a08fb92add6e0b594471c,inlingua Metro New York Ridgewood,NA,NA,NA,0000-0000-0000-00230,230
-Teri Auten,NA,0f6b506d69fb743565830ea54945e640baac5f7f,"El Prado Adult School, Frontera Calif. Institution for Women",NA,NA,NA,0000-0000-0000-00231,231
-Concepcion Kosel,NA,66bfa835a8cc848a358a5874ca7b22976dd76089,Palmer College of Chiropractic,NA,NA,NA,0000-0000-0000-00232,232
-Lorina Bizub,NA,13db040bfdb639a0a188f0da6719b1225015c6d2,Northwestern College,NA,NA,NA,0000-0000-0000-00233,233
-Moises Collova,NA,c28eea79698293dcd759330117d760354e4bdff5,Oberlin College,NA,NA,NA,0000-0000-0000-00234,234
-Cynthia Maneafaiga,NA,178637e0b375ee6c3293f2791127d633f7a5a062,Kiamichi Technology Center - Durant,NA,NA,NA,0000-0000-0000-00235,235
-Jocelyn Roemhild,NA,af0dd765f1a63e78f8f3454d39f7ceab95a8205c,Southwestern Assemblies of God University,NA,NA,NA,0000-0000-0000-00236,236
-Desire Pol,NA,757e9b7edb8067346ecdc859312f0cfe32ea6416,Kaskaskia College,NA,NA,NA,0000-0000-0000-00237,237
-Hector Elvington,NA,b05bcd6954384aee79432275c34647748ee2b962,Great Plains Technology Center,NA,NA,NA,0000-0000-0000-00238,238
-Santos Collet,NA,d22670f28ec72e4ceee847a58cbd817658aa69ed,Dakota College at Bottineau,NA,NA,NA,0000-0000-0000-00239,239
-Stephaine Lantis,NA,3dd786653f1513dc2fff34333f2e104380cedd75,Steuben-Allegany BOCES,NA,NA,NA,0000-0000-0000-00240,240
-Stacee Selbo,NA,82871fb5f53d5e05ad5dd9757ee0603ef8da93a8,University of Illinois at Urbana-Champaign,NA,NA,NA,0000-0000-0000-00241,241
-Barney Dieng,NA,2a8d33a4d0b835f40fc6c8dd7b64ae95a6a05b16,Philadelphia College of Osteopathic Medicine,NA,NA,NA,0000-0000-0000-00242,242
-Brant Bursch,NA,e5861a4c8cd3143139e70df72a2b04471cfb1494,Cowley College,NA,NA,NA,0000-0000-0000-00243,243
-Kasie Omary,NA,70f347c236f6ecb10944a2bc921ffba1902f67e0,Everest College - Torrance,NA,NA,NA,0000-0000-0000-00244,244
-Rex Tenpas,NA,ed153f9931d334f832bd63e8b2af910e4fcedefe,Dermalogica Academy,NA,NA,NA,0000-0000-0000-00245,245
-Mellissa Vanosdol,NA,2282870c1da311266513036dfc11bb19b7f527ce,Alliance Charter Elementary at Roosevelt Elementary School,NA,NA,NA,0000-0000-0000-00246,246
-Dania Mix,NA,375c1a211ae326eb86c1dc6eab7a4f1e36938ee2,Fortis College,NA,NA,NA,0000-0000-0000-00247,247
-Vicki Valerino,NA,6507ab8d1c2965f9981f5e3af05ab9e8c314ebbf,Allegany College of Maryland,NA,NA,NA,0000-0000-0000-00248,248
-Loris Hinebaugh,NA,b89db764c04ffc5d6788d52ad46fe808d19e72bb,College America - Flagstaff,NA,NA,NA,0000-0000-0000-00249,249
-Belen Gerety,NA,14186eae0dc3eb21fec60852e68176dfdc6b5e3e,Uceda School of Orlando I,NA,NA,NA,0000-0000-0000-00250,250
-Juan Tigano,NA,b5ba757cee55ef5d9782e9788d98e2116deea991,Lamar Institute of Technology,NA,NA,NA,0000-0000-0000-00251,251
-Arlette Guridi,NA,c16adf23c2d5fbe71f16cf5bb10cac5b58a8252b,Universidad Nacional Autonoma De Mexico UNAM- San Antonio,NA,NA,NA,0000-0000-0000-00252,252
-Lona Derrah,NA,1b0150c4914f643c5c98ed869b0a869103e0c734,Ithaca College,NA,NA,NA,0000-0000-0000-00253,253
-Natalie Primozich,NA,58a70c491049b8e443c0b07d296bd8887d4e2fef,ZMS The Academy,NA,NA,NA,0000-0000-0000-00254,254
-Dierdre Castellonese,NA,70f2ed675a51a3aa0d373ad4fa731be1037923e2,Fayetteville State University,NA,NA,NA,0000-0000-0000-00255,255
-Latisha Woolwine,NA,415bf1f259952cc2d1e8af19bdf053dbfe8f0f77,Oxnard College,NA,NA,NA,0000-0000-0000-00256,256
-Monica Saravia,NA,c849a11b0efb4fab658dc4bfa362b28a292bbb55,Liberty Institute Orlando,NA,NA,NA,0000-0000-0000-00257,257
-Laree Skalicky,NA,4b19fd52c2c528d6aa9e34b72ec58f70b767d5d2,Myotherapy Institute,NA,NA,NA,0000-0000-0000-00258,258
-Leah Hamar,NA,3daf1b86e0d7ea183b5fc495f2cfc7fb784e74f9,Metropolitan State University of Denver,NA,NA,NA,0000-0000-0000-00259,259
-Morgan Corseri,NA,c8d6179c484015cf574eb087a9cce2d2a0ed3dda,Mid-Atlantic Christian University,NA,NA,NA,0000-0000-0000-00260,260
-Yadira Danella,NA,ed5287ff187c443506e68580c16d53b8f1f06e37,Alice Lloyd College,NA,NA,NA,0000-0000-0000-00261,261
-Mittie Diefenderfer,NA,0931c4c349663139daa8600c3e5072ea50036571,Dallas International University,NA,NA,NA,0000-0000-0000-00262,262
-Jamar Mijares,NA,a4979361c79ef57ce382c1f4b507855151462078,West Virginia State University,NA,NA,NA,0000-0000-0000-00263,263
-Shanell Fuger,NA,f009f90914f938867805c6e30bb2493ae3c231cf,Otay Mesa Adult School - R.J. Donovan Correctional Facility,NA,NA,NA,0000-0000-0000-00264,264
-Mathew Allsop,NA,6606172e6ec4475b42d4223eb527b5c61ea597eb,"corinthian colleges, inc",NA,NA,NA,0000-0000-0000-00265,265
-Arnold Blanc,NA,62e6785448dfc0a15caa349743c9ac4a37ac20c5,Bais HaMedrash & Mesivta of Baltimore,NA,NA,NA,0000-0000-0000-00266,266
-Claudette Aragoni,NA,ee4642aed8118ae68dd84075b888d96149e4ee15,Saint Gregory's University,NA,NA,NA,0000-0000-0000-00267,267
-China Stubbs,NA,21e3244807f7b5b14e9d6ea54f487bf02b273baa,Pacific College of Oriental Medicine,NA,NA,NA,0000-0000-0000-00268,268
-Abigail Caroway,NA,9e169cfb478e43a764f91f081c4fb605960f1b94,Upright Citizens Brigade Theatre - New York,NA,NA,NA,0000-0000-0000-00269,269
-Neda Trappey,NA,1133b50e830dbe0dc5994d216635a860dd7e7b85,Aveda Institute Tallahassee,NA,NA,NA,0000-0000-0000-00270,270
-Amparo Debiew,NA,5300c47ac995433838df611a7d2ef2de0e540f4c,Northeast Lakeview College,NA,NA,NA,0000-0000-0000-00271,271
-Marjorie Mcenaney,NA,bf94d884a6d198ed36373c8ab2a972b3c23ae698,"Centro de Capacitacion y Asesoramiento, Vetelba",NA,NA,NA,0000-0000-0000-00272,272
-Frederic Berdan,NA,14701ba1023647990f3d4b499b4650df7a5c2618,Phoenix East Aviation,NA,NA,NA,0000-0000-0000-00273,273
-Dionna Clavelle,NA,c4cc241287cecec6ca0fbef8ade0d18998a27a42,Innovative Detective Institute,NA,NA,NA,0000-0000-0000-00274,274
-Floy Greenbacker,NA,7903aa4d7f4f3c4161485a95d4128dac421f3a68,Endicott College,NA,NA,NA,0000-0000-0000-00275,275
-Dann Starliper,NA,d59fc5e3dd7512888c34e56394f742e2ae5eebd1,Process Work Institute,NA,NA,NA,0000-0000-0000-00276,276
-Stanton Balzarine,NA,c9468aed77fb21c4495b8539814f7e8fad5b7d9a,Jamaica Hospital,NA,NA,NA,0000-0000-0000-00277,277
-Vanetta Amrich,NA,736a0a07b83138170f66c511b38b2bd43ac4e47c,Pepperdine University,NA,NA,NA,0000-0000-0000-00278,278
-Asuncion Simonetty,NA,a447e15142ec522a3e3920b5304294b91b464804,Modern Technology School,NA,NA,NA,0000-0000-0000-00279,279
-Lenita Sallah,NA,e51842c3ef40cb64390d14ec1c91532ce833601e,Armstrong State University,NA,NA,NA,0000-0000-0000-00280,280
-Sachiko Wires,NA,027c2ae7f5267da1f7ba1d6b744e85948ce3f073,Wayne State University,NA,NA,NA,0000-0000-0000-00281,281
-Shane Pelayo,NA,48036c4d15a2511f0f81136bd99f1cb43f5ce961,University of Colorado at Boulder,NA,NA,NA,0000-0000-0000-00282,282
-Cary Lipani,NA,bc6ef948a6e1974b328a3b170dedb635876163a5,Florida Institute of Traditional Chinese Medicine,NA,NA,NA,0000-0000-0000-00283,283
-Fatima Guilbeau,NA,a6bbdf6899ef945932cf90be2e8d952e46b2e9ec,St. Vincent De Paul Regional Seminary,NA,NA,NA,0000-0000-0000-00284,284
-Mallie Elvis,NA,662e5fd192a7ca15c0a32f4ce067cde925b5972e,Anaheim University,NA,NA,NA,0000-0000-0000-00285,285
-Kathrin Koepke,NA,c19796b69080b2dde848b66923320da823852b34,North Arkansas College,NA,NA,NA,0000-0000-0000-00286,286
-Twanna Thorsness,NA,f566bf2bf34eaa0d43d58f86a574431d1670f2b4,Dean College,NA,NA,NA,0000-0000-0000-00287,287
-Jaquelyn Hoving,NA,4486b40c36911c45676f28e42280d860d1c36eed,Syracuse University,NA,NA,NA,0000-0000-0000-00288,288
-Bev Mallery,NA,3d10db9b88133d45f16227159b0c9519648512fe,Mount Mary University,NA,NA,NA,0000-0000-0000-00289,289
-Patrick Southwood,NA,d9d3f63b0d24cb91e08d5b367220deb96a87f52a,Vatterott College - Des Moines,NA,NA,NA,0000-0000-0000-00290,290
-Kenya Dudack,NA,7223581ffb3489ececd1f8080da220f77d6e6818,Inter American University of Puerto Rico Aguadilla,NA,NA,NA,0000-0000-0000-00291,291
-Lakenya Mapalo,NA,ce04038611bd5ac2e192f008c3658dfa88401a56,Coastal Carolina University,NA,NA,NA,0000-0000-0000-00292,292
-Jonell Sokorai,NA,4f41c219707ed81a7023b1d9ab382eec535441f7,Mundus Institute,NA,NA,NA,0000-0000-0000-00293,293
-Dawna Newstrom,NA,1b0feba2c65fe06b2f34f5dd6830725e94f3f016,Capilo Institute,NA,NA,NA,0000-0000-0000-00294,294
-Antonietta Ciesla,NA,94f0d42d0948f3523f517003749d0110a1e95e63,St. Johns River State College,NA,NA,NA,0000-0000-0000-00295,295
-Maya Eberth,NA,b0c30f9af186db358f9493ce94448c60d5583646,Academy for Five Element Acupuncture,NA,NA,NA,0000-0000-0000-00296,296
-Tammi Gorelick,NA,712e3c33de47d37580114f64aff837289e6e6644,Northwest Aviation College,NA,NA,NA,0000-0000-0000-00297,297
-Dolores Lickteig,NA,38078aee7db8c6dcc285734466b7d4a26a20c5c6,Kentucky Horseshoeing School,NA,NA,NA,0000-0000-0000-00298,298
-Jodie Villagomez,NA,ba379ea6f196113ea073a83d0d6a0ad5c57a3b13,West Valley College,NA,NA,NA,0000-0000-0000-00299,299
-Wilmer Bridges,NA,ab73c93a48b1ff5ee01d6cf7fe3935adb191214a,Apex College of Veterinary Technology,NA,NA,NA,0000-0000-0000-00300,300
-Katherina Grassi,NA,02f389e37756247acb864ecbd0adb1febdf8c3f1,Coachella Valley Adult School,NA,NA,NA,0000-0000-0000-00301,301
-Elsie Shafi,NA,b90460066cf1ecad6a4bbdfd751f939bc198f43b,Watsonville - Aptos Adult School,NA,NA,NA,0000-0000-0000-00302,302
-Delana Kosar,NA,70358c8d866f73f13e4dadaae187af1986300b14,Grace University,NA,NA,NA,0000-0000-0000-00303,303
-Jayme Fordyce,NA,4bcc71fef8a72a1d97784333b313ebbc57646ebe,"Uceda School of Hackensack, NJ",NA,NA,NA,0000-0000-0000-00304,304
-Reynaldo Benafield,NA,88e61970f04b268b112b4ecf441b29321069a5fa,Carthage College,NA,NA,NA,0000-0000-0000-00305,305
-Angelica Emery,NA,6774808ff3f18d4bfaf50cecb679cf1d6eac84c1,University of New Hampshire,NA,NA,NA,0000-0000-0000-00306,306
-Maryam Yearby,NA,67a06f5afd413deadd0d3eea42233392030a4661,Lesley University,NA,NA,NA,0000-0000-0000-00307,307
-Annmarie Vanwey,NA,09b0b2fa9020c88caaf2e2fa9e5faff1ee0074f9,Pine Manor College,NA,NA,NA,0000-0000-0000-00308,308
-Siobhan Pritt,NA,7513edb1a9f0a87a8a1ed8d6a8a6a36b83b5021d,Southern University at Shreveport,NA,NA,NA,0000-0000-0000-00309,309
-Thora Jeanbaptise,NA,dea31d79dcf93c3fa600ecaf811d234197214a88,Instituto Irma Valentin - Manati,NA,NA,NA,0000-0000-0000-00310,310
-Isaiah Carmen,NA,13e3287d9144b7433cd9d9b48cfd1fea1ae8d2b4,Nonproliferation and National Security Institute,NA,NA,NA,0000-0000-0000-00311,311
-Kylee Minasian,NA,7c2222a2a7f34ad047d956cc93bfeb87117c0b52,Pacific Northwest Ballet School,NA,NA,NA,0000-0000-0000-00312,312
-Gino Normoyle,NA,8b344618ba6f7e28311e7b668a54bfd1e50feaae,Angley College - Orlando,NA,NA,NA,0000-0000-0000-00313,313
-Christal Ketterer,NA,c55e48a84d4602a77a2c1ba0f853c3efe67dd277,Icon Collective,NA,NA,NA,0000-0000-0000-00314,314
-Ted Gramajo,NA,b291104793defe4ab6b41be9c59b9b0feafdba08,Motorcycle Technology Center,NA,NA,NA,0000-0000-0000-00315,315
-Clora Venson,NA,f15536136843b78a89bd5b4dfcd673198fc0f675,Ann Arbor Institute of Massage Therapy,NA,NA,NA,0000-0000-0000-00316,316
-Preston Dixion,NA,1ba3434277b874a7f7c4d4733fd3a7930d2cad4d,Provo College,NA,NA,NA,0000-0000-0000-00317,317
-Berenice Zagami,NA,5e643c872fbf106a9993b00efc302697f3fd7eec,Webb Institute,NA,NA,NA,0000-0000-0000-00318,318
-Felice Beato,NA,96669f29918eb7b108d65d7f8d8d6badd26d5188,Veritas Baptist College,NA,NA,NA,0000-0000-0000-00319,319
-Levi Parral,NA,9986565641bb71905b86444ee90cb0033988ae39,Med Tech College - Indianapolis,NA,NA,NA,0000-0000-0000-00320,320
-Milissa Goedicke,NA,aad4d45a811cc295acfc3c0200dc1581f10186e3,Hallmark University,NA,NA,NA,0000-0000-0000-00321,321
-Shanelle Debuhr,NA,a0ea67d114d47e5e4e0fdc4eaf3e649cf674924d,Forrest College,NA,NA,NA,0000-0000-0000-00322,322
-Adella Brazzell,NA,d1dce6fceaac7d7be3b7da00707914a2bdaf2bf8,New College Franklin,NA,NA,NA,0000-0000-0000-00323,323
-Loida Dirienzo,NA,666674562ec89dbedb34df12bd4c4046ddeface3,McKendree University,NA,NA,NA,0000-0000-0000-00324,324
-Bess Bichoff,NA,fbf974d94f73a6918938f8e0eb82c0277a30316b,Texas A&M University - Texarkana,NA,NA,NA,0000-0000-0000-00325,325
-Awilda Kurpinski,NA,c85b6fa8578982fa8e8d5f945df3042674b41106,University of the People,NA,NA,NA,0000-0000-0000-00326,326
-Marlys Mehrotra,NA,ac4305b82e6daf10b108d5c966b1aac371cdb029,West Valley Occupational Center,NA,NA,NA,0000-0000-0000-00327,327
-Samara Krochmal,NA,8d0ee3f16c5ea4a671d5cb688e31c63ec70d1e01,Fortis Institute - Forty Fort,NA,NA,NA,0000-0000-0000-00328,328
-Migdalia Spivery,NA,7b39cc044335d447329d3203c0377174da1afa10,Manhattan Christian College,NA,NA,NA,0000-0000-0000-00329,329
-Elodia Swindall,NA,4c5dec3b57432fa7e2b869079da8b0c6d87ca6d9,Central Wyoming College,NA,NA,NA,0000-0000-0000-00330,330
-Genny Holdbrook,NA,e447933e01b73a0435d7a4dbfc42eabaa190f529,Uceda School of Pennsylvania,NA,NA,NA,0000-0000-0000-00331,331
-Shantae Kloster,NA,a21134492300e35a4f50b67667aca0a5f830aaf6,North Idaho College,NA,NA,NA,0000-0000-0000-00332,332
-Sam Durrette,NA,3a3442e3c81154e77a22b33281ea8a8d9477dd7d,First Institute,NA,NA,NA,0000-0000-0000-00333,333
-Adelle Ketchen,NA,a0cfb115fb1be3338a7221220f9a93d036bf972b,INTERNATIONAL BUSINESS SCHOOL-MIDLAND,NA,NA,NA,0000-0000-0000-00334,334
-Sallie Stuble,NA,b3e6d8ca9022a479d419f03f8cf46c73b853a423,McHenry County College,NA,NA,NA,0000-0000-0000-00335,335
-Wyatt Boelter,NA,1e3f58efb075e5151cda7976c5744c98b1eeaa49,Inter American University of Puerto Rico Bayamon,NA,NA,NA,0000-0000-0000-00336,336
-Sage Finnerty,NA,8e12d395d44c1c83170232681b36a830ce6746fd,Zane State College,NA,NA,NA,0000-0000-0000-00337,337
-Sherika Barus,NA,4630e42db039cb65f81e0948f1cd909a22cf1908,Advance Welding Institute,NA,NA,NA,0000-0000-0000-00338,338
-Anita Loxtercamp,NA,749f163ceee833e8b54ac42d834422d288554c29,St. Edward's University,NA,NA,NA,0000-0000-0000-00339,339
-Nellie Skagerberg,NA,bc39b19de390402a107022b9d6454eab4ab0f710,Shenandoah University,NA,NA,NA,0000-0000-0000-00340,340
-Maryrose Rhoton,NA,913bcbae8d8c7a9e18192dbad850ea75cefe855d,Northeast Technology Center - Claremore,NA,NA,NA,0000-0000-0000-00341,341
-Pura Troxil,NA,5db226c48c983b4c622b1da55069b5e1e632163b,Marquette University,NA,NA,NA,0000-0000-0000-00342,342
-Richard Keet,NA,2b02d99fd4cddac47c58b44e8b9dbbd25f370c89,Saginaw Chippewa Tribal College,NA,NA,NA,0000-0000-0000-00343,343
-Florencio Ruhl,NA,54cbad7ffb79d58f0f02d18a284b16823f40abbb,ICDC College - Van Nuys,NA,NA,NA,0000-0000-0000-00344,344
-Lavonia Baro,NA,31b83cb9698bb29234efd807924e8dbd80ca2891,Wiley College,NA,NA,NA,0000-0000-0000-00345,345
-Alisha Mossa,NA,44385c8f266c2a6b0576fcabefc7c191cd9c34fc,College of San Mateo,NA,NA,NA,0000-0000-0000-00346,346
-Tara Wakeford,NA,fb5ce956eec70ffe57f453ef8d2d691ae6af35f1,Victoria College,NA,NA,NA,0000-0000-0000-00347,347
-Jess Picou,NA,917f972240ee97d20c431b834c8a0a692be41c60,Air University Extension Course Program,NA,NA,NA,0000-0000-0000-00348,348
-Teofila Soren,NA,abc34375f6768eca238f95dfa7a9071cb7a83429,Nueta Hidatsa Sahnish College,NA,NA,NA,0000-0000-0000-00349,349
-Estella Poulsen,NA,a71507c48bacb38f218dad935be49b0df5ec30fd,Alder Graduate School of Education,NA,NA,NA,0000-0000-0000-00350,350
-Zora Letendre,NA,8ddc8e466988459f1b5765a9ad80fc6e2a7ee14e,SUNY College of Environmental Science and Forestry,NA,NA,NA,0000-0000-0000-00351,351
-Eveline Schreiber,NA,13602fbd5ad2c12ec734eaf86598c0f7880f8b9f,D'Mart Institute - Corozal,NA,NA,NA,0000-0000-0000-00352,352
-Tena Chulla,NA,f6bb0e75de06cd06a5715c0d5b4de2bdfcdc2103,Everest College - City of Industry,NA,NA,NA,0000-0000-0000-00353,353
-Hai Diebol,NA,1870ec26c920e6b4a6af6e35cb0d921aa741d97b,University of the Sciences,NA,NA,NA,0000-0000-0000-00354,354
-Shalanda Falkenberg,NA,435c27eb4bc4b10bae7b844c3df123aee8d58c4f,University of Arkansas at Little Rock,NA,NA,NA,0000-0000-0000-00355,355
-Katerine Colla,NA,0cdd607a58b72edd4021b1b3081e955584b00036,Mount Saint Mary College,NA,NA,NA,0000-0000-0000-00356,356
-Phoebe Olaes,NA,c4a8bc1b17a6d779c9f662ac6d78e3a7f55dd59b,Brown University,NA,NA,NA,0000-0000-0000-00357,357
-Tabetha Kilroy,NA,0a87cbf6d36ea0bb82c5c3cca87e823fc0a93222,Florida Institute of Technology,NA,NA,NA,0000-0000-0000-00358,358
-Aldo Callegari,NA,225101aa04422b7b93e1e2ef45efe8278dad24b7,Instituto Irma Valentin - Caguas,NA,NA,NA,0000-0000-0000-00359,359
-Jammie Terherst,NA,b13ce8b6bb570b11a756e81fda3f1d773e13ff08,Athenaeum of Ohio,NA,NA,NA,0000-0000-0000-00360,360
-Cassie Kew,NA,2ee66798f6fecae30a35a64b04efab0ec52bde0d,Mitchell's Academy,NA,NA,NA,0000-0000-0000-00361,361
-Sharyn Pyun,NA,1eed8b7091005b9791946b5a7f260b6bfab92869,Great Lakes Truck Driving School,NA,NA,NA,0000-0000-0000-00362,362
-Arnoldo Garthee,NA,38dc9ece6e9fa00f0a74e6c4bbb1b1086b8ffd45,TEACH-NOW Graduate School of Education,NA,NA,NA,0000-0000-0000-00363,363
-Ressie Stjulien,NA,8b1728c294a973a9fbf968ac99bf86771b2e24f6,JPS INSTITUTE FOR HEALTH CAREER DEVELOPMENT,NA,NA,NA,0000-0000-0000-00364,364
-Jazmine Kuilan,NA,952c7c605029bfb0bb18dfe3ebd40db248aa25a5,The Academy,NA,NA,NA,0000-0000-0000-00365,365
-Johnette Bearded,NA,d870ab012f7b7004bc0fe92659486da343455e25,Statements The Academy,NA,NA,NA,0000-0000-0000-00366,366
-Francie Bedar,NA,f2335193f9cdc57c061b97da7a4bd50246fa53b1,Mind Fuel School,NA,NA,NA,0000-0000-0000-00367,367
-Florencia Lossett,NA,0b13cbc32f1fb5c0427d87ff99ffb96f9665c17a,Oklahoma School of Photography,NA,NA,NA,0000-0000-0000-00368,368
-Christin Loeser,NA,97ddf4f95c31416d1708c9ac0dc7a49707e8213a,Rocky Vista University,NA,NA,NA,0000-0000-0000-00369,369
-Grover Gaudet,NA,ba0194bb50933a900e2cba2efd9c5aec712c358d,Wagner College,NA,NA,NA,0000-0000-0000-00370,370
-Abel Mylar,NA,4f459bcc84c2ab24cef2e9abaab006e933d7bb78,Quantum Helicopters,NA,NA,NA,0000-0000-0000-00371,371
-Chi Howse,NA,8e79371886f80a24ad589f2be1ae21dadcbddded,Florida Education Institute,NA,NA,NA,0000-0000-0000-00372,372
-Ila Barriault,NA,937fa01a64d474588e818e9f5550a972b706e9f1,Northwest Baptist Seminary,NA,NA,NA,0000-0000-0000-00373,373
-Tamala Zerkle,NA,f50fb550c390edeaf3fb192b6a94974da2c5bbd8,Westech College,NA,NA,NA,0000-0000-0000-00374,374
-Keira Baldonado,NA,7be448ae51f1e4dca9f1cc14c6cf8a10472fe446,Colorado School of Mines,NA,NA,NA,0000-0000-0000-00375,375
-Abe Hoysock,NA,7c7db6e6d23eab9ad7309e7a63e2eb4d21f50db0,Aveda Institute Des Moines,NA,NA,NA,0000-0000-0000-00376,376
-Graig Aversa,NA,a723d0063be9e3dd815b0452589fc648a7477051,Body Wisdom Massage Therapy School,NA,NA,NA,0000-0000-0000-00377,377
-Jong Nuhfer,NA,b357de73b15f667e759a7b18a65b4d7217e9a08f,Fremont Adult & Continuing Education,NA,NA,NA,0000-0000-0000-00378,378
-Ardella Cadriel,NA,b918a69b06c670614dbdfe03c4283eeab196f81c,Yeshivas Emek Hatorah,NA,NA,NA,0000-0000-0000-00379,379
-Delois Beacom,NA,cb64b90c6dc36dd9b7fb884ec9e56fe7b5a48d1d,Highline College,NA,NA,NA,0000-0000-0000-00380,380
-Stacy Cherep,NA,aaadfb64663f079267549efd96c61b4aa5bba951,Delta State University,NA,NA,NA,0000-0000-0000-00381,381
-Lizbeth Benavides,NA,3786c868c562e14762b22c1d90ad351e23c84fce,Marist College,NA,NA,NA,0000-0000-0000-00382,382
-Dorthy Selestewa,NA,62ba877319d623f2f9a1c3fca37c6fddd4e5cb1d,Whittier College,NA,NA,NA,0000-0000-0000-00383,383
-Alex Avallone,NA,84121a29456068fbce3dc636a8bced8d8c5891f3,American Public University System,NA,NA,NA,0000-0000-0000-00384,384
-Chester Zackery,NA,14a8670718a68434be46305fda15ae732a5047c1,Mesabi Range College,NA,NA,NA,0000-0000-0000-00385,385
-Jana Spindel,NA,6a6a6d628ce560fcddf50587cf09fe15ad6a08e5,NAES College,NA,NA,NA,0000-0000-0000-00386,386
-Tory Ransdell,NA,9ebda20c761547583115c6d8ac76de7f056faf8f,University of Saint Joseph,NA,NA,NA,0000-0000-0000-00387,387
-Murray Goodlin,NA,b61bfd015741bfacd1d09b3cbac21678dd345973,Center for Service Support (CSS),NA,NA,NA,0000-0000-0000-00388,388
-Loretta Sheridan,NA,7dc8b4e4f0a3162fc26d023ac2e10df9b64e5956,Cardean University,NA,NA,NA,0000-0000-0000-00389,389
-Rubie Benneth,NA,01e792ec0676e91cf712b1589b657458a3dd808c,Concordia Seminary,NA,NA,NA,0000-0000-0000-00390,390
-Codi Risper,NA,0f8a3124a5b4443807e0133ede09374d04905ba0,Granite State College,NA,NA,NA,0000-0000-0000-00391,391
-Mohammed Assenmacher,NA,99346673c5f5d5661918c41c41f02a467fc0f8fd,The Music School of Delaware,NA,NA,NA,0000-0000-0000-00392,392
-Malena Blanchett,NA,243ab9b7185627aa6be065e44a80fefa7056a980,Mount Aloysius College,NA,NA,NA,0000-0000-0000-00393,393
-Rudolf Roswick,NA,c7126d16c7ea3cba09da4a81ae5365c8e9c2abbd,Saint Louis Christian College,NA,NA,NA,0000-0000-0000-00394,394
-Scott Skoczylas,NA,92a5caa1f0dd54e880ed4a1ce408a19d6af900cc,Sierra Conservation Center Adult School,NA,NA,NA,0000-0000-0000-00395,395
-Lester Bolland,NA,90956294e1fadc7c999313f51fc8bbfdb25fcbd8,Brensten Education,NA,NA,NA,0000-0000-0000-00396,396
-Carma Romaniello,NA,ce5ae180aa772a01c6df59ad044827003f2b6af4,Virginia Intermont College,NA,NA,NA,0000-0000-0000-00397,397
-Terry Dono,NA,636052f0701b8855ca20dbacaa825b81e067bf98,Southern Massage Institute,NA,NA,NA,0000-0000-0000-00398,398
-Rivka Felarca,NA,deeaadead9391442144053e5060c6b17b38a6ebd,Rochester University,NA,NA,NA,0000-0000-0000-00399,399
-Lee Delessio,NA,82910cf29dd3a96558009ca9078c901935b1b0bd,College of the Holy Cross,NA,NA,NA,0000-0000-0000-00400,400
-Jude Sachetti,NA,a96326c6d8f0b3917fbf6d57be29312e5db4bfa3,Yeshiva University,NA,NA,NA,0000-0000-0000-00401,401
-Ayanna Willcoxon,NA,e24bedb50ee24d166b0cbd4b3fa85d538b96fa6c,Hannibal-LaGrange University,NA,NA,NA,0000-0000-0000-00402,402
-Malik Fickel,NA,48cf4d8b0e1faac998539e9b78abdf6b428699c9,Martinsburg College,NA,NA,NA,0000-0000-0000-00403,403
-Gillian Mattocks,NA,4a4abd07744765b4d303f13eac77d64184052a39,Mesivta Torah Vodaath Rabbinical Seminary,NA,NA,NA,0000-0000-0000-00404,404
-Jessenia Argie,NA,9494e9039fa8976cd01c4e9f5745c0ff6eea21d8,Harper College,NA,NA,NA,0000-0000-0000-00405,405
-Carletta Gilmore,NA,0340ff87a2c0bdd757b1ebd36d91f1a050e115ab,Everglades University - Orlando,NA,NA,NA,0000-0000-0000-00406,406
-Zachary Manoogian,NA,c79f6aea31cd0faab7e90c376717a0abf3354faa,Harvey Mudd College,NA,NA,NA,0000-0000-0000-00407,407
-Alexia Mascia,NA,c7f747279a42d0bac5261d135c59f7ba4becfe8c,Uceda International- Falls Church,NA,NA,NA,0000-0000-0000-00408,408
-Myrta Schlotfeldt,NA,e6f48897c9a8e0c171495a38c8f9e571baae8279,Pensacola State College,NA,NA,NA,0000-0000-0000-00409,409
-Alan Ahrenholtz,NA,ceddfb97d7b3f727ffab52e3b0c1dcd8da7560b2,College of the Albemarle,NA,NA,NA,0000-0000-0000-00410,410
-Al Bintner,NA,570b1b30d16291023bba905f841b2779c27406da,inlingua Princeton,NA,NA,NA,0000-0000-0000-00411,411
-Rafaela Kukla,NA,3ba4cf4dcc74cbb06819fdbfa231ee027621c672,International Institute for Restorative Practices,NA,NA,NA,0000-0000-0000-00412,412
-Laureen Milam,NA,6af0adaa5a24713ce44a3a646272c9a13a2ff66f,SAE Institute of Technology - Los Angeles,NA,NA,NA,0000-0000-0000-00413,413
-Ruthann Chrisco,NA,07e917e17d48a0f860aed8169c7cc427aee654b8,California Institute for Human Science,NA,NA,NA,0000-0000-0000-00414,414
-Brittny Roloff,NA,95bcf4affcfdcb4960523c1aca050310d97bcf51,Rabbinical College of Telshe,NA,NA,NA,0000-0000-0000-00415,415
-Yolande Llewlyn,NA,467fa9131544ee6b52b7f7cd195bff0e5cebb0d3,Martin University,NA,NA,NA,0000-0000-0000-00416,416
-Kent Cutbirth,NA,149a86c7cb08981ace22cb9b613e59c6bfd4cafb,Bramson ORT College,NA,NA,NA,0000-0000-0000-00417,417
-Petra Monaham,NA,e401abebe722aa61e4325926635acf937702fa8d,Praxis Institute,NA,NA,NA,0000-0000-0000-00418,418
-Karleen Hartranft,NA,5a35ec4d21644acdf703a3324ff3f94dce0508aa,Palo Alto University,NA,NA,NA,0000-0000-0000-00419,419
-Josphine Braley,NA,b8530faf7be7a1d493dac0d3d7793ab7fd5b1250,Mount Marty College,NA,NA,NA,0000-0000-0000-00420,420
-Chu Krupiak,NA,f0f25570ce476ba34ed6e82051c0e6e9d8d5cf10,Heidelberg University,NA,NA,NA,0000-0000-0000-00421,421
-Phung Czapor,NA,2850b42667c0d9becd9eeb884cde2c104e48a0cc,Pacific Northwest University of Health Sciences,NA,NA,NA,0000-0000-0000-00422,422
-Madaline Piepho,NA,1a3cb74748fe2ad7aa73145064e59e847085b5cd,Essex County College,NA,NA,NA,0000-0000-0000-00423,423
-Shirely Sonoski,NA,c39322e0991e39f4f07b9328a3850cf187faa97a,SUNY Purchase,NA,NA,NA,0000-0000-0000-00424,424
-Antonetta Majkowski,NA,0351b4976eeb623f43207c7ba74c5df7e49095bf,SUNY College at Oswego,NA,NA,NA,0000-0000-0000-00425,425
-Sun Delaughter,NA,5578184a8a1b6e55f6f0849a4e42115a082e038d,Miles College,NA,NA,NA,0000-0000-0000-00426,426
-Michelina Prendergast,NA,f216aa5a60d9986baf27e72394cc040236458919,Barclay College,NA,NA,NA,0000-0000-0000-00427,427
-Jona Salvant,NA,51a7b2215f5437e795461b83255e5d79170ecdd5,Georgia Southwestern State University,NA,NA,NA,0000-0000-0000-00428,428
-Josie Hassanein,NA,f61d49dc8be5432c3081406d61180f27b3adb8ca,University of North Georgia,NA,NA,NA,0000-0000-0000-00429,429
-Terresa Blaire,NA,75a8adb299a3111d95a099ca3584dcb1881f72e0,Sanford-Brown College - Tinley Park,NA,NA,NA,0000-0000-0000-00430,430
-Lexie Jastrzebski,NA,31730d0e82caa1cb81f09275c7b94b6f752ada79,The Elaine Sterling Institute,NA,NA,NA,0000-0000-0000-00431,431
-Martha Joelson,NA,117e717b84e485fe8e2dea5ecfeb5d9474476d42,University of Houston,NA,NA,NA,0000-0000-0000-00432,432
-Stephnie Stallone,NA,c4558f7347872732a06ceeca79ebde59b11dbe93,Blue Cliff College - Gulfport,NA,NA,NA,0000-0000-0000-00433,433
-Nancee Vanloan,NA,d31fd92681b7cb2edbf32379d8b38bb3edc6386e,Silicon Valley College-Emeryville,NA,NA,NA,0000-0000-0000-00434,434
-Zandra Rutman,NA,e61780cdc0ce30742c19facd3d6d4aa0997626a9,Institute of Lutheran Theology,NA,NA,NA,0000-0000-0000-00435,435
-Eleanore Gales,NA,ca8b3b7e7e36a758b51dbf275a18f4685fa566e3,New York Automotive and Diesel Institute,NA,NA,NA,0000-0000-0000-00436,436
-Nina Goubeaux,NA,5d5aa98403145f30bf779804858c1eff4a200642,Alcorn State University,NA,NA,NA,0000-0000-0000-00437,437
-Tiana Hoffmeister,NA,38f086fac033ba1d856e04940bb5f88312d5b38e,"ESL Program, University of North Carolina, Wilmington",NA,NA,NA,0000-0000-0000-00438,438
-Jules Radin,NA,e59083ec886729e936def5e1cbb554bc2ab60d93,Golden West College,NA,NA,NA,0000-0000-0000-00439,439
-Ian Routt,NA,8a9a2d4cf1a1b7d2719d94ba74936d7304304a5c,California State University - Channel Islands,NA,NA,NA,0000-0000-0000-00440,440
-Alecia Gimlin,NA,381634dee4b99f76837c841474af170c336e10c2,Emerging Technologies Institute,NA,NA,NA,0000-0000-0000-00441,441
-Tess Shortridge,NA,329e8cd63d3a9834d126e7b4f5e6f462efa2af7e,International Reformed University and Seminary,NA,NA,NA,0000-0000-0000-00442,442
-Dianna Aliff,NA,16f44b8e626924615093143c55e411a5d588b6f3,Maine College of Health Professions,NA,NA,NA,0000-0000-0000-00443,443
-Jimmie Haren,NA,cf2775a86352af4fc0232b8bd74dd5c26cd18d66,Kiamichi Technology Center - Stigler,NA,NA,NA,0000-0000-0000-00444,444
-Eldora Gossard,NA,c19135df77e3c662045cbaf594b594a69897a709,Estelle Skin Care and Spa Institute,NA,NA,NA,0000-0000-0000-00445,445
-Garrett Goldsboro,NA,fd55614b4a95488499dd273a4ddf508298913f46,Xavier University of Louisiana,NA,NA,NA,0000-0000-0000-00446,446
-Kendal Ferdolage,NA,a14e480259a020c21f04b43a072dd18476b8c718,Tulsa Technology Center - Broken Arrow Campus,NA,NA,NA,0000-0000-0000-00447,447
-Lisbeth Tobe,NA,4f8c2394736703559bf60494d8a15fbe24bf9bd2,Fresno Pacific University,NA,NA,NA,0000-0000-0000-00448,448
-Laraine Czaplinski,NA,d8d50e3aeec4285f44333dd25c0c18af9ed1dccb,Pomona College,NA,NA,NA,0000-0000-0000-00449,449
-Kisha Turnage,NA,5e47133e5aa51fa0e56cb3ba81a3e8536ac02078,University of South Dakota,NA,NA,NA,0000-0000-0000-00450,450
-Kris Small,NA,9e29ca1716409eb2c833e6bd0c7ad68ce16baae1,Virginia Polytechnic Institute and State University,NA,NA,NA,0000-0000-0000-00451,451
-Shakita Staudenmeier,NA,386045fd0edbfa6645d90ea3a765f8be523795c9,Johns Hopkins University,NA,NA,NA,0000-0000-0000-00452,452
-Fatimah Duncanson,NA,5d272f4d9677253ca0ada79f4181134e59b9c4c3,University of Miami,NA,NA,NA,0000-0000-0000-00453,453
-Season Bordwell,NA,a603fe94f01b059bed59611fb25397d759cb5a2b,Washington DC Joint Plumbing Apprenticeship Committee,NA,NA,NA,0000-0000-0000-00454,454
-Bridgette Ziegenhagen,NA,edb431bb27af12b1b1089e56d2f74005c48605b2,"U.S. Naval War College, The",NA,NA,NA,0000-0000-0000-00455,455
-Janay Rondon,NA,9ac60c3805922a79e6caa9b8b94d65342de69bf0,Ferrum College,NA,NA,NA,0000-0000-0000-00456,456
-Vincent Sokul,NA,68e026ac980235a99cad04f3137c9eebce44c3a8,GOLDEN GATE BAPTIST THEOLOGICAL SEMINARY-NORTHWEST,NA,NA,NA,0000-0000-0000-00457,457
-Wenona Timper,NA,1c6cadaf7bab4afc1ee7cd6cea395f20018774c0,SUNY Buffalo State,NA,NA,NA,0000-0000-0000-00458,458
-Fred Burchfiel,NA,84f82bd5fa2f03d75872e7b074108b424cb728a4,University of North Texas Health Science Center at Fort Worth,NA,NA,NA,0000-0000-0000-00459,459
-Ella Bouvier,NA,15f6c57d5373d49a7255d4c0439b6d0436a5d023,Cummings Graduate Institute for Behavioral Health Studies,NA,NA,NA,0000-0000-0000-00460,460
-Tayna Redington,NA,238938e4c2359897c2af16d8cde980501685e69b,Centre College,NA,NA,NA,0000-0000-0000-00461,461
-Coral Dugal,NA,902af0ca7a7609800a3adf21e0d9775c1d10ecbb,Allen University,NA,NA,NA,0000-0000-0000-00462,462
-Jeramy Gremler,NA,443ebc8882efe554caeb3f3a70977dd835ba3f8e,High-Tech Institute - Atlanta,NA,NA,NA,0000-0000-0000-00463,463
-Amee Handly,NA,827814a9bbb6b2f07712ecdb44548812fab9ac24,National Massage Therapy Institute - Turnersville,NA,NA,NA,0000-0000-0000-00464,464
-Kathline Delsol,NA,cca695f31b647c1f724b327f05081778803f3122,Old School,NA,NA,NA,0000-0000-0000-00465,465
-Tifany Cestia,NA,18999e1888eef621c88ecfca129267a3a9f47b0d,University of Southern California,NA,NA,NA,0000-0000-0000-00466,466
-Concetta Stockwin,NA,0e64a3fb27126148fd29bf28c3482ce77dc2edf6,FastTrain College - Tampa,NA,NA,NA,0000-0000-0000-00467,467
-Elvia Urreta,NA,16f17d8679afb61f766feab20ee0dd27d12d8a91,Baptist Memorial College of Health Sciences,NA,NA,NA,0000-0000-0000-00468,468
-Li Barbour,NA,ffabbbb0ebf96efd6cfdebaa9cd7656f280b63cc,New York College of Traditional Chinese Medicine,NA,NA,NA,0000-0000-0000-00469,469
-Rozella Kadis,NA,3bdc0a87f6cd51b18bad28b1cfc8ca4540b4f1ff,Brigham Young University - Hawaii,NA,NA,NA,0000-0000-0000-00470,470
-Apryl Vannah,NA,d3deddaae4dcb870a6d8d4ed8037b300517e644e,Andover College,NA,NA,NA,0000-0000-0000-00471,471
-Pa Kelly,NA,01cab34abaf94e3c410e1d4c3489f0f4e6617cd8,Mississippi School of Therapeutic Massage,NA,NA,NA,0000-0000-0000-00472,472
-Hung Kinkella,NA,67e72c5876dd35d988233dd3a05eb1de24a2fb9a,Newbury College,NA,NA,NA,0000-0000-0000-00473,473
-Merrill Stalker,NA,653a8d2a4ab4b1ae2f9897b4c5674ec5c6eea96d,Jung Tao School of Classical Chinese Medicine,NA,NA,NA,0000-0000-0000-00474,474
-Mattie Hind,NA,7e70483a0c26689ccb5a6613d80f355b646a1dc5,Manhattan School of Computer Technology,NA,NA,NA,0000-0000-0000-00475,475
-Archie Trippensee,NA,c8e6d0d0df563328c8dcef6df88aaee89d7fac06,Guld Coast College - Ocala,NA,NA,NA,0000-0000-0000-00476,476
-Romeo Roman,NA,d08c1c200c7f2b919caf9e2cad800baac35d8aa4,Lyon College,NA,NA,NA,0000-0000-0000-00477,477
-Giovanna Igel,NA,18ebb09a67776fcccff0f57879c64c665a2ca2d4,American Institute of Pharmaceutical Technology,NA,NA,NA,0000-0000-0000-00478,478
-Elke Ringlein,NA,389cfdb5190d38485c39455ea055b77eb7255298,Baltimore International College,NA,NA,NA,0000-0000-0000-00479,479
-Everette Ciccarelli,NA,071c99f27665bdd7115e45d398b00107048b9770,Fresno City College,NA,NA,NA,0000-0000-0000-00480,480
-Jarvis Rannalli,NA,f38d03b971af7bbfc2e4287b1139422f1c8d951a,Henderson State University,NA,NA,NA,0000-0000-0000-00481,481
-Shana Duty,NA,7ce2920b3563cdcf032f70cd81ba4ace9b36ede6,Siegal College of Judaic Studies,NA,NA,NA,0000-0000-0000-00482,482
-Kandis Schierbrock,NA,e2944801e18fe8e720729904d3aa2045a72f40ae,Baker University,NA,NA,NA,0000-0000-0000-00483,483
-Savanna Hirsh,NA,42988520faca49ba1f152f31235cce293d42dbc0,Apprentice for the Electrical Industry IBEW Local 98,NA,NA,NA,0000-0000-0000-00484,484
-Hattie Skevofilakas,NA,76af5538aa2a726c4f377dfdd1f8fcc58fa0c14c,Gateway Seminary,NA,NA,NA,0000-0000-0000-00485,485
-Britt Roma,NA,6adaabce1f5df4ceaac9ca9f82862ee5be4ea0b9,SUNY College at Brockport,NA,NA,NA,0000-0000-0000-00486,486
-Wai Criscuolo,NA,a0c46327daf5152beed56121ca83644c6e435a85,Youngstown State University,NA,NA,NA,0000-0000-0000-00487,487
-Titus Costas,NA,8b9bc133e922e1f0daef2f47f777244e0ff0e601,Bellevue College,NA,NA,NA,0000-0000-0000-00488,488
-Beatriz Chovanec,NA,7a0325533b9eb14f3c6e75f0e054be7e6ddcc05f,Gupton Jones College of Funeral Service,NA,NA,NA,0000-0000-0000-00489,489
-Colin Baranick,NA,eb4dd512ba0616664863777acf4247d63912d6d5,Acacia University,NA,NA,NA,0000-0000-0000-00490,490
-Jazmin Zhuang,NA,73402ab7f68ab2ce4f55f5adda2515798b031448,San Joaquin Delta College,NA,NA,NA,0000-0000-0000-00491,491
-Ciera Ferrera,NA,cac2867737ccb6b86138ddd825ac7da2970ed721,Bethel University,NA,NA,NA,0000-0000-0000-00492,492
-Peg Loden,NA,a294522cdbf984caf65ff81353ccdb223d2d42ae,Electronic Institute - Middletown,NA,NA,NA,0000-0000-0000-00493,493
-Bernarda Megna,NA,4264ac672602aa259676bdcf381419adad8fab81,Messenger College,NA,NA,NA,0000-0000-0000-00494,494
-Thersa Ulbrich,NA,f1d12ddccafdf503737419015abf3823acec6ac5,American Fitness and Nutrition Academy,NA,NA,NA,0000-0000-0000-00495,495
-Jeannette Nardozzi,NA,f6c767f1157ea4e1aadb3b93bf6b4520e8211318,Oklahoma State University - Oklahoma City,NA,NA,NA,0000-0000-0000-00496,496
-Ambrose Goodfriend,NA,cacfc7c744ef328b88533a3566be53d4c2b73341,Carl Sandburg College,NA,NA,NA,0000-0000-0000-00497,497
-Teddy Lietzke,NA,9b298ae9edc5439df55710088593fcbf92d8e977,Sojourner-Douglass College,NA,NA,NA,0000-0000-0000-00498,498
-Kasha Opheim,NA,9a693f0b75dbb2e5bff39a2a9215c18b567bf4ba,Hebrew Union College - Jewish Institute of Religion,NA,NA,NA,0000-0000-0000-00499,499
-Lynelle Harness,NA,311590e7a2b6533272c4f47b735e369c618429b4,Brown Mackie College - Denver,NA,NA,NA,0000-0000-0000-00500,500
+name,aliases,hash_id,current_affiliation,previous_affiliation,last_degree_affiliation,orcid_url,orcid,author_id,verified
+Apolonia Torbit,NA,a2fb197031ebbb47f9c1a5295cae51e009a59ae0,Instituto Irma Valentin - Isabela,NA,NA,NA,0000-0000-0000-0001,1,FALSE
+Trang Brayton,NA,1f8ef099f29aa6357880300e3ba4a0d3d85d7aaf,Cortiva Institute - Connecticut (Westport),NA,NA,NA,0000-0000-0000-0002,2,FALSE
+Magda Purkerson,NA,eccc7611b35709ef4be8f758f1f709a6e189a328,Sanford-Brown College - Saint Peters,NA,NA,NA,0000-0000-0000-0003,3,FALSE
+Lynda Frezzo,NA,0ec473c3d81a693317493e6b5b8603e560a407fb,Fortis Institute - Forty Fort,NA,NA,NA,0000-0000-0000-0004,4,FALSE
+Bari Lamond,NA,641ac5437e91638162be12a0b159501a081f9283,Airman's Proficiency Center,NA,NA,NA,0000-0000-0000-0005,5,FALSE
+Lillie Swabe,NA,9b18b6f1971b2a475c42c3db171c6827e8475f15,Aston International Academy,NA,NA,NA,0000-0000-0000-0006,6,FALSE
+Branda Whitenack,NA,a28d0305ee8c62a06f696fe3b5442e0fb19c359c,Minneapolis School of Anesthesia,NA,NA,NA,0000-0000-0000-0007,7,FALSE
+Claudio Szalai,NA,ad819502888c845dd6122131ad1abc0b3b1bb4c1,Ponce Paramedical College,NA,NA,NA,0000-0000-0000-0008,8,FALSE
+Anette Newbern,NA,76ec39ad3913dad7c750267d3016461f96762c56,Pontifical John Paul II Institute for Studies on Marriage and Family,NA,NA,NA,0000-0000-0000-0009,9,FALSE
+Sheena Bartone,NA,26fb6f0b0fc775e11d210782f6c5c4349c916787,Claremont Graduate University,NA,NA,NA,0000-0000-0000-0010,10,FALSE
+Son Hancin,NA,0e98cad6cf761e16656638ce06477cffef7628ae,Dale Carnegie Center of Excellence - NYC/Westchester,NA,NA,NA,0000-0000-0000-0011,11,FALSE
+Alesha Wueste,NA,becd5d4dde5bc4b041f38540844530c46b4346bc,Meridian Institute of Surgical Assisting,NA,NA,NA,0000-0000-0000-0012,12,FALSE
+Bettie Yoquelet,NA,2bbd95bb004fef4ebb76197b6e94664b04c30161,Xavier College,NA,NA,NA,0000-0000-0000-0013,13,FALSE
+Yong Bitner,NA,b5026386adee05a582f802e8960926a2891ea685,Massachusetts Institute of Technology,NA,NA,NA,0000-0000-0000-0014,14,FALSE
+Haley Brisky,NA,f1ac9954a576cd9033412f36cfd6fb0f2726ceda,University of Colorado Denver,NA,NA,NA,0000-0000-0000-0015,15,TRUE
+Tomiko Temp,NA,4f99b645de248fbc860ddb8171e8061c2c95b474,Wingate University,NA,NA,NA,0000-0000-0000-0016,16,FALSE
+Lurlene Ponder,NA,7dc28328c6a6e85ab00977d01c19a21be7659a67,Wake Forest University,NA,NA,NA,0000-0000-0000-0017,17,FALSE
+Yael Yandell,NA,7c525c038a56e8550fac6a5032f0ab7c29b07b47,The New School Center for Media,NA,NA,NA,0000-0000-0000-0018,18,FALSE
+Brigitte Daramola,NA,45615dc5404e2d303d353d55a1c5f60ef36a3380,Rose-Hulman Institute of Technology,NA,NA,NA,0000-0000-0000-0019,19,FALSE
+Alvin Osmus,NA,23f00cf1f3474427c26f33ffda0d759780105909,Elkins Park Hospital School of Radiologic Technology,NA,NA,NA,0000-0000-0000-0020,20,FALSE
+Richelle Garivay,NA,c6543e5ce483e40a1af5783675aa6ae2f2d33af8,Institute for Media and Entertainment,NA,NA,NA,0000-0000-0000-0021,21,FALSE
+Yasuko Jeannette,NA,b3d392be34e9283d2a27b90833260e0ea64358e0,Mechon L'Hoyroa,NA,NA,NA,0000-0000-0000-0022,22,FALSE
+Earlean Agan,NA,d2ac2543cf5507bd747f7d7b8ec3950664014670,Alder Graduate School of Education,NA,NA,NA,0000-0000-0000-0023,23,FALSE
+Claris Beuse,NA,4bbbe82a476ce601812edbee2d521d2a226930ad,The University of Tennessee - Martin,NA,NA,NA,0000-0000-0000-0024,24,FALSE
+Selina Carbajal,NA,194dd562c72007c9bb429d59920b7e6538f7af25,Siouxland College of Massage Therapy,NA,NA,NA,0000-0000-0000-0025,25,FALSE
+Kip Beckton,NA,113d8ec658f7d812856a2bd615f8054806e04d73,Louisiana State University at Eunice,NA,NA,NA,0000-0000-0000-0026,26,FALSE
+Glynis Fischler,NA,298c1bac47e30b5201d9d8ea069bd1cc4ed1fffd,Touro University California,NA,NA,NA,0000-0000-0000-0027,27,FALSE
+Suzy Almiron,NA,189c35067ff5cd396bb2cc89bdbdbead0ae3043f,Vatterott College - Joplin,NA,NA,NA,0000-0000-0000-0028,28,FALSE
+Jeffie Canellas,NA,8b11d80262242be2b68c501e79c04c501ddc15bb,C.C.B. School of Atlanta,NA,NA,NA,0000-0000-0000-0029,29,FALSE
+Edwina Cobourn,NA,dc887ef04c94385173af56308cd5938e40eb74a4,Assumption College,NA,NA,NA,0000-0000-0000-0030,30,FALSE
+Kacey Hillman,NA,756baa989987e785029a4eb91319bdea01344197,Odessa College,NA,NA,NA,0000-0000-0000-0031,31,FALSE
+Alejandro Mulinix,NA,2e08c4c48f51cb580c28305b3da5357ee133de74,Tulsa Technology Center - Peoria,NA,NA,NA,0000-0000-0000-0032,32,FALSE
+Madalyn Debolt,NA,daca6d9c3e195e722b4efb6ba51b9297d4cb459b,San Antonio College,NA,NA,NA,0000-0000-0000-0033,33,FALSE
+Rhoda Mangrich,NA,b757f7400a0cda336c84110623f54f3cb4ca3663,Gainesville State College,NA,NA,NA,0000-0000-0000-0034,34,FALSE
+Chasidy Arollo,NA,0f1c635e002436eeaf8733852be46da04650a2bf,Music Conservatory of Westchester,NA,NA,NA,0000-0000-0000-0035,35,FALSE
+Mee Stohrer,NA,bd77aa375e353a1c2558b31bf8b2050e601b6747,IITR Truck Schools,NA,NA,NA,0000-0000-0000-0036,36,FALSE
+Sharla Mccrobie,NA,02b2dae6c061ca2dab6353f02643a95ee33d4028,Mid-Del Technology Center,NA,NA,NA,0000-0000-0000-0037,37,FALSE
+Myra Furtaw,NA,9c9ced96810abbffa1aae290698184a9c994d718,Mildred Elley,NA,NA,NA,0000-0000-0000-0038,38,FALSE
+Marlon Denfip,NA,5a7f799b61f345cd7fe8bb50e995e2ec0160f077,Columbus State University,NA,NA,NA,0000-0000-0000-0039,39,FALSE
+Alane Ishida,NA,001332ca5715dc2ce5bf167752efad047267d41b,University of Rochester,NA,NA,NA,0000-0000-0000-0040,40,FALSE
+Nikia Oberhelman,NA,be90696c4c6e51ae6c5aaa4cee1ebf5b7326e694,Portland State University,NA,NA,NA,0000-0000-0000-0041,41,FALSE
+Luisa Samele,NA,aa21bbda192d764c3effc798b296e1a4ac75790b,American Pathways University,NA,NA,NA,0000-0000-0000-0042,42,FALSE
+Christina Loyed,NA,ce6865bfbdd13c29aec1eb5257a861eee30a2a0c,UEI College - Cerritos,NA,NA,NA,0000-0000-0000-0043,43,FALSE
+Sheilah Defaber,NA,424b0d3608cfb773e7d21b5abad4ce30cd0f624b,Lewis University,NA,NA,NA,0000-0000-0000-0044,44,FALSE
+Luz Swedeen,NA,8e2eefc6f56256d342709f51dacf9a2c3fa0a352,Cincinnati Christian University,NA,NA,NA,0000-0000-0000-0045,45,FALSE
+Meagan Chrabasz,NA,850539b5f81f5c77aacabf81ea42b8b77a046baf,Washington State University,NA,NA,NA,0000-0000-0000-0046,46,FALSE
+Willette Abed,NA,ff76ded6f0cccac4310d87a08243c67c732a1cbd,Spalding University,NA,NA,NA,0000-0000-0000-0047,47,FALSE
+Nicholas Mossel,NA,7fbe9238229b89783995f6d7f6f2589f539b290f,New Jersey School of Locksmithing,NA,NA,NA,0000-0000-0000-0048,48,FALSE
+Latoya Takehara,NA,5c58038f6b282ab9053b5ea7a1e7a2179ee0f195,Brandon College,NA,NA,NA,0000-0000-0000-0049,49,FALSE
+Edris Urbine,NA,e2d951e683901bae895b251ce4f51a14db503dcd,Center for Development of Security Excellence (CDSE),NA,NA,NA,0000-0000-0000-0050,50,FALSE
+Coral Larrieu,NA,da5e90765f645f8fe263d6216e46c87ea977fcbb,Hawaii Pacific University,NA,NA,NA,0000-0000-0000-0051,51,FALSE
+Cassi Stank,NA,a6a0f3b835ffefbb53fb40790a39a5ce035f2a4e,Geneva College,NA,NA,NA,0000-0000-0000-0052,52,FALSE
+Curtis Schowalter,NA,ab2bdac32b3921840fdf113d590b398c08416333,Pepperdine University,NA,NA,NA,0000-0000-0000-0053,53,FALSE
+Jutta Beilman,NA,09e364e986b6111c2972a273877132d29d6bd0c9,Rabbinical Seminary M'kor Chaim,NA,NA,NA,0000-0000-0000-0054,54,FALSE
+Hyacinth Pietras,NA,7f0861fc3691ba9d625ac7bd0303f1d0eea9d5f6,University of Fairfax,NA,NA,NA,0000-0000-0000-0055,55,FALSE
+Marci Zombro,NA,7fb957b573ce437026918fca29166767b563b040,San Bernardino County ROP,NA,NA,NA,0000-0000-0000-0056,56,FALSE
+Esmeralda Kunin,NA,e807b7b9280a36c500e38d74c38428047ed739c2,Blake Austin College,NA,NA,NA,0000-0000-0000-0057,57,FALSE
+Athena Jezek,NA,708c2d267e594c509c10866a24f7c67d4347ac59,Sacred Heart Major Seminary,NA,NA,NA,0000-0000-0000-0058,58,FALSE
+Dania Rothenbach,NA,263a0025252d3f2541aaaf2040c40ae69e17b60d,Everest College- West Los Angeles,NA,NA,NA,0000-0000-0000-0059,59,FALSE
+Pauletta Solinger,NA,69376be8a42e8ef07a1217993299afba56f7f368,Doral College,NA,NA,NA,0000-0000-0000-0060,60,FALSE
+Suanne Licursi,NA,4c82b835dade783cba330b65b79a348eb7d2be9e,Clarkson University,NA,NA,NA,0000-0000-0000-0061,61,FALSE
+Vicente Lamb,NA,f53fb066dc7be9d925f5f147e91892face85148d,California Miramar University,NA,NA,NA,0000-0000-0000-0062,62,FALSE
+Louella Lathim,NA,a8c00fa380d18a31c0eea27b3d727a2b25262999,Seton Hall University,NA,NA,NA,0000-0000-0000-0063,63,FALSE
+Verlene Horsch,NA,e8dc1c30eeb1b0f905b41ee808842845f390d576,Westwood College - Denver North,NA,NA,NA,0000-0000-0000-0064,64,FALSE
+Dakota Sciancalepore,NA,0bb112a077fcef3e643a5f3ee43c2e2e5cdc96e0,Cheyney University of Pennsylvania,NA,NA,NA,0000-0000-0000-0065,65,FALSE
+Jenelle Bochat,NA,fb3eed8aa325eb459f8f6bf24dd155118ba51a95,Academy de Firenze,NA,NA,NA,0000-0000-0000-0066,66,FALSE
+Gracie Mericle,NA,315ba9985b54697d7be96c053e87073ff3cfa763,Bellevue College,NA,NA,NA,0000-0000-0000-0067,67,FALSE
+Maxima Cantoran,NA,78ee8bc1d29c03d4a580ff8901a9a7e93bc66714,Rensselaer Polytechnic Institute,NA,NA,NA,0000-0000-0000-0068,68,FALSE
+Salena Lintner,NA,2852003bc4a19bde17b957db6e062d47ab4ddc2d,Heritage Institute,NA,NA,NA,0000-0000-0000-0069,69,FALSE
+Yer Keels,NA,1ac3ea567d716e981617c0db24a7f70eb3b7043c,Rider University,NA,NA,NA,0000-0000-0000-0070,70,FALSE
+Clinton Claassen,NA,e1712cea3748685d6379a883f2c8772c8d021d6f,Vatterott College - St. Charles Campus,NA,NA,NA,0000-0000-0000-0071,71,FALSE
+Asia Mergist,NA,d3e9acf52762b48abae4abcf2dd2a3e67082ea3c,Everest Institute - San Jose,NA,NA,NA,0000-0000-0000-0072,72,FALSE
+Carleen Kinnick,NA,10a63f5c808b72e934e58f6b8d434895eb9812ca,Center for Personal Development,NA,NA,NA,0000-0000-0000-0073,73,FALSE
+Shalanda Albarran,NA,896b1c69684be031c837388902ffe914ad44bda6,Madison Media Institute,NA,NA,NA,0000-0000-0000-0074,74,FALSE
+Joann Geraci,NA,673c6f9db3a755c04c01371f379f4368b0dab965,"Premiere Aesthetics Institute, LLC",NA,NA,NA,0000-0000-0000-0075,75,FALSE
+Deadra Escarcega,NA,9c48cfbd7ddaa9564a587ad0de5a55228ef80f79,Brightwood College - Nashville,NA,NA,NA,0000-0000-0000-0076,76,FALSE
+Halina Darga,NA,cbae04ed420249486ae14ee56026af97aa5c2bd5,Alabama A & M University,NA,NA,NA,0000-0000-0000-0077,77,FALSE
+Wilbur Patricia,NA,57ad6bc95e31871252e61925f8f4440cc4a1bf73,Peninsula College,NA,NA,NA,0000-0000-0000-0078,78,FALSE
+Wendie Herner,NA,067e71f34dba7d873c6ab593d8f5649d947823b6,Sequoia District Adult School,NA,NA,NA,0000-0000-0000-0079,79,FALSE
+Adrien Goist,NA,4ea81961f30830bfce9654bd99289a7d9fb1aabf,Institute of Therapeutic Massage,NA,NA,NA,0000-0000-0000-0080,80,FALSE
+Oren Bermejo,NA,4d575c98856aebaf22b97fa73ddf44abbc0f422d,Harrisburg University of Science and Technology,NA,NA,NA,0000-0000-0000-0081,81,FALSE
+Elza Rysavy,NA,a5da5ed53218c430c76e16171fd40d3383a45970,DAVENPORT UNIVERSITY-EASTERN REGION-DEARBORN,NA,NA,NA,0000-0000-0000-0082,82,FALSE
+Britt Mundinger,NA,c278e58db3864910ce58b30045af910165c36ef3,Iowa Wesleyan University,NA,NA,NA,0000-0000-0000-0083,83,FALSE
+Margrett Karner,NA,2ee88302c9132336a7a2f4b2d79cbf4579e055e4,Missouri College,NA,NA,NA,0000-0000-0000-0084,84,FALSE
+Hung Bumatay,NA,cd560dcd3652466c0ef3ce270e5d3255c84a1207,Valley Forge Military College,NA,NA,NA,0000-0000-0000-0085,85,FALSE
+Shira Genualdo,NA,b2055b545789d20859f42277da4c21483f651b8d,The College of Saints John Fisher and Thomas More,NA,NA,NA,0000-0000-0000-0086,86,FALSE
+Faustino Balkus,NA,62fe7212ec3efe8a6bd97149c836d25d62aa039d,Healing Hands Institute,NA,NA,NA,0000-0000-0000-0087,87,FALSE
+Thea Mcrary,NA,4c79deada23d41ed9923c87c14c4ee31502f86c5,Strayer University,NA,NA,NA,0000-0000-0000-0088,88,FALSE
+Jasmin Kole,NA,1467c878f1146331d881ea0ddf44000a82af3474,University of Hawaii at Hilo,NA,NA,NA,0000-0000-0000-0089,89,FALSE
+Annett Wein,NA,181384aff66d4628ef047f582e53c26036925703,Charter Oak State College,NA,NA,NA,0000-0000-0000-0090,90,FALSE
+Cyndi Albor,NA,641f6d82435eff9493c6e325b1f2b11e3cc31d44,Capital Education Institute,NA,NA,NA,0000-0000-0000-0091,91,FALSE
+Esta Grandstaff,NA,8f91d1ce927a3278c53d37b0f19a26bad3ed0851,Stevens Institute of Technology,NA,NA,NA,0000-0000-0000-0092,92,FALSE
+Michal Gobert,NA,de115b35a47358c10b75bfd0b049bd81ab58a175,Franklin Academy,NA,NA,NA,0000-0000-0000-0093,93,FALSE
+Otilia Dute,NA,012178222416d3e96eb0b0338cf921970e954ea5,American Health Science University,NA,NA,NA,0000-0000-0000-0094,94,FALSE
+Cecilia Westerberg,NA,0adb77e541628c125eff78a4ef40233deca3ccaa,University of North Carolina at Wilmington,NA,NA,NA,0000-0000-0000-0095,95,FALSE
+Kristian Audet,NA,8212e49bfcfac1a8bb6e8c738a5787e4b2950cea,Ruben's Five Star Academy,NA,NA,NA,0000-0000-0000-0096,96,FALSE
+Raquel Betsill,NA,b390227213d41727a4960f6723244179f77fc274,Morthland College,NA,NA,NA,0000-0000-0000-0097,97,FALSE
+Rayna Charters,NA,dc2d15e4102f4a1961373cae654e5aec7525fb91,Yeshiva Bais Aharon,NA,NA,NA,0000-0000-0000-0098,98,FALSE
+Kathern Morreale,NA,29f4ecc33d67fa81d5c60429a27f4fe8078fb1dc,San Mateo Adult School,NA,NA,NA,0000-0000-0000-0099,99,FALSE
+Hye Padro,NA,65a383ffaa0cfa96eefd93d18caab3d307a539b4,Centenary University,NA,NA,NA,0000-0000-0000-00100,100,FALSE
+Elease Purkiss,NA,7e6830947cf41f05f838657172e2f0fd73e9154d,Cochise College,NA,NA,NA,0000-0000-0000-00101,101,FALSE
+Sandee Khalili,NA,3956e1ade3ade85a1f64aafa0d5436f62723f44f,Colegio Tecnologico y Comercial de Puerto Rico,NA,NA,NA,0000-0000-0000-00102,102,FALSE
+Danille Lievano,NA,00258474f27d3530be29c453722350be796d4080,CES College,NA,NA,NA,0000-0000-0000-00103,103,FALSE
+Sunny Kesner,NA,c499c5abcfb54fc178d53b99a46f41f9aaf7a417,Notre Dame Seminary,NA,NA,NA,0000-0000-0000-00104,104,FALSE
+Dena Drabicki,NA,77c2474663767fc5357b72c93980a6cc40d74d56,Caroline University,NA,NA,NA,0000-0000-0000-00105,105,FALSE
+Yuko Swavely,NA,892fd5b38f878610138a60e7e72535d485762b9f,Polytechnic Institute of New York University,NA,NA,NA,0000-0000-0000-00106,106,FALSE
+Roseanne Whited,NA,7d3549e576e6e720fc3bc40e3b9f27054ba4093a,Montgomery Job Corps Center,NA,NA,NA,0000-0000-0000-00107,107,FALSE
+Elisa Bareford,NA,76dc96a95b2b550a3b818137dd1b610887f2fbce,Claremont McKenna College,NA,NA,NA,0000-0000-0000-00108,108,FALSE
+Amparo Maleck,NA,c3a8bafd0a92ac2846453fc7dd049957f7ad3cb6,Northeast Technology Center - Claremore,NA,NA,NA,0000-0000-0000-00109,109,FALSE
+Heidi Gugliuzza,NA,0a5a3dd47acab8609d0c5e1baf4523f8dbef4b63,Won Institute of Graduate Studies,NA,NA,NA,0000-0000-0000-00110,110,FALSE
+Ashlee Bernett,NA,9815114cdac73162dbde0703ebc46801a1303823,Bethany College,NA,NA,NA,0000-0000-0000-00111,111,FALSE
+Nathanael Cardani,NA,fa0eb58249d428eb6336860d6e11480a850386c6,Transylvania University,NA,NA,NA,0000-0000-0000-00112,112,FALSE
+Hank Hults,NA,d21d799f7496c54c1bfe7e94afb3f39359eaf133,Kaiser Permanente - West Bay Consortium,NA,NA,NA,0000-0000-0000-00113,113,FALSE
+Anastacia Viejo,NA,d1871ad446489133ad093210f60067fb2cb8977e,Precision Manufacturing Institute,NA,NA,NA,0000-0000-0000-00114,114,FALSE
+Lisabeth Weik,NA,af30e03bb1f4a52e1dcb76dbb77550bcde398157,Mercy/St. Luke's Hospital,NA,NA,NA,0000-0000-0000-00115,115,FALSE
+Tuan Younan,NA,f1e1a685ff0a9bebd964c904888abda0e225f801,Arkansas State University,NA,NA,NA,0000-0000-0000-00116,116,FALSE
+Zachariah Welch,NA,efecb4213ffbe6a6fb14a989ea6a30d419c5d50a,Defense Commissary Agency,NA,NA,NA,0000-0000-0000-00117,117,FALSE
+Rena Volkmer,NA,148fb404e1a4b44cd9ddfe190a0ac7ac57362b75,Saginaw Valley State University,NA,NA,NA,0000-0000-0000-00118,118,FALSE
+Soo Coatie,NA,d5c707757192ff7c5dbff9d64611fb19379c0d8d,UNIVERSITY MEDICAL CENTER,NA,NA,NA,0000-0000-0000-00119,119,FALSE
+Ellis Lastufka,NA,d2210411bba898d8aae7394be6b7b9beff6cf108,Cal America Education Institute,NA,NA,NA,0000-0000-0000-00120,120,FALSE
+Akiko Suryanarayana,NA,2121638249c8411ba2d3c47826bcddd6683372d5,Remington College - Little Rock Campus,NA,NA,NA,0000-0000-0000-00121,121,FALSE
+Rolande Paolucci,NA,e042e97d82cc4e3776e6c77cdba97ddd55f77938,Everest College - Skokie,NA,NA,NA,0000-0000-0000-00122,122,FALSE
+Vinita Slinker,NA,8f69b2b48f657c9fed899c7695ae51b2ee4fa229,Marconi International University,NA,NA,NA,0000-0000-0000-00123,123,FALSE
+Shani Delavega,NA,ea1b20e0dc70e43be3499bf19606a38ffeea239e,BioHealth College,NA,NA,NA,0000-0000-0000-00124,124,FALSE
+Jacquie Boe,NA,7233fc8414bc52b5b75a449a9cd5f3470f74135b,Commonwealth Institute of Funeral Service,NA,NA,NA,0000-0000-0000-00125,125,FALSE
+Romelia Pacific,NA,1ee235456c0e97bf96f887f801817d49d393cb53,Pratt Institute,NA,NA,NA,0000-0000-0000-00126,126,FALSE
+Micah Bulman,NA,caf1e2dfe4f4d0858638de1186b0d422bba0e959,Asbury University,NA,NA,NA,0000-0000-0000-00127,127,FALSE
+Harriett Gopen,NA,7323fec3a25dab0c0ba9917d98f64a8f7819abb1,Trident University International,NA,NA,NA,0000-0000-0000-00128,128,FALSE
+Saundra Kapp,NA,7720a3ee90a6f81ef6c7e4845ac52738f0ab5de1,Utica School of Commerce- Oneonta Campus,NA,NA,NA,0000-0000-0000-00129,129,FALSE
+Allena Spratte,NA,9a3f421bd86a173758790364159a06bfa1543c12,Nyack College at Nyack College Manhattan Center,NA,NA,NA,0000-0000-0000-00130,130,FALSE
+Forest Madin,NA,e683138599e2d7eebe3fa0fd0446dd51df71a6a6,Everest Institute - Southfield,NA,NA,NA,0000-0000-0000-00131,131,FALSE
+Quyen Swolley,NA,c1e1787bd9ab5c0e8869c1f8a6b4898098f69c70,University of Wisconsin - River Falls,NA,NA,NA,0000-0000-0000-00132,132,FALSE
+Bernard Salgado,NA,95cd5c06e97265c04e5466adb1726dcbed464337,Saddleback College,NA,NA,NA,0000-0000-0000-00133,133,FALSE
+Nicky Lesh,NA,c6323274e3b46d180f8d3b0c3fcb0512b4480622,San Diego Global Knowledge University,NA,NA,NA,0000-0000-0000-00134,134,FALSE
+Jayme Chiasson,NA,43ecdbe278098cd47599239f68f748fe92a4a29d,Midwives College of Utah,NA,NA,NA,0000-0000-0000-00135,135,FALSE
+Audry Baksi,NA,0fd4a8f66cb04f784d611ea82e368f3eb5a0569d,American Commercial College - Abilene,NA,NA,NA,0000-0000-0000-00136,136,FALSE
+Antwan Hilsendager,NA,d2439d036c852dfc970be8199ec922e55e657ded,Remington College-Nashville Campus,NA,NA,NA,0000-0000-0000-00137,137,FALSE
+Tamekia Stepnoski,NA,0435951df2df3d7a947c617763e461c7ad0758d2,Apollos University,NA,NA,NA,0000-0000-0000-00138,138,FALSE
+Conception Keisler,NA,43612e02d8d95c701dcf39d2d15ea83170efd626,PCI Academy,NA,NA,NA,0000-0000-0000-00139,139,FALSE
+Talisha Frisinger,NA,e95f18b79a0f96e05c4ff591a4bf712fe4558450,Southwestern College,NA,NA,NA,0000-0000-0000-00140,140,FALSE
+Ellamae Pagliuca,NA,f7a6487214ed8c6be121c29e68122a38353ec9cf,Institute of Therapeutic Massage & Movement,NA,NA,NA,0000-0000-0000-00141,141,FALSE
+Leon Sacre,NA,8bb8d44770054c381269bc5711999d09e1246dd9,Loma Linda University,NA,NA,NA,0000-0000-0000-00142,142,FALSE
+Sima Togni,NA,6f4b63819d174f32ca4506166cf37240a48d3536,Vantage College,NA,NA,NA,0000-0000-0000-00143,143,FALSE
+Kortney Bonita,NA,bec74d10c749ed8c970be69a781d684023b3b3bb,Western Michigan University Thomas M. Cooley Law School,NA,NA,NA,0000-0000-0000-00144,144,FALSE
+Latosha Taton,NA,1152ca0c155ff28224633e16dc3020fe9b492f6c,University of Houston - Victoria,NA,NA,NA,0000-0000-0000-00145,145,FALSE
+Cornelia Treves,NA,8d274c247a5a10c351719c26ccab5c50171d56a9,Fort Wayne School of Radiography,NA,NA,NA,0000-0000-0000-00146,146,FALSE
+Arlette Bonavia,NA,191b637e31b558239c2205d8de5cbe8595e6df55,Ruby's Academy for Health Occupations,NA,NA,NA,0000-0000-0000-00147,147,FALSE
+Shonta Fineran,NA,6c8d975af83e48f50fb0f090b2b40a00791650cc,California Polytechnic State University-San Luis Obispo,NA,NA,NA,0000-0000-0000-00148,148,FALSE
+Fermina Bertholf,NA,e58178cbe1c414b5177add2bfb38549dd78ccc0d,Pacific Northwest Ballet School,NA,NA,NA,0000-0000-0000-00149,149,FALSE
+Kurtis Manozca,NA,39677e7db0e4feac798dbe96c5be38cffa5ff098,University of Washington,NA,NA,NA,0000-0000-0000-00150,150,FALSE
+Carie Muth,NA,3b9f258760d709c81cee89f713ebb1217bec1cd3,William Carey University,NA,NA,NA,0000-0000-0000-00151,151,FALSE
+Merri Suing,NA,34d11ffc339624fe92185d7dad37d91b8c88e7b8,Florida Agricultural and Mechanical University,NA,NA,NA,0000-0000-0000-00152,152,FALSE
+Vincenzo Abeln,NA,d2ba0672d5493ca6084193acc7d01fac0880081c,Cayce/Reilly School of Massage,NA,NA,NA,0000-0000-0000-00153,153,FALSE
+Francis Yerly,NA,e4a884a3cbf4e248e961e023e236108fbf0c70d3,The Alternative Conjunction Clinic & School of MT,NA,NA,NA,0000-0000-0000-00154,154,FALSE
+Dionna Benzer,NA,2e68591724fc62ebfb1e31a4cc90871e763ef37b,Pennsylvania Gunsmith School,NA,NA,NA,0000-0000-0000-00155,155,FALSE
+Frances Schnackenberg,NA,f7311b53da0a2f00434cc702b555277d3b53f612,Mars Hill University,NA,NA,NA,0000-0000-0000-00156,156,FALSE
+Margy Mah,NA,9021258ee09d1bf1f6b374d54b2e3f5249e32528,Mid City College,NA,NA,NA,0000-0000-0000-00157,157,FALSE
+Tanya Krzyston,NA,7047d036f459141d192db97a637c42ff6eb225b7,Merced College,NA,NA,NA,0000-0000-0000-00158,158,FALSE
+Frankie Cerra,NA,2e583a4719d9aae8115218bcbd34b64f3dce0a69,Phillips Graduate University,NA,NA,NA,0000-0000-0000-00159,159,FALSE
+Mui Skates,NA,e456228149fb991bb5facd3499e862ee7fe08008,Birthingway College of Midwifery,NA,NA,NA,0000-0000-0000-00160,160,FALSE
+Phebe Kocher,NA,bb057c4fd4cef0881e4f2929d261131c362214f0,DePaul University,NA,NA,NA,0000-0000-0000-00161,161,FALSE
+Roland Wilkosz,NA,be19f0643bc2cfd435aa5c1df39ee12e77ebb8c0,Unitek College - Sacramento,NA,NA,NA,0000-0000-0000-00162,162,FALSE
+Delphia Colgan,NA,7204339efe5f90349d3981508b862a709bc98fbf,ALA SUNY Cobleskill,NA,NA,NA,0000-0000-0000-00163,163,FALSE
+Savannah Jandreau,NA,3e04fb73f39314a88a8408bcc6a996f2f2461973,Olivet University,NA,NA,NA,0000-0000-0000-00164,164,FALSE
+Ming Tays,NA,0a87e6153331f98b24b07dc6ff8853f728dbd678,Marshfield Clinic,NA,NA,NA,0000-0000-0000-00165,165,FALSE
+Cristal Brees,NA,d3f0bc11bd565cb53a8b527a2f9071bcfb29e27e,Pillar College,NA,NA,NA,0000-0000-0000-00166,166,FALSE
+Elayne Karlinsky,NA,11099e8607e8ee85457a90f9cd7bd7f1b69202b9,Colton-Redlands-Yucaipa Regional Occupational Program,NA,NA,NA,0000-0000-0000-00167,167,FALSE
+Juliann Retersdorf,NA,7dd7c84f02b68c5805b977deff53f0eea762ad22,ICDC College - Lawndale,NA,NA,NA,0000-0000-0000-00168,168,FALSE
+Janetta Deen,NA,f254258e048e2978020e425ef1020347c6eb346b,Instituto Tecnologico Empressarial,NA,NA,NA,0000-0000-0000-00169,169,FALSE
+Terrie Ruddick,NA,12b90c3549690cab0ed8cdce31de366963d1fdb3,Norwalk - La Mirada Adult School,NA,NA,NA,0000-0000-0000-00170,170,FALSE
+Ursula Bruning,NA,4925ccfad11fe49dc1544f03095dd09820de23a0,The National Hispanic University,NA,NA,NA,0000-0000-0000-00171,171,FALSE
+Georgetta Drown,NA,dc4ce978c08a4821cf70a5b7434f389b36c29c4c,Norfolk State University Virginia Beach Higher Education Cen,NA,NA,NA,0000-0000-0000-00172,172,FALSE
+Domitila Dowst,NA,4ba3f17dce140b75cb01269dc8e7514d4162b0fd,Hallmark University,NA,NA,NA,0000-0000-0000-00173,173,FALSE
+Necole Walczak,NA,69120de3bc7d31a9f1a4b89ebff7ac283c10a7ad,ECPI University,NA,NA,NA,0000-0000-0000-00174,174,FALSE
+Nida Concilio,NA,848e3d00c44ce11dd6745ec360fb06bc7723703f,Corona-Norco Adult School,NA,NA,NA,0000-0000-0000-00175,175,FALSE
+Ossie Biddinger,NA,4dbbff243eeab11669f2ebc29e971b5a8bcbf47d,Clarion University of Pennsylvania,NA,NA,NA,0000-0000-0000-00176,176,FALSE
+Tiffanie Tench,NA,852fb834ec18375825e9fa41e16b070533e6f706,Herzing University,NA,NA,NA,0000-0000-0000-00177,177,FALSE
+Cassey Diekema,NA,4d45ebec123be37e950a2610fab072e7a3b8fca8,Dana College,NA,NA,NA,0000-0000-0000-00178,178,FALSE
+Oliva Illas,NA,11d0ea3a5f2daaa63eb667e4ff044a1f8348840b,University of Charleston,NA,NA,NA,0000-0000-0000-00179,179,FALSE
+Elinor Haden,NA,c6fab896e8d82870b98be345c1a1fea8c284d91a,Marymount California University,NA,NA,NA,0000-0000-0000-00180,180,FALSE
+Tad Spence,NA,4291b29e711fc2f8932ec6533005ccf66599e96c,Morris County School of Technology,NA,NA,NA,0000-0000-0000-00181,181,FALSE
+Harland Saini,NA,aae6ecc32bfc19243f7d2cbcf6b33616206e19f8,Ave Maria School of Law,NA,NA,NA,0000-0000-0000-00182,182,FALSE
+Genevieve Schwaller,NA,2a47c752b9a4de21f957d628ab26bdbc66e154dd,U.S. Army War College,NA,NA,NA,0000-0000-0000-00183,183,FALSE
+Taisha Mahany,NA,f695085e98b4127a47086c62a4f4b01b41eb4092,El Camino Hospital,NA,NA,NA,0000-0000-0000-00184,184,FALSE
+Lezlie Peredo,NA,176e7027bbf64d8d498705d7218c54b78b22d722,University of Baltimore,NA,NA,NA,0000-0000-0000-00185,185,FALSE
+Merrill Dysinger,NA,219896f40d302791bbadfc94d595a13631b3d84e,Brescia University,NA,NA,NA,0000-0000-0000-00186,186,FALSE
+Allan Venanzi,NA,f5828b430aa9e739bfafa1e20e3a3e1ae69557a2,Teachers College of San Joaquin,NA,NA,NA,0000-0000-0000-00187,187,FALSE
+Rogelio Cephas,NA,15811e319ce38daffc9a7ec10521a34d9058d570,Farmington Missouri Hospital Company,NA,NA,NA,0000-0000-0000-00188,188,FALSE
+Malisa Crigler,NA,3cc0548846762717b2794836779112c7b305d932,The University of Findlay,NA,NA,NA,0000-0000-0000-00189,189,FALSE
+Piper Neidhardt,NA,f92678528da613fb5193aebbc6d2840be2ca5cb5,Garden State Science and Technology Institute,NA,NA,NA,0000-0000-0000-00190,190,FALSE
+Amal Obarr,NA,3a76e4df57bed0660ee1391c6b51ecd87e3ba5a8,Classic Cooking Academy,NA,NA,NA,0000-0000-0000-00191,191,FALSE
+Kristopher Pabelick,NA,917a41a2a48f76726b364283f0d6e5439c880646,ASA College,NA,NA,NA,0000-0000-0000-00192,192,FALSE
+Ashlyn Vasi,NA,1775fd76e9000aa7845336506ed825a78f0ee8f1,Oklahoma State University - Oklahoma City,NA,NA,NA,0000-0000-0000-00193,193,FALSE
+Shaina Wadford,NA,5d5c16e1301cd44ab93f6f01b53a52289ebd6501,Methodist College,NA,NA,NA,0000-0000-0000-00194,194,FALSE
+Marylou Semas,NA,2684b11341ea70ef9cf13952cf9b0e47d97fa4f2,Seminary Extension Independent Study Institute,NA,NA,NA,0000-0000-0000-00195,195,FALSE
+Charlyn Sojourner,NA,a6da580253a92d7f8b778d82f1f34760fcfdcc6b,University of the District of Columbia David A Clarke School of Law,NA,NA,NA,0000-0000-0000-00196,196,FALSE
+Gwenda Kleffner,NA,e54acbce0a91c6cb4fdd0027936ead8cf5978246,Dale Carnegie of Northeast Ohio,NA,NA,NA,0000-0000-0000-00197,197,FALSE
+Eveline Blackaby,NA,b0cca3066360c3e518805838cebe44f0a77e97ab,Cinta Aveda Institute,NA,NA,NA,0000-0000-0000-00198,198,FALSE
+Candis Golackson,NA,53970ce2361f297bf3731bc936a7ea1d4cc6b011,Copper Mountain College,NA,NA,NA,0000-0000-0000-00199,199,FALSE
+Bobbie Aguilar,NA,5a4b023ea5060ba519379f205d894fa82387c00b,Veritas Baptist College,NA,NA,NA,0000-0000-0000-00200,200,FALSE
+Janett Acorda,NA,cf7191a9aa21b584c0757a56d062376e946ff28d,Lyon College,NA,NA,NA,0000-0000-0000-00201,201,FALSE
+Felisha Hansell,NA,b61bfc4ed44e7bd8cb097808d3cb1b273b671bb6,Hardin-Simmons University,NA,NA,NA,0000-0000-0000-00202,202,FALSE
+Mabelle Linnear,NA,e3f830568bc4dcaeb1dec7caf6d1f1c2f18bc671,Hofstra University,NA,NA,NA,0000-0000-0000-00203,203,FALSE
+Asa Wendelberger,NA,0c79026aee8b62f1c1861ef2dca0428a47f14a17,Euclid Hospital/Cleveland Clinic Health System,NA,NA,NA,0000-0000-0000-00204,204,FALSE
+Jazmin Pinello,NA,3822d3a1adbbc082992c5f8f2358eb82627aa22a,Morningside College,NA,NA,NA,0000-0000-0000-00205,205,FALSE
+Mabel Kincade,NA,28deba32dbfeb51d8e04784c89bd72e7866c640c,State University of New York - Delhi,NA,NA,NA,0000-0000-0000-00206,206,FALSE
+Arianna Hayner,NA,57034211a3ba960a6d98526f94695ea0b09fd76c,The University of the South,NA,NA,NA,0000-0000-0000-00207,207,FALSE
+Dannette Fontneau,NA,c98bc9278328b39f3656be463455eb2fc1ee79fe,Digital Media Institute at InterTech,NA,NA,NA,0000-0000-0000-00208,208,FALSE
+Candi Coletti,NA,8d7195fdb7ef215eef0a53b51c63921d61475bcc,Coker University,NA,NA,NA,0000-0000-0000-00209,209,FALSE
+Sherly Drenner,NA,03629887d408f8db34d71271b7f633c37cebf1d2,America Evangelical University,NA,NA,NA,0000-0000-0000-00210,210,FALSE
+Malinda Leichty,NA,d7188e76aa0e6a71da21b6d4440503320a9be40b,Dallas Institute of Funeral Service,NA,NA,NA,0000-0000-0000-00211,211,FALSE
+Clorinda Vair,NA,b107dca6466f600d1c44a7dcd696750a3579ed41,Brightwood College - Sacramento,NA,NA,NA,0000-0000-0000-00212,212,FALSE
+Candie Stemmer,NA,ff9364dc949111b38c70391bb5f8528b3500084c,Centro de Capacitacion y Asesoramiento,NA,NA,NA,0000-0000-0000-00213,213,FALSE
+Alisa Minnie,NA,95b486d929ffc390982fc9567bc59fa1d758aa9e,Washington-Saratoga-Warren-Hamilton-Essex BOCES,NA,NA,NA,0000-0000-0000-00214,214,FALSE
+Gabrielle Riobe,NA,c27342db3db58f232289f344e36d284b1ea8b22f,The Ocean Corporation,NA,NA,NA,0000-0000-0000-00215,215,FALSE
+Antonina Granda,NA,5731e7fc80eb291799a9d6698d0b98b6af4a7aa2,School of Piano Technology for the Blind,NA,NA,NA,0000-0000-0000-00216,216,FALSE
+Concha Lagreca,NA,e4206dd3974d0943f54ba256a66198e59309b95c,South San Francisco Adult Education,NA,NA,NA,0000-0000-0000-00217,217,FALSE
+Lynnette Spevacek,NA,6adbbb1a2b715c964eaac7b0859e31906e93ee0d,College of San Mateo,NA,NA,NA,0000-0000-0000-00218,218,FALSE
+Kit Kudrle,NA,d6d21901b24842cfeb7a4aa7b2ace638231c5ad4,Northland Pioneer College,NA,NA,NA,0000-0000-0000-00219,219,FALSE
+Reinaldo Sproles,NA,63230e29eb6bffcd2ca820dfd56a24e4bd33212d,Sanford-Brown College - Houston,NA,NA,NA,0000-0000-0000-00220,220,FALSE
+Kerrie Styron,NA,0e1bbc1c4306917990692aad296f9e6a4f0cb3cc,The College of Healthcare Professions,NA,NA,NA,0000-0000-0000-00221,221,FALSE
+Sharon Quevedo,NA,4fa5174717dcc83cd68afa0017cf70700bfc7aaf,Holy Trinity Orthodox Seminary,NA,NA,NA,0000-0000-0000-00222,222,FALSE
+Irena Hoerner,NA,7f0b92a73d4babc9484af4377743f887e884e465,Middlebury College,NA,NA,NA,0000-0000-0000-00223,223,FALSE
+Dwain Schrage,NA,8c2dfdfb14a951fb6e3eb991b40aaf816cc5bf4f,International Air and Hospitality Academy,NA,NA,NA,0000-0000-0000-00224,224,TRUE
+Raymond Hjort,NA,04443dd4577d511a8a74725ccd018b2b9daa7aec,New York Automotive and Diesel Institute,NA,NA,NA,0000-0000-0000-00225,225,FALSE
+Leisa Zorko,NA,017f181fbb97a94129188a5e217fad98515aeccb,San Diego City College,NA,NA,NA,0000-0000-0000-00226,226,FALSE
+Mel Reeher,NA,4bf82075d3b6eccf7628955003c3aa898575a4c8,Vet Tech Institute,NA,NA,NA,0000-0000-0000-00227,227,FALSE
+Hiroko Moulder,NA,1d838ceb6816846a55947c3a6de0f1e91b749502,American Advanced Technicians Institute,NA,NA,NA,0000-0000-0000-00228,228,FALSE
+Fidela Karvonen,NA,a2bc58abd18895fb53470b6c63ecf76b0c5ce96d,Western Washington University,NA,NA,NA,0000-0000-0000-00229,229,FALSE
+Roscoe Ridell,NA,b76d7ad4c2d12953121b8b85a7ce0f2ee9dfce9d,Dermalogica Academy,NA,NA,NA,0000-0000-0000-00230,230,FALSE
+Yvette Elridge,NA,cd902ee5c48e364079f9d512e74ef574a9433313,ESLi at McNeese State University,NA,NA,NA,0000-0000-0000-00231,231,FALSE
+Myrtis Gianikas,NA,ed5bb6f22a230cb9bf771b47976c34d7e34ca10c,SOUTHERN NEW JERSEY TECHNICAL SCHOOL - WOODBURY,NA,NA,NA,0000-0000-0000-00232,232,FALSE
+Bernardine Thalacker,NA,9eac56af9b0cd8e7242a1a5d7416344c9dac2666,American Pacific College - Los Angeles,NA,NA,NA,0000-0000-0000-00233,233,FALSE
+Dyan Jevnikar,NA,5234b6da01d6e54e345a9b292a5014813048b3b3,Columbia International University,NA,NA,NA,0000-0000-0000-00234,234,FALSE
+Elena Polhamus,NA,a67305bec09963f3af87cd2aa5ab05d872070a54,The Restaurant School at Walnut Hill College,NA,NA,NA,0000-0000-0000-00235,235,FALSE
+Queen Bertus,NA,bd4dabfa0fb132da090b5c044fc22cec00d655d7,AKS Massage School,NA,NA,NA,0000-0000-0000-00236,236,FALSE
+Monica Breckley,NA,00e872f6cc2a7b8a8ce7b4269b6c5ac37b90f98c,Target International Student Center,NA,NA,NA,0000-0000-0000-00237,237,FALSE
+Ileana Berthiaume,NA,61d1b043a9850ac78e54f2f58a8608d1a7e7816a,Sierra College,NA,NA,NA,0000-0000-0000-00238,238,FALSE
+Lanelle Cancer,NA,57eade41c54a26c66f7db3ac28b18ba026b1202c,Sawyer School - Pawtucket,NA,NA,NA,0000-0000-0000-00239,239,FALSE
+Meridith Uhyrek,NA,2de88842e51a737ca5ea0c66335c486d390c1c1b,Northwestern University,NA,NA,NA,0000-0000-0000-00240,240,FALSE
+Christa Stickrod,NA,87fe96ecb0bdc056650264ce37d09346ba522a4f,Prairie View A & M University,NA,NA,NA,0000-0000-0000-00241,241,FALSE
+Merissa Zehner,NA,fcbbc6112b41aed403b35d82f2521282453075e1,EDP University of Puerto Rico,NA,NA,NA,0000-0000-0000-00242,242,FALSE
+Rachelle Mustaro,NA,4edb77b752204b38f65e8039781e723f4d7d8013,Houston School of Houston School of Carpentry,NA,NA,NA,0000-0000-0000-00243,243,FALSE
+Joycelyn Amott,NA,b6d566b6f87569e48fa35936596d4569b5c7bea5,Hilbert College,NA,NA,NA,0000-0000-0000-00244,244,TRUE
+Natosha Durling,NA,1f52cee5bc7e23d11918b67ee23957587bfec305,SS. Cyril & Methodius Seminary,NA,NA,NA,0000-0000-0000-00245,245,TRUE
+Bettyann Rumpf,NA,4a0c386561ef8ced4c8bdb8ab9d540040d8181d2,Utica College,NA,NA,NA,0000-0000-0000-00246,246,FALSE
+Floria Boliver,NA,7981b2197b4e5e88f1d6da6a91c7fe54a0fb6858,Parkland College,NA,NA,NA,0000-0000-0000-00247,247,FALSE
+Rhonda Waide,NA,ded4f913a23f47cee46eb0f7768309fd173bdfd4,Berea College,NA,NA,NA,0000-0000-0000-00248,248,FALSE
+Lashaun Swigart,NA,b67e09acdef456684604f9d342c665e6771d8e21,Casal Aveda Institute,NA,NA,NA,0000-0000-0000-00249,249,FALSE
+Randell Weglin,NA,fb748146be827478a749f356d71cb5238f4d4db0,Daniel Morgan Graduate School of National Security,NA,NA,NA,0000-0000-0000-00250,250,FALSE
+Cira Morvay,NA,ab28d910f7f8d92fbfcbc89b8166f3addc61a787,Charleston Southern University,NA,NA,NA,0000-0000-0000-00251,251,TRUE
+Colton Cutrona,NA,93b39322c1bdfc52e21c802752428ed24a225d79,Braxton College,NA,NA,NA,0000-0000-0000-00252,252,FALSE
+Ling Holman,NA,e0f1be7001e947a2a7ab272e28ebc01e46b9b468,Lebanon Valley College,NA,NA,NA,0000-0000-0000-00253,253,FALSE
+Easter Revells,NA,151add39964c4b4c5d706dbb4b089bc293e5e536,Beal College,NA,NA,NA,0000-0000-0000-00254,254,FALSE
+Reginald Mcmaken,NA,0c23e7dc6e45ee782a660f51a06e3336a310920b,Bloomsburg University of Pennsylvania,NA,NA,NA,0000-0000-0000-00255,255,FALSE
+Rene Nashe,NA,e712dfcb70122839a7b43be752a0731211a85bec,Florida SouthWestern State College,NA,NA,NA,0000-0000-0000-00256,256,FALSE
+Francisco Lamport,NA,fb00a4f681dd32fee47165cf2650dce28c5844cd,Webb Institute,NA,NA,NA,0000-0000-0000-00257,257,FALSE
+Yon Eschbaugh,NA,36548aa7dd604eb91bd23aeff59516fd7605f58f,Galveston College,NA,NA,NA,0000-0000-0000-00258,258,FALSE
+Felice Boshnack,NA,a396c221735026a180a6cc9f2e782af570ee2aa3,Liberty University,NA,NA,NA,0000-0000-0000-00259,259,FALSE
+Fe Kiah,NA,5cab65a952b43d3712770b3ee5a32177736b8c75,Savannah River College,NA,NA,NA,0000-0000-0000-00260,260,FALSE
+Ela Kitzman,NA,6bf88728c943e4b43f1e8578272006707e247955,Yeshiva Chemdas Hatorah,NA,NA,NA,0000-0000-0000-00261,261,FALSE
+Gilbert Killian,NA,45dc2fbf445d80cfc2898486bcbeed52e959a819,Derech Hachaim Seminary,NA,NA,NA,0000-0000-0000-00262,262,FALSE
+Star Ninke,NA,9c4ed74a0e2f468813ba5ad3dbffb9b08e9916ae,Coral Springs Regional Institute of Public Safety,NA,NA,NA,0000-0000-0000-00263,263,FALSE
+Remona Mallin,NA,e484c691ee40e376685ecb2ac0e5748c79a30468,University of Providence,NA,NA,NA,0000-0000-0000-00264,264,FALSE
+Ty Peddie,NA,44784e2a6b6d35a6c9eed59c435abdc9129dbadc,Massage Institute of Memphis,NA,NA,NA,0000-0000-0000-00265,265,FALSE
+Jame Debrot,NA,4b7afde6dee5d3096fc2e35e113907fd62abed09,Central Pacific College,NA,NA,NA,0000-0000-0000-00266,266,FALSE
+Dominga Quirarte,NA,ce28214505e7908f4daad9eef88e505b79fd8baa,Southern University and A & M College,NA,NA,NA,0000-0000-0000-00267,267,FALSE
+Frederic Mcghin,NA,97aa4c8ec3183d1368e43d757e530669d227e156,Life Pacific University,NA,NA,NA,0000-0000-0000-00268,268,FALSE
+Janita Balser,NA,2dd78a32645f40fce4f41618a6044ac7f201891b,Remington College,NA,NA,NA,0000-0000-0000-00269,269,FALSE
+Marvel Manderson,NA,607efbaaf20af402f6824ae147fbd156b15edc87,Kentucky Wesleyan College,NA,NA,NA,0000-0000-0000-00270,270,FALSE
+Sierra Lavette,NA,a7ba2843309c14ff56d510fb89f63a46ed4174a6,IBMC College,NA,NA,NA,0000-0000-0000-00271,271,FALSE
+Gino Fewless,NA,9f2d2f82d9e1cbd88eb12edfc1144f6d539b67ce,Notre Dame College,NA,NA,NA,0000-0000-0000-00272,272,FALSE
+Sherlyn Burnsed,NA,3ec4efefc3b9b64478abc3637f2e5b786456672e,Southern States University,NA,NA,NA,0000-0000-0000-00273,273,FALSE
+Tu Portney,NA,d2185275a3b5db46910927a732d1575f3bc6af2c,Centura Institute,NA,NA,NA,0000-0000-0000-00274,274,FALSE
+Johana Noxon,NA,1301d5178472a97afef903fff9d7bfdfdc180604,Mexican American Opportunity Foundation (MAOF),NA,NA,NA,0000-0000-0000-00275,275,FALSE
+Melvin Tienda,NA,ef77f352c53f9a09e90d0ffd7e4598e4a82a7e27,Dominican University of California,NA,NA,NA,0000-0000-0000-00276,276,FALSE
+Aurelio Berkley,NA,82b06c83a19c35948b9be1aa5d986a8d797b2c62,Center of Advanced Therapeutics,NA,NA,NA,0000-0000-0000-00277,277,FALSE
+Roseann Mcelhaney,NA,a78f5e78a8e5f9023fe88b664442f8681348b060,West Virginia Rehabilitation Center,NA,NA,NA,0000-0000-0000-00278,278,FALSE
+Lester Raybourn,NA,1a69aefd9a55ceb280138b4418bcb16dc7c0e579,A New Beginning School of Massage,NA,NA,NA,0000-0000-0000-00279,279,FALSE
+Moon Torigian,NA,461d65df38ea81ea17e66bdc5be7430beaf3a1f1,Christian Life College,NA,NA,NA,0000-0000-0000-00280,280,FALSE
+Kristy Porche,NA,7896518c13c06f7cacb02183ec1e232cb3c27b29,North Central Michigan College,NA,NA,NA,0000-0000-0000-00281,281,FALSE
+Ervin Vasilopoulos,NA,4da36f624d0beccb1e6dfbf6d8b70f01f2ebfc46,"Centro de Capacitacion y Asesoramiento, Vetelba",NA,NA,NA,0000-0000-0000-00282,282,FALSE
+Lynn Pawlowicz,NA,f577d9c85192b7863b9600c940af20e81e44c525,University of Massachusetts - Lowell,NA,NA,NA,0000-0000-0000-00283,283,FALSE
+Dung Rarick,NA,b8c0be48c46cc53d56fc05b26ee2ef30b1a27f64,Guld Coast College - Holiday,NA,NA,NA,0000-0000-0000-00284,284,FALSE
+Will Huesso,NA,1c0b11b86787afcee9894cf4514829f88c5c6fae,University of Maryland - Eastern Shore,NA,NA,NA,0000-0000-0000-00285,285,FALSE
+Chanda Bonnenfant,NA,7bc6518bf4952e8d4fec563fed470377ba0b4270,Albany College of Pharmacy,NA,NA,NA,0000-0000-0000-00286,286,FALSE
+Lavon Yearsley,NA,df43cd043432bc92ac689bf3babfe7246db63ecf,Little Big Horn College,NA,NA,NA,0000-0000-0000-00287,287,FALSE
+Boyce Mcennis,NA,2a78ec1de7b3b9b2c9f430300dbf677a3ef04599,Grinnell College,NA,NA,NA,0000-0000-0000-00288,288,FALSE
+Theo Appenzeller,NA,468e876f9f5a2488159c97e42461672f8f30390a,University of Louisiana at Lafayette,NA,NA,NA,0000-0000-0000-00289,289,FALSE
+Jacquelynn Saguil,NA,d8ffc5f69a57760259869ee268b102bc89e918c0,Christine Valmy International School for Esthetics,NA,NA,NA,0000-0000-0000-00290,290,FALSE
+Tora Lasso,NA,7eb170c216c7d7f3383647abe5c1096baffecd6e,JAMESON MEMORIAL HOSPITAL SCHOOL OF NURSING -SOUTH,NA,NA,NA,0000-0000-0000-00291,291,FALSE
+Shemeka Jeanes,NA,95df78051a49f748a13dfde3472df66e90be6b56,Chuckawalla Valley Adult School,NA,NA,NA,0000-0000-0000-00292,292,FALSE
+Maurine Kaschak,NA,2db62f3b1f976aae084a78490e3255359a7c64e8,Columbia College Chicago,NA,NA,NA,0000-0000-0000-00293,293,FALSE
+Aja Varakuta,NA,bce6d17791060dcfb41b69c231cd42f604c54322,Cortiva Institute - Boston,NA,NA,NA,0000-0000-0000-00294,294,FALSE
+Adina Venturino,NA,d93e03e7a1eff9d5e9c2434b82a28bdb0f628171,University of Jamestown,NA,NA,NA,0000-0000-0000-00295,295,FALSE
+Keri Honaker,NA,02d7ede3d9a6f8554b6665a1fa747e1f6159d6be,University of Maine at Augusta,NA,NA,NA,0000-0000-0000-00296,296,FALSE
+Donnetta Gundelach,NA,ea1e137ea6f793bdc9ce1b86ae4b5e5a6dcdd48d,Northwestern Technological Institute,NA,NA,NA,0000-0000-0000-00297,297,FALSE
+Ebony Speegle,NA,206598e60f7837739b6590e9834cbbf61fa81be6,College of Saint Elizabeth,NA,NA,NA,0000-0000-0000-00298,298,FALSE
+Lecia Mandato,NA,fa68b1c6e95e81cd461aa3fd90495bcf60ddba10,Sierra Conservation Center Adult School,NA,NA,NA,0000-0000-0000-00299,299,FALSE
+Deon Pola,NA,82441b40b1910500e6164aa3cfe1911ec6e6b860,Salve Regina University,NA,NA,NA,0000-0000-0000-00300,300,FALSE
+Carina Windam,NA,ccc40b0d9c18640765541f279623c0dc828ba273,Marymount University,NA,NA,NA,0000-0000-0000-00301,301,FALSE
+Marceline Bibian,NA,e35d5225321ad9699c66d9d6627136434167588e,Grace University,NA,NA,NA,0000-0000-0000-00302,302,FALSE
+Aleisha Lords,NA,db426f12be66c4e1485293540bcb210aa29e8afd,Northland International University,NA,NA,NA,0000-0000-0000-00303,303,FALSE
+Mi Lovaglio,NA,212b6e7409530464ff1fc0820d223b620637ed72,Stewart School,NA,NA,NA,0000-0000-0000-00304,304,FALSE
+Zula Wegiel,NA,1e552742552f6347443fd0d2c8875999b1186268,Franklin College,NA,NA,NA,0000-0000-0000-00305,305,FALSE
+Lawerence Zachry,NA,80f4f57a1605d83810cfe632ca62ec8d4947baa7,Benjamin Franklin Institute of Technology,NA,NA,NA,0000-0000-0000-00306,306,FALSE
+Carlo Lazarus,NA,417c2a36234f36dcfd5b92f4576bdf39e3d5e454,Montana State University - Great Falls College of Technology,NA,NA,NA,0000-0000-0000-00307,307,FALSE
+Katelin Belscher,NA,160c2222d68281f13389cb0d269e8b06fb59033a,National Aviation Academy of New England,NA,NA,NA,0000-0000-0000-00308,308,FALSE
+Bryant Vik,NA,62bb6026d5ad7144205c8797e4ac133b4cd03ebd,Brown Mackie College - Denver,NA,NA,NA,0000-0000-0000-00309,309,FALSE
+Dorathy Issler,NA,399a24ac2e762cf9ab90665931b8e3b938938931,American Institute of Massage,NA,NA,NA,0000-0000-0000-00310,310,FALSE
+Claretta Aldredge,NA,ae62b212e5f06794638a8bfc8ba6849b460b2d78,Ohio Valley University,NA,NA,NA,0000-0000-0000-00311,311,FALSE
+Enoch Frierson,NA,f195d3abf8f6aa0c7e8becb7f910e3c4071800c0,American Winds Aviation,NA,NA,NA,0000-0000-0000-00312,312,FALSE
+Marcia Lorts,NA,78b58d90b14921df9f209026135dfd434ca5d5b4,National Technological University,NA,NA,NA,0000-0000-0000-00313,313,FALSE
+Josef Darakjian,NA,08bdb5a1ca874bcd410f5b84017526bcf2335419,The Creative Center,NA,NA,NA,0000-0000-0000-00314,314,FALSE
+Ione Alderfer,NA,320590a45c153a3c3a75303de90ec1db994162f1,Conception Seminary College,NA,NA,NA,0000-0000-0000-00315,315,FALSE
+Nilda Coppens,NA,0465d199ce089c0c5c77386a33a28115bf401a7d,Ohio State University,NA,NA,NA,0000-0000-0000-00316,316,FALSE
+Kyoko Bendis,NA,2ccab310cae68d88ec55707925ce7c55b05ed40b,Cardean University,NA,NA,NA,0000-0000-0000-00317,317,FALSE
+Karl Found,NA,65d7d3ea6a17553121f67c93ecf17761918ea8a1,Special School District of St. Louis County,NA,NA,NA,0000-0000-0000-00318,318,FALSE
+Deja Vita,NA,cf9b472e1ce0d8ae6a94b29c0f01332bd1e65c2e,Lorenzo Walker Institute of Technolgy,NA,NA,NA,0000-0000-0000-00319,319,FALSE
+Robt Nicolosi,NA,a708e17f068258f7d2c1870d6eb80c310ff6f24a,Gulfport Job Corps Center,NA,NA,NA,0000-0000-0000-00320,320,FALSE
+Jessica Dewar,NA,7646b559e98559f18f7ae9d3024d2b00f663cd3e,Washington and Lee University,NA,NA,NA,0000-0000-0000-00321,321,FALSE
+Manuel Connington,NA,536d99a099d3b207886d6f7141b01840d6984649,Sanford-Brown College Chicago,NA,NA,NA,0000-0000-0000-00322,322,FALSE
+Magdalen Riegler,NA,2c991e66dcad6799bfb1c69468a58381e5c8b8db,Southeastern College at Wake Forest SBS,NA,NA,NA,0000-0000-0000-00323,323,FALSE
+Katherina Walser,NA,2d9ea5d1d6f34d30870703454b5bb6018bacfebf,St. Vincent College of Health Professions,NA,NA,NA,0000-0000-0000-00324,324,FALSE
+Benedict Tercero,NA,b3012ad7e4dbd18dbc2ed1077111208625cdc3be,Brooks College,NA,NA,NA,0000-0000-0000-00325,325,FALSE
+Sachiko Artibee,NA,05135ab674dd038712a31ad42983dcd7f62bac32,Vanguard Institute of Technology,NA,NA,NA,0000-0000-0000-00326,326,FALSE
+Bonita Nydick,NA,11cf9401636a21edeac0fe444fb337e81cc3ece5,Sheldon Jackson College,NA,NA,NA,0000-0000-0000-00327,327,FALSE
+Chae Matusiak,NA,2a6b66bd379fada1fe74324704423253a72ab59c,Gibbs College - Norwalk,NA,NA,NA,0000-0000-0000-00328,328,FALSE
+Nichole Salafia,NA,0165dbe3fe57e340237171946f104a66015772a8,Vatterott College - Kansas City,NA,NA,NA,0000-0000-0000-00329,329,FALSE
+Beata Crummell,NA,f7eecce084773719c1d2b4765ee6e1c5e3770681,PR Technological Institute San Juan Campus,NA,NA,NA,0000-0000-0000-00330,330,TRUE
+Gisela Meals,NA,98add00c702bbdb4f15b0871959824e91d2e4fb1,Yeshiva Shaarei Torah of Rockland,NA,NA,NA,0000-0000-0000-00331,331,FALSE
+Latia Finstad,NA,10a64aafc7bb6ca5868b5937f2242a9f4fe26606,Brown College Brooklyn Center Campus,NA,NA,NA,0000-0000-0000-00332,332,FALSE
+Claire Casgrove,NA,ee3a27664694188661a714d996e8cfb3fa1debd2,Massachusetts International Academy,NA,NA,NA,0000-0000-0000-00333,333,FALSE
+Lanie Ziek,NA,c2e4471adc46c86c9e039d7c92ac4810d8b46d6a,Howard College,NA,NA,NA,0000-0000-0000-00334,334,FALSE
+Ed Rapson,NA,07a3d75dd5f922a023d847a4b6a928014c4a6f0c,Atlanta Ballet Centre for Dance Education,NA,NA,NA,0000-0000-0000-00335,335,FALSE
+Margert Mceathron,NA,02cb6455a35fcc190cb88f43cd4b9ce98a86df68,ABC Adult School,NA,NA,NA,0000-0000-0000-00336,336,FALSE
+Marcy Ahaus,NA,6f5cbd9a1998712943658f09be4e7ae47112f58f,Visions Adult School - California State Prison,NA,NA,NA,0000-0000-0000-00337,337,FALSE
+Maynard Vigneau,NA,e109653ce077d9d12ecfb7bd6c5529c380b4ff9d,Westminister Choir College of Rider University,NA,NA,NA,0000-0000-0000-00338,338,FALSE
+Reina Dedek,NA,fc7694a243f74daa186c6cfab6e1bbeafe687551,Tufts University School of Medicine,NA,NA,NA,0000-0000-0000-00339,339,FALSE
+Vernon Tarricone,NA,032bcfe88e765481ac6d53707fb32231cd57dbc6,Bryn Mawr College,NA,NA,NA,0000-0000-0000-00340,340,FALSE
+Ashleigh Suk,NA,48d8cdd8d9064e6598b9cb47b5c1cca28899b60f,Dordt University,NA,NA,NA,0000-0000-0000-00341,341,FALSE
+Mona Caldoron,NA,7c94684cbb3726c926d656f9569281d14fe47ee1,L'Academie de Cuisine,NA,NA,NA,0000-0000-0000-00342,342,FALSE
+Karin Huppenbauer,NA,cdbfb48c5b49e4f64be72ba2832794d40297c110,Kalamazoo College,NA,NA,NA,0000-0000-0000-00343,343,FALSE
+Brigid Basurto,NA,d887c8f0a5795cecbb370fa61341fd41a1248d5a,Southeastern University,NA,NA,NA,0000-0000-0000-00344,344,FALSE
+Anita Klapp,NA,5eb71ed0457f4b6ba71a93dde9f92be0356ec483,Arkansas State University Mid-South,NA,NA,NA,0000-0000-0000-00345,345,FALSE
+Veta Pring,NA,a989a5c399c6eb3fe218d8f8f09fb14565bd7b62,Barclay College,NA,NA,NA,0000-0000-0000-00346,346,FALSE
+Kaleigh Zemjanis,NA,6b2c047bb02a90f809081b40826cd61f0d1a7492,Universidad Ana G. Mendez ? Carolina Campus,NA,NA,NA,0000-0000-0000-00347,347,FALSE
+Erick Kea,NA,59d55731f1eb3eddf8248703b55a2d7583836ffa,Georgia Southern University,NA,NA,NA,0000-0000-0000-00348,348,FALSE
+Bradley Tremel,NA,3ef0b5880d533098c54a5c2dc2255202a3f5ace2,Florida International University,NA,NA,NA,0000-0000-0000-00349,349,FALSE
+Onie Whiton,NA,a165fddfcf961e5ab62a6dba5b69a639353fefe7,D'Youville College,NA,NA,NA,0000-0000-0000-00350,350,FALSE
+Marna Calkin,NA,a1dba8854e6e91f2cbf00bb048f94be24d01aa01,North Central Missouri College,NA,NA,NA,0000-0000-0000-00351,351,FALSE
+Lakita Laninga,NA,da97bf01280d537b1d465216af0b415fd14bd995,Milan Institute - Palm Desert,NA,NA,NA,0000-0000-0000-00352,352,FALSE
+Abby Arakawa,NA,ff53eb02442b20ecba6a55345255b90004d0dbf4,Towson University,NA,NA,NA,0000-0000-0000-00353,353,FALSE
+Lenard Langner,NA,fd1f02a686c8664497e99f36ad0243dc83137f3a,Salem State University,NA,NA,NA,0000-0000-0000-00354,354,FALSE
+Ileen Mesa,NA,227a78417387f35b05da1ef087ab2e71f6f24593,Derech Ayson Rabbinical Seminary,NA,NA,NA,0000-0000-0000-00355,355,FALSE
+Latoyia Primrose,NA,bf7a3460ceedb98012fd97502a3a56a73c0cd374,IntelliTec College - Colorado Springs,NA,NA,NA,0000-0000-0000-00356,356,FALSE
+Darcie Badie,NA,74ac736d1497dae3a03ad2e464e05e8afa27d3d7,Langston University,NA,NA,NA,0000-0000-0000-00357,357,FALSE
+Ellena Rutske,NA,5145cc06260c2c563380f1396440e3b4ffa621d2,Michigan State University,NA,NA,NA,0000-0000-0000-00358,358,FALSE
+Nelia Kenderdine,NA,c21bfff2a5b2181f5960b5141190a41f615687be,Iliff School of Theology,NA,NA,NA,0000-0000-0000-00359,359,FALSE
+Minna Steve,NA,c428c75eed23cf5372c2d86ac1a3c9b37235eb0f,Alfred State College,NA,NA,NA,0000-0000-0000-00360,360,FALSE
+Lyndon Cardamone,NA,84b4f0c13a380092050b3f65e4a4184654944a5b,Emerson College,NA,NA,NA,0000-0000-0000-00361,361,FALSE
+Denisse Molano,NA,922ef207b83db16d1d5aabd91f64e23ba005cafe,Livingstone College,NA,NA,NA,0000-0000-0000-00362,362,FALSE
+Lenita Brockmeier,NA,c05b753a293957a05a0fc14a2dab81b3850891f3,Los Angeles County ROP,NA,NA,NA,0000-0000-0000-00363,363,FALSE
+Bernardo Gunzelman,NA,6b1c93125ef8f8a6fd9e57c3d91457ff89a3fa23,Harrison College - Indianapolis,NA,NA,NA,0000-0000-0000-00364,364,FALSE
+Elda Kodani,NA,c21e76894d97f4b5e4a902ac1d5e7746199c4053,Uceda International- Falls Church,NA,NA,NA,0000-0000-0000-00365,365,FALSE
+Catharine Schanck,NA,b4b332294d34a24a27cd5e40486dd0d7e15795eb,Pinchot University,NA,NA,NA,0000-0000-0000-00366,366,FALSE
+Ilse Rewakowski,NA,67e2d93056831274d76a6f3b951cb47018848ec9,Nueta Hidatsa Sahnish College,NA,NA,NA,0000-0000-0000-00367,367,FALSE
+Keira Ozier,NA,6092faad44a953116c179d3da4ca08d169ddd35e,Academy College,NA,NA,NA,0000-0000-0000-00368,368,FALSE
+Dulcie Folken,NA,a9dcb2f325ba31835e5daad4d0228c78b52a0f1d,DAVENPORT UNIVERSITY-EASTERN AVENUE CAREER CENTER,NA,NA,NA,0000-0000-0000-00369,369,FALSE
+Elliot Leaverton,NA,34eb57fe2cf841869b9041a7bd13d0ad3607f16e,Emerging Technologies Institute,NA,NA,NA,0000-0000-0000-00370,370,FALSE
+Junko Grover,NA,5b2dec3685e64cc3f69cd025f01df26da122c328,Bethel University,NA,NA,NA,0000-0000-0000-00371,371,FALSE
+Marcelo Chasey,NA,2c274818097d3c1aa3b48db686aa6709bb51974f,ACE Institute of Technology,NA,NA,NA,0000-0000-0000-00372,372,FALSE
+Krystal Leinonen,NA,b35a724e1e71484d7eaf05746baf94ef4d495ad3,The New England Conservatory of Music,NA,NA,NA,0000-0000-0000-00373,373,FALSE
+Brianna Haan,NA,485df77fe0105d3a465b16e50593cfad842a96fa,William James College,NA,NA,NA,0000-0000-0000-00374,374,FALSE
+Shella Kur,NA,ab76da49b7d9f01be6c5331b3b3f26ec42e5f048,Hunter College - CUNY,NA,NA,NA,0000-0000-0000-00375,375,FALSE
+Kathryne Wenrich,NA,3a1eb3f2d705ad16d0da06376e4f49496118e1c9,Santa Clara University,NA,NA,NA,0000-0000-0000-00376,376,FALSE
+Madelaine Harres,NA,c3072594dc00d6d90a0e71aeb35d2761ce11e3a2,Connors State College,NA,NA,NA,0000-0000-0000-00377,377,FALSE
+Eloise Gloshen,NA,408f8eff84fd3524131392e3d2a488f6046a0407,TESST College of Technology - Alexandria,NA,NA,NA,0000-0000-0000-00378,378,FALSE
+Doloris Boyens,NA,f760ff27ea909bb10a1a29c665f4e79945dc66d1,Richard Bland College,NA,NA,NA,0000-0000-0000-00379,379,FALSE
+Elane Lindstedt,NA,2a4bf7124b4329a08be57d1c8d86e286addddc0b,University of Pittsburgh - Johnstown,NA,NA,NA,0000-0000-0000-00380,380,FALSE
+Tisa Kranwinkle,NA,279221c76c21d3df6e96ff264aa14306642c6deb,Blue Cliff College - Shreveport,NA,NA,NA,0000-0000-0000-00381,381,FALSE
+Deandre Febo,NA,50c6191a8a8cd88a2be7491d3dd4f5fd04e9881c,IBO Technology Course,NA,NA,NA,0000-0000-0000-00382,382,FALSE
+Zackary Freeby,NA,09b96fa583716c9ae9267df0f504b6aa11e135a9,Baylor University,NA,NA,NA,0000-0000-0000-00383,383,FALSE
+Penelope Connery,NA,962ec215e57bcd280c85e859ce1c86dca4ac9cf3,California State University - Fullerton,NA,NA,NA,0000-0000-0000-00384,384,FALSE
+Karrie Trotto,NA,6b02a1ae376af0974a79d7c999085f38d9b04cb9,Ithaca College,NA,NA,NA,0000-0000-0000-00385,385,FALSE
+Tristan Barrio,NA,ebec7734d98b196788cb66d41fb965398a39918a,Remington College - Lafayette Campus,NA,NA,NA,0000-0000-0000-00386,386,FALSE
+Kenia Sagan,NA,0f43994db3eba50a586f72019d21ac4f8a5e0d99,"Health and Style Institute, LLC",NA,NA,NA,0000-0000-0000-00387,387,FALSE
+Desire Kurkeyerian,NA,0f6e33c5c51c2ea099964d18813bfdaa01d9d8b8,"Mid-East CTC, Adult Education",NA,NA,NA,0000-0000-0000-00388,388,FALSE
+Luba Dagnese,NA,0e367b7401d1566b2471cf8ead7ac3c820927241,Fairmont State University,NA,NA,NA,0000-0000-0000-00389,389,FALSE
+Sherron Ysaguirre,NA,6514bf75576d069f13e0ecbc3d982c81399078e9,Jacksonville State University,NA,NA,NA,0000-0000-0000-00390,390,FALSE
+Tennie Wubnig,NA,97090ba069cf2b36224c69dfd5dadbc58ddd7b5d,The Village School for Children,NA,NA,NA,0000-0000-0000-00391,391,FALSE
+Julieann Smeal,NA,ca01783e63bbe915b3e9eb8adea2eedd3692927b,Kenyon College,NA,NA,NA,0000-0000-0000-00392,392,FALSE
+Delfina Stieglitz,NA,f9597389932d21886107866edfd4009d43df2832,CNI College,NA,NA,NA,0000-0000-0000-00393,393,FALSE
+Marx Aninion,NA,fe8551a9c954ee026f1aa872064db62a29fee468,Texas State University,NA,NA,NA,0000-0000-0000-00394,394,FALSE
+Roxy Wishum,NA,4f6f693d74d1f6ddc0ac2bd28103058c8a32b211,Advance Welding Institute,NA,NA,NA,0000-0000-0000-00395,395,FALSE
+Zenobia Fant,NA,84a67de9bc0e162750ae29e172dc2e817bea0ccb,Western Illinois University,NA,NA,NA,0000-0000-0000-00396,396,TRUE
+Yuette Cilley,NA,f2431a5f6a2ff6674c3460e2cc0efbcbf436f6a4,Chicago State University,NA,NA,NA,0000-0000-0000-00397,397,FALSE
+Violeta Fust,NA,eb25811bbfe356cac6587ac100c4c580c14fd299,Azure College,NA,NA,NA,0000-0000-0000-00398,398,FALSE
+Christene Bauce,NA,4aec197e46058bf3da06a5c26a1ccac68ebdd0f8,The Institute for Chaplaincy and Clinical Pastoral Education at Care and Counseling Center of Georgia,NA,NA,NA,0000-0000-0000-00399,399,FALSE
+Nina Lavorini,NA,60ffed4d4cbdc7eae98c99971df25e99aba4096b,University of the District of Columbia,NA,NA,NA,0000-0000-0000-00400,400,FALSE
+Chassidy Largena,NA,63e81cbfbc1f1d6635dbf677937a7ac3d19584aa,Southwest Acupuncture College - Santa Fe,NA,NA,NA,0000-0000-0000-00401,401,FALSE
+Katharina Vanandel,NA,52bd8ffcee671d17325474e4ed708d16854dccd8,Alma College,NA,NA,NA,0000-0000-0000-00402,402,FALSE
+Cleora Girling,NA,fea65e0c35d3811a69a61e89661166aed9445aec,University of Utah,NA,NA,NA,0000-0000-0000-00403,403,FALSE
+Shawanda Kozera,NA,eaa2eb0783e9d7a92e9b59487e0afca2a3519c6b,Omnitech Institute,NA,NA,NA,0000-0000-0000-00404,404,FALSE
+Margie Jaussi,NA,21217899097ad1fa9e0be448d2e6de6c47f1d29b,Inland Valley Education Center - Calif. Institution for Men,NA,NA,NA,0000-0000-0000-00405,405,FALSE
+Devin Kubley,NA,198ad29c9f00544443cbe320245445fbb118e1a0,Blue Cliff College - Fayetteville,NA,NA,NA,0000-0000-0000-00406,406,FALSE
+Verena Clasen,NA,f12d630f03f247acfee4e7ca7a385f103034991a,University of Michigan Dearborn,NA,NA,NA,0000-0000-0000-00407,407,FALSE
+Petra Mckiney,NA,c6310d49c7ba3f6bc2db920b801acffa35660d0b,Denison University,NA,NA,NA,0000-0000-0000-00408,408,FALSE
+Tisha Sao,NA,e3d70baa2992754e2c4b614a16b034b84da6048e,Spa Tech Institute,NA,NA,NA,0000-0000-0000-00409,409,FALSE
+Ermelinda Walquist,NA,bd0d80783c86e8092d1dfcf5e3b58381ac9cf691,Everest Institute - Pittsburgh,NA,NA,NA,0000-0000-0000-00410,410,TRUE
+Andree Banach,NA,47837d1da3f8ffac3f48460c5e9888126e0669b0,Robert Morris University,NA,NA,NA,0000-0000-0000-00411,411,FALSE
+Emory Boahn,NA,535d39acac77b68c8ab612e845d2257d525045aa,Webber International University,NA,NA,NA,0000-0000-0000-00412,412,FALSE
+Toccara Baney,NA,ec3f89b6866a8d9f45ecddb22e585c0c82c529b0,Bowie State University,NA,NA,NA,0000-0000-0000-00413,413,FALSE
+Leonardo Arnall,NA,88cc980da4079a81279597009e60888ebdf7438a,Lebanon College,NA,NA,NA,0000-0000-0000-00414,414,FALSE
+Ali Macculloch,NA,3b15ee53d98d3e9532c71e90fb98c38756400f32,Lone Star College System,NA,NA,NA,0000-0000-0000-00415,415,FALSE
+Clarissa Hegel,NA,4de8d2021c3a522975231ca9e056e4d2310ca49f,Jackson State University,NA,NA,NA,0000-0000-0000-00416,416,FALSE
+Keiko Shadwell,NA,7508bb19eca3ee0a1a53e0bd1c4c6894350cd55d,City Colleges of Chicago-Malcolm X College,NA,NA,NA,0000-0000-0000-00417,417,FALSE
+Kasi Kotler,NA,40ec27451bd089d967bba407048ff27e447011a4,Saint Augustine College,NA,NA,NA,0000-0000-0000-00418,418,FALSE
+Tia Renno,NA,401e54451ca39c1c42065ff6f45471cce21f94df,The Baptist College of Florida,NA,NA,NA,0000-0000-0000-00419,419,TRUE
+Azucena Mcdeavitt,NA,4946eb129e18d05561906ac307685c591fb050d7,Heritage College - Denver,NA,NA,NA,0000-0000-0000-00420,420,FALSE
+Keenan Hochstedler,NA,baf4d0221c90cd56008b3bd4e2ba47d658dc69b3,Mendocino College,NA,NA,NA,0000-0000-0000-00421,421,FALSE
+Olivia Schouweiler,NA,c515f0a8e76086e85f6dc83ef6a51125e9e61f44,College America - Cheyenne,NA,NA,NA,0000-0000-0000-00422,422,FALSE
+Bobbi Farrelly,NA,1244d86623747675cbb349dbe855fdc11148a217,Canisius College,NA,NA,NA,0000-0000-0000-00423,423,FALSE
+Myriam Edminster,NA,788c01dc02b520e826ebc1d404c36beea1a42fae,CollegeAmerica - Colorado Springs,NA,NA,NA,0000-0000-0000-00424,424,FALSE
+Judy Renning,NA,5f1a15b67b80e3bac2bad90eca190d72b55e783d,Montgomery College,NA,NA,NA,0000-0000-0000-00425,425,FALSE
+Anton Cao,NA,5b9dd3873749e38ffce7b2da847a7021d5966239,Appalachian State University,NA,NA,NA,0000-0000-0000-00426,426,FALSE
+Vance Prudden,NA,39ce2352e178a6c062a28ed51c87b15cab0342aa,St. Luke's College,NA,NA,NA,0000-0000-0000-00427,427,FALSE
+Amy Kleinfeld,NA,991b7466fd3071248255b57369a5dae4117fea45,International Preparatory School,NA,NA,NA,0000-0000-0000-00428,428,FALSE
+Marsha Versage,NA,ac7b2ab803b4517961dfb52e6f6310317b997d83,Harris-Stowe State University,NA,NA,NA,0000-0000-0000-00429,429,FALSE
+Shannan Cabell,NA,0bb6e14c0cfb778c819033fb967c56b2ee6912fc,A & W Health Care Educators,NA,NA,NA,0000-0000-0000-00430,430,FALSE
+Maribeth Barryman,NA,5654fd7cd90d34cc212718f406dd111102ccd0f9,Pontifical Catholic University of Puerto Rico,NA,NA,NA,0000-0000-0000-00431,431,FALSE
+Leia Hay,NA,a8453a173f477cda742ae8d0ea061a476b8677f1,Arkansas State University Three Rivers,NA,NA,NA,0000-0000-0000-00432,432,FALSE
+Loree Herber,NA,34fae0fde0d3df61bec90b5adf3723e90daf54df,Blanton-Peale Institute,NA,NA,NA,0000-0000-0000-00433,433,FALSE
+Nancey Ruger,NA,5a97bbf9bcd4dd1e56055c0445a9dccf1ec5c7f4,Sanford-Brown Institute - Springfield,NA,NA,NA,0000-0000-0000-00434,434,FALSE
+Clayton Waud,NA,129cc7a182ad23ae37e5a09b55b57325fba3fb01,International College of Broadcasting,NA,NA,NA,0000-0000-0000-00435,435,FALSE
+Corrina Mientka,NA,15d1095b8b4871ace67abf57a71f113c62ab4626,Georgia College and State University,NA,NA,NA,0000-0000-0000-00436,436,FALSE
+Valerie Bevels,NA,3a648b6c91fb5058d7bfe41f670fdf106f9eb2db,Talmudical Seminary Oholei Torah,NA,NA,NA,0000-0000-0000-00437,437,FALSE
+Dion Highbaugh,NA,24f96d4f670406569668a8d720819e3307860b5e,National Defense University,NA,NA,NA,0000-0000-0000-00438,438,FALSE
+Francine Zarco,NA,fd1d6909008bc25f91b9bf919a859a82a421535f,Jones College - Miami,NA,NA,NA,0000-0000-0000-00439,439,FALSE
+Lakendra Pickrell,NA,89fe4e1ed347c723ed994e3a312d0b9e73114cd7,Pace Institute,NA,NA,NA,0000-0000-0000-00440,440,FALSE
+Shayla Futral,NA,e30e651dca5432ef267ce64341beb743d204f2b8,Clovis Adult Education,NA,NA,NA,0000-0000-0000-00441,441,FALSE
+Consuelo Kluttz,NA,d9f09b2d39d74c2b1b92ba1b3a5548f46828919a,San Diego College,NA,NA,NA,0000-0000-0000-00442,442,FALSE
+Britni Manylath,NA,fa8e31ca74e6647a762424f139cf35b9357df81e,Missouri Valley College,NA,NA,NA,0000-0000-0000-00443,443,FALSE
+Nella Bogden,NA,e2e74f95651081fa1171c33090568dbfa8b37ad3,SUNY College of Agriculture & Technology at Morrisville,NA,NA,NA,0000-0000-0000-00444,444,FALSE
+Letha Jou,NA,2273c159af5ec58fd1820dfe87d28e95c3704417,Brookline College - Phoenix,NA,NA,NA,0000-0000-0000-00445,445,FALSE
+Lenore Pian,NA,7b3eb2126787a89e31054da86db5569aeafce5fc,MCPHS University,NA,NA,NA,0000-0000-0000-00446,446,FALSE
+Keesha Mohair,NA,288b2aaf9fb7f717cec80f0f8a30cc2e5161501f,Kiamichi Technology Center - Durant,NA,NA,NA,0000-0000-0000-00447,447,FALSE
+Jamey Hovantzi,NA,54f52a5c9481bbfcae56cafe8753524c4156db63,United States University,NA,NA,NA,0000-0000-0000-00448,448,FALSE
+Audrie Yuill,NA,fcd44051e27457122b13a6231c18f0476f0bef2b,Tap This Valley Works CET,NA,NA,NA,0000-0000-0000-00449,449,FALSE
+Berniece Waller,NA,ff9a153a182054c56beeaffd8b8f7599db3ea032,Youth Consultation Services Institute,NA,NA,NA,0000-0000-0000-00450,450,FALSE
+Gala Lembo,NA,1e87a5ff4172a94c49e3ef8c4b9e597063c4391c,Anamarc College - Santa Teresa,NA,NA,NA,0000-0000-0000-00451,451,FALSE
+Judie Homerding,NA,a5406b7c79ad861a48ce568a13dcf94becf1200d,INTERLINK International Institute at Montana State University,NA,NA,NA,0000-0000-0000-00452,452,FALSE
+Margot Gussin,NA,f3208630a65101dd02e46f3a5b768937366001cb,Thomas University,NA,NA,NA,0000-0000-0000-00453,453,FALSE
+Latoria Figueira,NA,ebbdc823d69895e0f71783a8d0d07be92723d86a,Christendom College,NA,NA,NA,0000-0000-0000-00454,454,FALSE
+Deidra Ghere,NA,450efef6a0a419e7f3b0dff621db942fccfd69cb,Calvary Chapel University,NA,NA,NA,0000-0000-0000-00455,455,FALSE
+Bernadette Sulouff,NA,0ac6687d8b3fb2d8d6438e361bc460e3d9a85950,Acacia University,NA,NA,NA,0000-0000-0000-00456,456,FALSE
+Normand Greninger,NA,ef6e4225e7cd992ac6e7b86fb08f2f1ffcadce9c,Brightwood College - Riverside,NA,NA,NA,0000-0000-0000-00457,457,FALSE
+Amos Fye,NA,5092137a9570f23b5599110f9336e04924c613eb,Tougaloo College,NA,NA,NA,0000-0000-0000-00458,458,FALSE
+Cristin Colvert,NA,d6d6727cb5f6b14868948c7d8a79cf06b0d648c2,Seattle Pacific Seminary,NA,NA,NA,0000-0000-0000-00459,459,FALSE
+Susanne Burwood,NA,8eb7e28ff5fdcddf17cc0e6032014c7315351601,Purdue University Fort Wayne,NA,NA,NA,0000-0000-0000-00460,460,FALSE
+Cammie Chalifoux,NA,fdecaf2348a213646f401e3c4b7003e8a3f12ef4,Brookline College - Oklahoma City,NA,NA,NA,0000-0000-0000-00461,461,FALSE
+Jesusa Blyzes,NA,f5feb0d273fd7701147b48dc9411183af1c41278,Marion Military Institute,NA,NA,NA,0000-0000-0000-00462,462,FALSE
+Cythia Bravard,NA,913adf66fa1b5dc11bec0a876b4fc99cf5425704,Sofia University,NA,NA,NA,0000-0000-0000-00463,463,FALSE
+Dierdre Kenefick,NA,25319850ff9cf5f445461eef0b8842566dc8dc7a,Finger Lakes School of Massage,NA,NA,NA,0000-0000-0000-00464,464,FALSE
+Lizbeth Bisard,NA,663fc7d02cda8c8afad5d684b14df5c12680450e,Maric College - Lake Forest,NA,NA,NA,0000-0000-0000-00465,465,FALSE
+Jacinta Loudermilk,NA,2589ab84f78e46303e7e565c171f6d631185af49,Salinas Adult School,NA,NA,NA,0000-0000-0000-00466,466,FALSE
+Armida Aluise,NA,4d6cd49f45c735f254fb98892a7b9dde421d1ea3,TechSkills - Brookfield,NA,NA,NA,0000-0000-0000-00467,467,FALSE
+Alvera Horal,NA,0a571b8670f9da011f65fee1bc384bf864d18930,Hamrick School,NA,NA,NA,0000-0000-0000-00468,468,FALSE
+Alena Shovlin,NA,c3eeb8e1292b5d2aad3362200bef7c267d087998,Central Yeshiva Beth Joseph,NA,NA,NA,0000-0000-0000-00469,469,FALSE
+Penney Thro,NA,71583846a0fd79bf45a04b4370c908ee0d4b3a6a,Sierra States University,NA,NA,NA,0000-0000-0000-00470,470,FALSE
+Evelin Ziems,NA,45a198e31c580144fbfef11a336a793bcaadf27b,Victory University,NA,NA,NA,0000-0000-0000-00471,471,TRUE
+Laine Delgardo,NA,797806ac34eb5402eabb16db967e71f47709078a,Phoenix Seminary,NA,NA,NA,0000-0000-0000-00472,472,FALSE
+Pierre Connelly,NA,9ad0939fdcf97c00e922ae1cfafc55c909a692db,Marshall University School of Pharmacy,NA,NA,NA,0000-0000-0000-00473,473,FALSE
+Wesley Etzkorn,NA,eeb7bc6fe7459976762cebb342f299af78143ad9,Emporia State University,NA,NA,NA,0000-0000-0000-00474,474,FALSE
+Evie Dersch,NA,91ad0d30cc71f4e8ca6e5d148bacd3e6e07820ed,Everest Institute - Marietta Campus,NA,NA,NA,0000-0000-0000-00475,475,FALSE
+Telma Notarnicola,NA,36921e5410be9444f0bf357a4b4f898cc6ca353b,Swedish Institute,NA,NA,NA,0000-0000-0000-00476,476,FALSE
+Edna Zinno,NA,afff7c0d94e80a270575e2ba5b8baf81f134a331,The National Massage Therapy Institute Division of PSB,NA,NA,NA,0000-0000-0000-00477,477,FALSE
+Rudy Camera,NA,7fdb8632a1fbc1596fb3d8d97c25f806b381dfce,Ivy Tech State College - Valparaiso,NA,NA,NA,0000-0000-0000-00478,478,FALSE
+Georgia Riskin,NA,e7ece3e5b4c6f0610001b7892483f791fbc622c0,William Penn University,NA,NA,NA,0000-0000-0000-00479,479,FALSE
+Arvilla Bettini,NA,769da44dc0fa82e5c89386eef84150f779f8ab62,William Edge Institute,NA,NA,NA,0000-0000-0000-00480,480,FALSE
+Zachary Spranger,NA,b82e0c9a3211bb920ed53ac4c2dd6a4717c2f5aa,Georgian Court University,NA,NA,NA,0000-0000-0000-00481,481,FALSE
+Leonor Prety,NA,54461b48d89671c9adbeb599fcc3fa0bf895fb0b,Darkei Noam Rabbinical College,NA,NA,NA,0000-0000-0000-00482,482,FALSE
+Sara Serrin,NA,9cf445e3ae4510f87ea097340205b29d9aa1366f,University of North Florida,NA,NA,NA,0000-0000-0000-00483,483,FALSE
+Martine Golk,NA,d5dc89fdf701056e6a012dfdfc3364f9ef843d94,Somerset County Technology Institute,NA,NA,NA,0000-0000-0000-00484,484,FALSE
+Isabella New,NA,039821e6a9cfd023f357fadd05256452bd1c2328,Missouri Southern State University,NA,NA,NA,0000-0000-0000-00485,485,FALSE
+Adele Frasch,NA,cca48476016da3881564ddc1a3a6cbed8fcdb1cc,Southwest Minnesota State University,NA,NA,NA,0000-0000-0000-00486,486,FALSE
+Rosemary Walthour,NA,022413c99e9f0c6cf863ad71db2b3b0203ffff68,John Jay College of Criminal Justice of the City University of New York,NA,NA,NA,0000-0000-0000-00487,487,FALSE
+Jaymie Mcqueeny,NA,0e010994c357dd85401711083b65190f276a63bb,First Institute,NA,NA,NA,0000-0000-0000-00488,488,FALSE
+Kathey Hipsher,NA,7964b09f677dd3d11dc44537dc19a5633ec85f57,Burnett International College,NA,NA,NA,0000-0000-0000-00489,489,FALSE
+Ai Furbush,NA,f3863da0f465fa927187edba02d1dcca36bbe227,Shepherds College,NA,NA,NA,0000-0000-0000-00490,490,FALSE
+Marry Stier,NA,7b44198de0cdaa7d98c44a9a78b9fb76e2df16b4,Reed College,NA,NA,NA,0000-0000-0000-00491,491,FALSE
+Tenesha Hassig,NA,6737736fbd543bf1e1dc57d17505bbde7b8c4997,Sage School of Massage and Esthetics,NA,NA,NA,0000-0000-0000-00492,492,FALSE
+Veronique Sahsman,NA,f2b9c3a1b88708f8f9696d0e9567b2408532af41,Virginia College School of Construction,NA,NA,NA,0000-0000-0000-00493,493,FALSE
+Rafael Sanfiorenzo,NA,ef2e8ae8c392c91ac8627c634a3e34f23c7ae64b,Baker University,NA,NA,NA,0000-0000-0000-00494,494,FALSE
+Lawana Zweig,NA,1eda49036bada8241526fe5c4280643d53fc9737,University of Nevada - Las Vegas,NA,NA,NA,0000-0000-0000-00495,495,FALSE
+Carita Dambrosio,NA,71f072e0e837be899a6040c491abf1b5e002d87b,Wayne-Finger Lakes BOCES,NA,NA,NA,0000-0000-0000-00496,496,FALSE
+Cherie Jobson,NA,607a80c0aebe744db1521a4e840540a75b8e0713,Philadelphia Child and Family Trng,NA,NA,NA,0000-0000-0000-00497,497,FALSE
+Flor Mcdaries,NA,a4dfa6d7bbba06d1f406e9c6e367998239343f48,Charlotte School of Law,NA,NA,NA,0000-0000-0000-00498,498,FALSE
+Alexis Graleski,NA,0a9cbca6da294cf39845b514ca6240f6eaf56f39,Yuin University,NA,NA,NA,0000-0000-0000-00499,499,FALSE
+Napoleon Denger,NA,95bd0a39feefc8c8cf74cc0744d207879ddd5812,Institute of Taoist Education & Acupuncture,NA,NA,NA,0000-0000-0000-00500,500,FALSE
