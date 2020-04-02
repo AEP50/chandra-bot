@@ -435,7 +435,7 @@ output_humans_df <- humans_df %>%
          previous_affiliation = as.character(NA),
          last_degree_affiliation = as.character(NA),
          orcid_url = as.character(NA),
-         orcid) %>%
+         orcid,) %>%
   select(name, 
          aliases, 
          hash_id = hash, 

@@ -70,11 +70,9 @@ append_normalized_scores <- function(input_review_df, min_review_threshold) {
 ```{r method-02-co-authors}
 append_former_coauthor_count <- function(input_paper_df, input_review_df, input_human_df) {
   
-  input_paper_df <- paper_df
-  input_review_df <- review_df
-  input_human_df <- human_df
-  
-  input_paper_df <- filter(input_paper_df, paper_id == "2018/148")
+  # input_paper_df <- paper_df
+  # input_review_df <- review_df
+  # input_human_df <- human_df
   
   authors_df <- select(input_paper_df, paper_id, author_ids, year) %>%
     separate(., author_ids, 
@@ -155,10 +153,18 @@ count_dreyer_words <- function(input_text_vector){
 ```{r method-04-verified}
 append_verified_reviewer <- function(input_human_df, input_review_df) {
   
-  return_df <- input_review_df %>%
+  working_df <- input_review_df %>%
     left_join(., 
               select(input_human_df, reviewer_human_hash_id = hash_id, reviewer_verified = verified), 
               by = c("reviewer_human_hash_id"))
+  
+  mean_verified_df <- working_df %>%
+    filter(reviewer_verified) %>%
+    group_by(paper_id) %>%
+    summarise(mean_verified_score_dist_mean = mean(score_dist_mean)) %>%
+    ungroup()
+  
+  return_df <- left_join(working_df, mean_verified_df, by = c("paper_id"))
   
   return(return_df)
 }
@@ -179,7 +185,7 @@ output_review_df <- review_df %>%
   append_former_coauthor_count(paper_df, ., human_df) %>%
   append_verified_reviewer(human_df, .) %>%
   bind_cols(., tibble(comment_dreyer_count = count_dreyer_words(review_df$commentary_to_author))) %>%
-  left_join(., committee_recs_df, by = c("paper_id"))
+  left_join(., committee_recs_df, by = c("paper_id")) 
  
 ```
 
