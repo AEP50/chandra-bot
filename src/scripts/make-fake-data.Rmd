@@ -38,9 +38,9 @@ sentence_file_name <- paste0(interim_dir, "english-sentences.RDS")
 # see make-affiliations-db
 university_file_name <- paste0(interim_dir, "affiliations.RDS")
 
-output_paper_file_name <- paste0(processed_dir, "fake_paper_series.csv")
-output_review_file_name <- paste0(processed_dir, "fake_review_series.csv")
-output_human_file_name <- paste0(processed_dir, "fake_human.csv")
+output_paper_file_name <- paste0(processed_dir, "fake_paper_series")
+output_review_file_name <- paste0(processed_dir, "fake_review_series")
+output_human_file_name <- paste0(processed_dir, "fake_human")
 
 ```
 
@@ -58,6 +58,7 @@ MAX_ABSTRACT_LENGTH <- 20L
 ACCEPT_WORD <- "Accept" 
 REJECT_WORD <- "Reject"
 SEPARATOR <- "/"
+VERIFIED_REVIEWERS <- 10
 ```
 
 # Data Reads
@@ -103,7 +104,7 @@ create_universe_of_humans <- function(input_first_df, input_last_df, input_unive
   last_degree_df <- select_first_n_random(input_university_df, input_size) %>%
     rename(last_degree_affiliation = affiliation)
     
-  return_df <- bind_cols(first_df, last_df, university_df, last_degree_df) %>%
+  working_df <- bind_cols(first_df, last_df, university_df, last_degree_df) %>%
     mutate(author_id = row_number()) %>%
     mutate(orcid = sprintf("0000-0000-0000-00%02d", author_id)) %>%
     rowwise() %>%
@@ -113,6 +114,12 @@ create_universe_of_humans <- function(input_first_df, input_last_df, input_unive
               tibble(mean_score = rnorm(nrow(.), mean = 3.0,  sd = 0.75))) %>%
     bind_cols(., tibble(sd_score = runif(nrow(.), min = 0.5, max = 2.0)))
   
+  return_df <- select_first_n_random(select(working_df, author_id), VERIFIED_REVIEWERS) %>%
+    mutate(verified = TRUE) %>%
+    left_join(working_df, ., by = c("author_id")) %>%
+    mutate(verified = replace_na(verified, FALSE))
+    
+
   return(return_df)
   
 }
@@ -309,11 +316,12 @@ create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df,
 
 make_present_publish_decision <- function(input_papers_with_reviews_df) {
   
-  input_papers_with_reviews_df <- papers_with_reviews_df
+  # input_papers_with_reviews_df <- papers_with_reviews_df
   
   threshold <- (MIN_PRESENTATION_SCORE + MAX_PRESENTATION_SCORE) / 2.0
-   
-  return_df <- input_papers_with_reviews_df %>%
+  
+  decision_df <- input_papers_with_reviews_df %>%
+    distinct(paper_id, mean_rating) %>%
     bind_cols(., tibble(random = runif(nrow(.), min = -1.0, max = 1.0))) %>%
     mutate(present_decision = if_else((mean_rating + random) > threshold * 1.15,
                                       ACCEPT_WORD, REJECT_WORD)) %>%
@@ -321,9 +329,11 @@ make_present_publish_decision <- function(input_papers_with_reviews_df) {
     bind_cols(., tibble(random = runif(nrow(.), min = -1.0, max = 1.0))) %>%
     mutate(publish_decision = if_else((mean_rating + random) > threshold * 1.35,
                                       ACCEPT_WORD, REJECT_WORD)) %>%
-    select(-random)
-    
-    return(return_df)
+    select(-random, -mean_rating)
+  
+  return_df <- left_join(input_papers_with_reviews_df, decision_df, by = c("paper_id"))
+  
+  return(return_df)
   
 }
 ```
@@ -359,12 +369,14 @@ for (year_counter in seq(from = start_year, to = end_year)) {
     select(-paper_number)
   
   papers_with_reviews_df <- reviews_df %>%
+    left_join(., select(humans_df, reviewer_hash = hash, verified), by = c("reviewer_hash")) %>%
+    mutate(weight = if_else(verified, 2L, 1L)) %>%
     group_by(paper_id) %>%
     mutate(accept_is_1_present = if_else(presentation_recommendation == ACCEPT_WORD, 1L, 0L)) %>%
     mutate(accept_is_1_publish = if_else(publication_recommendation == ACCEPT_WORD, 1L, 0L)) %>%
     summarise(mean_rating = mean(rating),
-              mean_present_acceptance_rate = mean(accept_is_1_present),
-              mean_publish_acceptance_rate = mean(accept_is_1_publish)) %>%
+              mean_present_acceptance_rate = weighted.mean(accept_is_1_present, weight),
+              mean_publish_acceptance_rate = weighted.mean(accept_is_1_publish, weight)) %>%
     ungroup() %>%
     left_join(join_papers_df, ., by = c("paper_id"))
   
@@ -384,29 +396,27 @@ for (year_counter in seq(from = start_year, to = end_year)) {
   
 }
 
-# append review recommendation and overall score to paper DB
-output_papers_df <- left_join(running_papers_df, 
-                              humans_df, 
-                              by = c("author_id")) %>%
-  mutate(author = paste0(first, " ", last),
-         body = as.character(NA)) %>%
-  rename(title = article_title,
-         committee_presentation_decision = present_decision,
-         committee_publication_decision = publish_decision) %>%
-  select(paper_id, year, title, author, author_id, committee_presentation_decision,
-         committee_publication_decision, abstract, body) %>%
-  group_by(paper_id, year, title, committee_presentation_decision,
-           committee_publication_decision, abstract, body) %>%
+authors_df <- running_papers_df %>%
+  select(paper_id, author_id) %>%
+  left_join(., select(humans_df, author_id, first, last), by = c("author_id")) %>%
+  mutate(author = paste0(first, " ", last)) %>%
+  group_by(paper_id) %>%
   mutate(authors = paste0(author, collapse = ","),
          author_ids = paste0(author_id, collapse = ",")) %>%
   ungroup() %>%
+  distinct(paper_id, authors, author_ids) 
+
+output_papers_df <- running_papers_df %>%
+  distinct(paper_id, year, article_title, present_decision, publish_decision, abstract) %>%
+  left_join(., authors_df, by = c("paper_id")) %>%
+  mutate(body = as.character(NA)) %>%
   select(paper_id,
          authors, 
          author_ids,
-         title,
+         title = article_title,
          year,
-         committee_presentation_decision,
-         committee_publication_decision,
+         committee_presentation_decision = present_decision,
+         committee_publication_decision = publish_decision,
          abstract,
          body)
         
@@ -425,7 +435,7 @@ output_humans_df <- humans_df %>%
          previous_affiliation = as.character(NA),
          last_degree_affiliation = as.character(NA),
          orcid_url = as.character(NA),
-         orcid) %>%
+         orcid,) %>%
   select(name, 
          aliases, 
          hash_id = hash, 
@@ -434,15 +444,20 @@ output_humans_df <- humans_df %>%
          last_degree_affiliation,
          orcid_url,
          orcid,
-         author_id)
+         author_id,
+         verified)
          
 ```
 
 # Write
 ```{r write}
-write_csv(output_papers_df, path = output_paper_file_name)
-write_csv(output_reviews_df, path = output_review_file_name)
-write_csv(output_humans_df, path = output_human_file_name)
+write_csv(output_papers_df, path = paste0(output_paper_file_name, ".csv"))
+write_csv(output_reviews_df, path = paste0(output_review_file_name, ".csv"))
+write_csv(output_humans_df, path = paste0(output_human_file_name, ".csv"))
+
+saveRDS(output_papers_df, file = paste0(output_paper_file_name, ".RDS"))
+saveRDS(output_reviews_df, file = paste0(output_review_file_name, ".RDS"))
+saveRDS(output_humans_df, file = paste0(output_human_file_name, ".RDS"))
 ```
 
 
