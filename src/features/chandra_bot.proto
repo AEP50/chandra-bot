@@ -37,6 +37,7 @@ message Author {
 message Reviewer {
   Human human = 1;
   repeated Review reviews = 2;
+  bool verified = 3;
 }
 
 enum PRESENTATION_REC {
