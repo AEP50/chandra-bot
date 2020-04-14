@@ -2,6 +2,17 @@ syntax = "proto3";
 
 package chandra_bot_data_model;
 
+enum PRESENTATION_REC {
+  PRESENTATION_REC_REJECT = 0;
+  PRESENTATION_REC_ACCEPT = 1;
+}
+
+enum PUBLICATION_REC {
+  PUBLICATION_REC_REJECT = 0;
+  PUBLICATION_REC_ACCEPT = 1;
+  PUBLICATION_REC_ACCEPT_CORRECT = 2;
+}
+
 message Affiliation {
   string name = 1;
   repeated string aliases = 2;
@@ -23,8 +34,8 @@ message Paper {
   repeated Review reviews = 2;
   string title = 3;
   int32 year = 4;
-  bool committee_presentation_decision = 5;
-  bool committee_publication_decision = 6;
+  PRESENTATION_REC committee_presentation_decision = 5;
+  PUBLICATION_REC committee_publication_decision = 6;
   Content abstract = 7;
   Content body = 8;
 }
@@ -38,16 +49,6 @@ message Reviewer {
   Human human = 1;
   repeated Review reviews = 2;
   bool verified = 3;
-}
-
-enum PRESENTATION_REC {
-  PRESENTATION_REC_REJECT = 0;
-  PRESENTATION_REC_ACCEPT = 1;
-}
-enum PUBLICATION_REC {
-  PUBLICATION_REC_REJECT = 0;
-  PUBLICATION_REC_ACCEPT = 1;
-  PUBLICATION_REC_ACCEPT_CORRECT = 2;
 }
 
 message Review {
