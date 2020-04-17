@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package chandra_bot_data_model;
+
+enum PRESENTATION_REC {
+  PRESENTATION_REC_REJECT = 0;
+  PRESENTATION_REC_ACCEPT = 1;
+}
+
+enum PUBLICATION_REC {
+  PUBLICATION_REC_REJECT = 0;
+  PUBLICATION_REC_ACCEPT = 1;
+  PUBLICATION_REC_ACCEPT_CORRECT = 2;
+}
+
+message Affiliation {
+  string name = 1;
+  repeated string aliases = 2;
+}
+
+message Human {
+  string name = 1;
+  repeated string aliases = 2;
+  string hash_id = 3;
+  Affiliation current_affiliation = 4;
+  repeated Affiliation previous_affiliation = 5;
+  Affiliation last_degree_affiliation = 6;
+  string orcid_url = 7;
+  string orcid = 8;
+}
+
+message Paper {
+  repeated Author authors = 1;
+  repeated Review reviews = 2;
+  string title = 3;
+  int32 year = 4;
+  PRESENTATION_REC committee_presentation_decision = 5;
+  PUBLICATION_REC committee_publication_decision = 6;
+  Content abstract = 7;
+  Content body = 8;
+}
+
+message Author {
+  Human human = 1;
+  repeated Paper papers = 2;
+}
+
+message Reviewer {
+  Human human = 1;
+  repeated Review reviews = 2;
+  bool verified = 3;
+}
+
+message Review {
+  Reviewer reviewer = 1;
+  Paper paper = 2;
+  float presentation_score = 3;
+  Content commentary_to_author = 4;
+  Content commentary_to_chair = 5;
+
+  PRESENTATION_REC presentation_recommend = 6;
+  PUBLICATION_REC publication_recommend = 7;
+}
+
+message Content {
+  Human human = 1;
+  int32 spelling_errors = 2;
+  float grammar_score = 3;
+  string text = 4;
+}
+
+message PaperBook {
+  repeated Paper paper = 1;
+}
