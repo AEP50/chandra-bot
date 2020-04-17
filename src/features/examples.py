@@ -12,6 +12,6 @@ cb = cbot.create_bot(
 
 cb.assemble_paper_book()
 
-book_file = "../../data/processed/fake_serialized_paper_book.text"
-
-cb.write_paper_book(output_file = book_file)
+# book_file = "../../data/processed/fake_serialized_paper_book.text"
+#
+# cb.write_paper_book(output_file = book_file)

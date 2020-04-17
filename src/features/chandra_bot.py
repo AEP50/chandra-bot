@@ -95,6 +95,26 @@ class chandra_bot(object):
         author.human.orcid = row['orcid'].values[0]
 
     def _attribute_review(self, review: dm.Review, row: list):
+        review.presentation_score = row['presentation_score']
+        review.commentary_to_author.text = row['commentary_to_author']
+        review.commentary_to_chair.text = row['commentary_to_chair']
+
+        if row['presentation_recommendation'] == 'Reject':
+            review.presentation_recommend = dm.PRESENTATION_REC_REJECT
+        elif row['presentation_recommendation'] == 'Accept':
+            review.presentation_recommend = dm.PRESENTATION_REC_ACCEPT
+        else:
+            review.presentation_recommend = None
+
+        if row['publication_recommendation'] == 'Reject':
+            review.publication_recommend = dm.PUBLICATION_REC_REJECT
+        elif row['publication_recommendation'] == 'Accept':
+            review.publication_recommend = dm.PUBLICATION_REC_ACCEPT
+        else:
+            review.publication_recommend = None
+
+
+    def _attribute_reviewer(self, review: dm.Review, row: list):
         review.reviewer.human.name = row['name'].values[0]
 
         try:
@@ -136,7 +156,9 @@ class chandra_bot(object):
                 review_row = paper_review_df.loc[hash_id]
                 reviewer_hash = review_row['reviewer_human_hash_id']
                 human_row = self.human_df.loc[self.human_df['hash_id'] == reviewer_hash]
-                self._attribute_review(paper.reviews.add(), human_row)
+                review = paper.reviews.add()
+                self._attribute_review(review, review_row)
+                self._attribute_reviewer(review, human_row)
 
     @staticmethod
     def create_bot(paper_file: str, review_file: str, human_file: str):
