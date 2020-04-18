@@ -30,14 +30,15 @@ message Human {
 }
 
 message Paper {
-  repeated Author authors = 1;
-  repeated Review reviews = 2;
-  string title = 3;
-  int32 year = 4;
-  PRESENTATION_REC committee_presentation_decision = 5;
-  PUBLICATION_REC committee_publication_decision = 6;
-  Content abstract = 7;
-  Content body = 8;
+  string number = 1;
+  repeated Author authors = 2;
+  repeated Review reviews = 3;
+  string title = 4;
+  int32 year = 5;
+  PRESENTATION_REC committee_presentation_decision = 6;
+  PUBLICATION_REC committee_publication_decision = 7;
+  Content abstract = 8;
+  Content body = 9;
 }
 
 message Author {
@@ -49,17 +50,20 @@ message Reviewer {
   Human human = 1;
   repeated Review reviews = 2;
   bool verified = 3;
+  float mean_present_score = 4;
+  float std_dev_present_score = 5;
 }
 
 message Review {
   Reviewer reviewer = 1;
   Paper paper = 2;
   float presentation_score = 3;
-  Content commentary_to_author = 4;
-  Content commentary_to_chair = 5;
+  float normalized_present_score = 4;
+  Content commentary_to_author = 5;
+  Content commentary_to_chair = 6;
 
-  PRESENTATION_REC presentation_recommend = 6;
-  PUBLICATION_REC publication_recommend = 7;
+  PRESENTATION_REC presentation_recommend = 7;
+  PUBLICATION_REC publication_recommend = 8;
 }
 
 message Content {

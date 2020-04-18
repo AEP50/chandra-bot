@@ -50,6 +50,7 @@ class chandra_bot(object):
 
     def _attribute_paper(self, paper: dm.Paper, row: list) -> None:
 
+        paper.number = row['paper_id']
         paper.title = row['title']
         paper.year = int(row['year'])
 
