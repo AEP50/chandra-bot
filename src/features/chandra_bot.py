@@ -29,6 +29,8 @@ class chandra_bot(object):
         'orcid': pd.StringDtype(), 'author_id': pd.StringDtype(), 'verified': 'bool'
     }
 
+    NORMALIZE_SCORE_MIN_REVIEWS = 10
+
     def __init__(
                 self,
                 paper_df: pd.DataFrame = None,
@@ -50,7 +52,6 @@ class chandra_bot(object):
 
     def _attribute_paper(self, paper: dm.Paper, row: list) -> None:
 
-        paper.number = row['paper_id']
         paper.title = row['title']
         paper.year = int(row['year'])
 
@@ -143,6 +144,7 @@ class chandra_bot(object):
     def assemble_paper_book(self):
         for paper_id in self.paper_df.index:
             paper = self.paper_book.paper.add()
+            paper.number = paper_id
             paper_row = self.paper_df.loc[paper_id]
             self._attribute_paper(paper, paper_row)
 
@@ -188,3 +190,106 @@ class chandra_bot(object):
     def write_paper_book(self, output_file: str):
         with open(output_file, "wb") as f:
             f.write(self.paper_book.SerializeToString())
+
+    def _compute_normalized_scores(self):
+        scores_df = pd.DataFrame()
+        for paper in self.paper_book.paper:
+            for review in paper.reviews:
+                row_series = pd.Series({
+                                    "paper_id": paper.number,
+                                    "reviewer_id": review.reviewer.human.hash_id,
+                                    "score": review.presentation_score
+                })
+                row_df = pd.DataFrame([row_series])
+                scores_df = pd.concat([scores_df, row_df], ignore_index = True)
+
+        mean_df = scores_df.groupby('reviewer_id').mean()[['score']].rename(columns = {'score': 'mean'})
+        std_df = scores_df.groupby('reviewer_id').std()[['score']].rename(columns = {'score': 'std'})
+        count_df = scores_df.groupby('reviewer_id').count()[['score']].rename(columns = {'score': 'count'})
+        normalized_df = mean_df.join(std_df, on = 'reviewer_id').join(count_df, on = 'reviewer_id')
+
+        matched_reviewer = []
+        for paper in self.paper_book.paper:
+            for review in paper.reviews:
+                hash_id = review.reviewer.human.hash_id
+                if hash_id in matched_reviewer:
+                    None
+                else:
+                    matched_reviewer.append(hash_id)
+                    try:
+                        row = normalized_df.loc[hash_id]
+                        review.reviewer.mean_present_score = row['mean']
+                        review.reviewer.std_dev_present_score = row['std']
+                        review.reviewer.number_of_reviews = row['count']
+
+                        if row['count'] >= self.NORMALIZE_SCORE_MIN_REVIEWS:
+                            paper.review.normalized_present_score = (paper.review.presentation_score - row['mean']) / row['std']
+                        else:
+                            paper.review.normalized_present_score = None
+                    except:
+                        None
+
+    def compute_normalized_scores(self, dataframe_only: bool = False):
+        if dataframe_only:
+            df = self.review_df
+            mean_df = df.groupby('reviewer_human_hash_id').mean()[['presentation_score']].rename(columns = {'presentation_score': 'mean'})
+            std_df = df.groupby('reviewer_human_hash_id').std()[['presentation_score']].rename(columns = {'presentation_score': 'std'})
+            count_df = df.groupby('reviewer_human_hash_id').count()[['presentation_score']].rename(columns = {'presentation_score': 'count'})
+            normalized_df = mean_df.join(std_df, on = 'reviewer_human_hash_id').join(count_df, on = 'reviewer_human_hash_id')
+
+            df = df.join(normalized_df, on = 'reviewer_human_hash_id')
+            df['normalized_present_score'] = (df['presentation_score'] - df['mean'])/df['std']
+            df = df.rename(columns = {'mean': 'mean_present_score', 'std': 'std_dev_present_score', 'count': 'number_of_reviews'})
+            self.review_df = df
+        else:
+            self._compute_normalized_scores()
+
+        def make_dataframe(self, dataframe_name: str):
+            output_df = pd.DataFrame()
+            if dataframe_name == 'paper':
+                for paper in self.paper_book.paper:
+                    authors = []
+                    for author in paper.authors:
+                        authors.append(author.human.name)
+
+                    authors_string = ','.join(authors)
+                # START HERE: how to make unique author id (do at end?)
+                    row_series = Series({
+                                    'paper_id': paper.number,
+                                    'authors': authors_string,
+                                    'title': paper.title,
+                                    'year': paper.year,
+                                    'committee_presentation_decision': paper.committee_presentation_decision,
+                                    'committee_publication_decision': paper.committee_publication_decision,
+                                    'abstract': paper.abstract,
+                                    'body': paper.body
+                    })
+                    row_df = pd.DataFrame([row_series])
+                    output_df = pd.concat([output_df, row_df], ignore_index = True)
+
+                # START HERE: 1 add hash_id so it's unique, then sum by hash and give row_number as author_id, make string
+                # can you do this first? so you can then do the paper loop?
+                df = output_df.groupby('reviewer_human_hash_id').count()[['presentation_score']]
+
+
+            elif dataframe_name == 'review':
+                for paper in self.paper_book:
+                    for review in paper.reviews:
+                        reviewer = review.reviewer
+                        row_series = pd.Series({
+                                            'paper_id': paper.number,
+                                            'presentation_score': review.presentation_score,
+                                            'commentary_to_author': review.commentary_to_author,
+                                            'commentary_to_chair': review.commentary_to_chair,
+                                            'reviewer_human_hash_id': review.reviewer.human.hash_id,
+                                            'presentation_recommendation': review.presentation_recommend,
+                                            'publication_recommendation': review.publication_recommend
+                        })
+                        row_df = pd.DataFrame([row_series])
+                        output_df = pd.concat([output_df, row_df], ignore_index = True)
+            elif dataframe_name == 'human':
+                # human
+            else:
+                print("dataframe_name must be 'paper', 'review', or 'human'")
+
+            return output_df

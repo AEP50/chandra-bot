@@ -52,6 +52,7 @@ message Reviewer {
   bool verified = 3;
   float mean_present_score = 4;
   float std_dev_present_score = 5;
+  int32 number_of_reviews = 6;
 }
 
 message Review {

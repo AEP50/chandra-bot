@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='chandra_bot_data_model',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x1c\x63handra_bot_data_model.proto\x12\x16\x63handra_bot_data_model\",\n\x0b\x41\x66\x66iliation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61liases\x18\x02 \x03(\t\"\xa4\x02\n\x05Human\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61liases\x18\x02 \x03(\t\x12\x0f\n\x07hash_id\x18\x03 \x01(\t\x12@\n\x13\x63urrent_affiliation\x18\x04 \x01(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x41\n\x14previous_affiliation\x18\x05 \x03(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x44\n\x17last_degree_affiliation\x18\x06 \x01(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x11\n\torcid_url\x18\x07 \x01(\t\x12\r\n\x05orcid\x18\x08 \x01(\t\"\x9c\x03\n\x05Paper\x12\x0e\n\x06number\x18\x01 \x01(\t\x12/\n\x07\x61uthors\x18\x02 \x03(\x0b\x32\x1e.chandra_bot_data_model.Author\x12/\n\x07reviews\x18\x03 \x03(\x0b\x32\x1e.chandra_bot_data_model.Review\x12\r\n\x05title\x18\x04 \x01(\t\x12\x0c\n\x04year\x18\x05 \x01(\x05\x12Q\n\x1f\x63ommittee_presentation_decision\x18\x06 \x01(\x0e\x32(.chandra_bot_data_model.PRESENTATION_REC\x12O\n\x1e\x63ommittee_publication_decision\x18\x07 \x01(\x0e\x32\'.chandra_bot_data_model.PUBLICATION_REC\x12\x31\n\x08\x61\x62stract\x18\x08 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12-\n\x04\x62ody\x18\t \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\"e\n\x06\x41uthor\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12-\n\x06papers\x18\x02 \x03(\x0b\x32\x1d.chandra_bot_data_model.Paper\"\xb6\x01\n\x08Reviewer\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12/\n\x07reviews\x18\x02 \x03(\x0b\x32\x1e.chandra_bot_data_model.Review\x12\x10\n\x08verified\x18\x03 \x01(\x08\x12\x1a\n\x12mean_present_score\x18\x04 \x01(\x02\x12\x1d\n\x15std_dev_present_score\x18\x05 \x01(\x02\"\xb7\x03\n\x06Review\x12\x32\n\x08reviewer\x18\x01 \x01(\x0b\x32 .chandra_bot_data_model.Reviewer\x12,\n\x05paper\x18\x02 \x01(\x0b\x32\x1d.chandra_bot_data_model.Paper\x12\x1a\n\x12presentation_score\x18\x03 \x01(\x02\x12 \n\x18normalized_present_score\x18\x04 \x01(\x02\x12=\n\x14\x63ommentary_to_author\x18\x05 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12<\n\x13\x63ommentary_to_chair\x18\x06 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12H\n\x16presentation_recommend\x18\x07 \x01(\x0e\x32(.chandra_bot_data_model.PRESENTATION_REC\x12\x46\n\x15publication_recommend\x18\x08 \x01(\x0e\x32\'.chandra_bot_data_model.PUBLICATION_REC\"u\n\x07\x43ontent\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12\x17\n\x0fspelling_errors\x18\x02 \x01(\x05\x12\x15\n\rgrammar_score\x18\x03 \x01(\x02\x12\x0c\n\x04text\x18\x04 \x01(\t\"9\n\tPaperBook\x12,\n\x05paper\x18\x01 \x03(\x0b\x32\x1d.chandra_bot_data_model.Paper*L\n\x10PRESENTATION_REC\x12\x1b\n\x17PRESENTATION_REC_REJECT\x10\x00\x12\x1b\n\x17PRESENTATION_REC_ACCEPT\x10\x01*m\n\x0fPUBLICATION_REC\x12\x1a\n\x16PUBLICATION_REC_REJECT\x10\x00\x12\x1a\n\x16PUBLICATION_REC_ACCEPT\x10\x01\x12\"\n\x1ePUBLICATION_REC_ACCEPT_CORRECT\x10\x02\x62\x06proto3'
+  serialized_pb=b'\n\x1c\x63handra_bot_data_model.proto\x12\x16\x63handra_bot_data_model\",\n\x0b\x41\x66\x66iliation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61liases\x18\x02 \x03(\t\"\xa4\x02\n\x05Human\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61liases\x18\x02 \x03(\t\x12\x0f\n\x07hash_id\x18\x03 \x01(\t\x12@\n\x13\x63urrent_affiliation\x18\x04 \x01(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x41\n\x14previous_affiliation\x18\x05 \x03(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x44\n\x17last_degree_affiliation\x18\x06 \x01(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x11\n\torcid_url\x18\x07 \x01(\t\x12\r\n\x05orcid\x18\x08 \x01(\t\"\x9c\x03\n\x05Paper\x12\x0e\n\x06number\x18\x01 \x01(\t\x12/\n\x07\x61uthors\x18\x02 \x03(\x0b\x32\x1e.chandra_bot_data_model.Author\x12/\n\x07reviews\x18\x03 \x03(\x0b\x32\x1e.chandra_bot_data_model.Review\x12\r\n\x05title\x18\x04 \x01(\t\x12\x0c\n\x04year\x18\x05 \x01(\x05\x12Q\n\x1f\x63ommittee_presentation_decision\x18\x06 \x01(\x0e\x32(.chandra_bot_data_model.PRESENTATION_REC\x12O\n\x1e\x63ommittee_publication_decision\x18\x07 \x01(\x0e\x32\'.chandra_bot_data_model.PUBLICATION_REC\x12\x31\n\x08\x61\x62stract\x18\x08 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12-\n\x04\x62ody\x18\t \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\"e\n\x06\x41uthor\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12-\n\x06papers\x18\x02 \x03(\x0b\x32\x1d.chandra_bot_data_model.Paper\"\xd1\x01\n\x08Reviewer\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12/\n\x07reviews\x18\x02 \x03(\x0b\x32\x1e.chandra_bot_data_model.Review\x12\x10\n\x08verified\x18\x03 \x01(\x08\x12\x1a\n\x12mean_present_score\x18\x04 \x01(\x02\x12\x1d\n\x15std_dev_present_score\x18\x05 \x01(\x02\x12\x19\n\x11number_of_reviews\x18\x06 \x01(\x05\"\xb7\x03\n\x06Review\x12\x32\n\x08reviewer\x18\x01 \x01(\x0b\x32 .chandra_bot_data_model.Reviewer\x12,\n\x05paper\x18\x02 \x01(\x0b\x32\x1d.chandra_bot_data_model.Paper\x12\x1a\n\x12presentation_score\x18\x03 \x01(\x02\x12 \n\x18normalized_present_score\x18\x04 \x01(\x02\x12=\n\x14\x63ommentary_to_author\x18\x05 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12<\n\x13\x63ommentary_to_chair\x18\x06 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12H\n\x16presentation_recommend\x18\x07 \x01(\x0e\x32(.chandra_bot_data_model.PRESENTATION_REC\x12\x46\n\x15publication_recommend\x18\x08 \x01(\x0e\x32\'.chandra_bot_data_model.PUBLICATION_REC\"u\n\x07\x43ontent\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12\x17\n\x0fspelling_errors\x18\x02 \x01(\x05\x12\x15\n\rgrammar_score\x18\x03 \x01(\x02\x12\x0c\n\x04text\x18\x04 \x01(\t\"9\n\tPaperBook\x12,\n\x05paper\x18\x01 \x03(\x0b\x32\x1d.chandra_bot_data_model.Paper*L\n\x10PRESENTATION_REC\x12\x1b\n\x17PRESENTATION_REC_REJECT\x10\x00\x12\x1b\n\x17PRESENTATION_REC_ACCEPT\x10\x01*m\n\x0fPUBLICATION_REC\x12\x1a\n\x16PUBLICATION_REC_REJECT\x10\x00\x12\x1a\n\x16PUBLICATION_REC_ACCEPT\x10\x01\x12\"\n\x1ePUBLICATION_REC_ACCEPT_CORRECT\x10\x02\x62\x06proto3'
 )
 
 _PRESENTATION_REC = _descriptor.EnumDescriptor(
@@ -39,8 +39,8 @@ _PRESENTATION_REC = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1720,
-  serialized_end=1796,
+  serialized_start=1747,
+  serialized_end=1823,
 )
 _sym_db.RegisterEnumDescriptor(_PRESENTATION_REC)
 
@@ -66,8 +66,8 @@ _PUBLICATION_REC = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1798,
-  serialized_end=1907,
+  serialized_start=1825,
+  serialized_end=1934,
 )
 _sym_db.RegisterEnumDescriptor(_PUBLICATION_REC)
 
@@ -365,6 +365,13 @@ _REVIEWER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='number_of_reviews', full_name='chandra_bot_data_model.Reviewer.number_of_reviews', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -378,7 +385,7 @@ _REVIEWER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=916,
-  serialized_end=1098,
+  serialized_end=1125,
 )
 
 
@@ -457,8 +464,8 @@ _REVIEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1101,
-  serialized_end=1540,
+  serialized_start=1128,
+  serialized_end=1567,
 )
 
 
@@ -509,8 +516,8 @@ _CONTENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1542,
-  serialized_end=1659,
+  serialized_start=1569,
+  serialized_end=1686,
 )
 
 
@@ -540,8 +547,8 @@ _PAPERBOOK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1661,
-  serialized_end=1718,
+  serialized_start=1688,
+  serialized_end=1745,
 )
 
 _HUMAN.fields_by_name['current_affiliation'].message_type = _AFFILIATION
