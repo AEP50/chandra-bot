@@ -9,24 +9,38 @@ class chandra_bot(object):
     """
 
     PAPER_DICT = {
-        'paper_id': pd.StringDtype(), 'authors': pd.StringDtype(), 'author_ids': pd.StringDtype(),
-        'title': pd.StringDtype(), 'year': np.int32, 'committee_publication_decision': pd.StringDtype(),
-        'committee_presentation_decision': pd.StringDtype(), 'abstract': pd.StringDtype(),
+        'paper_id': pd.StringDtype(),
+        'authors': pd.StringDtype(),
+        'author_ids': pd.StringDtype(),
+        'title': pd.StringDtype(),
+        'year': np.int32,
+        'committee_publication_decision': pd.StringDtype(),
+        'committee_presentation_decision': pd.StringDtype(),
+        'abstract': pd.StringDtype(),
         'body': pd.StringDtype()
     }
 
     REVIEW_DICT = {
-        'paper_id': pd.StringDtype(), 'presentation_score': np.int32,
-        'commentary_to_author': pd.StringDtype(), 'commentary_to_chair': pd.StringDtype(),
-        'reviewer_human_hash_id': pd.StringDtype(), 'presentation_recommend': pd.StringDtype(),
+        'paper_id': pd.StringDtype(),
+        'presentation_score': np.int32,
+        'commentary_to_author': pd.StringDtype(),
+        'commentary_to_chair': pd.StringDtype(),
+        'reviewer_human_hash_id': pd.StringDtype(),
+        'presentation_recommend': pd.StringDtype(),
         'publication_recommend': pd.StringDtype()
     }
 
     HUMAN_DICT = {
-        'name': pd.StringDtype(), 'aliases': pd.StringDtype(), 'hash_id': pd.StringDtype(),
-        'current_affiliation': pd.StringDtype(), 'previous_affiliation': pd.StringDtype(),
-        'last_degree_affiliation': pd.StringDtype(), 'orcid_url': pd.StringDtype(),
-        'orcid': pd.StringDtype(), 'author_id': pd.StringDtype(), 'verified': 'bool'
+        'name': pd.StringDtype(),
+        'aliases': pd.StringDtype(),
+        'hash_id': pd.StringDtype(),
+        'current_affiliation': pd.StringDtype(),
+        'previous_affiliation': pd.StringDtype(),
+        'last_degree_affiliation': pd.StringDtype(),
+        'orcid_url': pd.StringDtype(),
+        'orcid': pd.StringDtype(),
+        'author_id': pd.StringDtype(),
+        'verified': 'bool'
     }
 
     NORMALIZE_SCORE_MIN_REVIEWS = 10
@@ -139,7 +153,7 @@ class chandra_bot(object):
 
         review.reviewer.human.orcid_url = str(row['orcid_url'].values[0])
         review.reviewer.human.orcid = row['orcid'].values[0]
-        review.reviewer.verified = row['verified'].values[0]
+        review.reviewer.verified = bool(row['verified'].values[0])
 
     def assemble_paper_book(self):
         for paper_id in self.paper_df.index:
@@ -289,6 +303,7 @@ class chandra_bot(object):
                         output_df = pd.concat([output_df, row_df], ignore_index = True)
             elif dataframe_name == 'human':
                 # human
+                pass
             else:
                 print("dataframe_name must be 'paper', 'review', or 'human'")
 
