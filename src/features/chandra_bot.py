@@ -234,12 +234,12 @@ class chandra_bot(object):
                         row = normalized_df.loc[hash_id]
                         review.reviewer.mean_present_score = row['mean']
                         review.reviewer.std_dev_present_score = row['std']
-                        review.reviewer.number_of_reviews = row['count']
+                        review.reviewer.number_of_reviews = int(row['count'])
 
                         if row['count'] >= self.NORMALIZE_SCORE_MIN_REVIEWS:
-                            paper.review.normalized_present_score = (paper.review.presentation_score - row['mean']) / row['std']
+                            review.normalized_present_score = (review.presentation_score - row['mean']) / row['std']
                         else:
-                            paper.review.normalized_present_score = None
+                            review.normalized_present_score = None
                     except:
                         None
 
