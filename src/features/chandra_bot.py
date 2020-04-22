@@ -260,17 +260,31 @@ class chandra_bot(object):
 
         def make_dataframe(self, dataframe_name: str):
             output_df = pd.DataFrame()
+
+            # START here, check logic of this
             if dataframe_name == 'paper':
+                all_authors = []
+                for paper in self.paper_book.paper:
+                    for author in paper.authors:
+                        if author not in all_authors:
+                            all_authors.append(author.human.hash_id)
+                author_id_df = pd.DataFrame({'hash_id': all_authors})
+                author_id_df['author_id'] = np.arange(len(author_id_df)) + 1
+
                 for paper in self.paper_book.paper:
                     authors = []
+                    author_ids = []
                     for author in paper.authors:
                         authors.append(author.human.name)
+                        author_ids.append(author_id_df.loc[author_id_df['hash_id'] == author.human.hash_id]['author_id'].values[0])
 
                     authors_string = ','.join(authors)
-                # START HERE: how to make unique author id (do at end?)
-                    row_series = Series({
+                    authors_id_string = ','.join(author_ids)
+
+                    row_series = pd.Series({
                                     'paper_id': paper.number,
                                     'authors': authors_string,
+                                    'author_ids': author_ids_string,
                                     'title': paper.title,
                                     'year': paper.year,
                                     'committee_presentation_decision': paper.committee_presentation_decision,
@@ -280,11 +294,6 @@ class chandra_bot(object):
                     })
                     row_df = pd.DataFrame([row_series])
                     output_df = pd.concat([output_df, row_df], ignore_index = True)
-
-                # START HERE: 1 add hash_id so it's unique, then sum by hash and give row_number as author_id, make string
-                # can you do this first? so you can then do the paper loop?
-                df = output_df.groupby('reviewer_human_hash_id').count()[['presentation_score']]
-
 
             elif dataframe_name == 'review':
                 for paper in self.paper_book:
