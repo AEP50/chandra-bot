@@ -43,28 +43,25 @@ message Paper {
 
 message Author {
   Human human = 1;
-  repeated Paper papers = 2;
 }
 
 message Reviewer {
   Human human = 1;
-  repeated Review reviews = 2;
-  bool verified = 3;
-  float mean_present_score = 4;
-  float std_dev_present_score = 5;
-  int32 number_of_reviews = 6;
+  bool verified = 2;
+  float mean_present_score = 3;
+  float std_dev_present_score = 4;
+  int32 number_of_reviews = 5;
 }
 
 message Review {
   Reviewer reviewer = 1;
-  Paper paper = 2;
-  float presentation_score = 3;
-  float normalized_present_score = 4;
-  Content commentary_to_author = 5;
-  Content commentary_to_chair = 6;
+  float presentation_score = 2;
+  float normalized_present_score = 3;
+  Content commentary_to_author = 4;
+  Content commentary_to_chair = 5;
 
-  PRESENTATION_REC presentation_recommend = 7;
-  PUBLICATION_REC publication_recommend = 8;
+  PRESENTATION_REC presentation_recommend = 6;
+  PUBLICATION_REC publication_recommend = 7;
 }
 
 message Content {
