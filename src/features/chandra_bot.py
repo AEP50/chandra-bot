@@ -62,7 +62,11 @@ class chandra_bot(object):
 
             self.paper_book = dm.PaperBook()
         else:
-            self.paper_book = input_paper_book
+            self.paper_book: dm.PaperBook = input_paper_book
+
+            # self.paper_df = self.make_dataframe(dataframe_name = 'paper')
+            # self.review_df = self.make_dataframe('review')
+            # self.human_df = self.make_dataframe('human')
 
     def _attribute_paper(self, paper: dm.Paper, row: list) -> None:
 
@@ -198,6 +202,7 @@ class chandra_bot(object):
             print(input_file + ": File not found.")
 
         bot = chandra_bot(input_paper_book = paper_book)
+        bot.paper_df = bot.make_dataframe(dataframe_name = 'paper')
 
         return bot
 
@@ -258,62 +263,102 @@ class chandra_bot(object):
         else:
             self._compute_normalized_scores()
 
-        def make_dataframe(self, dataframe_name: str):
-            output_df = pd.DataFrame()
+    def make_dataframe(self, dataframe_name: str):
+        output_df = pd.DataFrame()
 
-            # START here, check logic of this
-            if dataframe_name == 'paper':
-                all_authors = []
-                for paper in self.paper_book.paper:
-                    for author in paper.authors:
-                        if author not in all_authors:
-                            all_authors.append(author.human.hash_id)
-                author_id_df = pd.DataFrame({'hash_id': all_authors})
-                author_id_df['author_id'] = np.arange(len(author_id_df)) + 1
+        if dataframe_name == 'paper':
+            author_id_df = self._make_author_id_df()
 
-                for paper in self.paper_book.paper:
-                    authors = []
-                    author_ids = []
-                    for author in paper.authors:
-                        authors.append(author.human.name)
-                        author_ids.append(author_id_df.loc[author_id_df['hash_id'] == author.human.hash_id]['author_id'].values[0])
+            for paper in self.paper_book.paper:
+                authors = []
+                author_ids = []
+                for author in paper.authors:
+                    authors.append(author.human.name)
+                    author_ids.append(author_id_df.loc[author_id_df['hash_id'] == author.human.hash_id]['author_id'].values[0])
 
-                    authors_string = ','.join(authors)
-                    authors_id_string = ','.join(author_ids)
+                authors_string = ','.join(authors)
+                authors_id_string = ','.join(author_ids)
 
+                row_series = pd.Series({
+                                'paper_id': paper.number,
+                                'authors': authors_string,
+                                'author_ids': author_ids_string,
+                                'title': paper.title,
+                                'year': paper.year,
+                                'committee_presentation_decision': paper.committee_presentation_decision,
+                                'committee_publication_decision': paper.committee_publication_decision,
+                                'abstract': paper.abstract,
+                                'body': paper.body
+                })
+                row_df = pd.DataFrame([row_series])
+                output_df = pd.concat([output_df, row_df], ignore_index = True)
+
+        elif dataframe_name == 'review':
+            for paper in self.paper_book:
+                for review in paper.reviews:
+                    reviewer = review.reviewer
                     row_series = pd.Series({
-                                    'paper_id': paper.number,
-                                    'authors': authors_string,
-                                    'author_ids': author_ids_string,
-                                    'title': paper.title,
-                                    'year': paper.year,
-                                    'committee_presentation_decision': paper.committee_presentation_decision,
-                                    'committee_publication_decision': paper.committee_publication_decision,
-                                    'abstract': paper.abstract,
-                                    'body': paper.body
+                                        'paper_id': paper.number,
+                                        'presentation_score': review.presentation_score,
+                                        'commentary_to_author': review.commentary_to_author,
+                                        'commentary_to_chair': review.commentary_to_chair,
+                                        'reviewer_human_hash_id': review.reviewer.human.hash_id,
+                                        'presentation_recommendation': review.presentation_recommend,
+                                        'publication_recommendation': review.publication_recommend,
+                                        'normalized_present_score': review.normalized_present_score
                     })
                     row_df = pd.DataFrame([row_series])
                     output_df = pd.concat([output_df, row_df], ignore_index = True)
+        elif dataframe_name == 'human':
+            author_id_df = self._make_author_id_df()
+            for paper in self.paper_book:
+                for author in paper.authors:
+                    author_id = author_id_df.loc[author_id_df['hash_id'] == author.human.hash_id]['author_id'].values[0]
+                    row_series = pd.Series({
+                                        'name': author.human.name,
+                                        'aliases': author.human.alias,
+                                        'hash_id': author.human.hash_id,
+                                        'current_affiliation': author.human.current_affiliation,
+                                        'previous_affiliation': author.human.previous_affiliation,
+                                        'last_degree_affiliation': author.human.last_degree_affiliation,
+                                        'orcid_url': author.human.orcid_url,
+                                        'orcid': author.human.orcid,
+                                        'author_id': author_id
+                    })
+                    row_df = pd.DataFrame([row_series])
+                    authors_df = pd.concat([authors_df, row_df], ignore_index = True)
+                for review in paper.reviews:
+                    reviewer = review.reviewer
+                    row_series = pd.Series({
+                                        'name': reviewer.human.name,
+                                        'aliases': reviewer.human.alias,
+                                        'hash_id': reviewer.human.hash_id,
+                                        'current_affiliation': reviewer.human.current_affiliation,
+                                        'previous_affiliation': reviewer.human.previous_affiliation,
+                                        'last_degree_affiliation': reviewer.human.last_degree_affiliation,
+                                        'orcid_url': reviewer.human.orcid_url,
+                                        'orcid': reviewer.human.orcid,
+                                        'verified': reviewer.verified
+                    })
+                    row_df = pd.DataFrame([row_series])
+                    reviewers_df = pd.concat([reviewers_df, row_df], ignore_index = True)
 
-            elif dataframe_name == 'review':
-                for paper in self.paper_book:
-                    for review in paper.reviews:
-                        reviewer = review.reviewer
-                        row_series = pd.Series({
-                                            'paper_id': paper.number,
-                                            'presentation_score': review.presentation_score,
-                                            'commentary_to_author': review.commentary_to_author,
-                                            'commentary_to_chair': review.commentary_to_chair,
-                                            'reviewer_human_hash_id': review.reviewer.human.hash_id,
-                                            'presentation_recommendation': review.presentation_recommend,
-                                            'publication_recommendation': review.publication_recommend
-                        })
-                        row_df = pd.DataFrame([row_series])
-                        output_df = pd.concat([output_df, row_df], ignore_index = True)
-            elif dataframe_name == 'human':
-                # human
-                pass
-            else:
-                print("dataframe_name must be 'paper', 'review', or 'human'")
+            output_df = authors_df.join(reviewers_df['verified'], on = 'hash_id')
+            also_df = reviewers_df.join(authors_df['author_id'], on = 'hash_id')
+            output_df = pd.concat([output_df, also_df], ignore_index = True).drop_duplicates()
 
-            return output_df
+        else:
+            print("dataframe_name must be 'paper', 'review', or 'human'")
+
+        return output_df
+
+    def _make_author_id_df(self):
+        list = []
+        for paper in self.paper_book.paper:
+            for author in paper.authors:
+                if author.human.hash_id not in list:
+                    list.append(author.human.hash_id)
+        df = pd.DataFrame({'hash_id': list})
+        df['author_id'] = np.arange(len(df)) + 1
+
+        return(df)

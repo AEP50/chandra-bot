@@ -21,3 +21,8 @@ bot.write_paper_book(output_file = book_file)
 
 print('Read paper book from disk')
 bot = cbot.read_paper_book(book_file)
+
+print('Make a paper dataframe')
+paper_out_df = bot.make_dataframe('paper')
+review_out_df = bot.make_dataframe('review')
+human_out_df = bot.make_dataframe('human')
