@@ -315,13 +315,17 @@ class chandra_bot(object):
                 authors_df = pd.DataFrame()
                 for author in paper.authors:
                     author_id = author_id_df.loc[author_id_df['hash_id'] == author.human.hash_id]['author_id'].values[0]
+                    alias_str = ','.join(author.human.aliases)
+                    affil_list = []
+                    for affil in author.human.previous_affiliation:
+                        affil_list.append(affil)
                     row_series = pd.Series({
                                         'name': author.human.name,
-                                        'aliases': author.human.aliases,
+                                        'aliases': alias_str,
                                         'hash_id': author.human.hash_id,
-                                        'current_affiliation': author.human.current_affiliation,
-                                        'previous_affiliation': author.human.previous_affiliation,
-                                        'last_degree_affiliation': author.human.last_degree_affiliation,
+                                        'current_affiliation': author.human.current_affiliation.name,
+                                        'previous_affiliation': ','.join(affil_list),
+                                        'last_degree_affiliation': author.human.last_degree_affiliation.name,
                                         'orcid_url': author.human.orcid_url,
                                         'orcid': author.human.orcid,
                                         'author_id': author_id
@@ -332,13 +336,17 @@ class chandra_bot(object):
                 reviewers_df = pd.DataFrame()
                 for review in paper.reviews:
                     reviewer = review.reviewer
+                    alias_str = ','.join(reviewer.human.aliases)
+                    affil_list = []
+                    for affil in reviewer.human.previous_affiliation:
+                        affil_list.append(affil.name)
                     row_series = pd.Series({
                                         'name': reviewer.human.name,
-                                        'aliases': reviewer.human.aliases,
+                                        'aliases': alias_str,
                                         'hash_id': reviewer.human.hash_id,
-                                        'current_affiliation': reviewer.human.current_affiliation,
-                                        'previous_affiliation': reviewer.human.previous_affiliation,
-                                        'last_degree_affiliation': reviewer.human.last_degree_affiliation,
+                                        'current_affiliation': reviewer.human.current_affiliation.name,
+                                        'previous_affiliation': ','.join(affil_list),
+                                        'last_degree_affiliation': reviewer.human.last_degree_affiliation.name,
                                         'orcid_url': reviewer.human.orcid_url,
                                         'orcid': reviewer.human.orcid,
                                         'verified': reviewer.verified
@@ -346,13 +354,16 @@ class chandra_bot(object):
                     row_df = pd.DataFrame([row_series])
                     reviewers_df = pd.concat([reviewers_df, row_df], ignore_index = True)
 
-            r_join_df = reviewers_df[['hash_id', 'verified']].set_index('hash_id')
-            a_df = authors_df.set_index('hash_id').join(r_join_df, on = 'hash_id')
+                r_join_df = reviewers_df[['hash_id', 'verified']].set_index('hash_id')
+                a_df = authors_df.set_index('hash_id').join(r_join_df, on = 'hash_id')
 
-            a_join_df = authors_df[['hash_id', 'author_id']].set_index('hash_id')
-            b_df = reviewers_df.set_index('hash_id').join(a_join_df, on = 'hash_id')
-            # TODO remove duplicates from this
-            output_df = pd.concat([a_df, b_df]
+                a_join_df = authors_df[['hash_id', 'author_id']].set_index('hash_id')
+                b_df = reviewers_df.set_index('hash_id').join(a_join_df, on = 'hash_id')
+
+                a_b_df = pd.concat([a_df, b_df])
+                output_df = pd.concat([output_df, a_b_df])
+
+            output_df.drop_duplicates().groupby('hash_id').max()
 
         else:
             print("dataframe_name must be 'paper', 'review', or 'human'")
