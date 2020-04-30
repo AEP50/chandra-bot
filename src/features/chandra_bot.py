@@ -2,6 +2,7 @@ from __future__ import print_function
 import chandra_bot_data_model_pb2 as dm
 import numpy as np
 import pandas as pd
+import itertools
 
 class chandra_bot(object):
     """
@@ -380,3 +381,29 @@ class chandra_bot(object):
         df['author_id'] = np.arange(len(df)) + 1
 
         return(df)
+
+    def count_former_coauthors(self):
+        pairs_df = pd.DataFrame()
+        for paper in self.paper_book.paper:
+            a_list = []
+            for author in paper.authors:
+                a_list.append(author.human.hash_id)
+            pairs = [a_list, a_list]
+            data = list(itertools.product(*pairs))
+            idx = ['{}'.format(i) for i in range(1, len(data) + 1)]
+            df = pd.DataFrame(data, index = idx, columns = list('ab'))
+            df = df[df.a != df.b]
+            pairs_df = pd.concat([pairs_df, df])
+
+        pairs_df = pairs_df.groupby(['a','b']).size().reset_index(name='paper_count')
+
+        for paper in self.paper_book.paper:
+            a_list = []
+            for author in paper.authors:
+                a_list.append(author.human.hash_id)
+            for review in paper.reviews:
+                r_hash_id = review.reviewer.human.hash_id
+                df = pairs_df[pairs_df['a'] == r_hash_id]
+                for a in a_list:
+                    a_df = df[df['b'] == a]
+                    review.papers_written_with_authors += sum(a_df['paper_count'])

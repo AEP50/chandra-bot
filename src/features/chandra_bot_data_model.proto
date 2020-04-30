@@ -59,9 +59,10 @@ message Review {
   float normalized_present_score = 3;
   Content commentary_to_author = 4;
   Content commentary_to_chair = 5;
+  int32 papers_written_with_authors = 6;
 
-  PRESENTATION_REC presentation_recommend = 6;
-  PUBLICATION_REC publication_recommend = 7;
+  PRESENTATION_REC presentation_recommend = 7;
+  PUBLICATION_REC publication_recommend = 8;
 }
 
 message Content {

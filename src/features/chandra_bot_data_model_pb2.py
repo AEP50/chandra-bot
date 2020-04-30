@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='chandra_bot_data_model',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x1c\x63handra_bot_data_model.proto\x12\x16\x63handra_bot_data_model\",\n\x0b\x41\x66\x66iliation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61liases\x18\x02 \x03(\t\"\xa4\x02\n\x05Human\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61liases\x18\x02 \x03(\t\x12\x0f\n\x07hash_id\x18\x03 \x01(\t\x12@\n\x13\x63urrent_affiliation\x18\x04 \x01(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x41\n\x14previous_affiliation\x18\x05 \x03(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x44\n\x17last_degree_affiliation\x18\x06 \x01(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x11\n\torcid_url\x18\x07 \x01(\t\x12\r\n\x05orcid\x18\x08 \x01(\t\"\x9c\x03\n\x05Paper\x12\x0e\n\x06number\x18\x01 \x01(\t\x12/\n\x07\x61uthors\x18\x02 \x03(\x0b\x32\x1e.chandra_bot_data_model.Author\x12/\n\x07reviews\x18\x03 \x03(\x0b\x32\x1e.chandra_bot_data_model.Review\x12\r\n\x05title\x18\x04 \x01(\t\x12\x0c\n\x04year\x18\x05 \x01(\x05\x12Q\n\x1f\x63ommittee_presentation_decision\x18\x06 \x01(\x0e\x32(.chandra_bot_data_model.PRESENTATION_REC\x12O\n\x1e\x63ommittee_publication_decision\x18\x07 \x01(\x0e\x32\'.chandra_bot_data_model.PUBLICATION_REC\x12\x31\n\x08\x61\x62stract\x18\x08 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12-\n\x04\x62ody\x18\t \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\"e\n\x06\x41uthor\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12-\n\x06papers\x18\x02 \x03(\x0b\x32\x1d.chandra_bot_data_model.Paper\"\xd1\x01\n\x08Reviewer\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12/\n\x07reviews\x18\x02 \x03(\x0b\x32\x1e.chandra_bot_data_model.Review\x12\x10\n\x08verified\x18\x03 \x01(\x08\x12\x1a\n\x12mean_present_score\x18\x04 \x01(\x02\x12\x1d\n\x15std_dev_present_score\x18\x05 \x01(\x02\x12\x19\n\x11number_of_reviews\x18\x06 \x01(\x05\"\xb7\x03\n\x06Review\x12\x32\n\x08reviewer\x18\x01 \x01(\x0b\x32 .chandra_bot_data_model.Reviewer\x12,\n\x05paper\x18\x02 \x01(\x0b\x32\x1d.chandra_bot_data_model.Paper\x12\x1a\n\x12presentation_score\x18\x03 \x01(\x02\x12 \n\x18normalized_present_score\x18\x04 \x01(\x02\x12=\n\x14\x63ommentary_to_author\x18\x05 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12<\n\x13\x63ommentary_to_chair\x18\x06 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12H\n\x16presentation_recommend\x18\x07 \x01(\x0e\x32(.chandra_bot_data_model.PRESENTATION_REC\x12\x46\n\x15publication_recommend\x18\x08 \x01(\x0e\x32\'.chandra_bot_data_model.PUBLICATION_REC\"u\n\x07\x43ontent\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12\x17\n\x0fspelling_errors\x18\x02 \x01(\x05\x12\x15\n\rgrammar_score\x18\x03 \x01(\x02\x12\x0c\n\x04text\x18\x04 \x01(\t\"9\n\tPaperBook\x12,\n\x05paper\x18\x01 \x03(\x0b\x32\x1d.chandra_bot_data_model.Paper*L\n\x10PRESENTATION_REC\x12\x1b\n\x17PRESENTATION_REC_REJECT\x10\x00\x12\x1b\n\x17PRESENTATION_REC_ACCEPT\x10\x01*m\n\x0fPUBLICATION_REC\x12\x1a\n\x16PUBLICATION_REC_REJECT\x10\x00\x12\x1a\n\x16PUBLICATION_REC_ACCEPT\x10\x01\x12\"\n\x1ePUBLICATION_REC_ACCEPT_CORRECT\x10\x02\x62\x06proto3'
+  serialized_pb=b'\n\x1c\x63handra_bot_data_model.proto\x12\x16\x63handra_bot_data_model\",\n\x0b\x41\x66\x66iliation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61liases\x18\x02 \x03(\t\"\xa4\x02\n\x05Human\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x61liases\x18\x02 \x03(\t\x12\x0f\n\x07hash_id\x18\x03 \x01(\t\x12@\n\x13\x63urrent_affiliation\x18\x04 \x01(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x41\n\x14previous_affiliation\x18\x05 \x03(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x44\n\x17last_degree_affiliation\x18\x06 \x01(\x0b\x32#.chandra_bot_data_model.Affiliation\x12\x11\n\torcid_url\x18\x07 \x01(\t\x12\r\n\x05orcid\x18\x08 \x01(\t\"\x9c\x03\n\x05Paper\x12\x0e\n\x06number\x18\x01 \x01(\t\x12/\n\x07\x61uthors\x18\x02 \x03(\x0b\x32\x1e.chandra_bot_data_model.Author\x12/\n\x07reviews\x18\x03 \x03(\x0b\x32\x1e.chandra_bot_data_model.Review\x12\r\n\x05title\x18\x04 \x01(\t\x12\x0c\n\x04year\x18\x05 \x01(\x05\x12Q\n\x1f\x63ommittee_presentation_decision\x18\x06 \x01(\x0e\x32(.chandra_bot_data_model.PRESENTATION_REC\x12O\n\x1e\x63ommittee_publication_decision\x18\x07 \x01(\x0e\x32\'.chandra_bot_data_model.PUBLICATION_REC\x12\x31\n\x08\x61\x62stract\x18\x08 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12-\n\x04\x62ody\x18\t \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\"6\n\x06\x41uthor\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\"\xa0\x01\n\x08Reviewer\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12\x10\n\x08verified\x18\x02 \x01(\x08\x12\x1a\n\x12mean_present_score\x18\x03 \x01(\x02\x12\x1d\n\x15std_dev_present_score\x18\x04 \x01(\x02\x12\x19\n\x11number_of_reviews\x18\x05 \x01(\x05\"\xae\x03\n\x06Review\x12\x32\n\x08reviewer\x18\x01 \x01(\x0b\x32 .chandra_bot_data_model.Reviewer\x12\x1a\n\x12presentation_score\x18\x02 \x01(\x02\x12 \n\x18normalized_present_score\x18\x03 \x01(\x02\x12=\n\x14\x63ommentary_to_author\x18\x04 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12<\n\x13\x63ommentary_to_chair\x18\x05 \x01(\x0b\x32\x1f.chandra_bot_data_model.Content\x12#\n\x1bpapers_written_with_authors\x18\x06 \x01(\x05\x12H\n\x16presentation_recommend\x18\x07 \x01(\x0e\x32(.chandra_bot_data_model.PRESENTATION_REC\x12\x46\n\x15publication_recommend\x18\x08 \x01(\x0e\x32\'.chandra_bot_data_model.PUBLICATION_REC\"u\n\x07\x43ontent\x12,\n\x05human\x18\x01 \x01(\x0b\x32\x1d.chandra_bot_data_model.Human\x12\x17\n\x0fspelling_errors\x18\x02 \x01(\x05\x12\x15\n\rgrammar_score\x18\x03 \x01(\x02\x12\x0c\n\x04text\x18\x04 \x01(\t\"9\n\tPaperBook\x12,\n\x05paper\x18\x01 \x03(\x0b\x32\x1d.chandra_bot_data_model.Paper*L\n\x10PRESENTATION_REC\x12\x1b\n\x17PRESENTATION_REC_REJECT\x10\x00\x12\x1b\n\x17PRESENTATION_REC_ACCEPT\x10\x01*m\n\x0fPUBLICATION_REC\x12\x1a\n\x16PUBLICATION_REC_REJECT\x10\x00\x12\x1a\n\x16PUBLICATION_REC_ACCEPT\x10\x01\x12\"\n\x1ePUBLICATION_REC_ACCEPT_CORRECT\x10\x02\x62\x06proto3'
 )
 
 _PRESENTATION_REC = _descriptor.EnumDescriptor(
@@ -39,8 +39,8 @@ _PRESENTATION_REC = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1747,
-  serialized_end=1823,
+  serialized_start=1642,
+  serialized_end=1718,
 )
 _sym_db.RegisterEnumDescriptor(_PRESENTATION_REC)
 
@@ -66,8 +66,8 @@ _PUBLICATION_REC = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1825,
-  serialized_end=1934,
+  serialized_start=1720,
+  serialized_end=1829,
 )
 _sym_db.RegisterEnumDescriptor(_PUBLICATION_REC)
 
@@ -299,13 +299,6 @@ _AUTHOR = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='papers', full_name='chandra_bot_data_model.Author.papers', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -319,7 +312,7 @@ _AUTHOR = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=812,
-  serialized_end=913,
+  serialized_end=866,
 )
 
 
@@ -338,36 +331,29 @@ _REVIEWER = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='reviews', full_name='chandra_bot_data_model.Reviewer.reviews', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='verified', full_name='chandra_bot_data_model.Reviewer.verified', index=2,
-      number=3, type=8, cpp_type=7, label=1,
+      name='verified', full_name='chandra_bot_data_model.Reviewer.verified', index=1,
+      number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='mean_present_score', full_name='chandra_bot_data_model.Reviewer.mean_present_score', index=3,
+      name='mean_present_score', full_name='chandra_bot_data_model.Reviewer.mean_present_score', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='std_dev_present_score', full_name='chandra_bot_data_model.Reviewer.std_dev_present_score', index=3,
       number=4, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='std_dev_present_score', full_name='chandra_bot_data_model.Reviewer.std_dev_present_score', index=4,
-      number=5, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='number_of_reviews', full_name='chandra_bot_data_model.Reviewer.number_of_reviews', index=5,
-      number=6, type=5, cpp_type=1, label=1,
+      name='number_of_reviews', full_name='chandra_bot_data_model.Reviewer.number_of_reviews', index=4,
+      number=5, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -384,8 +370,8 @@ _REVIEWER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=916,
-  serialized_end=1125,
+  serialized_start=869,
+  serialized_end=1029,
 )
 
 
@@ -404,37 +390,37 @@ _REVIEW = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='paper', full_name='chandra_bot_data_model.Review.paper', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='presentation_score', full_name='chandra_bot_data_model.Review.presentation_score', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='presentation_score', full_name='chandra_bot_data_model.Review.presentation_score', index=2,
+      name='normalized_present_score', full_name='chandra_bot_data_model.Review.normalized_present_score', index=2,
       number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='normalized_present_score', full_name='chandra_bot_data_model.Review.normalized_present_score', index=3,
-      number=4, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='commentary_to_author', full_name='chandra_bot_data_model.Review.commentary_to_author', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='commentary_to_author', full_name='chandra_bot_data_model.Review.commentary_to_author', index=4,
+      name='commentary_to_chair', full_name='chandra_bot_data_model.Review.commentary_to_chair', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='commentary_to_chair', full_name='chandra_bot_data_model.Review.commentary_to_chair', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='papers_written_with_authors', full_name='chandra_bot_data_model.Review.papers_written_with_authors', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -464,8 +450,8 @@ _REVIEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1128,
-  serialized_end=1567,
+  serialized_start=1032,
+  serialized_end=1462,
 )
 
 
@@ -516,8 +502,8 @@ _CONTENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1569,
-  serialized_end=1686,
+  serialized_start=1464,
+  serialized_end=1581,
 )
 
 
@@ -547,8 +533,8 @@ _PAPERBOOK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1688,
-  serialized_end=1745,
+  serialized_start=1583,
+  serialized_end=1640,
 )
 
 _HUMAN.fields_by_name['current_affiliation'].message_type = _AFFILIATION
@@ -561,11 +547,8 @@ _PAPER.fields_by_name['committee_publication_decision'].enum_type = _PUBLICATION
 _PAPER.fields_by_name['abstract'].message_type = _CONTENT
 _PAPER.fields_by_name['body'].message_type = _CONTENT
 _AUTHOR.fields_by_name['human'].message_type = _HUMAN
-_AUTHOR.fields_by_name['papers'].message_type = _PAPER
 _REVIEWER.fields_by_name['human'].message_type = _HUMAN
-_REVIEWER.fields_by_name['reviews'].message_type = _REVIEW
 _REVIEW.fields_by_name['reviewer'].message_type = _REVIEWER
-_REVIEW.fields_by_name['paper'].message_type = _PAPER
 _REVIEW.fields_by_name['commentary_to_author'].message_type = _CONTENT
 _REVIEW.fields_by_name['commentary_to_chair'].message_type = _CONTENT
 _REVIEW.fields_by_name['presentation_recommend'].enum_type = _PRESENTATION_REC

@@ -26,3 +26,6 @@ print('Make dataframes')
 paper_out_df = bot.make_dataframe('paper')
 review_out_df = bot.make_dataframe('review')
 human_out_df = bot.make_dataframe('human')
+
+print('Count former co-authors')
+bot.count_former_coauthors()
