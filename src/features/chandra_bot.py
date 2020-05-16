@@ -6,7 +6,7 @@ import itertools
 
 class chandra_bot(object):
     """
-    a class for data model
+    Add description
     """
 
     PAPER_DICT = {
@@ -204,6 +204,8 @@ class chandra_bot(object):
 
         bot = chandra_bot(input_paper_book = paper_book)
         bot.paper_df = bot.make_dataframe(dataframe_name = 'paper')
+        bot.review_df = bot.make_dataframe(dataframe_name = 'review')
+        bot.human_df = bot.make_dataframe(dataframe_name = 'human')
 
         return bot
 
@@ -275,10 +277,10 @@ class chandra_bot(object):
                 author_ids = []
                 for author in paper.authors:
                     authors.append(author.human.name)
-                    author_ids.append(author_id_df.loc[author_id_df['hash_id'] == author.human.hash_id]['author_id'].values[0])
+                    author_ids.append(str(author_id_df.loc[author_id_df['hash_id'] == author.human.hash_id]['author_id'].values[0]))
 
                 authors_string = ','.join(authors)
-                authors_id_string = ','.join(str(author_ids))
+                authors_id_string = ','.join(author_ids)
 
                 row_series = pd.Series({
                                 'paper_id': paper.number,
@@ -288,8 +290,8 @@ class chandra_bot(object):
                                 'year': paper.year,
                                 'committee_presentation_decision': paper.committee_presentation_decision,
                                 'committee_publication_decision': paper.committee_publication_decision,
-                                'abstract': paper.abstract,
-                                'body': paper.body
+                                'abstract': paper.abstract.text,
+                                'body': paper.body.text
                 })
                 row_df = pd.DataFrame([row_series])
                 output_df = pd.concat([output_df, row_df], ignore_index = True)
@@ -301,8 +303,8 @@ class chandra_bot(object):
                     row_series = pd.Series({
                                         'paper_id': paper.number,
                                         'presentation_score': review.presentation_score,
-                                        'commentary_to_author': review.commentary_to_author,
-                                        'commentary_to_chair': review.commentary_to_chair,
+                                        'commentary_to_author': review.commentary_to_author.text,
+                                        'commentary_to_chair': review.commentary_to_chair.text,
                                         'reviewer_human_hash_id': review.reviewer.human.hash_id,
                                         'presentation_recommendation': review.presentation_recommend,
                                         'publication_recommendation': review.publication_recommend,
@@ -310,6 +312,7 @@ class chandra_bot(object):
                     })
                     row_df = pd.DataFrame([row_series])
                     output_df = pd.concat([output_df, row_df], ignore_index = True)
+
         elif dataframe_name == 'human':
             author_id_df = self._make_author_id_df()
             for paper in self.paper_book.paper:
@@ -364,7 +367,7 @@ class chandra_bot(object):
                 a_b_df = pd.concat([a_df, b_df])
                 output_df = pd.concat([output_df, a_b_df])
 
-            output_df.drop_duplicates().groupby('hash_id').max()
+            output_df = output_df.drop_duplicates().groupby('hash_id').max().reset_index()
 
         else:
             print("dataframe_name must be 'paper', 'review', or 'human'")
@@ -382,28 +385,98 @@ class chandra_bot(object):
 
         return(df)
 
-    def count_former_coauthors(self):
-        pairs_df = pd.DataFrame()
-        for paper in self.paper_book.paper:
-            a_list = []
-            for author in paper.authors:
-                a_list.append(author.human.hash_id)
-            pairs = [a_list, a_list]
-            data = list(itertools.product(*pairs))
-            idx = ['{}'.format(i) for i in range(1, len(data) + 1)]
-            df = pd.DataFrame(data, index = idx, columns = list('ab'))
-            df = df[df.a != df.b]
-            pairs_df = pd.concat([pairs_df, df])
+    def count_former_coauthors(self, dataframe_only: bool = False):
+        if dataframe_only:
+            df = self.paper_df[['paper_id', 'author_ids']]
+            df = (pd.concat([df['paper_id'].reset_index(drop = True), df.author_ids.str.split(',', expand = True)], axis = 1)
+                .set_index('paper_id')
+                .stack()
+                .reset_index(level=[0,1])
+                .rename(columns = {0: 'author_id'})
+                .drop(columns = ['level_1'])
+                .set_index('paper_id')
+                .join(self.paper_df[['paper_id', 'year']].set_index('paper_id')))
 
-        pairs_df = pairs_df.groupby(['a','b']).size().reset_index(name='paper_count')
+            h_df = self.human_df.reset_index()[['hash_id', 'author_id']].astype({'author_id': 'int64'})
+            auth_df = df.astype({'author_id': 'int64'}).reset_index().merge(h_df, on = 'author_id', how = 'left')
 
-        for paper in self.paper_book.paper:
-            a_list = []
-            for author in paper.authors:
-                a_list.append(author.human.hash_id)
-            for review in paper.reviews:
-                r_hash_id = review.reviewer.human.hash_id
-                df = pairs_df[pairs_df['a'] == r_hash_id]
-                for a in a_list:
-                    a_df = df[df['b'] == a]
-                    review.papers_written_with_authors += sum(a_df['paper_count'])
+            r_df = self.review_df[['paper_id', 'reviewer_human_hash_id']]
+            a_r_pairs_df = auth_df.merge(r_df, on = 'paper_id', how = 'left').groupby(['hash_id', 'reviewer_human_hash_id']).size().reset_index(name = 'count')
+
+            df = auth_df.merge(auth_df, how = 'outer', on = ['paper_id', 'year'], suffixes=('_01', '_02'))
+            gb = df[['paper_id', 'year', 'hash_id_01', 'hash_id_02']].groupby(['hash_id_01', 'hash_id_02'])
+            a_a_pairs_df = gb.size().to_frame(name = 'papers_written_with_authors').join(gb.agg({'year': 'min'}).rename(columns = {'year': 'year_of_first_collab'})).reset_index()
+
+            conflict_r_df = a_r_pairs_df.merge(a_a_pairs_df, how = 'left', left_on = ['hash_id', 'reviewer_human_hash_id'], right_on = ['hash_id_01', 'hash_id_02']).dropna()
+
+            df = auth_df.merge(r_df, how = 'left', on = 'paper_id')
+            df_b = df.merge(conflict_r_df, how = 'left', on = ['hash_id', 'reviewer_human_hash_id']).dropna()
+            df_c = df_b[df_b['year_of_first_collab'] <= df_b['year']]
+            review_count_df = df_c[['paper_id', 'reviewer_human_hash_id', 'papers_written_with_authors']].reset_index(drop = True)
+
+            self.review_df = self.review_df.merge(review_count_df, how = 'left', on = ['paper_id', 'reviewer_human_hash_id']).fillna(0)
+
+        else:
+            pairs_df = pd.DataFrame()
+            for paper in self.paper_book.paper:
+                a_list = []
+                for author in paper.authors:
+                    a_list.append(author.human.hash_id)
+                pairs = [a_list, a_list]
+                data = list(itertools.product(*pairs))
+                idx = ['{}'.format(i) for i in range(1, len(data) + 1)]
+                df = pd.DataFrame(data, index = idx, columns = list('ab'))
+                df = df[df.a != df.b]
+                df['year'] = paper.year
+                pairs_df = pd.concat([pairs_df, df])
+
+            count_df = pairs_df.groupby(['a','b']).size().reset_index(name = 'paper_count')
+            first_df = pairs_df.groupby(['a','b']).min()[['year']].rename(columns = {'year': 'year_first_collab'})
+            pairs_df = count_df.join(first_df, on = ['a','b'])
+
+            for paper in self.paper_book.paper:
+                a_list = []
+                for author in paper.authors:
+                    a_list.append(author.human.hash_id)
+                for review in paper.reviews:
+                    r_hash_id = review.reviewer.human.hash_id
+                    df = pairs_df[pairs_df['a'] == r_hash_id]
+                    for a in a_list:
+                        a_df = df[(df.b == a) & df.year_first_collab <= paper.year]
+                        review.papers_written_with_authors += sum(a_df['paper_count'])
+
+    @staticmethod
+    def _count_words_in_text(key_words, output_col_name, df, input_col_name):
+        look_for = '|'.join(key_words)
+        df[output_col_name] = df[input_col_name].str.count(look_for)
+        return(df)
+
+    def count_words_in_paper_abstract(self, key_words, column_name: str, dataframe_only: bool = True):
+        if dataframe_only:
+            self.paper_df = chandra_bot._count_words_in_text(key_words, column_name, self.paper_df, 'abstract')
+        else:
+            print("dataframe_only must be True")
+
+    def count_words_in_review_commentary(self, key_words, column_name: str, dataframe_only: bool = True):
+        if dataframe_only:
+            self.review_df = chandra_bot._count_words_in_text(key_words, column_name, self.review_df, 'commentary_to_author')
+        else:
+            print("dataframe_only must be True")
+
+    def append_verified_reviewer(self, min_count: int, dataframe_only: bool = False):
+        if dataframe_only:
+            df = pd.merge(self.review_df, self.human_df[['hash_id', 'verified']], how = 'left', left_on = ['reviewer_human_hash_id'], right_on = ['hash_id'])
+            df = df.loc[df.verified][['paper_id', 'presentation_score']]
+            df = df.groupby('paper_id').agg(n = ('presentation_score', 'size'), mean_verified_score = ('presentation_score', 'mean'))
+            df = df.loc[df['n'] >= min_count].reset_index()
+            self.review_df = pd.merge(self.review_df, df[['paper_id', 'mean_verified_score']], how = 'left', on = ['paper_id'])
+        else:
+            for paper in self.paper_book.paper:
+                v_list = np.empty((0))
+                for review in paper.reviews:
+                    if review.reviewer.verified:
+                        v_list = np.append(v_list, review.normalized_present_score)
+                if len(v_list) > min_count:
+                    paper.mean_verified_score = np.mean(v_list)
+                else:
+                    paper.mean_verified_score = np.nan

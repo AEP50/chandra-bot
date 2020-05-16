@@ -39,6 +39,7 @@ message Paper {
   PUBLICATION_REC committee_publication_decision = 7;
   Content abstract = 8;
   Content body = 9;
+  float mean_verified_score = 10;
 }
 
 message Author {

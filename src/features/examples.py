@@ -29,3 +29,12 @@ human_out_df = bot.make_dataframe('human')
 
 print('Count former co-authors')
 bot.count_former_coauthors()
+
+print('Count former co-authors (via dataframes)')
+bot.count_former_coauthors(dataframe_only = True)
+
+print('Mean verified review score')
+bot.append_verified_reviewer(min_count = 2, dataframe_only = False)
+
+print('Mean verified review score (via dataframes)')
+bot.append_verified_reviewer(min_count = 2, dataframe_only = True)
