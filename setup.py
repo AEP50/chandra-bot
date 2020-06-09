@@ -18,7 +18,7 @@ with open("requirements.txt") as f:
 install_requires = [r.strip() for r in requirements]
 
 setup(
-    name="chandra_bot",
+    name="chandra-bot",
     version="0.0.1",
     description="",
     long_description=long_description,
@@ -26,7 +26,7 @@ setup(
     url="https://github.com/adb40/chandra-bot",
     license="Apache 2",
     platforms="any",
-    packages=["chandra_bot"],
+    packages=["src"],
     include_package_data=True,
     install_requires=install_requires,
 )

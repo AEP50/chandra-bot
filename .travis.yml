@@ -9,3 +9,6 @@ install:
   - pip install .
 script:
   - pytest -m travis
+deploy:
+  on:
+    branch: python_noodle
