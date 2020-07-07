@@ -26,7 +26,7 @@ setup(
     url="https://github.com/adb40/chandra-bot",
     license="Apache 2",
     platforms="any",
-    packages=["src"],
+    packages=["chandra_bot"],
     include_package_data=True,
     install_requires=install_requires,
 )
