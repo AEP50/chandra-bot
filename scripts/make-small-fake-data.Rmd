@@ -1,0 +1,463 @@
+---
+title: "Make Fake Data"
+output: html_notebook
+---
+
+# Overhead
+```{r overhead, include = FALSE}
+packages_vector <- c("tidyverse")
+
+need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
+
+if (length(need_to_install)) install.packages(need_to_install)
+
+for (package in packages_vector) {
+  library(package, character.only = TRUE)
+}
+
+```
+
+# Remote I-O
+```{r remote-io}
+source("hash-method.R")
+
+external_dir <- "../../data/external/"
+interim_dir <- "../../data/interim/"
+processed_dir <- "../../data/processed/"
+
+# see make-names-db
+first_name_file_name <- paste0(interim_dir, "first-names.RDS")
+last_name_file_name <- paste0(interim_dir, "last-names.RDS")
+
+# see make-article-titles-db
+article_titles_file_name <- paste0(interim_dir, "article-titles.RDS")
+
+# see make-english-sentence-db
+sentence_file_name <- paste0(interim_dir, "english-sentences.RDS")
+
+# see make-affiliations-db
+university_file_name <- paste0(interim_dir, "affiliations.RDS")
+
+output_paper_file_name <- paste0(processed_dir, "small_fake_paper_series")
+output_review_file_name <- paste0(processed_dir, "small_fake_review_series")
+output_human_file_name <- paste0(processed_dir, "small_fake_human")
+
+```
+
+# Parameters
+```{r parameters}
+NUMBER_HUMANS <- 100L
+NUMBER_PAPERS <- 200L
+MAX_AUTHORS_PER_PAPER <- 7L
+REVIEWERS_PER_PAPER <- 5L
+MAX_REVIEW_NUMBER_SENTENCES <- 20L
+MIN_PRESENTATION_SCORE <- 1L
+MAX_PRESENTATION_SCORE <- 5L
+MIN_ABSTRACT_LENGTH <- 5L
+MAX_ABSTRACT_LENGTH <- 20L
+ACCEPT_WORD <- "Accept" 
+REJECT_WORD <- "Reject"
+SEPARATOR <- "/"
+VERIFIED_REVIEWERS <- 10
+```
+
+# Data Reads
+```{r data-reads}
+first_names_df <- readRDS(first_name_file_name)
+last_names_df <- readRDS(last_name_file_name)
+
+article_titles_df <- readRDS(article_titles_file_name)
+
+sentence_df <- readRDS(sentence_file_name)
+
+university_df <- readRDS(university_file_name)
+
+```
+
+# Methods
+```{r  methods}
+select_first_n_random <- function(input_df, input_n) {
+  
+  return_df <- input_df %>%
+    bind_cols(., tibble(random = runif(nrow(.), min = 0.0, max = 1.0))) %>%
+    arrange(-random) %>%
+    head(input_n) %>%
+    select(-random)
+  
+  return(return_df)
+
+}
+
+create_universe_of_humans <- function(input_first_df, input_last_df, input_university_df, input_size) {
+  
+  # input_first_df <- first_names_df
+  # input_last_df <- last_names_df
+  # input_university_df <- university_df
+  # input_size <- NUMBER_HUMANS
+  
+  first_df <- select_first_n_random(input_first_df, input_size) 
+  
+  last_df <- select_first_n_random(input_last_df, input_size)
+  
+  university_df <- select_first_n_random(input_university_df, input_size)
+  
+  last_degree_df <- select_first_n_random(input_university_df, input_size) %>%
+    rename(last_degree_affiliation = affiliation)
+    
+  working_df <- bind_cols(first_df, last_df, university_df, last_degree_df) %>%
+    mutate(author_id = row_number()) %>%
+    mutate(orcid = sprintf("0000-0000-0000-00%02d", author_id)) %>%
+    rowwise() %>%
+    mutate(hash = hash_method(paste0(first, " ", last), last_degree_affiliation, orcid)) %>%
+    ungroup() %>%
+    bind_cols(., 
+              tibble(mean_score = rnorm(nrow(.), mean = 3.0,  sd = 0.75))) %>%
+    bind_cols(., tibble(sd_score = runif(nrow(.), min = 0.5, max = 2.0)))
+  
+  return_df <- select_first_n_random(select(working_df, author_id), VERIFIED_REVIEWERS) %>%
+    mutate(verified = TRUE) %>%
+    left_join(working_df, ., by = c("author_id")) %>%
+    mutate(verified = replace_na(verified, FALSE))
+    
+
+  return(return_df)
+  
+}
+
+create_papers <- function(input_humans_df, 
+                          input_articles_df, 
+                          input_sentence_df, 
+                          input_size, 
+                          input_max_authors,
+                          input_min_abstract_length,
+                          input_max_abstract_length) {
+  
+  # input_humans_df <- humans_df
+  # input_articles_df <- article_titles_df
+  # input_sentence_df <- sentence_df 
+  # input_size <- NUMBER_PAPERS
+  # input_max_authors <- MAX_AUTHORS_PER_PAPER
+  # input_min_abstract_length <- MIN_ABSTRACT_LENGTH
+  # input_max_abstract_length <- MAX_ABSTRACT_LENGTH
+  
+  working_title_df <- select_first_n_random(input_articles_df, input_size) %>%
+    mutate(paper_number = row_number())
+  
+  abstracts_df <- expand.grid(paper_number = seq(1:input_size), 
+                              sentence_index = seq(1:input_max_abstract_length)) %>%
+    left_join(., tibble(paper_number = seq(1:input_size),
+                        sentence_number = runif(input_size,
+                                                min = input_min_abstract_length,
+                                                max = input_max_abstract_length)),
+              by = c("paper_number")) %>%
+    arrange(paper_number, sentence_index) %>%
+    mutate(sentence_number = ceiling(sentence_number)) %>%
+    filter(sentence_index <= sentence_number) %>%
+    select(-sentence_number) %>%
+    bind_cols(., select_first_n_random(input_sentence_df, nrow(.))) %>%
+    group_by(paper_number) %>%
+    summarise(abstract = paste(sentence, collapse = " ")) %>%
+    ungroup()
+  
+  number_authors_df <- tibble(authors = runif(input_size, min = 0, max = input_max_authors)) %>%
+    mutate(authors = as.integer(ceiling(authors))) %>%
+    mutate(paper_number = row_number())
+  
+  authors_df <- expand.grid(paper_number = seq(1:input_size), author_number = seq(1:input_max_authors)) %>%
+    left_join(., number_authors_df, by = c("paper_number")) %>%
+    filter(author_number <= authors) %>%
+    select(paper_number, author_number) %>%
+    arrange(paper_number, author_number)
+  
+  working_humans_df <- input_humans_df
+  while (nrow(working_humans_df) < nrow(authors_df)) {
+    working_humans_df <- bind_rows(working_humans_df, working_humans_df)
+    
+  }
+  
+  return_df <- authors_df %>%
+    bind_cols(., head(working_humans_df, nrow(authors_df))) %>%
+    left_join(., working_title_df, by = c("paper_number")) %>%
+    left_join(., abstracts_df, by = c("paper_number")) %>%
+    select(paper_number, article_title, abstract, author_number, author_id)
+  
+  return(return_df)
+  
+}
+
+create_reviews <- function(input_humans_df, input_papers_df, input_sentence_df, 
+                           input_reviews_per, input_max_length){
+  
+  # input_humans_df <- humans_df
+  # input_papers_df <- papers_df
+  # input_sentence_df <- sentence_df
+  # input_reviews_per <- REVIEWERS_PER_PAPER
+  # input_max_length <- MAX_REVIEW_NUMBER_SENTENCES
+  
+  reviews_per_buffer <- input_reviews_per + 5L
+  
+  reviewers_comments_df <- expand.grid(paper_number = seq(1:nrow(input_papers_df)),
+                              reviewer_number = seq(1:reviews_per_buffer),
+                              comments = seq(1:input_max_length)) %>%
+    arrange(paper_number, reviewer_number, comments) %>%
+    bind_cols(., select_first_n_random(sentence_df, nrow(.))) %>%
+    rename(to_author = sentence) %>%
+    bind_cols(., select_first_n_random(sentence_df, nrow(.))) %>%
+    rename(to_chair = sentence)
+  
+  reviewers_df <- reviewers_comments_df %>%
+    distinct(paper_number, reviewer_number)
+  
+  working_humans_df <- input_humans_df 
+  while (nrow(working_humans_df) < nrow(reviewers_df)) {
+    working_humans_df <- bind_rows(working_humans_df, working_humans_df)
+  }
+  
+  reviewers_df <- bind_cols(reviewers_df, select_first_n_random(working_humans_df, nrow(reviewers_df))) %>%
+    select(paper_number, reviewer_number, reviewer_hash = hash)
+  
+  # check if authors are reveiwing their own paper
+  reviewer_check_df <- reviewers_df %>%
+    distinct(reviewer_hash, paper_number) %>%
+    mutate(reviewer = TRUE) %>%
+    select(hash = reviewer_hash, paper_number, reviewer)
+  
+  author_check_df <- input_papers_df %>%
+    distinct(author_id, paper_number) %>%
+    left_join(., input_humans_df, by = c("author_id")) %>%
+    mutate(author = TRUE) %>%
+    select(hash, paper_number, author)
+  
+  check_df <- left_join(reviewer_check_df, author_check_df, by = c("hash", "paper_number")) %>%
+    mutate(reviewer = replace_na(reviewer, FALSE)) %>%
+    mutate(author = replace_na(author, FALSE)) %>%
+    filter(author & reviewer) %>%
+    mutate(remove = TRUE) %>%
+    select(reviewer_hash = hash, paper_number,remove)
+  
+  working_df <- left_join(reviewers_df, check_df, by = c("reviewer_hash", "paper_number")) %>%
+    mutate(remove = replace_na(remove, FALSE)) %>%
+    filter(!remove) %>%
+    select(-remove) %>%
+    bind_cols(., tibble(number_to_author = runif(nrow(.), min = 0.0, max = input_max_length))) %>%
+    mutate(number_to_author = as.integer(ceiling(number_to_author))) %>%
+    bind_cols(., tibble(number_to_chair = runif(nrow(.), min = 0.0, max = input_max_length))) %>%
+    mutate(number_to_chair = as.integer(ceiling(number_to_chair))) %>%
+    left_join(reviewers_comments_df, ., by = c("paper_number", "reviewer_number")) %>%
+    filter(!is.na(reviewer_hash))
+  
+  comments_to_author_df <- working_df %>%
+    select(paper_number, reviewer_number, comments, to_author, reviewer_hash, number_to_author) %>%
+    filter(comments <= number_to_author) %>%
+    group_by(paper_number, reviewer_hash) %>%
+    summarise(reviewer_comments_to_author = paste(to_author, collapse = " ")) %>%
+    ungroup()
+  
+  comments_to_chair_df <- working_df %>%
+    select(paper_number, reviewer_number, comments, to_chair, reviewer_hash, number_to_chair) %>%
+    filter(comments <= number_to_chair) %>%
+    group_by(paper_number, reviewer_hash) %>%
+    summarise(confidential_comments = paste(to_chair, collapse = " ")) %>%
+    ungroup()
+  
+  presentation_score_df <- working_df %>%
+    distinct(paper_number, reviewer_hash) %>%
+    left_join(., 
+              select(input_humans_df, hash, mean_score, sd_score), 
+              by = c("reviewer_hash" = "hash")) %>%
+    rowwise() %>%
+    mutate(score = rnorm(1, mean = mean_score, sd = sd_score)) %>%
+    ungroup() %>%
+    mutate(score = as.integer(ceiling(score))) %>%
+    mutate(score = if_else(score < MIN_PRESENTATION_SCORE, MIN_PRESENTATION_SCORE, score)) %>%
+    mutate(score = if_else(score > MAX_PRESENTATION_SCORE, MAX_PRESENTATION_SCORE, score)) %>%
+    select(paper_number, reviewer_hash, rating = score)  
+  
+  threshold <- (MIN_PRESENTATION_SCORE + MAX_PRESENTATION_SCORE) / 2.0
+  
+  accept_reject_presentation_df <- presentation_score_df %>%
+    bind_cols(., tibble(random = runif(nrow(.), min = 0, max = 1.0))) %>%
+    mutate(presentation_recommendation = 
+             if_else(((random < 0.500 & rating >= threshold) | (random < 0.100 & rating >= (threshold - 1))),
+                     ACCEPT_WORD, REJECT_WORD)) %>%
+    select(paper_number, reviewer_hash, presentation_recommendation)
+  
+  accept_reject_publication_df <- presentation_score_df %>%
+    bind_cols(., tibble(random = runif(nrow(.), min = 0, max = 1.0))) %>%
+    mutate(publication_recommendation = 
+             if_else(((random < 0.400 & rating >= threshold) | (random < 0.050 & rating >= (threshold - 1))),
+                     ACCEPT_WORD, REJECT_WORD)) %>%
+    select(paper_number, reviewer_hash, publication_recommendation)
+  
+  reviews_per_paper_df <- input_papers_df %>%
+    distinct(paper_number) %>%
+    bind_cols(., 
+              tibble(number_of_reviews = runif(nrow(.), 
+                                               min = input_reviews_per - 2, 
+                                               max = input_reviews_per + 1))) %>%
+    mutate(number_of_reviews = as.integer(ceiling(number_of_reviews)))
+  
+  return_df <- working_df %>%
+    distinct(paper_number, reviewer_hash) %>%
+    group_by(paper_number) %>%
+    mutate(reviewer_number = row_number()) %>%
+    ungroup() %>%
+    left_join(., reviews_per_paper_df, by = c("paper_number")) %>%
+    filter(reviewer_number <= number_of_reviews) %>%
+    left_join(., comments_to_author_df, by = c("paper_number", "reviewer_hash")) %>%
+    left_join(., comments_to_chair_df, by = c("paper_number", "reviewer_hash")) %>%
+    left_join(., accept_reject_presentation_df, by = c("paper_number", "reviewer_hash")) %>%
+    left_join(., accept_reject_publication_df, by = c("paper_number", "reviewer_hash")) %>%
+    left_join(., presentation_score_df, by = c("paper_number", "reviewer_hash"))
+  
+  return(return_df)
+    
+}
+
+make_present_publish_decision <- function(input_papers_with_reviews_df) {
+  
+  # input_papers_with_reviews_df <- papers_with_reviews_df
+  
+  threshold <- (MIN_PRESENTATION_SCORE + MAX_PRESENTATION_SCORE) / 2.0
+  
+  decision_df <- input_papers_with_reviews_df %>%
+    distinct(paper_id, mean_rating) %>%
+    bind_cols(., tibble(random = runif(nrow(.), min = -1.0, max = 1.0))) %>%
+    mutate(present_decision = if_else((mean_rating + random) > threshold * 1.15,
+                                      ACCEPT_WORD, REJECT_WORD)) %>%
+    select(-random) %>%
+    bind_cols(., tibble(random = runif(nrow(.), min = -1.0, max = 1.0))) %>%
+    mutate(publish_decision = if_else((mean_rating + random) > threshold * 1.35,
+                                      ACCEPT_WORD, REJECT_WORD)) %>%
+    select(-random, -mean_rating)
+  
+  return_df <- left_join(input_papers_with_reviews_df, decision_df, by = c("paper_id"))
+  
+  return(return_df)
+  
+}
+```
+
+# Make Data
+```{r make-data}
+humans_df <- create_universe_of_humans(first_names_df, last_names_df, university_df, NUMBER_HUMANS)
+
+start_year <- 2015
+end_year <- 2020
+for (year_counter in seq(from = start_year, to = end_year)) {
+  
+  papers_df <- create_papers(humans_df, 
+                             article_titles_df, 
+                             sentence_df, 
+                             NUMBER_PAPERS, 
+                             MAX_AUTHORS_PER_PAPER,
+                             MIN_ABSTRACT_LENGTH,
+                             MAX_ABSTRACT_LENGTH)
+  
+  reviews_df <- create_reviews(humans_df, 
+                               papers_df, 
+                               sentence_df, 
+                               REVIEWERS_PER_PAPER, 
+                               MAX_REVIEW_NUMBER_SENTENCES) %>%
+    mutate(year = year_counter) %>%
+    mutate(paper_id = paste0(year, SEPARATOR, paper_number)) %>%
+    select(-paper_number)
+  
+  join_papers_df <- papers_df %>%
+    mutate(year = year_counter) %>%
+    mutate(paper_id = paste0(year, SEPARATOR, paper_number)) %>%
+    select(-paper_number)
+  
+  papers_with_reviews_df <- reviews_df %>%
+    left_join(., select(humans_df, reviewer_hash = hash, verified), by = c("reviewer_hash")) %>%
+    mutate(weight = if_else(verified, 2L, 1L)) %>%
+    group_by(paper_id) %>%
+    mutate(accept_is_1_present = if_else(presentation_recommendation == ACCEPT_WORD, 1L, 0L)) %>%
+    mutate(accept_is_1_publish = if_else(publication_recommendation == ACCEPT_WORD, 1L, 0L)) %>%
+    summarise(mean_rating = mean(rating),
+              mean_present_acceptance_rate = weighted.mean(accept_is_1_present, weight),
+              mean_publish_acceptance_rate = weighted.mean(accept_is_1_publish, weight)) %>%
+    ungroup() %>%
+    left_join(join_papers_df, ., by = c("paper_id"))
+  
+  papers_with_reviews_and_decisions_df <- make_present_publish_decision(papers_with_reviews_df)
+  
+  if (year_counter == start_year) {
+    
+    running_papers_df <- papers_with_reviews_and_decisions_df
+    running_reviews_df <- reviews_df
+    
+  } else {
+    
+    running_papers_df <- bind_rows(running_papers_df, papers_with_reviews_and_decisions_df)
+    running_reviews_df <- bind_rows(running_reviews_df, reviews_df)
+    
+  }
+  
+}
+
+authors_df <- running_papers_df %>%
+  select(paper_id, author_id) %>%
+  left_join(., select(humans_df, author_id, first, last), by = c("author_id")) %>%
+  mutate(author = paste0(first, " ", last)) %>%
+  group_by(paper_id) %>%
+  mutate(authors = paste0(author, collapse = ","),
+         author_ids = paste0(author_id, collapse = ",")) %>%
+  ungroup() %>%
+  distinct(paper_id, authors, author_ids) 
+
+output_papers_df <- running_papers_df %>%
+  distinct(paper_id, year, article_title, present_decision, publish_decision, abstract) %>%
+  left_join(., authors_df, by = c("paper_id")) %>%
+  mutate(body = as.character(NA)) %>%
+  select(paper_id,
+         authors, 
+         author_ids,
+         title = article_title,
+         year,
+         committee_presentation_decision = present_decision,
+         committee_publication_decision = publish_decision,
+         abstract,
+         body)
+        
+output_reviews_df <- running_reviews_df %>%
+  select(paper_id, 
+         presentation_score = rating,
+         commentary_to_author = reviewer_comments_to_author,
+         commentary_to_chair = confidential_comments,
+         reviewer_human_hash_id = reviewer_hash,
+         presentation_recommendation,
+         publication_recommendation)
+  
+output_humans_df <- humans_df %>%
+  mutate(name = paste0(first, " ", last),
+         aliases = as.character(NA),
+         previous_affiliation = as.character(NA),
+         last_degree_affiliation = as.character(NA),
+         orcid_url = as.character(NA),
+         orcid,) %>%
+  select(name, 
+         aliases, 
+         hash_id = hash, 
+         current_affiliation = affiliation,
+         previous_affiliation,
+         last_degree_affiliation,
+         orcid_url,
+         orcid,
+         author_id,
+         verified)
+         
+```
+
+# Write
+```{r write}
+write_csv(output_papers_df, path = paste0(output_paper_file_name, ".csv"))
+write_csv(output_reviews_df, path = paste0(output_review_file_name, ".csv"))
+write_csv(output_humans_df, path = paste0(output_human_file_name, ".csv"))
+
+saveRDS(output_papers_df, file = paste0(output_paper_file_name, ".RDS"))
+saveRDS(output_reviews_df, file = paste0(output_review_file_name, ".RDS"))
+saveRDS(output_humans_df, file = paste0(output_human_file_name, ".RDS"))
+```
+
+

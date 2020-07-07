@@ -1,0 +1,4 @@
+pandas
+google
+protobuf
+pytest
