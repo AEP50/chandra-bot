@@ -10,3 +10,5 @@ src/features/bin/*
 src/features/__pycache__/*
 src/features/include/*
 src/features/scratch.py
+
+*.pyc

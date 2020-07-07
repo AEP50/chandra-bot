@@ -8,7 +8,11 @@ install:
   - pip install -r requirements.txt
   - pip install .
 script:
-  - pytest
+  - pytest -m travis
 deploy:
+  provider: pages
+  sjip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
   on:
     branch: python_noodle

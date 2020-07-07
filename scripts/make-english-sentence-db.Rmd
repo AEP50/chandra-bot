@@ -1,0 +1,51 @@
+---
+title: "Make English Sentence Database"
+output: html_notebook
+---
+
+# Overhead
+```{r overhead, include = FALSE}
+packages_vector <- c("tidyverse")
+
+need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
+
+if (length(need_to_install)) install.packages(need_to_install)
+
+for (package in packages_vector){
+  library(package, character.only = TRUE)
+}
+
+```
+
+# Remote I-O
+```{r remote-io}
+external_dir <- "../../data/external/"
+interim_dir <- "../../data/interim/"
+
+# https://tatoeba.org/eng/downloads
+sentence_file_name <- paste0(external_dir, "sentences.csv")
+
+output_file_name <- paste0(interim_dir, "english-sentences.RDS")
+
+```
+
+# Data Reads
+```{r data-reads}
+input_line <- readLines(sentence_file_name)
+raw_sentence_df <- tibble(line_text = input_line)
+```
+
+# Clean Data
+```{r clean-data}
+sentence_df <- raw_sentence_df %>%
+  separate(., line_text, into = c("index", "language", "sentence"), sep = "\t", remove = TRUE) %>%
+  filter(language == "eng") %>%
+  select(sentence)
+```
+
+# Write Data
+```{r write-data}
+saveRDS(sentence_df, file = output_file_name)
+```
+
+
