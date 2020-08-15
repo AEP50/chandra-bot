@@ -26,8 +26,8 @@ paper_file_name <- paste0(processed_dir, "fake_paper_series")
 review_file_name <- paste0(processed_dir, "fake_review_series")
 human_file_name <- paste0(processed_dir, "fake_human")
 
-output_reduced_papers_file_name <- paste0(interim_dir, "tableau-reduced-papers.csv")
-output_reduced_reviews_file_name <- paste0(interim_dir, "tableau-reduced-reviews.csv")
+output_reduced_papers_file_name <- paste0(interim_dir, "fake-tableau-reduced-papers.csv")
+output_reduced_reviews_file_name <- paste0(interim_dir, "fake-tableau-reduced-reviews.csv")
 ```
 
 # Parameters
