@@ -46,8 +46,6 @@ class ChandraBot(object):
         'verified': 'bool'
     }
 
-    NORMALIZE_SCORE_MIN_REVIEWS = 10
-
     def __init__(
                 self,
                 paper_df: pd.DataFrame = None,
@@ -271,7 +269,7 @@ class ChandraBot(object):
                     except:
                         None
 
-    def compute_normalized_scores(self, min_number_reviews: int = NORMALIZE_SCORE_MIN_REVIEWS, dataframe_only: bool = False):
+    def compute_normalized_scores(self, min_number_reviews: int = 10, dataframe_only: bool = False):
         if dataframe_only:
             df = self.review_df
             mean_df = df.groupby('reviewer_human_hash_id').mean()[['presentation_score']].rename(columns = {'presentation_score': 'mean'})
@@ -284,7 +282,7 @@ class ChandraBot(object):
             df = df.rename(columns = {'mean': 'mean_present_score', 'std': 'std_dev_present_score', 'count': 'number_of_reviews'})
             self.review_df = df
         else:
-            self._compute_normalized_scores(min_number_scores)
+            self._compute_normalized_scores(min_number_reviews)
 
     def make_dataframe(self, dataframe_name: str):
         output_df = pd.DataFrame()
