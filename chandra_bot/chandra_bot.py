@@ -184,7 +184,7 @@ class ChandraBot(object):
             paper_row = self.paper_df.loc[paper_id]
             self._attribute_paper(paper, paper_row)
 
-            if 'author_id' in self.paper_df.columns:
+            if 'author_ids' in self.paper_df.columns:
                 for author_id in paper_row.author_ids.split(','):
                     human_row = self.human_df.loc[self.human_df['author_id'] == author_id]
                     self._attribute_author(paper, paper.authors.add(), human_row)
