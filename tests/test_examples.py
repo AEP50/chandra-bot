@@ -10,9 +10,9 @@ example_dir = os.path.join(os.getcwd(), 'examples')
 def test():
     print('Creating bot')
     bot = cbot.create_bot(
-    paper_file = os.path.join(example_dir, "data/processed/small_fake_paper_series.csv"),
-    review_file = os.path.join(example_dir, "data/processed/small_fake_review_series.csv"),
-    human_file = os.path.join(example_dir,"data/processed/small_fake_human.csv")
+    paper_file = os.path.join(example_dir, "small_fake_paper_series.csv"),
+    review_file = os.path.join(example_dir, "small_fake_review_series.csv"),
+    human_file = os.path.join(example_dir,"small_fake_human.csv")
     )
     print('Assembling the paper book')
     bot.assemble_paper_book()
@@ -24,7 +24,7 @@ def test():
     bot.compute_normalized_scores(dataframe_only = True)
 
     print('Writing paper book to disk')
-    book_file = os.path.join(example_dir, "data/processed/fake_serialized_paper_book.text")
+    book_file = os.path.join(example_dir, "fake_serialized_paper_book.text")
     bot.write_paper_book(output_file = book_file)
 
     print('Read paper book from disk')

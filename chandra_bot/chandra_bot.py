@@ -46,8 +46,6 @@ class ChandraBot(object):
         'verified': 'bool'
     }
 
-    NORMALIZE_SCORE_MIN_REVIEWS = 10
-
     def __init__(
                 self,
                 paper_df: pd.DataFrame = None,
@@ -76,22 +74,31 @@ class ChandraBot(object):
         paper.title = row['title']
         paper.year = int(row['year'])
 
-        if row['committee_presentation_decision'] == 'Reject':
+        if row['committee_presentation_decision'].lower() == 'reject':
             paper.committee_presentation_decision = dm.PRESENTATION_REC_REJECT
-        elif row['committee_presentation_decision'] == 'Accept':
+        elif row['committee_presentation_decision'].lower() == 'accept':
             paper.committee_presentation_decision = dm.PRESENTATION_REC_ACCEPT
         else:
-            paper.committee_presentation_decision = None
+            paper.committee_presentation_decision = dm.PRESENTATION_REC_NONE
 
-        if row['committee_publication_decision'] == 'Reject':
+        if row['committee_publication_decision'].lower() == 'reject':
             paper.committee_publication_decision = dm.PUBLICATION_REC_REJECT
-        elif row['committee_publication_decision'] == 'Accept':
+        elif row['committee_publication_decision'].lower() == 'accept':
             paper.committee_publication_decision = dm.PUBLICATION_REC_ACCEPT
+        elif row['committee_publication_decision'].lower() == 'accept_correct':
+            paper.committee_publication_decision = dm.PUBLICATION_REC_ACCEPT_CORRECT
         else:
-            paper.committee_publication_decision = None
+            paper.committee_publication_decision = dm.PUBLICATION_REC_NONE
 
-        paper.abstract.text = row['abstract']
-        paper.body.text = str(row['body'])
+        if 'abstract' in row:
+            paper.abstract.text = row['abstract']
+        else:
+            paper.abstract.text = 'Missing'
+
+        if 'body' in row:
+            paper.body.text = str(row['body'])
+        else:
+            paper.body.text = 'Missing'
 
     def _attribute_author(self, paper: dm.Paper, author: dm.Author, row: list):
         author.human.name = row['name'].values[0]
@@ -119,22 +126,30 @@ class ChandraBot(object):
 
     def _attribute_review(self, review: dm.Review, row: list):
         review.presentation_score = row['presentation_score']
-        review.commentary_to_author.text = row['commentary_to_author']
-        review.commentary_to_chair.text = row['commentary_to_chair']
 
-        if row['presentation_recommendation'] == 'Reject':
+        try:
+            review.commentary_to_author.text = row['commentary_to_author']
+        except:
+            review.commentary_to_author.text = ''
+
+        try:
+            review.commentary_to_chair.text = row['commentary_to_chair']
+        except:
+            review.commentary_to_chair.text = ''
+
+        if row['presentation_recommendation'].lower() == 'reject':
             review.presentation_recommend = dm.PRESENTATION_REC_REJECT
-        elif row['presentation_recommendation'] == 'Accept':
+        elif row['presentation_recommendation'].lower() == 'accept':
             review.presentation_recommend = dm.PRESENTATION_REC_ACCEPT
         else:
-            review.presentation_recommend = None
+            review.presentation_recommend = dm.PRESENTATION_REC_NONE
 
-        if row['publication_recommendation'] == 'Reject':
+        if row['publication_recommendation'].lower() == 'reject':
             review.publication_recommend = dm.PUBLICATION_REC_REJECT
-        elif row['publication_recommendation'] == 'Accept':
+        elif row['publication_recommendation'].lower() == 'accept':
             review.publication_recommend = dm.PUBLICATION_REC_ACCEPT
         else:
-            review.publication_recommend = None
+            review.publication_recommend = dm.PRESENTATION_REC_NONE
 
 
     def _attribute_reviewer(self, review: dm.Review, row: list):
@@ -159,7 +174,7 @@ class ChandraBot(object):
             None
 
         review.reviewer.human.orcid_url = str(row['orcid_url'].values[0])
-        review.reviewer.human.orcid = row['orcid'].values[0]
+        review.reviewer.human.orcid = str(row['orcid'].values[0])
         review.reviewer.verified = bool(row['verified'].values[0])
 
     def assemble_paper_book(self):
@@ -169,9 +184,10 @@ class ChandraBot(object):
             paper_row = self.paper_df.loc[paper_id]
             self._attribute_paper(paper, paper_row)
 
-            for author_id in paper_row.author_ids.split(','):
-                human_row = self.human_df.loc[self.human_df['author_id'] == author_id]
-                self._attribute_author(paper, paper.authors.add(), human_row)
+            if 'author_ids' in self.paper_df.columns:
+                for author_id in paper_row.author_ids.split(','):
+                    human_row = self.human_df.loc[self.human_df['author_id'] == author_id]
+                    self._attribute_author(paper, paper.authors.add(), human_row)
 
             paper_review_df = self.review_df.loc[self.review_df['paper_id'] == paper_id]
             paper_review_df.set_index('reviewer_human_hash_id')
@@ -215,7 +231,7 @@ class ChandraBot(object):
         with open(output_file, "wb") as f:
             f.write(self.paper_book.SerializeToString())
 
-    def _compute_normalized_scores(self):
+    def _compute_normalized_scores(self, min_number_reviews: int):
         scores_df = pd.DataFrame()
         for paper in self.paper_book.paper:
             for review in paper.reviews:
@@ -246,14 +262,14 @@ class ChandraBot(object):
                         review.reviewer.std_dev_present_score = row['std']
                         review.reviewer.number_of_reviews = int(row['count'])
 
-                        if row['count'] >= self.NORMALIZE_SCORE_MIN_REVIEWS:
+                        if row['count'] >= min_number_reviews:
                             review.normalized_present_score = (review.presentation_score - row['mean']) / row['std']
                         else:
                             review.normalized_present_score = None
                     except:
                         None
 
-    def compute_normalized_scores(self, dataframe_only: bool = False):
+    def compute_normalized_scores(self, min_number_reviews: int = 10, dataframe_only: bool = False):
         if dataframe_only:
             df = self.review_df
             mean_df = df.groupby('reviewer_human_hash_id').mean()[['presentation_score']].rename(columns = {'presentation_score': 'mean'})
@@ -266,7 +282,7 @@ class ChandraBot(object):
             df = df.rename(columns = {'mean': 'mean_present_score', 'std': 'std_dev_present_score', 'count': 'number_of_reviews'})
             self.review_df = df
         else:
-            self._compute_normalized_scores()
+            self._compute_normalized_scores(min_number_reviews)
 
     def make_dataframe(self, dataframe_name: str):
         output_df = pd.DataFrame()

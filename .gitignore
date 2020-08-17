@@ -3,12 +3,15 @@
 .RData
 .Ruserdata
 .DS_Store
+data/external/editorial_manager/paper_review_details_2019.xlsx
+data/interim/paper_review_for_tableau.csv
+data/interim/session_groups.csv
+data/interim/session_groups_number_2.csv
+src/scripts/hash-method.R
 data/external/sentences.csv
 
-src/scripts/hash-method.R
-src/features/bin/*
 src/features/__pycache__/*
-src/features/include/*
-src/features/scratch.py
-
 *.pyc
+chandra_bot.egg-info/*
+notebooks/.ipynb_checkpoints/confidential-analysis-checkpoint.ipynb
+notebooks/confidential-analysis.ipynb
