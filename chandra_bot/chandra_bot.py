@@ -385,7 +385,7 @@ class ChandraBot(object):
                 a_b_df = pd.concat([a_df, b_df])
                 output_df = pd.concat([output_df, a_b_df])
 
-            output_df = output_df.drop_duplicates().groupby('hash_id').max().reset_index()
+            output_df = output_df.drop_duplicates().groupby('hash_id').first().reset_index()
 
         else:
             print("dataframe_name must be 'paper', 'review', or 'human'")
