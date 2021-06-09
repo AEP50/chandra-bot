@@ -38,21 +38,27 @@ private_google_drive_path <- "~/project_chandra_bot/"
 
 papers_2019_file_name <- "ADB40 2019 Papers.xlsx"
 papers_2020_file_name <- "ADB40 2020 Papers.xlsx"
+papers_2021_file_name <- "AEP50 2021 Papers.xlsx"
 
 decisions_2019_file_name <- "adb40-annual-meeting-2019-decisions" 
 decisions_2020_file_name <- "adb40-annual-meeting-2020-decisions"
+decisions_2021_file_name <- "aep50-annual-meeting-2021-decisions"
 
 verified_file_name <- "aep50-verified-reviewers"
 
 fetch_df <- tibble(private = c(papers_2019_file_name,
                                papers_2020_file_name,
+                               papers_2021_file_name,
                                decisions_2019_file_name,
                                decisions_2020_file_name,
+                               decisions_2021_file_name,
                                verified_file_name),
                    local = c(paste0(confidential_dir, papers_2019_file_name),
                              paste0(confidential_dir, papers_2020_file_name),
+                             paste0(confidential_dir, papers_2021_file_name),
                              paste0(confidential_dir, decisions_2019_file_name, ".csv"),
                              paste0(confidential_dir, decisions_2020_file_name, ".csv"),
+                             paste0(confidential_dir, decisions_2021_file_name, ".csv"),
                              paste0(confidential_dir, verified_file_name, ".csv")))
 
 output_humans_file_name <- paste0(confidential_dir, "confidential-humans.csv")
@@ -62,7 +68,8 @@ output_papers_file_name <- paste0(confidential_dir, "confidential-papers.csv")
 
 # Parameters
 ```{r parameters}
-MAX_SCORE <- 5L
+max_score_df <- tibble(year = c(2019, 2020, 2021),
+                       max_score = c(5, 5, 10))
 
 pub_decision_dict_df <- tibble(bot_names = c("ACCEPT",
                                              "REJECT",
@@ -123,21 +130,32 @@ for (row in nrow(fetch_df)) {
                overwrite = TRUE)
 }
 
-input_2020_reviews_df <- read_excel(path = paste0(confidential_dir, papers_2019_file_name), 
+input_2019_reviews_df <- read_excel(path = paste0(confidential_dir, papers_2019_file_name), 
                                col_names = LETTERS[1:12])
 
-input_2019_reviews_df <- read_excel(path = paste0(confidential_dir, papers_2020_file_name), 
+input_2020_reviews_df <- read_excel(path = paste0(confidential_dir, papers_2020_file_name), 
                                col_names = LETTERS[1:12])
 
-committee_decisions_df <- bind_rows(read_csv(paste0(confidential_dir, decisions_2019_file_name, ".csv"), col_types = "ccc"),
-                                    read_csv(paste0(confidential_dir, decisions_2020_file_name, ".csv"), col_types = "ccc"))
+input_2021_reviews_df <- read_excel(path = paste0(confidential_dir, papers_2021_file_name), 
+                               col_names = LETTERS[1:20])
 
-verified_reviewers_vector <- read_csv(paste0(confidential_dir, verified_file_name, ".csv"), col_types = "c")$canonical_name
+committee_decisions_df <- bind_rows(
+  read_csv(paste0(confidential_dir, decisions_2019_file_name, ".csv"), col_types = "ccc"),
+  read_csv(paste0(confidential_dir, decisions_2020_file_name, ".csv"), col_types = "ccc"),
+  read_csv(paste0(confidential_dir, decisions_2021_file_name, ".csv"), col_types = "ccc"))
+
+verified_reviewers_vector <- read_csv(
+  paste0(confidential_dir, verified_file_name, ".csv"), col_types = "c"
+  )$canonical_name
 
 ```
 
 # Build Reviews Database
 ```{r build-review}
+working_2021_df <- slice(input_2021_reviews_df, 5:n())
+colnames(working_2021_df) <- slice(input_2021_reviews_df, 4:4)
+working_2021_df <- mutate(working_2021_df, year = 2021)
+
 working_2020_df <- slice(input_2020_reviews_df, 5:n())
 colnames(working_2020_df) <- slice(input_2020_reviews_df, 4:4)
 working_2020_df <- mutate(working_2020_df, year = 2020)
@@ -146,7 +164,7 @@ working_2019_df <- slice(input_2019_reviews_df, 5:n())
 colnames(working_2019_df) <- slice(input_2019_reviews_df, 4:4)
 working_2019_df <- mutate(working_2019_df, year = 2019)
 
-reviews_df <- bind_rows(working_2020_df, working_2019_df) %>%
+reviews_df <- bind_rows(working_2021_df, working_2020_df, working_2019_df) %>%
   select(paper_id = 'Manuscript Number',
          title = 'Article Title',
          reviewer_name = 'Reviewer Name',
@@ -156,8 +174,9 @@ reviews_df <- bind_rows(working_2020_df, working_2019_df) %>%
          editorial_status = 'Editorial Status',
          presentation_score = 'Overall score for Presentation',
          year) %>%
+  left_join(., max_score_df, by = c("year")) %>%
   mutate(presentation_score = as.numeric(presentation_score)) %>%
-  mutate(presentation_score = if_else(presentation_score > MAX_SCORE, 
+  mutate(presentation_score = if_else(presentation_score > max_score, 
                                       presentation_score / 2.0, 
                                       presentation_score)) %>%
   mutate(reviewer_name = gsub("[a-zA-z]{3}[0-9]{2}", "", reviewer_name, ignore.case = TRUE)) %>%
@@ -165,7 +184,7 @@ reviews_df <- bind_rows(working_2020_df, working_2019_df) %>%
   mutate(reviewer_name = gsub("[\\(][0-9][\\)]", "", reviewer_name)) %>%
   mutate(reviewer_name = trimws(reviewer_name))
 
-remove(working_2019_df, working_2020_df)
+remove(working_2019_df, working_2020_df, working_2021_df)
 ```
 
 # Reconcile Humans with Canonical
@@ -257,12 +276,12 @@ output_human_df <- left_join(
 
 join_df <- distinct(reviews_df, paper_id, year, title, pub_dec = editorial_status) %>%
   group_by(paper_id, year, title) %>%
-  summarise(pub_dec = min(pub_dec)) %>%
+  summarise(pub_dec = min(pub_dec), .groups = "drop") %>%
   ungroup()
 
 output_paper_df <- committee_decisions_df %>%
   group_by(paper_id) %>%
-  summarise(prez_dec = min(committee_decision)) %>%
+  summarise(prez_dec = min(committee_decision), .groups = "drop") %>%
   ungroup() %>%
   left_join(join_df, ., by = c("paper_id")) %>%
   mutate(prez_dec = toupper(prez_dec)) %>%
