@@ -3,6 +3,10 @@ title: "Make Data"
 output: html_notebook
 ---
 
+# TODO:
+# 1. Run tests with python change
+# 3. Add authors to the paper df
+
 # Overhead
 ```{r overhead, include = FALSE}
 packages_vector <- c("httpuv",
@@ -82,36 +86,45 @@ pub_decision_dict_df <- tibble(bot_names = c("ACCEPT",
                                                    "Revise",
                                                    "With Editor"))
 
-recommendation_dict_df <- tibble(review_recommendation = c("Accept",
-                                                           "Reject",
-                                                           "Accept: Presentation and Publication",
-                                                           "Accept: Presentation Only",
-                                                           "Accept: Presentation; Reject: Publication",
-                                                           "Accept: Presentation; Revise: Publication",
-                                                           "Accept: Publication Only",
-                                                           "Reject: Presentation and Publication",
-                                                           "Reject: Presentation Only",
-                                                           "Reject: Publication Only"),
-                                 presentation_recommendation = c("Accept",
-                                                                 "Reject",
-                                                                 "Accept",
-                                                                 "Accept",
-                                                                 "Accept",
-                                                                 "Accept",
-                                                                 "None",
-                                                                 "Reject",
-                                                                 "Reject",
-                                                                 "None"),
-                                 publication_recommendation = c("None",
-                                                                "None",
-                                                                "Accept",
-                                                                "None",
-                                                                "Reject",
-                                                                "Accept_Correct",
-                                                                "Accept",
-                                                                "Reject",
-                                                                "None",
-                                                                "Reject"))
+dict_2019_df <- tibble(review_recommendation = c("Accept: Presentation and Publication",
+                                                 "Accept: Presentation Only",
+                                                 "Accept: Presentation; Reject: Publication",
+                                                 "Accept: Presentation; Revise: Publication",
+                                                 "Accept: Publication Only",
+                                                 "Reject: Presentation and Publication",
+                                                 "Reject: Presentation Only",
+                                                 "Reject: Publication Only"),
+                       presentation_recommendation = c("Accept",
+                                                       "Accept",
+                                                       "Accept",
+                                                       "Accept",
+                                                       "None",
+                                                       "Reject",
+                                                       "Reject",
+                                                       "None"),
+                       publication_recommendation = c("Accept",
+                                                      "None",
+                                                      "Reject",
+                                                      "Accept_Correct",
+                                                      "Accept",
+                                                      "Reject",
+                                                      "None",
+                                                      "Reject"))
+
+dict_df <- tibble(review_recommendation = c("Accept",
+                                            "Reject"),
+                  presentation_recommendation = c("Accept",
+                                                  "Reject"),
+                  publication_recommendation = c("Accept",
+                                                 "Reject"))
+
+recommendation_dict_df <- bind_rows(
+  mutate(dict_2019_df, year = 2019L),
+  mutate(dict_df, year = 2020L),
+  mutate(dict_df, year = 2021L)
+)
+
+remove(dict_df, dict_2019_df)
 
 ```
 
@@ -154,7 +167,10 @@ verified_reviewers_vector <- read_csv(
 ```{r build-review}
 working_2021_df <- slice(input_2021_reviews_df, 5:n())
 colnames(working_2021_df) <- slice(input_2021_reviews_df, 4:4)
-working_2021_df <- mutate(working_2021_df, year = 2021)
+working_2021_df <- mutate(working_2021_df, year = 2021) %>%
+  rename(
+    `Overall score for Presentation` = 
+      `How strongly would you recommend this for presentation at the annual meeting?`)
 
 working_2020_df <- slice(input_2020_reviews_df, 5:n())
 colnames(working_2020_df) <- slice(input_2020_reviews_df, 4:4)
@@ -167,6 +183,7 @@ working_2019_df <- mutate(working_2019_df, year = 2019)
 reviews_df <- bind_rows(working_2021_df, working_2020_df, working_2019_df) %>%
   select(paper_id = 'Manuscript Number',
          title = 'Article Title',
+         type = 'Article Type',
          reviewer_name = 'Reviewer Name',
          commentary_to_chair = 'Reviewer Comments to Editor',
          commentary_to_author = 'Reviewer Comments to Author',
@@ -177,8 +194,8 @@ reviews_df <- bind_rows(working_2021_df, working_2020_df, working_2019_df) %>%
   left_join(., max_score_df, by = c("year")) %>%
   mutate(presentation_score = as.numeric(presentation_score)) %>%
   mutate(presentation_score = if_else(presentation_score > max_score, 
-                                      presentation_score / 2.0, 
-                                      presentation_score)) %>%
+                                      presentation_score / 2.0 / max_score, 
+                                      presentation_score / max_score)) %>%
   mutate(reviewer_name = gsub("[a-zA-z]{3}[0-9]{2}", "", reviewer_name, ignore.case = TRUE)) %>%
   mutate(reviewer_name = gsub("[a-zA-z]{2}[0-9]{3}", "", reviewer_name, ignore.case = TRUE)) %>%
   mutate(reviewer_name = gsub("[\\(][0-9][\\)]", "", reviewer_name)) %>%
@@ -223,12 +240,15 @@ remove(key_human_df, alias_01_human_df, alias_02_human_df, join_human_df, review
 # Prepare Outputs
 ```{r prepare-outputs}
 output_review_df <- left_join(reviews_df, matched_humans_df, by = c("reviewer_name")) %>%
-  select(year, paper_id, title, reviewer_human_hash_id = hash,
+  select(year, paper_id, type, title, reviewer_human_hash_id = hash,
          commentary_to_chair, commentary_to_author,
          review_recommendation, presentation_score, 
          editorial_status) %>%
-  left_join(., recommendation_dict_df, by = c("review_recommendation")) %>%
+  left_join(., recommendation_dict_df, by = c("review_recommendation", "year")) %>%
   select(-review_recommendation) %>%
+  mutate(publication_recommendation = if_else(year %in% c(2020L,2021L) & type == "Presentation",
+                                              "None",
+                                              publication_recommendation)) %>%
   mutate(presentation_recommendation = replace_na(presentation_recommendation, "None")) %>%
   mutate(publication_recommendation = replace_na(publication_recommendation, "None")) %>%
   left_join(., pub_decision_dict_df, by = c("editorial_status" = "editorial_names")) %>%
@@ -320,4 +340,3 @@ drive_upload(output_reviews_file_name,
 drive_upload(output_papers_file_name,
              path = private_google_drive_path)
 ```
-
