@@ -3,10 +3,6 @@ title: "Make Data"
 output: html_notebook
 ---
 
-# TODO:
-# 1. Run tests with python change
-# 3. Add authors to the paper df
-
 # Overhead
 ```{r overhead, include = FALSE}
 packages_vector <- c("httpuv",
