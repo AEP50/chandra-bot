@@ -1,5 +1,5 @@
 ---
-title: "Extract Paper Details from PDFs"
+title: "Consume Paper Details for 2021"
 output: html_notebook
 ---
 
@@ -21,23 +21,27 @@ for (package in packages_vector){
 
 ```
 
+# Parameters
+```{r parameters}
+YEAR <- 2021
+```
+
 # Remote I/O
 ```{r remote-io}
 confidential_dir <- "~/Documents/Confidential/"
-input_dir <- paste0(confidential_dir, "trb-papers/")
+input_dir <- paste0(confidential_dir, "trb-papers/2021/")
 
 google_drive_path <- "~/project_chandra_bhat/papers/"
 
-output_file_name <- paste0(confidential_dir, "submitted-paper-author-data")
+output_file_name <- paste0(confidential_dir, "submitted-paper-author-data-2021")
 
 ```
 
 # Fetch from Drive
-```{r fetch-from-drive}
-a_df <- drive_find(q = "name contains '20-0'", type = "pdf")
-b_df <- drive_find(q = "name contains 'TRBAM-21-'", type = "pdf")
+```{r fetch-from-drive, eval=FALSE}
+df <- drive_find(q = "name contains 'TRBAM-21-'", type = "pdf")
 
-file_vector <- bind_rows(a_df, b_df) %>%
+file_vector <- df %>%
   pull(., name)
 
 for (filename in file_vector){
@@ -47,8 +51,9 @@ for (filename in file_vector){
                overwrite = TRUE)
 }
   
-remove(a_df, b_df)
+remove(df)
 ```
+
 # Data Reads 
 ```{r data-reads}
 papers_vector <- paste0(input_dir, list.files(input_dir, pattern = "*.pdf"))
@@ -151,17 +156,21 @@ authors_df <- work_authors_df %>%
 
 output_df <- left_join(authors_df, email_df, by = c("document", "number")) %>%
   select(-number) %>%
-  left_join(., select(working_df, -authors, -email), by = c("document"))
+  left_join(., select(working_df, -authors, -email), by = c("document")) %>%
+  mutate(year = YEAR)
 
 ```
 
-
-
-### Data Write
+# Data Write
 ```{r data-write}
 saveRDS(output_df, file = paste0(output_file_name, ".RDS")) 
 write_csv(output_df, path = paste0(output_file_name, ".csv"))
 
+```
+
+# Upload to Drive
+```{r data-upload, eval=FALSE}
 drive_upload(paste0(output_file_name,".csv"), type= "spreadsheet")
 
 ```
+

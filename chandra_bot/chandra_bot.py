@@ -192,10 +192,15 @@ class ChandraBot(object):
 
             if "author_ids" in self.paper_df.columns:
                 for author_id in paper_row.author_ids.split(","):
-                    human_row = self.human_df.loc[
-                        self.human_df["author_id"] == author_id
-                    ]
-                    self._attribute_author(paper, paper.authors.add(), human_row)
+                    if author_id in self.human_df["author_id"]:
+                        human_row = self.human_df.loc[
+                            self.human_df["author_id"] == author_id
+                        ]
+                        self._attribute_author(
+                            paper,
+                            paper.authors.add(),
+                            human_row
+                        )
 
             paper_review_df = self.review_df.loc[self.review_df["paper_id"] == paper_id]
             paper_review_df.set_index("reviewer_human_hash_id")

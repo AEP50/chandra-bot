@@ -1,0 +1,174 @@
+---
+title: "Make Bot Inputs"
+output: html_notebook
+---
+
+# Overhead
+```{r overhead, include = FALSE}
+packages_vector <- c("tidyverse")
+
+need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
+
+if (length(need_to_install)) install.packages(need_to_install)
+
+for (package in packages_vector) {
+  library(package, character.only = TRUE)
+}
+
+source("hash-method.R")
+```
+
+# Remote I-O
+```{r remote-io}
+confidential_dir <- "~/Documents/Confidential/"
+secrets_dir <- "~/Documents/"
+
+canonical_human_file_name <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGm3PUsUUSFAuXHPGl_gFwHAqnAOaSWCTwrSI6IgKNHWSHWZvt3cS67GNB40mqHYsuoH_FOA3SPRhO/pub?gid=0&single=true&output=csv"
+
+verified_filename <- paste0(confidential_dir, "aep50-verified-reviewers.csv")
+
+review_filenames_vector <- c(paste0(confidential_dir, "confidential-reviews-2019.RDS"),
+                             paste0(confidential_dir, "confidential-reviews-2020.RDS"),
+                             paste0(confidential_dir, "confidential-reviews-2021.RDS"))
+
+paper_filenames_vector <- c(paste0(confidential_dir, "submitted-paper-author-data-2020.RDS"),
+                            paste0(confidential_dir, "submitted-paper-author-data-2021.RDS"))
+
+output_humans_file_name <- paste0(confidential_dir, "confidential-humans.csv")
+output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews.csv")
+output_papers_file_name <- paste0(confidential_dir, "confidential-papers.csv")
+```
+
+# Parameters
+```{r parameters}
+
+```
+
+# Data Reads
+```{r data-reads}
+canonical_human_df <- read_csv(canonical_human_file_name, 
+                               col_types = cols(.default = col_character()))
+
+input_reviews_df <- tibble()
+for (filename in review_filenames_vector) {
+  
+  df <- readRDS(filename)
+  input_reviews_df <- bind_rows(input_reviews_df, df)
+  
+}
+
+input_papers_df <- tibble()
+for (filename in paper_filenames_vector) {
+  
+  df <- readRDS(filename)
+  input_papers_df <- bind_rows(input_papers_df, df)
+  
+}
+
+verified_reviewers_vector <- read_csv(verified_filename, col_types = "c")$canonical_name
+```
+
+# Add Authors to Humans
+```{r add-authors}
+key_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                       orcid_url, last_degree_affiliation) %>%
+  mutate(join_name = canonical_name)
+
+alias_01_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                            orcid_url, last_degree_affiliation, alias_01) %>%
+  filter(!is.na(alias_01)) %>%
+  rename(join_name = alias_01)
+
+alias_02_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                            orcid_url, last_degree_affiliation, alias_02) %>%
+  filter(!is.na(alias_02)) %>%
+  rename(join_name = alias_02)
+
+join_human_df <- bind_rows(key_human_df, alias_01_human_df, alias_02_human_df)
+
+paper_human_df <- distinct(input_papers_df, author) %>%
+  left_join(., join_human_df, by = c("author" = "join_name")) %>%
+  mutate(author_id = row_number()) %>%
+  rowwise() %>%
+  mutate(hash = hash_function(canonical_name, orcid_url, last_degree_affiliation)) %>%
+  ungroup()
+
+missing_humans_df <- filter(paper_human_df, is.na(canonical_name))
+
+matched_humans_papers_df <- filter(paper_human_df, !is.na(canonical_name)) 
+
+# write_csv(missing_humans_df, path = "temp.csv")
+
+remove(key_human_df, alias_01_human_df, alias_02_human_df, paper_human_df)
+```
+
+# Make Bot Inputs
+```{r bot-inputs}
+output_reviews_df <- input_reviews_df
+
+output_papers_df <- input_papers_df %>%
+  rename(paper_id = manuscript_number) %>%
+  left_join(., matched_humans_papers_df, by = c("author")) %>%
+  group_by(paper_id) %>%
+  summarise(authors = str_c(canonical_name, collapse = ","),
+            author_ids = str_c(author_id, collapse = ","),
+            title = first(title),
+            abstract = first(abstract),
+            year = first(year),
+            .groups = "drop") %>%
+  left_join(., 
+            distinct(
+              output_reviews_df, 
+              paper_id, 
+              committee_publication_decision, 
+              committee_presentation_decision
+              ),
+            by = c("paper_id")) %>%
+  mutate(committee_presentation_decision = replace_na(committee_presentation_decision, "None")) %>%
+  mutate(committee_publication_decision = replace_na(committee_publication_decision, "None")) 
+
+output_humans_df <- canonical_human_df %>%
+  mutate(aliases = paste(alias_01, alias_02, sep = ",")) %>%
+  mutate(previous_affiliation = paste(previous_affiliation_01,
+                                      previous_affiliation_02,
+                                      previous_affiliation_03,
+                                      previous_affiliation_04,
+                                      previous_affiliation_05,
+                                      sep = ",")) %>%
+  rowwise() %>%
+  mutate(hash = hash_function(canonical_name, orcid_url, last_degree_affiliation)) %>%
+  ungroup() %>%
+  mutate(orcid = if_else(is.na(orcid_url), 
+                         as.character(NA), 
+                         str_sub(orcid_url, start = str_length("https://orcid.org/") + 1))) %>%
+  mutate(verified = canonical_name %in% verified_reviewers_vector) %>%
+  left_join(., select(matched_humans_papers_df, canonical_name, author_id), by = c("canonical_name")) %>%
+  select(name = canonical_name,
+         current_affiliation = affiliation,
+         aliases,
+         previous_affiliation,
+         orcid,
+         orcid_url,
+         author_id,
+         verified,
+         last_degree_affiliation,
+         hash_id = hash)
+
+```
+
+
+# Write to Disk
+```{r write-data}
+write_csv(output_humans_df, path = output_humans_file_name)
+write_csv(output_reviews_df, path = output_reviews_file_name)
+write_csv(output_papers_df, path = output_papers_file_name)
+
+```
+
+# Debug
+```{r}
+df <- output_reviews_df %>%
+  filter(paper_id == "20-03210")
+
+```
+
