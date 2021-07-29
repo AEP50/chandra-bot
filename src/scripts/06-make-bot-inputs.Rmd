@@ -88,7 +88,6 @@ join_human_df <- bind_rows(key_human_df, alias_01_human_df, alias_02_human_df)
 
 paper_human_df <- distinct(input_papers_df, author) %>%
   left_join(., join_human_df, by = c("author" = "join_name")) %>%
-  mutate(author_id = row_number()) %>%
   rowwise() %>%
   mutate(hash = hash_function(canonical_name, orcid_url, last_degree_affiliation)) %>%
   ungroup()
@@ -96,6 +95,11 @@ paper_human_df <- distinct(input_papers_df, author) %>%
 missing_humans_df <- filter(paper_human_df, is.na(canonical_name))
 
 matched_humans_papers_df <- filter(paper_human_df, !is.na(canonical_name)) 
+
+author_id_df <- matched_humans_papers_df %>%
+  distinct(canonical_name, affiliation, orcid_url, last_degree_affiliation, hash) %>%
+  mutate(author_id = row_number()) %>%
+  select(canonical_name, author_id)
 
 # write_csv(missing_humans_df, path = "temp.csv")
 
@@ -106,9 +110,11 @@ remove(key_human_df, alias_01_human_df, alias_02_human_df, paper_human_df)
 ```{r bot-inputs}
 output_reviews_df <- input_reviews_df
 
+join_author_df <- left_join(matched_humans_papers_df, author_id_df, by = c("canonical_name"))
+
 output_papers_df <- input_papers_df %>%
   rename(paper_id = manuscript_number) %>%
-  left_join(., matched_humans_papers_df, by = c("author")) %>%
+  left_join(., join_author_df, by = c("author")) %>%
   group_by(paper_id) %>%
   summarise(authors = str_c(canonical_name, collapse = ","),
             author_ids = str_c(author_id, collapse = ","),
@@ -142,7 +148,7 @@ output_humans_df <- canonical_human_df %>%
                          as.character(NA), 
                          str_sub(orcid_url, start = str_length("https://orcid.org/") + 1))) %>%
   mutate(verified = canonical_name %in% verified_reviewers_vector) %>%
-  left_join(., select(matched_humans_papers_df, canonical_name, author_id), by = c("canonical_name")) %>%
+  left_join(., author_id_df, by = c("canonical_name")) %>%
   select(name = canonical_name,
          current_affiliation = affiliation,
          aliases,
@@ -152,7 +158,7 @@ output_humans_df <- canonical_human_df %>%
          author_id,
          verified,
          last_degree_affiliation,
-         hash_id = hash)
+         hash_id = hash) 
 
 ```
 
@@ -165,10 +171,4 @@ write_csv(output_papers_df, path = output_papers_file_name)
 
 ```
 
-# Debug
-```{r}
-df <- output_reviews_df %>%
-  filter(paper_id == "20-03210")
-
-```
 
