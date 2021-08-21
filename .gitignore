@@ -13,5 +13,5 @@ data/external/sentences.csv
 src/features/__pycache__/*
 *.pyc
 chandra_bot.egg-info/*
-notebooks/.ipynb_checkpoints/confidential-analysis-checkpoint.ipynb
+notebooks/.ipynb_checkpoints/*
 notebooks/confidential-analysis.ipynb

@@ -66,10 +66,6 @@ class ChandraBot(object):
         else:
             self.paper_book: dm.PaperBook = input_paper_book
 
-            # self.paper_df = self.make_dataframe(dataframe_name = 'paper')
-            # self.review_df = self.make_dataframe('review')
-            # self.human_df = self.make_dataframe('human')
-
     def _attribute_paper(self, paper: dm.Paper, row: list) -> None:
 
         paper.title = row["title"]
@@ -192,7 +188,7 @@ class ChandraBot(object):
 
             if "author_ids" in self.paper_df.columns:
                 for author_id in paper_row.author_ids.split(","):
-                    if author_id in self.human_df["author_id"]:
+                    if self.human_df["author_id"].eq(author_id).any():
                         human_row = self.human_df.loc[
                             self.human_df["author_id"] == author_id
                         ]
