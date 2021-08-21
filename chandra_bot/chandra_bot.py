@@ -9,7 +9,45 @@ from . import chandra_bot_data_model_pb2 as dm
 
 class ChandraBot(object):
     """
-    Add description
+    A ChandraBot object that stores research paper details, review information, and authors.
+
+    .. highlight:: python
+
+    Typical usage:
+    ::
+       bot = ChandraBot.create_bot(
+           paper_file=os.path.join(PAPER_FILE),
+           review_file=os.path.join(REVIEW_FILE),
+           human_file=os.path.join(HUMAN_FILE),
+        )
+
+        bot.assemble_paper_book()
+        bot.compute_normalized_scores(dataframe_only=True)
+        bot.write_paper_book(output_file=book_file)
+    
+    Attributes:
+       PAPER_DICT (dict): dictionary of attributes for the 
+            PAPER_FILE input
+
+        REVIEW_DICT (dict): dictionary of attributs for the 
+            REVIEW_FILE input
+
+        HUMAN_DICT (dict): dictionary of attributes for the 
+            HUMAN_FILE input
+
+        paper_df (DataFame): paper data with the attributes
+           defined in PAPER_DICT
+
+        review_df (DataFrame): review data with the attributes
+           defined in REVIEW_DICT
+
+        human_df (DataFrame): human data with the attributes
+           defined in HUMAN_DICT
+
+        paper_book (PaperBook): a serialized data representation
+           of the paper, review, and human data. See the ProtoBuf
+           file for details. 
+
     """
 
     PAPER_DICT = {
@@ -55,7 +93,7 @@ class ChandraBot(object):
         input_paper_book: dm.PaperBook = None,
     ):
         """
-        constructor
+        Constructor
         """
         if input_paper_book is None:
             self.paper_df: pd.DataFrame = paper_df
@@ -180,6 +218,15 @@ class ChandraBot(object):
         review.reviewer.verified = bool(row["verified"].values[0])
 
     def assemble_paper_book(self):
+        """
+        Assemble the input databases into the serialized data
+        object defined in the protobuffer. Calling this method
+        allows the user to navigate the data using the serialized
+        data objects rather than via DataFrames. 
+
+        args:
+           None
+        """
         for paper_id in self.paper_df.index:
             paper = self.paper_book.paper.add()
             paper.number = paper_id
@@ -211,6 +258,20 @@ class ChandraBot(object):
 
     @staticmethod
     def create_bot(paper_file: str, review_file: str, human_file: str):
+        """
+        Create a ChandraBot object from separate paper, review, and
+        human CSV files. 
+
+        args:
+            paper_file: input CSV file consistent with the PAPER_DICT
+                definition
+            review_file: input CSV file consistent with the REVIEW_DICT
+                definition
+            human_file: input CSV file consistent wit the HUMAN_DICT 
+               definition
+
+        returns: a Chandra Bot example
+        """
 
         paper_df = pd.read_csv(
             paper_file, dtype=ChandraBot.PAPER_DICT, index_col="paper_id"
