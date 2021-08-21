@@ -1,0 +1,215 @@
+---
+title: "Consume Reviews for 2019"
+output: html_notebook
+---
+
+# Overhead
+```{r overhead, include = FALSE}
+packages_vector <- c("httpuv",
+                     "rorcid",
+                     "googledrive",
+                     "readxl",
+                     "tidyverse")
+
+need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
+
+if (length(need_to_install)) install.packages(need_to_install)
+
+for (package in packages_vector) {
+  library(package, character.only = TRUE)
+}
+
+```
+
+# Remote I-O
+```{r remote-io}
+source("hash-method.R")
+
+external_dir <- "../../data/external/"
+interim_dir <- "../../data/interim/"
+confidential_dir <- "~/Documents/Confidential/"
+secrets_dir <- "~/Documents/"
+
+canonical_human_file_name <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGm3PUsUUSFAuXHPGl_gFwHAqnAOaSWCTwrSI6IgKNHWSHWZvt3cS67GNB40mqHYsuoH_FOA3SPRhO/pub?gid=0&single=true&output=csv"
+
+local_canonical_human_file_name <- paste0(interim_dir, "canonical_humans.csv")
+
+private_google_drive_path <- "~/project_chandra_bot/"
+
+papers_file_name <- "ADB40 2019 Papers.xlsx"
+
+decisions_file_name <- "adb40-annual-meeting-2019-decisions.csv"
+
+fetch_df <- tibble(private = c(papers_file_name,
+                               decisions_file_name),
+                   local = c(paste0(confidential_dir, papers_file_name),
+                             paste0(confidential_dir, decisions_file_name)))
+
+output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews-2019.RDS")
+```
+
+# Parameters
+```{r parameters}
+YEAR <- 2019
+MAX_SCORE <- 5
+
+pub_decision_dict_df <- tibble(bot_names = c("ACCEPT",
+                                             "REJECT",
+                                             NA,
+                                             "ACCEPT_CORRECT",
+                                             "ACCEPT"),
+                               editorial_names = c("Completed Accept",
+                                                   "Completed Reject",
+                                                   "Required Reviews Completed",
+                                                   "Revise",
+                                                   "With Editor"))
+recommendation_dict_df <- tibble(review_recommendation = c("Accept: Presentation and Publication",
+                                                           "Accept: Presentation Only",
+                                                           "Accept: Presentation; Reject: Publication",
+                                                           "Accept: Presentation; Revise: Publication",
+                                                           "Accept: Publication Only",
+                                                           "Reject: Presentation and Publication",
+                                                           "Reject: Presentation Only",
+                                                           "Reject: Publication Only"),
+                                 presentation_recommendation = c("Accept",
+                                                                 "Accept",
+                                                                 "Accept",
+                                                                 "Accept",
+                                                                 "None",
+                                                                 "Reject",
+                                                                 "Reject",
+                                                                 "None"),
+                                 publication_recommendation = c("Accept",
+                                                                "None",
+                                                                "Reject",
+                                                                "Accept_Correct",
+                                                                "Accept",
+                                                                "Reject",
+                                                                "None",
+                                                                "Reject"))
+```
+
+# Google Drive Downloads
+```{r google-drive, eval=FALSE}
+for (row in nrow(fetch_df)) {
+  
+  private_file_name <- slice(fetch_df, row:row)$private
+  local_file_name <- slice(fetch_df, row:row)$local
+  
+  drive_download(file = private_file_name,
+               path = local_file_name,
+               overwrite = TRUE)
+}
+```
+
+# Data Reads
+```{r data-reads}
+canonical_human_df <- read_csv(canonical_human_file_name, 
+                               col_types = cols(.default = col_character()))
+
+input_reviews_df <- read_excel(path = paste0(confidential_dir, papers_file_name), 
+                               col_names = LETTERS[1:12])
+
+committee_decisions_df <- read_csv(paste0(confidential_dir, decisions_file_name), col_types = "ccc")
+
+```
+
+# Build Reviews Database
+```{r build-review}
+working_df <- slice(input_reviews_df, 5:n())
+colnames(working_df) <- slice(input_reviews_df, 4:4)
+working_df <- mutate(working_df, year = YEAR)
+
+reviews_df <- working_df %>%
+  select(paper_id = 'Manuscript Number',
+         title = 'Article Title',
+         type = 'Article Type',
+         reviewer_name = 'Reviewer Name',
+         commentary_to_chair = 'Reviewer Comments to Editor',
+         commentary_to_author = 'Reviewer Comments to Author',
+         review_recommendation = 'Reviewer Recommendation',
+         editorial_status = 'Editorial Status',
+         presentation_score = 'Overall score for Presentation',
+         year) %>%
+  mutate(max_score = MAX_SCORE) %>%
+  mutate(presentation_score = as.numeric(presentation_score)) %>%
+  mutate(presentation_score = if_else(presentation_score > max_score, 
+                                      presentation_score / 2.0 / max_score, 
+                                      presentation_score / max_score)) %>%
+  mutate(reviewer_name = gsub("[a-zA-z]{3}[0-9]{2}", "", reviewer_name, ignore.case = TRUE)) %>%
+  mutate(reviewer_name = gsub("[a-zA-z]{2}[0-9]{3}", "", reviewer_name, ignore.case = TRUE)) %>%
+  mutate(reviewer_name = gsub("[\\(][0-9][\\)]", "", reviewer_name)) %>%
+  mutate(reviewer_name = trimws(reviewer_name))
+
+remove(working_df)
+```
+
+# Reconcile Review Humans with Canonical
+```{r reconcile}
+key_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                       orcid_url, last_degree_affiliation) %>%
+  mutate(join_name = canonical_name)
+
+alias_01_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                            orcid_url, last_degree_affiliation, alias_01) %>%
+  filter(!is.na(alias_01)) %>%
+  rename(join_name = alias_01)
+
+alias_02_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                            orcid_url, last_degree_affiliation, alias_02) %>%
+  filter(!is.na(alias_02)) %>%
+  rename(join_name = alias_02)
+
+join_human_df <- bind_rows(key_human_df, alias_01_human_df, alias_02_human_df)
+
+review_human_df <- distinct(reviews_df, reviewer_name)
+
+working_df <- left_join(review_human_df, join_human_df, by = c("reviewer_name" = "join_name")) %>%
+  rowwise() %>%
+  mutate(hash = hash_function(canonical_name, orcid_url, last_degree_affiliation)) %>%
+  ungroup()
+
+missing_humans_df <- filter(working_df, is.na(canonical_name))
+
+matched_humans_reviewers_df <- working_df
+
+remove(key_human_df, alias_01_human_df, alias_02_human_df, review_human_df,
+       working_df)
+```
+
+# Prepare Outputs
+```{r prepare-outputs}
+output_review_df <- left_join(reviews_df, matched_humans_reviewers_df, by = c("reviewer_name")) %>%
+  select(year, paper_id, type, title, reviewer_human_hash_id = hash,
+         commentary_to_chair, commentary_to_author,
+         review_recommendation, presentation_score, 
+         editorial_status) %>%
+  left_join(., recommendation_dict_df, by = c("review_recommendation")) %>%
+  select(-review_recommendation) %>%
+  mutate(presentation_recommendation = replace_na(presentation_recommendation, "None")) %>%
+  mutate(publication_recommendation = replace_na(publication_recommendation, "None")) %>%
+  left_join(., pub_decision_dict_df, by = c("editorial_status" = "editorial_names")) %>%
+  rename(committee_publication_decision = bot_names) %>%
+  mutate(committee_publication_decision = replace_na(committee_publication_decision, "None")) %>%
+  select(-editorial_status) %>%
+  left_join(., select(committee_decisions_df, paper_id, 
+                      prez_dec = committee_decision),
+            by = c("paper_id")) %>%
+  mutate(prez_dec = toupper(prez_dec)) %>%
+  mutate(prez_dec = if_else(prez_dec == "PODIUM", "ACCEPT", prez_dec)) %>%
+  mutate(prez_dec = replace_na(prez_dec, "None")) %>%
+  rename(committee_presentation_decision = prez_dec) %>%
+  mutate(commentary_to_chair = str_replace_all(commentary_to_chair, '\\"', "'")) %>%
+  mutate(commentary_to_chair = gsub("\r?\n|\r", " ", commentary_to_chair)) %>%
+  mutate(commentary_to_chair = replace_na(commentary_to_chair, "None")) %>%
+  mutate(commentary_to_author = str_replace_all(commentary_to_author, '\\"', "'")) %>%
+  mutate(commentary_to_author = gsub("\r?\n|\r", " ", commentary_to_author)) %>%
+  mutate(commentary_to_author = replace_na(commentary_to_author, "None")) 
+  
+```
+
+# Write to Disk
+```{r write-data}
+saveRDS(output_review_df, output_reviews_file_name)
+
+```
