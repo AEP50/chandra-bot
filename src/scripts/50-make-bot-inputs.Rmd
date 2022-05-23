@@ -29,10 +29,12 @@ verified_filename <- paste0(confidential_dir, "aep50-verified-reviewers.csv")
 
 review_filenames_vector <- c(paste0(confidential_dir, "confidential-reviews-2019.RDS"),
                              paste0(confidential_dir, "confidential-reviews-2020.RDS"),
-                             paste0(confidential_dir, "confidential-reviews-2021.RDS"))
+                             paste0(confidential_dir, "confidential-reviews-2021.RDS"),
+                             paste0(confidential_dir, "confidential-reviews-2022.RDS"))
 
 paper_filenames_vector <- c(paste0(confidential_dir, "submitted-paper-author-data-2020.RDS"),
-                            paste0(confidential_dir, "submitted-paper-author-data-2021.RDS"))
+                            paste0(confidential_dir, "submitted-paper-author-data-2021.RDS"),
+                            paste0(confidential_dir, "submitted-paper-author-data-2022.RDS"))
 
 output_humans_file_name <- paste0(confidential_dir, "confidential-humans.csv")
 output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews.csv")
@@ -165,9 +167,9 @@ output_humans_df <- canonical_human_df %>%
 
 # Write to Disk
 ```{r write-data}
-write_csv(output_humans_df, path = output_humans_file_name)
-write_csv(output_reviews_df, path = output_reviews_file_name)
-write_csv(output_papers_df, path = output_papers_file_name)
+write_csv(output_humans_df, output_humans_file_name)
+write_csv(output_reviews_df, output_reviews_file_name)
+write_csv(output_papers_df, output_papers_file_name)
 
 ```
 

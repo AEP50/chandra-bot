@@ -1,0 +1,166 @@
+---
+title: "Consume Paper Details for 2022"
+output: html_notebook
+---
+
+# Overhead
+```{r overhead, include = FALSE}
+# install and load libraries
+packages_vector <- c("tidyverse",
+                     "googledrive",
+                     "qdapRegex",
+                     "pdftools")
+
+need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
+
+if (length(need_to_install)) install.packages(need_to_install)
+
+for (package in packages_vector){
+  library(package, character.only = TRUE)
+}
+
+```
+
+# Parameters
+```{r parameters}
+YEAR <- 2022
+```
+
+# Remote I/O
+```{r remote-io}
+confidential_dir <- "~/Documents/Confidential/"
+input_dir <- paste0(confidential_dir, "trb-papers/2022/")
+
+google_drive_path <- "~/project_chandra_bhat/papers"
+
+output_file_name <- paste0(confidential_dir, "submitted-paper-author-data-2022")
+
+```
+
+# Fetch from Drive
+```{r fetch-from-drive, eval=FALSE}
+df <- drive_find(q = "name contains 'TRBAM-22-'", type = "pdf")
+
+file_vector <- df %>%
+  pull(., name)
+
+for (filename in file_vector){
+  print(filename)
+  drive_download(file = filename,
+               path = paste0(input_dir, filename),
+               overwrite = TRUE)
+}
+  
+remove(df)
+```
+
+# Data Reads 
+```{r data-reads}
+papers_vector <- paste0(input_dir, list.files(input_dir, pattern = "*.pdf"))
+text_vector <- map(papers_vector, ~ pdf_text(.x)[1:2]) %>%
+  gsub("[\r\n]", "", .)
+
+raw_df <- tibble(document = basename(papers_vector), text = text_vector) %>%
+  mutate(text = gsub("[\r\n\r\t\v]", "", text))
+  
+```
+
+TODO
+Start here. `authors_df` is created, but then not used. Start with `work_authors_df` to see what's going on. Clean this up. 
+
+
+# Reduction
+```{r data-reduction}
+working_df <- raw_df %>%
+  mutate(title = qdapRegex::ex_between(text, "Full Title:", "Abstract"),
+         abstract = qdapRegex::ex_between(text, "Abstract:", "Manuscript Classifications:"),
+         manuscript_class = qdapRegex::ex_between(text, "Manuscript Classifications:", "Manuscript Number:"),
+         manuscript_number = qdapRegex::ex_between(text, "Manuscript Number:", "Article Type:"),
+         article_type = qdapRegex::ex_between(text, "Article Type:", "Order of Authors"),
+         authors = qdapRegex::ex_between(text, "Order of Authors", "Powered by Editorial"),
+         email = regmatches(text,
+                            gregexpr(
+                              "([_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4}))",
+                              text))) %>%
+  mutate(title = gsub("[\r\n]", " ", str_wrap(title, width = 0.9, indent = 0.9)), 
+         abstract = gsub("[\r\n]", " ", str_wrap(abstract, width = 0.9, indent = 0.9)),
+         manuscript_class = gsub("[\r\n]", " ", str_wrap(manuscript_class, width = 0.9, indent = 0.9)),
+         manuscript_number = gsub("[\\r\\n\\r\\t\\v]", "", manuscript_number),
+         article_type = trimws(article_type)) %>%
+  mutate(article_type = gsub("[\r\n]", "", article_type)) %>%
+  mutate(article_type = if_else(
+    str_detect(article_type, "Presentation and Publication"),
+    "Presentation and Publication",
+    "Publication")) %>%
+  select(document, 
+         title, 
+         abstract, 
+         manuscript_class, 
+         manuscript_number, 
+         article_type, 
+         authors, 
+         email)
+
+email_df <- working_df %>%
+  select(document, email) %>%
+  unnest(cols = c(email)) %>%
+  group_by(document) %>%
+  mutate(number = row_number()) %>%
+  ungroup()
+
+work_authors_df <- working_df %>%
+  select(document, input = authors) %>%
+  separate(., input, 
+           into = c(paste0(sprintf("author_%2d", seq(from = 1, to = 100)))), 
+           sep = "                ", 
+           remove = TRUE, 
+           extra = "drop",
+           fill = "right") %>%
+  pivot_longer(., cols = -c(document), values_to = "raw") %>%
+  filter(!is.na(raw)) %>%
+  mutate(author = trimws(raw)) %>%
+  filter(str_length(author) > 1) %>%
+  filter(str_count(author, pattern = "Response") == 0) %>%
+  mutate(author = str_replace(author, "Additional Information:", "")) %>%
+  mutate(author = str_replace(author, "Question", "")) %>%
+  group_by(document) %>%
+  mutate(number = row_number()) %>%
+  ungroup() %>%
+  select(document, number, author)
+
+stop <- TRUE
+while(stop) {
+  
+  work_authors_df <- work_authors_df %>%
+    mutate(right = str_sub(author, start = -2)) %>%
+    mutate(is_return = (right == "\\n")) %>%
+    mutate(author = if_else(is_return, str_sub(author, end = -3L), author))
+  
+  stop <- nrow(filter(work_authors_df, is_return)) > 0
+  
+}
+
+authors_df <- work_authors_df %>%
+  separate(., author, into = c("name", "drop"), sep = ",", remove = TRUE, fill = "right", extra = "drop") %>%
+  select(document, number, author = name)
+
+output_df <- left_join(authors_df, email_df, by = c("document", "number")) %>%
+  select(-number) %>%
+  left_join(., select(working_df, -authors, -email), by = c("document")) %>%
+  mutate(year = YEAR)
+
+```
+
+# Data Write
+```{r data-write}
+saveRDS(output_df, file = paste0(output_file_name, ".RDS")) 
+write_csv(output_df, file = paste0(output_file_name, ".csv"))
+
+```
+
+# Upload to Drive
+```{r data-upload, eval=FALSE}
+drive_upload(paste0(output_file_name,".csv"), type= "spreadsheet")
+
+```
+
