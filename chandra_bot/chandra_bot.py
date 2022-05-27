@@ -146,7 +146,11 @@ class ChandraBot(object):
             None
 
         author.human.hash_id = row["hash_id"].values[0]
-        author.human.current_affiliation.name = row["current_affiliation"].values[0]
+        try:
+            author.human.current_affiliation.name = row["current_affiliation"].values[0]
+        except:
+            author.human.current_affiliation.name = ""
+
         author.human.last_degree_affiliation.name = str(
             row["last_degree_affiliation"].values[0]
         )
@@ -158,8 +162,15 @@ class ChandraBot(object):
         except:
             None
 
-        author.human.orcid_url = str(row["orcid_url"].values[0])
-        author.human.orcid = row["orcid"].values[0]
+        try:
+            author.human.orcid_url = str(row["orcid_url"].values[0])
+        except:
+            author.human.orcid_url = ""
+        
+        try:
+            author.human.orcid = row["orcid"].values[0]
+        except:
+            author.human.orcid = ""
 
     def _attribute_review(self, review: dm.Review, row: list):
         review.presentation_score = row["presentation_score"]
@@ -189,7 +200,10 @@ class ChandraBot(object):
             review.publication_recommend = dm.PRESENTATION_REC_NONE
 
     def _attribute_reviewer(self, review: dm.Review, row: list):
-        review.reviewer.human.name = row["name"].values[0]
+        try:
+            review.reviewer.human.name = row["name"].values[0]
+        except:
+            review.reviewer.human.name = ""
 
         try:
             for alias in row["aliases"].values[0].split(","):
@@ -198,13 +212,20 @@ class ChandraBot(object):
         except:
             None
 
-        review.reviewer.human.hash_id = row["hash_id"].values[0]
-        review.reviewer.human.current_affiliation.name = row[
-            "current_affiliation"
-        ].values[0]
-        review.reviewer.human.last_degree_affiliation.name = str(
-            row["last_degree_affiliation"].values[0]
-        )
+        try:
+            review.reviewer.human.hash_id = row["hash_id"].values[0]
+        except:
+            review.reviewer.human.hash_id = ""
+
+        try:
+            review.reviewer.human.current_affiliation.name = row["current_affiliation"].values[0]
+        except:
+            review.reviewer.human.current_affiliation.name = ""
+
+        try:
+            review.reviewer.human.last_degree_affiliation.name = str(row["last_degree_affiliation"].values[0])
+        except:
+            review.reviewer.human.last_degree_affiliation.name = ""
 
         try:
             for affil_name in row["previous_affiliation"].values[0].split(","):
@@ -213,9 +234,20 @@ class ChandraBot(object):
         except:
             None
 
-        review.reviewer.human.orcid_url = str(row["orcid_url"].values[0])
-        review.reviewer.human.orcid = str(row["orcid"].values[0])
-        review.reviewer.verified = bool(row["verified"].values[0])
+        try:
+            review.reviewer.human.orcid_url = str(row["orcid_url"].values[0])
+        except:
+            review.reviewer.human.orcid_url = ""
+
+        try:
+            review.reviewer.human.orcid = str(row["orcid"].values[0])
+        except:
+            review.reviewer.human.orcid = ""
+
+        try:
+            review.reviewer.verified = bool(row["verified"].values[0])
+        except:
+            review.reviewer.verified = False
 
     def assemble_paper_book(self):
         """
