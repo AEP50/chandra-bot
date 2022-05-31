@@ -65,10 +65,6 @@ raw_df <- tibble(document = basename(papers_vector), text = text_vector) %>%
   
 ```
 
-TODO
-Start here. `authors_df` is created, but then not used. Start with `work_authors_df` to see what's going on. Clean this up. 
-
-
 # Reduction
 ```{r data-reduction}
 working_df <- raw_df %>%
