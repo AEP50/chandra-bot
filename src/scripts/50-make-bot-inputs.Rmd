@@ -70,8 +70,6 @@ for (filename in paper_filenames_vector) {
 verified_reviewers_vector <- read_csv(verified_filename, col_types = "c")$canonical_name
 ```
 
-# START HERE: needed to add missing authors to canonical database. A few with \n\n are still not joining. Figure out problem in the cleansing step in -consume-papers.
-
 # Add Authors to Humans
 ```{r add-authors}
 key_human_df <- select(canonical_human_df, canonical_name, affiliation, 
@@ -119,7 +117,7 @@ author_id_df <- matched_humans_papers_df %>%
   mutate(author_id = row_number()) %>%
   select(canonical_name, author_id)
 
-write_csv(missing_humans_df, "temp.csv")
+# write_csv(select(missing_humans_df, author), "temp.csv")
 
 remove(key_human_df, alias_01_human_df, alias_02_human_df, paper_human_df)
 ```
@@ -152,7 +150,7 @@ output_papers_df <- input_papers_df %>%
   mutate(committee_publication_decision = replace_na(committee_publication_decision, "None")) 
 
 output_humans_df <- canonical_human_df %>%
-  mutate(aliases = paste(alias_01, alias_02, sep = ",")) %>%
+  mutate(aliases = paste(alias_01, alias_02, alias_03, alias_04, sep = ",")) %>%
   mutate(previous_affiliation = paste(previous_affiliation_01,
                                       previous_affiliation_02,
                                       previous_affiliation_03,

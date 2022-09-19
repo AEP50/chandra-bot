@@ -128,6 +128,7 @@ stop <- TRUE
 while(stop) {
   
   work_authors_df <- work_authors_df %>%
+    mutate(author = trimws(author)) %>%
     mutate(right = str_sub(author, start = -2)) %>%
     mutate(is_return = (right == "\\n")) %>%
     mutate(author = if_else(is_return, str_sub(author, end = -3L), author))

@@ -3,9 +3,6 @@ title: "Consume Reviews for 2020"
 output: html_notebook
 ---
 
-# START HERE
-# refactor to just consume the 2021 reviews and decisions and assemble logically
-
 # Overhead
 ```{r overhead, include = FALSE}
 packages_vector <- c("httpuv",
