@@ -29,10 +29,12 @@ verified_filename <- paste0(confidential_dir, "aep50-verified-reviewers.csv")
 
 review_filenames_vector <- c(paste0(confidential_dir, "confidential-reviews-2019.RDS"),
                              paste0(confidential_dir, "confidential-reviews-2020.RDS"),
-                             paste0(confidential_dir, "confidential-reviews-2021.RDS"))
+                             paste0(confidential_dir, "confidential-reviews-2021.RDS"),
+                             paste0(confidential_dir, "confidential-reviews-2022.RDS"))
 
 paper_filenames_vector <- c(paste0(confidential_dir, "submitted-paper-author-data-2020.RDS"),
-                            paste0(confidential_dir, "submitted-paper-author-data-2021.RDS"))
+                            paste0(confidential_dir, "submitted-paper-author-data-2021.RDS"),
+                            paste0(confidential_dir, "submitted-paper-author-data-2022.RDS"))
 
 output_humans_file_name <- paste0(confidential_dir, "confidential-humans.csv")
 output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews.csv")
@@ -84,7 +86,21 @@ alias_02_human_df <- select(canonical_human_df, canonical_name, affiliation,
   filter(!is.na(alias_02)) %>%
   rename(join_name = alias_02)
 
-join_human_df <- bind_rows(key_human_df, alias_01_human_df, alias_02_human_df)
+alias_03_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                            orcid_url, last_degree_affiliation, alias_03) %>%
+  filter(!is.na(alias_03)) %>%
+  rename(join_name = alias_03)
+
+alias_04_human_df <- select(canonical_human_df, canonical_name, affiliation, 
+                            orcid_url, last_degree_affiliation, alias_04) %>%
+  filter(!is.na(alias_04)) %>%
+  rename(join_name = alias_04)
+
+join_human_df <- bind_rows(key_human_df, 
+                           alias_01_human_df, 
+                           alias_02_human_df, 
+                           alias_03_human_df, 
+                           alias_04_human_df)
 
 paper_human_df <- distinct(input_papers_df, author) %>%
   left_join(., join_human_df, by = c("author" = "join_name")) %>%
@@ -101,7 +117,7 @@ author_id_df <- matched_humans_papers_df %>%
   mutate(author_id = row_number()) %>%
   select(canonical_name, author_id)
 
-# write_csv(missing_humans_df, path = "temp.csv")
+# write_csv(select(missing_humans_df, author), "temp.csv")
 
 remove(key_human_df, alias_01_human_df, alias_02_human_df, paper_human_df)
 ```
@@ -134,7 +150,7 @@ output_papers_df <- input_papers_df %>%
   mutate(committee_publication_decision = replace_na(committee_publication_decision, "None")) 
 
 output_humans_df <- canonical_human_df %>%
-  mutate(aliases = paste(alias_01, alias_02, sep = ",")) %>%
+  mutate(aliases = paste(alias_01, alias_02, alias_03, alias_04, sep = ",")) %>%
   mutate(previous_affiliation = paste(previous_affiliation_01,
                                       previous_affiliation_02,
                                       previous_affiliation_03,
@@ -165,9 +181,9 @@ output_humans_df <- canonical_human_df %>%
 
 # Write to Disk
 ```{r write-data}
-write_csv(output_humans_df, path = output_humans_file_name)
-write_csv(output_reviews_df, path = output_reviews_file_name)
-write_csv(output_papers_df, path = output_papers_file_name)
+write_csv(output_humans_df, output_humans_file_name)
+write_csv(output_reviews_df, output_reviews_file_name)
+write_csv(output_papers_df, output_papers_file_name)
 
 ```
 

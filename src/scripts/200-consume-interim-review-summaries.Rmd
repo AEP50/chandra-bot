@@ -1,0 +1,131 @@
+---
+title: "Make Bot Inputs"
+output: html_notebook
+---
+
+# Overhead
+```{r overhead, include = FALSE}
+packages_vector <- c("tidyverse",
+                     "readxl")
+
+need_to_install <- packages_vector[!(packages_vector %in% installed.packages()[,"Package"])]
+
+if (length(need_to_install)) install.packages(need_to_install)
+
+for (package in packages_vector) {
+  library(package, character.only = TRUE)
+}
+
+```
+
+# Remote I-O
+```{r remote-io}
+confidential_dir <- "~/Documents/Confidential/"
+
+input_filename <- paste0(confidential_dir, "AEP50_Review Results Summary-9-20-2022.xlsx")
+
+output_filename <- paste0(confidential_dir, "interim-review-summaries.csv")
+chair_filename <- paste0(confidential_dir, "interim-chair-summaries.csv")
+```
+
+# Parameters
+```{r parameters}
+
+```
+
+# Data Reads
+```{r data-reads}
+raw_df <- readxl::read_xlsx(input_filename, 
+                            skip = 3, 
+                            col_names = c("paper_id", 
+                                          "presentation_publish",
+                                          "required_reviews",
+                                          "review_id",
+                                          "confidential_comments",
+                                          "comments_to_author",
+                                          "recommendation",
+                                          "review_complete",
+                                          "editorial_status",
+                                          "Conclusion is valid and properly supported",
+                                          "Data are valid relevant and contribute to the findings",
+                                          "Does the abstract clearly communicate the scope and outcome of the study?",
+                                          "Existing work well described and referenced",
+                                          "How strongly would you recommend this for presentation at the annual meeting?",
+                                          "How strongly would you recommend this paper for publication consideration by the Editorial Board?",
+                                          "Important contribution to the state of the art or practice?",
+                                          "Is the narrative clear and easy to understand?",
+                                          "Methodology sufficiently explained for a knowledgeable reader to repeat the study?"))
+                                          
+                                          
+                                          
+                                    
+```
+
+# Reductions for Handler Database
+```{r handler}
+paper_id_df <- raw_df %>%
+  select(paper_id) %>%
+  filter(str_detect(paper_id, "TRBAM-"))
+
+titles_df <- raw_df %>%
+  select(paper_id) %>%
+  filter(!(str_detect(paper_id, "TRBAM-"))) %>%
+  distinct(paper_id) %>%
+  rename(paper_title = paper_id) %>%
+  filter(paper_title != "Article Title")
+
+output_df <- raw_df %>%
+  filter(!(str_detect(paper_id, "TRBAM-"))) %>%
+  rename(paper_title = paper_id) %>%
+  filter(paper_title != "Article Title") %>%
+  left_join(., bind_cols(paper_id_df, titles_df), by = c("paper_title")) %>%
+  select(paper_id, everything())
+  
+
+```
+
+# Reductions for Chair Database
+```{r chair}
+chair_df <- output_df %>%
+  rename(score_conclusion = `Conclusion is valid and properly supported`,
+         score_relevant = `Data are valid relevant and contribute to the findings`,
+         score_abstract = `Does the abstract clearly communicate the scope and outcome of the study?`,
+         score_reference = `Existing work well described and referenced`,
+         score_present = `How strongly would you recommend this for presentation at the annual meeting?`,
+         score_important = `Important contribution to the state of the art or practice?`,
+         score_narrative = `Is the narrative clear and easy to understand?`,
+         score_methodology = `Methodology sufficiently explained for a knowledgeable reader to repeat the study?`) %>%
+  mutate(across(.cols = starts_with("score_"), as.integer)) %>%
+  mutate(indiv_sum = score_conclusion +
+           score_relevant +
+           score_abstract +
+           score_reference +
+           score_present +
+           score_important +
+           score_narrative +
+           score_methodology) %>%
+  mutate(indiv_mean = indiv_sum / 8.0) %>%
+  mutate(count_accept = if_else(recommendation == "Accept", 1L, 0L)) %>%
+  mutate(count_reject = if_else(recommendation == "Reject", 1L, 0L)) %>%
+  group_by(paper_id) %>%
+  summarise(mean_present_score = mean(score_present),
+            stdev_present_score = sd(score_present),
+            accept_count = sum(count_accept),
+            reject_count = sum(count_reject),
+            mean_category_score = mean(indiv_mean),
+            stdev_category_score = sd(indiv_mean),
+            .groups = "drop")
+
+
+
+```
+
+
+
+# Write to Disk
+```{r write-data}
+write_csv(output_df, output_filename)
+write_csv(chair_df, chair_filename)
+```
+
+

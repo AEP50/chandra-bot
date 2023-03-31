@@ -54,6 +54,7 @@ message Reviewer {
   float mean_present_score = 3;
   float std_dev_present_score = 4;
   int32 number_of_reviews = 5;
+  int32 assigned_reviews_not_complete = 6;
 }
 
 message Review {

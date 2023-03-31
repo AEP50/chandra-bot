@@ -1,10 +1,7 @@
 ---
-title: "Consume Reviews for 2020"
+title: "Consume Reviews for 2021"
 output: html_notebook
 ---
-
-# START HERE
-# refactor to just consume the 2021 reviews and decisions and assemble logically
 
 # Overhead
 ```{r overhead, include = FALSE}
@@ -39,22 +36,23 @@ local_canonical_human_file_name <- paste0(interim_dir, "canonical_humans.csv")
 
 private_google_drive_path <- "~/project_chandra_bot/"
 
-papers_file_name <- "ADB40 2020 Papers.xlsx"
+papers_file_name <- "AEP50 2021 Papers.xlsx"
 
-decisions_file_name <- "adb40-annual-meeting-2020-decisions.csv"
+decisions_file_name <- "aep50-annual-meeting-2021-decisions.csv"
 
 fetch_df <- tibble(private = c(papers_file_name,
                                decisions_file_name),
                    local = c(paste0(confidential_dir, papers_file_name),
                              paste0(confidential_dir, decisions_file_name)))
 
-output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews-2020.RDS")
+output_humans_file_name <- paste0(confidential_dir, "confidential-humans-2021.RDS")
+output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews-2021.RDS")
 ```
 
 # Parameters
 ```{r parameters}
-YEAR <- 2020
-MAX_SCORE <- 5
+YEAR <- 2021
+MAX_SCORE <- 10
 
 pub_decision_dict_df <- tibble(bot_names = c("ACCEPT",
                                              "REJECT",
@@ -93,7 +91,7 @@ canonical_human_df <- read_csv(canonical_human_file_name,
                                col_types = cols(.default = col_character()))
 
 input_reviews_df <- read_excel(path = paste0(confidential_dir, papers_file_name), 
-                               col_names = LETTERS[1:12])
+                               col_names = LETTERS[1:20])
 
 committee_decisions_df <- read_csv(paste0(confidential_dir, decisions_file_name), col_types = "ccc")
 
@@ -103,7 +101,10 @@ committee_decisions_df <- read_csv(paste0(confidential_dir, decisions_file_name)
 ```{r build-review}
 working_df <- slice(input_reviews_df, 5:n())
 colnames(working_df) <- slice(input_reviews_df, 4:4)
-working_df <- mutate(working_df, year = YEAR)
+working_df <- mutate(working_df, year = YEAR) %>%
+  rename(
+    `Overall score for Presentation` = 
+      `How strongly would you recommend this for presentation at the annual meeting?`)
 
 reviews_df <- working_df %>%
   select(paper_id = 'Manuscript Number',
@@ -193,8 +194,7 @@ output_review_df <- left_join(reviews_df, matched_humans_reviewers_df, by = c("r
   mutate(commentary_to_author = str_replace_all(commentary_to_author, '\\"', "'")) %>%
   mutate(commentary_to_author = gsub("\r?\n|\r", " ", commentary_to_author)) %>%
   mutate(commentary_to_author = replace_na(commentary_to_author, "None")) 
-
-
+       
 ```
 
 # Write to Disk
@@ -202,3 +202,4 @@ output_review_df <- left_join(reviews_df, matched_humans_reviewers_df, by = c("r
 saveRDS(output_review_df, output_reviews_file_name)
 
 ```
+

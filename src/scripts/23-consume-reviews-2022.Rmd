@@ -1,5 +1,5 @@
 ---
-title: "Consume Reviews for 2021"
+title: "Consume Reviews for 2022"
 output: html_notebook
 ---
 
@@ -36,22 +36,22 @@ local_canonical_human_file_name <- paste0(interim_dir, "canonical_humans.csv")
 
 private_google_drive_path <- "~/project_chandra_bot/"
 
-papers_file_name <- "AEP50 2021 Papers.xlsx"
+papers_file_name <- "AEP50 2022 Papers.xlsx"
 
-decisions_file_name <- "aep50-annual-meeting-2021-decisions.csv"
+decisions_file_name <- "aep50-annual-meeting-2022-decisions.csv"
 
 fetch_df <- tibble(private = c(papers_file_name,
                                decisions_file_name),
                    local = c(paste0(confidential_dir, papers_file_name),
                              paste0(confidential_dir, decisions_file_name)))
 
-output_humans_file_name <- paste0(confidential_dir, "confidential-humans-2021.RDS")
-output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews-2021.RDS")
+output_humans_file_name <- paste0(confidential_dir, "confidential-humans-2022.RDS")
+output_reviews_file_name <- paste0(confidential_dir, "confidential-reviews-2022.RDS")
 ```
 
 # Parameters
 ```{r parameters}
-YEAR <- 2021
+YEAR <- 2022
 MAX_SCORE <- 10
 
 pub_decision_dict_df <- tibble(bot_names = c("ACCEPT",
