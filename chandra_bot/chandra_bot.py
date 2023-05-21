@@ -1,10 +1,14 @@
+"""
+Module docstring
+"""
 from __future__ import print_function
+
+import itertools
 
 import numpy as np
 import pandas as pd
-import itertools
 
-from . import chandra_bot_data_model_pb2 as dm
+from . import data_model_pb2 as dm
 
 
 class ChandraBot(object):
@@ -24,15 +28,15 @@ class ChandraBot(object):
         bot.assemble_paper_book()
         bot.compute_normalized_scores(dataframe_only=True)
         bot.write_paper_book(output_file=book_file)
-    
+
     Attributes:
-       PAPER_DICT (dict): dictionary of attributes for the 
+       PAPER_DICT (dict): dictionary of attributes for the
             PAPER_FILE input
 
-        REVIEW_DICT (dict): dictionary of attributs for the 
+        REVIEW_DICT (dict): dictionary of attributs for the
             REVIEW_FILE input
 
-        HUMAN_DICT (dict): dictionary of attributes for the 
+        HUMAN_DICT (dict): dictionary of attributes for the
             HUMAN_FILE input
 
         paper_df (DataFame): paper data with the attributes
@@ -46,7 +50,7 @@ class ChandraBot(object):
 
         paper_book (PaperBook): a serialized data representation
            of the paper, review, and human data. See the ProtoBuf
-           file for details. 
+           file for details.
 
     """
 
@@ -135,54 +139,51 @@ class ChandraBot(object):
         else:
             paper.body.text = "Missing"
 
-    def _attribute_author(self, paper: dm.Paper, author: dm.Author, row: list):
+    def _attribute_author(self, author: dm.Author, row: list):
         author.human.name = row["name"].values[0]
 
-        try:
+        if not pd.isnull(row["aliases"].values[0]):
             for alias in row["aliases"].values[0].split(","):
-                new_alias = author.human.aliases.add()
-                new_alias = alias
-        except:
-            None
+                author.human.aliases.append(alias)
 
         author.human.hash_id = row["hash_id"].values[0]
-        try:
+        if not pd.isnull(row["current_affiliation"].values[0]):
             author.human.current_affiliation.name = row["current_affiliation"].values[0]
-        except:
+        else:
             author.human.current_affiliation.name = ""
 
         author.human.last_degree_affiliation.name = str(
             row["last_degree_affiliation"].values[0]
         )
 
-        try:
-            for affil_name in row["previous_affiliation"].values[0].split(","):
-                affiliation = author.human.previous_affiliation.add()
-                affiliation.name = row["previous_affiliation"].values[0]
-        except:
-            None
+        if not pd.isnull(row["previous_affiliation"].values[0]):
+            affil_list = row["previous_affiliation"].values[0].split(",")
+            if len(affil_list) > 0:
+                for affil in affil_list:
+                    affiliation = author.human.previous_affiliation.add()
+                    affiliation.name = affil
 
-        try:
+        if not pd.isnull(row["orcid_url"].values[0]):
             author.human.orcid_url = str(row["orcid_url"].values[0])
-        except:
+        else:
             author.human.orcid_url = ""
-        
-        try:
+
+        if not pd.isnull(row["orcid"].values[0]):
             author.human.orcid = row["orcid"].values[0]
-        except:
+        else:
             author.human.orcid = ""
 
     def _attribute_review(self, review: dm.Review, row: list):
         review.presentation_score = row["presentation_score"]
 
-        try:
+        if not pd.isnull(row["commentary_to_author"]):
             review.commentary_to_author.text = row["commentary_to_author"]
-        except:
+        else:
             review.commentary_to_author.text = ""
 
-        try:
+        if not pd.isnull(row["commentary_to_chair"]):
             review.commentary_to_chair.text = row["commentary_to_chair"]
-        except:
+        else:
             review.commentary_to_chair.text = ""
 
         if row["presentation_recommendation"].lower() == "reject":
@@ -200,61 +201,67 @@ class ChandraBot(object):
             review.publication_recommend = dm.PRESENTATION_REC_NONE
 
     def _attribute_reviewer(self, review: dm.Review, row: list):
-        try:
+
+        if row.empty:
+            return
+
+        if not pd.isnull(row["name"].values[0]):
             review.reviewer.human.name = row["name"].values[0]
-        except:
+        else:
             review.reviewer.human.name = ""
 
-        try:
+        if not pd.isnull(row["aliases"].values[0]):
             for alias in row["aliases"].values[0].split(","):
-                new_alias = review.reviewer.aliases.add()
-                new_alias = alias
-        except:
-            None
+                if alias != "NA":
+                    review.reviewer.human.aliases.append(alias)
 
-        try:
+        if not pd.isnull(row["hash_id"].values[0]):
             review.reviewer.human.hash_id = row["hash_id"].values[0]
-        except:
+        else:
             review.reviewer.human.hash_id = ""
 
-        try:
-            review.reviewer.human.current_affiliation.name = row["current_affiliation"].values[0]
-        except:
+        if not pd.isnull(row["current_affiliation"].values[0]):
+            review.reviewer.human.current_affiliation.name = row[
+                "current_affiliation"
+            ].values[0]
+        else:
             review.reviewer.human.current_affiliation.name = ""
 
-        try:
-            review.reviewer.human.last_degree_affiliation.name = str(row["last_degree_affiliation"].values[0])
-        except:
+        if not pd.isnull(row["last_degree_affiliation"].values[0]):
+            review.reviewer.human.last_degree_affiliation.name = str(
+                row["last_degree_affiliation"].values[0]
+            )
+        else:
             review.reviewer.human.last_degree_affiliation.name = ""
 
-        try:
+        if not pd.isnull(row["previous_affiliation"].values[0]):
             for affil_name in row["previous_affiliation"].values[0].split(","):
                 affiliation = review.reviewer.human.previous_affiliation.add()
-                affiliation.name = row["previous_affiliation"].values[0]
-        except:
-            None
+                affiliation.name = affil_name
 
-        try:
+        if not pd.isnull(row["orcid_url"].values[0]):
             review.reviewer.human.orcid_url = str(row["orcid_url"].values[0])
-        except:
+        else:
             review.reviewer.human.orcid_url = ""
 
-        try:
+        if not pd.isnull(row["orcid"].values[0]):
             review.reviewer.human.orcid = str(row["orcid"].values[0])
-        except:
+        else:
             review.reviewer.human.orcid = ""
 
-        try:
+        if not pd.isnull(row["verified"].values[0]):
             review.reviewer.verified = bool(row["verified"].values[0])
-        except:
+        else:
             review.reviewer.verified = False
+
+        return
 
     def assemble_paper_book(self):
         """
         Assemble the input databases into the serialized data
         object defined in the protobuffer. Calling this method
         allows the user to navigate the data using the serialized
-        data objects rather than via DataFrames. 
+        data objects rather than via DataFrames.
 
         args:
            None
@@ -266,16 +273,13 @@ class ChandraBot(object):
             self._attribute_paper(paper, paper_row)
 
             if "author_ids" in self.paper_df.columns:
-                for author_id in paper_row.author_ids.split(","):
-                    if self.human_df["author_id"].eq(author_id).any():
-                        human_row = self.human_df.loc[
-                            self.human_df["author_id"] == author_id
-                        ]
-                        self._attribute_author(
-                            paper,
-                            paper.authors.add(),
-                            human_row
-                        )
+                if not pd.isnull(paper_row.author_ids):
+                    for author_id in paper_row.author_ids.split(","):
+                        if self.human_df["author_id"].eq(author_id).any():
+                            human_row = self.human_df.loc[
+                                self.human_df["author_id"] == author_id
+                            ]
+                            self._attribute_author(paper.authors.add(), human_row)
 
             paper_review_df = self.review_df.loc[self.review_df["paper_id"] == paper_id]
             paper_review_df.set_index("reviewer_human_hash_id")
@@ -292,14 +296,14 @@ class ChandraBot(object):
     def create_bot(paper_file: str, review_file: str, human_file: str):
         """
         Create a ChandraBot object from separate paper, review, and
-        human CSV files. 
+        human CSV files.
 
         args:
             paper_file: input CSV file consistent with the PAPER_DICT
                 definition
             review_file: input CSV file consistent with the REVIEW_DICT
                 definition
-            human_file: input CSV file consistent wit the HUMAN_DICT 
+            human_file: input CSV file consistent wit the HUMAN_DICT
                definition
 
         returns: a Chandra Bot example
@@ -317,10 +321,13 @@ class ChandraBot(object):
 
     @staticmethod
     def read_paper_book(input_file: str):
+        """
+        read_paper_book
+        """
         paper_book = dm.PaperBook()
         try:
-            with open(input_file, "rb") as f:
-                paper_book.ParseFromString(f.read())
+            with open(input_file, "rb") as file_pointer:
+                paper_book.ParseFromString(file_pointer.read())
         except IOError:
             print(input_file + ": File not found.")
 
@@ -332,8 +339,11 @@ class ChandraBot(object):
         return bot
 
     def write_paper_book(self, output_file: str):
-        with open(output_file, "wb") as f:
-            f.write(self.paper_book.SerializeToString())
+        """
+        write_paper_book
+        """
+        with open(output_file, "wb") as file_pointer:
+            file_pointer.write(self.paper_book.SerializeToString())
 
     def _compute_normalized_scores(self, min_number_reviews: int):
         scores_df = pd.DataFrame()
@@ -372,11 +382,9 @@ class ChandraBot(object):
         for paper in self.paper_book.paper:
             for review in paper.reviews:
                 hash_id = review.reviewer.human.hash_id
-                if hash_id in matched_reviewer:
-                    None
-                else:
+                if hash_id not in matched_reviewer:
                     matched_reviewer.append(hash_id)
-                    try:
+                    if hash_id in normalized_df.index:
                         row = normalized_df.loc[hash_id]
                         review.reviewer.mean_present_score = row["mean"]
                         review.reviewer.std_dev_present_score = row["std"]
@@ -388,26 +396,27 @@ class ChandraBot(object):
                             ) / row["std"]
                         else:
                             review.normalized_present_score = None
-                    except:
-                        None
 
     def compute_normalized_scores(
         self, min_number_reviews: int = 10, dataframe_only: bool = False
     ):
+        """
+        compute_normalized_scores
+        """
         if dataframe_only:
-            df = self.review_df
+            temp_df = self.review_df.copy()
             mean_df = (
-                df.groupby("reviewer_human_hash_id")
+                temp_df.groupby("reviewer_human_hash_id")
                 .mean()[["presentation_score"]]
                 .rename(columns={"presentation_score": "mean"})
             )
             std_df = (
-                df.groupby("reviewer_human_hash_id")
+                temp_df.groupby("reviewer_human_hash_id")
                 .std()[["presentation_score"]]
                 .rename(columns={"presentation_score": "std"})
             )
             count_df = (
-                df.groupby("reviewer_human_hash_id")
+                temp_df.groupby("reviewer_human_hash_id")
                 .count()[["presentation_score"]]
                 .rename(columns={"presentation_score": "count"})
             )
@@ -415,22 +424,25 @@ class ChandraBot(object):
                 count_df, on="reviewer_human_hash_id"
             )
 
-            df = df.join(normalized_df, on="reviewer_human_hash_id")
-            df["normalized_present_score"] = (
-                df["presentation_score"] - df["mean"]
-            ) / df["std"]
-            df = df.rename(
+            temp_df = temp_df.join(normalized_df, on="reviewer_human_hash_id")
+            temp_df["normalized_present_score"] = (
+                temp_df["presentation_score"] - temp_df["mean"]
+            ) / temp_df["std"]
+            temp_df = temp_df.rename(
                 columns={
                     "mean": "mean_present_score",
                     "std": "std_dev_present_score",
                     "count": "number_of_reviews",
                 }
             )
-            self.review_df = df
+            self.review_df = temp_df.copy()
         else:
             self._compute_normalized_scores(min_number_reviews)
 
     def make_dataframe(self, dataframe_name: str):
+        """
+        make_dataframe
+        """
         output_df = pd.DataFrame()
 
         if dataframe_name == "paper":
@@ -557,24 +569,27 @@ class ChandraBot(object):
         return output_df
 
     def _make_author_id_df(self):
-        list = []
+        author_list = []
         for paper in self.paper_book.paper:
             for author in paper.authors:
-                if author.human.hash_id not in list:
-                    list.append(author.human.hash_id)
-        df = pd.DataFrame({"hash_id": list})
-        df["author_id"] = np.arange(len(df)) + 1
+                if author.human.hash_id not in author_list:
+                    author_list.append(author.human.hash_id)
+        return_df = pd.DataFrame({"hash_id": author_list})
+        return_df["author_id"] = np.arange(len(return_df)) + 1
 
-        return df
+        return return_df
 
     def count_former_coauthors(self, dataframe_only: bool = False):
+        """
+        count former coauthors
+        """
         if dataframe_only:
-            df = self.paper_df[["paper_id", "author_ids"]]
-            df = (
+            temp_df = self.paper_df[["paper_id", "author_ids"]].copy()
+            temp_df = (
                 pd.concat(
                     [
-                        df["paper_id"].reset_index(drop=True),
-                        df.author_ids.str.split(",", expand=True),
+                        temp_df["paper_id"].reset_index(drop=True),
+                        temp_df.author_ids.str.split(",", expand=True),
                     ],
                     axis=1,
                 )
@@ -591,7 +606,7 @@ class ChandraBot(object):
                 {"author_id": "int64"}
             )
             auth_df = (
-                df.astype({"author_id": "int64"})
+                temp_df.astype({"author_id": "int64"})
                 .reset_index()
                 .merge(h_df, on="author_id", how="left")
             )
@@ -604,17 +619,17 @@ class ChandraBot(object):
                 .reset_index(name="count")
             )
 
-            df = auth_df.merge(
+            temp_df = auth_df.merge(
                 auth_df, how="outer", on=["paper_id", "year"], suffixes=("_01", "_02")
             )
-            gb = df[["paper_id", "year", "hash_id_01", "hash_id_02"]].groupby(
+            gb_df = temp_df[["paper_id", "year", "hash_id_01", "hash_id_02"]].groupby(
                 ["hash_id_01", "hash_id_02"]
             )
             a_a_pairs_df = (
-                gb.size()
+                gb_df.size()
                 .to_frame(name="papers_written_with_authors")
                 .join(
-                    gb.agg({"year": "min"}).rename(
+                    gb_df.agg({"year": "min"}).rename(
                         columns={"year": "year_of_first_collab"}
                     )
                 )
@@ -628,8 +643,8 @@ class ChandraBot(object):
                 right_on=["hash_id_01", "hash_id_02"],
             ).dropna()
 
-            df = auth_df.merge(r_df, how="left", on="paper_id")
-            df_b = df.merge(
+            temp_df = auth_df.merge(r_df, how="left", on="paper_id")
+            df_b = temp_df.merge(
                 conflict_r_df, how="left", on=["hash_id", "reviewer_human_hash_id"]
             ).dropna()
             df_c = df_b[df_b["year_of_first_collab"] <= df_b["year"]]
@@ -649,11 +664,11 @@ class ChandraBot(object):
                     a_list.append(author.human.hash_id)
                 pairs = [a_list, a_list]
                 data = list(itertools.product(*pairs))
-                idx = ["{}".format(i) for i in range(1, len(data) + 1)]
-                df = pd.DataFrame(data, index=idx, columns=list("ab"))
-                df = df[df.a != df.b]
-                df["year"] = paper.year
-                pairs_df = pd.concat([pairs_df, df])
+                idx = [f"{i}" for i in range(1, len(data) + 1)]
+                temp_df = pd.DataFrame(data, index=idx, columns=list("ab"))
+                temp_df = temp_df[temp_df.a != temp_df.b].copy()
+                temp_df["year"] = paper.year
+                pairs_df = pd.concat([pairs_df, temp_df])
 
             count_df = (
                 pairs_df.groupby(["a", "b"]).size().reset_index(name="paper_count")
@@ -671,20 +686,26 @@ class ChandraBot(object):
                     a_list.append(author.human.hash_id)
                 for review in paper.reviews:
                     r_hash_id = review.reviewer.human.hash_id
-                    df = pairs_df[pairs_df["a"] == r_hash_id]
-                    for a in a_list:
-                        a_df = df[(df.b == a) & df.year_first_collab <= paper.year]
+                    temp_df = pairs_df[pairs_df["a"] == r_hash_id]
+                    for auth in a_list:
+                        a_df = temp_df[
+                            (temp_df.b == auth) & temp_df.year_first_collab
+                            <= paper.year
+                        ].copy()
                         review.papers_written_with_authors += sum(a_df["paper_count"])
 
     @staticmethod
-    def _count_words_in_text(key_words, output_col_name, df, input_col_name):
+    def _count_words_in_text(key_words, output_col_name, input_df, input_col_name):
         look_for = "|".join(key_words)
-        df[output_col_name] = df[input_col_name].str.count(look_for)
-        return df
+        input_df[output_col_name] = input_df[input_col_name].str.count(look_for)
+        return input_df
 
     def count_words_in_paper_abstract(
         self, key_words, column_name: str, dataframe_only: bool = True
     ):
+        """
+        count words in paper abstract
+        """
         if dataframe_only:
             self.paper_df = ChandraBot._count_words_in_text(
                 key_words, column_name, self.paper_df, "abstract"
@@ -695,6 +716,9 @@ class ChandraBot(object):
     def count_words_in_review_commentary(
         self, key_words, column_name: str, dataframe_only: bool = True
     ):
+        """
+        count words in review commentary
+        """
         if dataframe_only:
             self.review_df = ChandraBot._count_words_in_text(
                 key_words, column_name, self.review_df, "commentary_to_author"
@@ -703,23 +727,29 @@ class ChandraBot(object):
             print("dataframe_only must be True")
 
     def append_verified_reviewer(self, min_count: int, dataframe_only: bool = False):
+        """
+        append verified reviewer
+        """
         if dataframe_only:
-            df = pd.merge(
+            temp_df = pd.merge(
                 self.review_df,
                 self.human_df[["hash_id", "verified"]],
                 how="left",
                 left_on=["reviewer_human_hash_id"],
                 right_on=["hash_id"],
             )
-            df = df.loc[df.verified][["paper_id", "presentation_score"]]
-            df = df.groupby("paper_id").agg(
+            temp_df["verified"] = temp_df["verified"].fillna(False)
+            temp_df = temp_df.loc[temp_df.verified][
+                ["paper_id", "presentation_score"]
+            ].copy()
+            temp_df = temp_df.groupby("paper_id").agg(
                 n=("presentation_score", "size"),
                 mean_verified_score=("presentation_score", "mean"),
             )
-            df = df.loc[df["n"] >= min_count].reset_index()
+            temp_df = temp_df.loc[temp_df["n"] >= min_count].copy().reset_index()
             self.review_df = pd.merge(
                 self.review_df,
-                df[["paper_id", "mean_verified_score"]],
+                temp_df[["paper_id", "mean_verified_score"]],
                 how="left",
                 on=["paper_id"],
             )
@@ -733,3 +763,5 @@ class ChandraBot(object):
                     paper.mean_verified_score = np.mean(v_list)
                 else:
                     paper.mean_verified_score = np.nan
+
+        return

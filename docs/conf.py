@@ -24,7 +24,6 @@ sys.path.insert(0, project_root)
 
 import chandra_bot
 
-
 # -- Project information -----------------------------------------------------
 
 project = "Chandra Bot"
