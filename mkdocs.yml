@@ -1,0 +1,74 @@
+site_name: "Main Roads Western Australia PTM Data Model"
+site_url: https://aep50.github.io/chandra-bot
+repo_url: https://github.com/aep50/chandra-bot
+
+use_directory_urls: false
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - content.code.annotate
+    - content.tabs.link
+    - navigation.indexes
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: grey
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: grey
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+plugins:
+  - autorefs
+  - awesome-pages
+  - mike
+  - mkdocs-jupyter:
+      include_source: True
+  - mkdocstrings:
+      default_handler: python
+      enable_inventory: true
+      handlers:
+          rendering:
+            show_root_heading: false
+            show_source: true
+            heading_level: 3
+      custom_templates: templates
+  - search
+
+nav:
+  - Home: README.md
+  - API: chandra_bot.md
+
+extra:
+  version:
+    provider: mike
+    default: latest
+
+extra_css:
+  - https://use.fontawesome.com/releases/v5.13.0/css/all.css
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      linenums: true
+  - fontawesome_markdown
+  - meta
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.smartsymbols
+  - smarty
+  - toc:
+      # insert a blank space before the character
+      permalink: " ¶"
