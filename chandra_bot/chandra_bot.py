@@ -359,12 +359,12 @@ class ChandraBot(object):
 
         mean_df = (
             scores_df.groupby("reviewer_id")
-            .mean()[["score"]]
+            .mean(numeric_only=True)[["score"]]
             .rename(columns={"score": "mean"})
         )
         std_df = (
             scores_df.groupby("reviewer_id")
-            .std()[["score"]]
+            .std(numeric_only=True)[["score"]]
             .rename(columns={"score": "std"})
         )
         count_df = (
@@ -405,12 +405,12 @@ class ChandraBot(object):
             temp_df = self.review_df.copy()
             mean_df = (
                 temp_df.groupby("reviewer_human_hash_id")
-                .mean()[["presentation_score"]]
+                .mean(numeric_only=True)[["presentation_score"]]
                 .rename(columns={"presentation_score": "mean"})
             )
             std_df = (
                 temp_df.groupby("reviewer_human_hash_id")
-                .std()[["presentation_score"]]
+                .std(numeric_only=True)[["presentation_score"]]
                 .rename(columns={"presentation_score": "std"})
             )
             count_df = (
