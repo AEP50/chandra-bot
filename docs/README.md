@@ -4,6 +4,7 @@ The [Annual Meeting](http://www.trb.org/AnnualMeeting/AnnualMeeting.aspx) of the
 
 ## Data Model
 In order to organize our thinking and structure our code, we started with a [data model](/chandra_bot/chandra_bot_data_model.proto). It includes:
+    
 * Humans -- humans write and review papers;
 * Papers -- research articles submitted to the Annual Meeting;
 * Reviews -- reviews of submitted papers; and,

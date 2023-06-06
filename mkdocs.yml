@@ -1,4 +1,4 @@
-site_name: "Main Roads Western Australia PTM Data Model"
+site_name: "Chandra Bot"
 site_url: https://aep50.github.io/chandra-bot
 repo_url: https://github.com/aep50/chandra-bot
 
@@ -43,6 +43,8 @@ plugins:
             heading_level: 3
       custom_templates: templates
   - search
+  - mkdocs_protobuf:
+      proto_dir: /chandra_bot/
 
 nav:
   - Home: README.md

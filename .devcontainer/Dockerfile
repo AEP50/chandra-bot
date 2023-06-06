@@ -5,8 +5,8 @@ RUN apt-get update \
     apt-get install --no-install-recommends --assume-yes \
       protobuf-compiler
 
-COPY environment.yml /tmp/conda-tmp/
-RUN /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml
+COPY environment-old-mac.yml /tmp/conda-tmp/
+RUN /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment-old-mac.yml
 
 # RUN protoc -I=./chandra_bot --python_out=./chandra_bot ./chandra_bot/data_model.proto
 # RUN pip install -e .

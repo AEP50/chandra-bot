@@ -15,10 +15,8 @@ class ChandraBot(object):
     """
     A ChandraBot object that stores research paper details, review information, and authors.
 
-    .. highlight:: python
-
     Typical usage:
-    ::
+
        bot = ChandraBot.create_bot(
            paper_file=os.path.join(PAPER_FILE),
            review_file=os.path.join(REVIEW_FILE),
