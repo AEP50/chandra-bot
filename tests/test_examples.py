@@ -1,8 +1,8 @@
 import os
 
-from chandra_bot import ChandraBot as cbot
-
 import pytest
+
+from chandra_bot import ChandraBot as cbot
 
 example_dir = os.path.join(os.getcwd(), "examples")
 
