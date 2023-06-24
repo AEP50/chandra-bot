@@ -43,12 +43,11 @@ plugins:
             heading_level: 3
       custom_templates: templates
   - search
-  - mkdocs_protobuf:
-      proto_dir: /chandra_bot/
 
 nav:
   - Home: README.md
   - API: chandra_bot.md
+  - Data Model: data_model.md
 
 extra:
   version:
