@@ -1,55 +1,42 @@
+"""Tools for managing paper review data.
+
+ChandraBot is a set of tools for managing paper review data. It is designed to
+assemble data to assess reviewer performance and review process fairness.
+
+Typical usage example:
+
+```python
+    bot = ChandraBot.create_bot(
+        paper_file=os.path.join(PAPER_FILE),
+        review_file=os.path.join(REVIEW_FILE),
+        human_file=os.path.join(HUMAN_FILE),
+    )
+
+    bot.assemble_paper_book()
+    bot.compute_normalized_scores(dataframe_only=True)
+    bot.write_paper_book(output_file=book_file)
+```
 """
-Module docstring
-"""
+
 from __future__ import print_function
 
 import itertools
 
 import numpy as np
 import pandas as pd
+from attr import dataclass
 
 from . import data_model_pb2 as dm
 
 
-class ChandraBot(object):
-    """
-    A ChandraBot object that stores research paper details, review information, and authors.
-
-    Typical usage:
-
-       bot = ChandraBot.create_bot(
-           paper_file=os.path.join(PAPER_FILE),
-           review_file=os.path.join(REVIEW_FILE),
-           human_file=os.path.join(HUMAN_FILE),
-        )
-
-        bot.assemble_paper_book()
-        bot.compute_normalized_scores(dataframe_only=True)
-        bot.write_paper_book(output_file=book_file)
+@dataclass
+class InputSchemas:
+    """Defines the input schemas for the paper, review, and human data.
 
     Attributes:
-       PAPER_DICT (dict): dictionary of attributes for the
-            PAPER_FILE input
-
-        REVIEW_DICT (dict): dictionary of attributs for the
-            REVIEW_FILE input
-
-        HUMAN_DICT (dict): dictionary of attributes for the
-            HUMAN_FILE input
-
-        paper_df (DataFame): paper data with the attributes
-           defined in PAPER_DICT
-
-        review_df (DataFrame): review data with the attributes
-           defined in REVIEW_DICT
-
-        human_df (DataFrame): human data with the attributes
-           defined in HUMAN_DICT
-
-        paper_book (PaperBook): a serialized data representation
-           of the paper, review, and human data. See the ProtoBuf
-           file for details.
-
+        PAPER_DICT: dictionary of attributes for the PAPER_FILE input
+        REVIEW_DICT: dictionary of attributes for the REVIEW_FILE input
+        HUMAN_DICT: dictionary of attributes for the HUMAN_FILE input
     """
 
     PAPER_DICT = {
@@ -86,6 +73,20 @@ class ChandraBot(object):
         "author_id": pd.StringDtype(),
         "verified": "bool",
     }
+
+
+class ChandraBot:
+    """Manages data for paper reviews.
+
+    Say more here
+
+    Attributes:
+        paper_df: paper data with the attributes defined in PAPER_DICT
+        review_df: review data with the attributes defined in REVIEW_DICT
+        human_df: human data with the attributes defined in HUMAN_DICT
+        paper_book: a serialized data representation of the paper, review,
+        and human data. See the ProtoBuf file for details.
+    """
 
     def __init__(
         self,
@@ -308,10 +309,10 @@ class ChandraBot(object):
         """
 
         paper_df = pd.read_csv(
-            paper_file, dtype=ChandraBot.PAPER_DICT, index_col="paper_id"
+            paper_file, dtype=InputSchemas.PAPER_DICT, index_col="paper_id"
         )
-        review_df = pd.read_csv(review_file, dtype=ChandraBot.REVIEW_DICT)
-        human_df = pd.read_csv(human_file, dtype=ChandraBot.HUMAN_DICT)
+        review_df = pd.read_csv(review_file, dtype=InputSchemas.REVIEW_DICT)
+        human_df = pd.read_csv(human_file, dtype=InputSchemas.HUMAN_DICT)
 
         bot = ChandraBot(paper_df=paper_df, review_df=review_df, human_df=human_df)
 
