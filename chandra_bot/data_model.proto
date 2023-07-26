@@ -15,9 +15,25 @@ enum PUBLICATION_REC {
   PUBLICATION_REC_NONE = 3;
 }
 
+message Citations {
+  int32 citations_all_time =  1;
+  int32 citations_last_year = 2;
+  int32 citations_last_5_years = 3;
+}
+
+message Downloads {
+  int32 downloads_all_time =  1;
+  int32 downloads_last_year = 2;
+  int32 downloads_last_5_years = 3;
+}
+
 message Affiliation {
   string name = 1;
   repeated string aliases = 2;
+}
+
+message Keywords {
+  repeated string keywords = 1;
 }
 
 message Human {
@@ -34,39 +50,72 @@ message Human {
 message Paper {
   string number = 1;
   repeated Author authors = 2;
+  string title = 3;
+  int32 year = 4;
+  Content abstract = 5;
+  Content body = 6;
+  Keywords keywords = 7;
+}
+
+message AnnualMeetingPaper {
+  Paper paper = 1;
+  repeated Review reviews = 2;
+  optional PRESENTATION_REC committee_presentation_decision = 3;
+  optional PUBLICATION_REC committee_publication_decision = 4;
+  float mean_verified_score = 5;
+}
+
+message TrrPaper {
+  Paper paper = 1;
+  optional PUBLICATION_REC trr_handling_editor_decision = 2;
   repeated Review reviews = 3;
-  string title = 4;
-  int32 year = 5;
-  PRESENTATION_REC committee_presentation_decision = 6;
-  PUBLICATION_REC committee_publication_decision = 7;
-  Content abstract = 8;
-  Content body = 9;
-  float mean_verified_score = 10;
+  Citations citations = 4;
+  Downloads downloads = 5;
 }
 
 message Author {
   Human human = 1;
 }
 
+message Editor {
+  Human human = 1;
+  Keywords keywords = 2;
+  repeated TrrPaper accepted_papers = 3;
+  repeated TrrPaper rejected_papers = 4;
+  repeated Paper authored_papers = 5;
+}
+
+message ReviewerStats {
+  float mean_score = 1;
+  float std_dev_score = 2;
+  bool verified = 3;
+  int32 number_of_reviews = 4;
+  int32 assigned_reviews_not_complete = 5;
+
+}
+
 message Reviewer {
   Human human = 1;
-  bool verified = 2;
-  float mean_present_score = 3;
-  float std_dev_present_score = 4;
-  int32 number_of_reviews = 5;
-  int32 assigned_reviews_not_complete = 6;
+  optional ReviewerStats annual_meeting_stats = 2;
+  optional ReviewerStats trr_stats = 3;
+  Keywords keywords = 4;
+}
+
+message Assessment {
+  optional float presentation_score = 1;
+  optional PRESENTATION_REC presentation_recommend = 2;
+  optional PUBLICATION_REC publication_recommend = 3;
+  Content commentary_to_author = 4;
+  optional Content commentary_to_chair = 5;
+  optional Content commentary_to_editor = 6;
+  optional float normalized_presentation_score = 7;
 }
 
 message Review {
   Reviewer reviewer = 1;
-  float presentation_score = 2;
-  float normalized_present_score = 3;
-  Content commentary_to_author = 4;
-  Content commentary_to_chair = 5;
-  int32 papers_written_with_authors = 6;
-
-  PRESENTATION_REC presentation_recommend = 7;
-  PUBLICATION_REC publication_recommend = 8;
+  optional Assessment annual_meeting_assessment = 2;
+  optional Assessment trr_assessment = 3;
+  int32 papers_written_with_authors = 4;
 }
 
 message Content {
@@ -76,6 +125,6 @@ message Content {
   string text = 4;
 }
 
-message PaperBook {
-  repeated Paper paper = 1;
+message AnnualMeetingBook {
+  repeated AnnualMeetingPaper book = 1;
 }
