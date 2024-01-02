@@ -8,7 +8,8 @@ import itertools
 import numpy as np
 import pandas as pd
 
-from . import data_model_pb2 as dm
+# from . import data_model_pb2 as dm
+from . import data_model_pydantic as dm
 
 
 class ChandraBot(object):
@@ -102,7 +103,7 @@ class ChandraBot(object):
             self.review_df: pd.DataFrame = review_df
             self.human_df: pd.DataFrame = human_df
 
-            self.paper_book = dm.PaperBook()
+            self.paper_book = dm.PaperBook(paper=[])
         else:
             self.paper_book: dm.PaperBook = input_paper_book
 
@@ -112,20 +113,20 @@ class ChandraBot(object):
         paper.year = int(row["year"])
 
         if row["committee_presentation_decision"].lower() == "reject":
-            paper.committee_presentation_decision = dm.PRESENTATION_REC_REJECT
+            paper.committee_presentation_decision = dm.PresentationRecEnum.PRESENTATION_REC_REJECT
         elif row["committee_presentation_decision"].lower() == "accept":
-            paper.committee_presentation_decision = dm.PRESENTATION_REC_ACCEPT
+            paper.committee_presentation_decision = dm.PresentationRecEnum.PRESENTATION_REC_ACCEPT
         else:
-            paper.committee_presentation_decision = dm.PRESENTATION_REC_NONE
+            paper.committee_presentation_decision = dm.PresentationRecEnum.PRESENTATION_REC_NONE
 
         if row["committee_publication_decision"].lower() == "reject":
-            paper.committee_publication_decision = dm.PUBLICATION_REC_REJECT
+            paper.committee_publication_decision = dm.PublicationRecEnum.PUBLICATION_REC_REJECT
         elif row["committee_publication_decision"].lower() == "accept":
-            paper.committee_publication_decision = dm.PUBLICATION_REC_ACCEPT
+            paper.committee_publication_decision = dm.PublicationRecEnum.PUBLICATION_REC_ACCEPT
         elif row["committee_publication_decision"].lower() == "accept_correct":
-            paper.committee_publication_decision = dm.PUBLICATION_REC_ACCEPT_CORRECT
+            paper.committee_publication_decision = dm.PublicationRecEnum.PUBLICATION_REC_ACCEPT_CORRECT
         else:
-            paper.committee_publication_decision = dm.PUBLICATION_REC_NONE
+            paper.committee_publication_decision = dm.PublicationRecEnum.PUBLICATION_REC_NONE
 
         if "abstract" in row:
             paper.abstract.text = row["abstract"]
@@ -185,18 +186,18 @@ class ChandraBot(object):
             review.commentary_to_chair.text = ""
 
         if row["presentation_recommendation"].lower() == "reject":
-            review.presentation_recommend = dm.PRESENTATION_REC_REJECT
+            review.presentation_recommend = dm.PresentationRecEnum.PRESENTATION_REC_REJECT
         elif row["presentation_recommendation"].lower() == "accept":
-            review.presentation_recommend = dm.PRESENTATION_REC_ACCEPT
+            review.presentation_recommend = dm.PresentationRecEnum.PRESENTATION_REC_ACCEPT
         else:
-            review.presentation_recommend = dm.PRESENTATION_REC_NONE
+            review.presentation_recommend = dm.PresentationRecEnum.PRESENTATION_REC_NONE
 
         if row["publication_recommendation"].lower() == "reject":
-            review.publication_recommend = dm.PUBLICATION_REC_REJECT
+            review.publication_recommend = dm.PublicationRecEnum.PUBLICATION_REC_REJECT
         elif row["publication_recommendation"].lower() == "accept":
-            review.publication_recommend = dm.PUBLICATION_REC_ACCEPT
+            review.publication_recommend = dm.PublicationRecEnum.PUBLICATION_REC_ACCEPT
         else:
-            review.publication_recommend = dm.PRESENTATION_REC_NONE
+            review.publication_recommend = dm.PresentationRecEnum.PRESENTATION_REC_NONE
 
     def _attribute_reviewer(self, review: dm.Review, row: list):
 
