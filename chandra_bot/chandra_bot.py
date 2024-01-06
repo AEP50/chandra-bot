@@ -7,6 +7,7 @@ import itertools
 
 import numpy as np
 import pandas as pd
+import json
 
 # from . import data_model_pb2 as dm
 from . import data_model_pydantic as dm
@@ -128,17 +129,20 @@ class ChandraBot(object):
         else:
             paper.committee_publication_decision = dm.PublicationRecEnum.PUBLICATION_REC_NONE
 
+        paper.abstract = dm.Content.model_construct()
         if "abstract" in row:
             paper.abstract.text = row["abstract"]
         else:
             paper.abstract.text = "Missing"
 
+        paper.body = dm.Content.model_construct()
         if "body" in row:
             paper.body.text = str(row["body"])
         else:
             paper.body.text = "Missing"
 
     def _attribute_author(self, author: dm.Author, row: list):
+        author.human = dm.Human.model_construct()
         author.human.name = row["name"].values[0]
 
         if not pd.isnull(row["aliases"].values[0]):
@@ -146,21 +150,25 @@ class ChandraBot(object):
                 author.human.aliases.append(alias)
 
         author.human.hash_id = row["hash_id"].values[0]
+        author.human.current_affiliation = dm.Affiliation.model_construct()
         if not pd.isnull(row["current_affiliation"].values[0]):
             author.human.current_affiliation.name = row["current_affiliation"].values[0]
         else:
             author.human.current_affiliation.name = ""
 
+        author.human.last_degree_affiliation = dm.Affiliation.model_construct()
         author.human.last_degree_affiliation.name = str(
             row["last_degree_affiliation"].values[0]
         )
 
+        author.human.previous_affiliation = []
         if not pd.isnull(row["previous_affiliation"].values[0]):
             affil_list = row["previous_affiliation"].values[0].split(",")
             if len(affil_list) > 0:
                 for affil in affil_list:
-                    affiliation = author.human.previous_affiliation.add()
+                    affiliation = dm.Affiliation.model_construct()
                     affiliation.name = affil
+                    author.human.previous_affiliation.append(affiliation)
 
         if not pd.isnull(row["orcid_url"].values[0]):
             author.human.orcid_url = str(row["orcid_url"].values[0])
@@ -175,11 +183,13 @@ class ChandraBot(object):
     def _attribute_review(self, review: dm.Review, row: list):
         review.presentation_score = row["presentation_score"]
 
+        review.commentary_to_author = dm.Content.model_construct()
         if not pd.isnull(row["commentary_to_author"]):
             review.commentary_to_author.text = row["commentary_to_author"]
         else:
             review.commentary_to_author.text = ""
 
+        review.commentary_to_chair = dm.Content.model_construct()
         if not pd.isnull(row["commentary_to_chair"]):
             review.commentary_to_chair.text = row["commentary_to_chair"]
         else:
@@ -200,10 +210,12 @@ class ChandraBot(object):
             review.publication_recommend = dm.PresentationRecEnum.PRESENTATION_REC_NONE
 
     def _attribute_reviewer(self, review: dm.Review, row: list):
+        review.reviewer = dm.Reviewer.model_construct()
 
         if row.empty:
             return
 
+        review.reviewer.human = dm.Human.model_construct()
         if not pd.isnull(row["name"].values[0]):
             review.reviewer.human.name = row["name"].values[0]
         else:
@@ -219,6 +231,7 @@ class ChandraBot(object):
         else:
             review.reviewer.human.hash_id = ""
 
+        review.reviewer.human.current_affiliation = dm.Affiliation.model_construct()
         if not pd.isnull(row["current_affiliation"].values[0]):
             review.reviewer.human.current_affiliation.name = row[
                 "current_affiliation"
@@ -226,6 +239,7 @@ class ChandraBot(object):
         else:
             review.reviewer.human.current_affiliation.name = ""
 
+        review.reviewer.human.last_degree_affiliation = dm.Affiliation.model_construct()
         if not pd.isnull(row["last_degree_affiliation"].values[0]):
             review.reviewer.human.last_degree_affiliation.name = str(
                 row["last_degree_affiliation"].values[0]
@@ -233,10 +247,12 @@ class ChandraBot(object):
         else:
             review.reviewer.human.last_degree_affiliation.name = ""
 
+        review.reviewer.human.last_degree_affiliation = []
         if not pd.isnull(row["previous_affiliation"].values[0]):
             for affil_name in row["previous_affiliation"].values[0].split(","):
-                affiliation = review.reviewer.human.previous_affiliation.add()
+                affiliation = dm.Affiliation.model_construct()
                 affiliation.name = affil_name
+                review.reviewer.human.previous_affiliation.append(affiliation)
 
         if not pd.isnull(row["orcid_url"].values[0]):
             review.reviewer.human.orcid_url = str(row["orcid_url"].values[0])
@@ -266,11 +282,12 @@ class ChandraBot(object):
            None
         """
         for paper_id in self.paper_df.index:
-            paper = self.paper_book.paper.add()
+            paper = dm.Paper.model_construct()
             paper.number = paper_id
             paper_row = self.paper_df.loc[paper_id]
             self._attribute_paper(paper, paper_row)
 
+            paper.authors = []
             if "author_ids" in self.paper_df.columns:
                 if not pd.isnull(paper_row.author_ids):
                     for author_id in paper_row.author_ids.split(","):
@@ -278,18 +295,26 @@ class ChandraBot(object):
                             human_row = self.human_df.loc[
                                 self.human_df["author_id"] == author_id
                             ]
-                            self._attribute_author(paper.authors.add(), human_row)
+                            author = dm.Author.model_construct()
+                            self._attribute_author(author, human_row)
+                            paper.authors.append(author)
 
             paper_review_df = self.review_df.loc[self.review_df["paper_id"] == paper_id]
             paper_review_df.set_index("reviewer_human_hash_id")
 
+            paper.reviews=[]
             for hash_id in paper_review_df.index:
                 review_row = paper_review_df.loc[hash_id]
                 reviewer_hash = review_row["reviewer_human_hash_id"]
                 human_row = self.human_df.loc[self.human_df["hash_id"] == reviewer_hash]
-                review = paper.reviews.add()
+                review = dm.Review.model_construct()
                 self._attribute_review(review, review_row)
                 self._attribute_reviewer(review, human_row)
+                paper.reviews.append(review)
+            
+            # validate and add paper to paper book
+            dm.Paper.model_validate(paper)
+            self.paper_book.paper.append(paper)
 
     @staticmethod
     def create_bot(paper_file: str, review_file: str, human_file: str):
@@ -323,10 +348,11 @@ class ChandraBot(object):
         """
         read_paper_book
         """
-        paper_book = dm.PaperBook()
         try:
+            # data = json.load(input_file)
+            # paper_book = pd.PaperBook.model_validate_json(data, strict=False)
             with open(input_file, "rb") as file_pointer:
-                paper_book.ParseFromString(file_pointer.read())
+                paper_book = dm.PaperBook.model_validate_json(file_pointer.read(), strict=False)
         except IOError:
             print(input_file + ": File not found.")
 
@@ -342,7 +368,7 @@ class ChandraBot(object):
         write_paper_book
         """
         with open(output_file, "wb") as file_pointer:
-            file_pointer.write(self.paper_book.SerializeToString())
+            file_pointer.write(self.paper_book.model_dump_json().encode())
 
     def _compute_normalized_scores(self, min_number_reviews: int):
         scores_df = pd.DataFrame()

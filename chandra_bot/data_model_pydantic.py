@@ -1,13 +1,15 @@
 from typing import List
 from pydantic import BaseModel, Field
 
-class PresentationRecEnum(BaseModel):
+from enum import IntEnum
+
+class PresentationRecEnum(IntEnum):
     """Enum for presentation recommendation."""
     PRESENTATION_REC_REJECT: int = 0
     PRESENTATION_REC_ACCEPT: int = 1
     PRESENTATION_REC_NONE: int = 2
 
-class PublicationRecEnum(BaseModel):
+class PublicationRecEnum(IntEnum):
     """Enum for publication recommendation."""
     PUBLICATION_REC_REJECT: int = 0
     PUBLICATION_REC_ACCEPT: int = 1

@@ -31,10 +31,11 @@ def test():
     print("Read paper book from disk")
     bot = cbot.read_paper_book(book_file)
 
-    print("Make dataframes")
-    paper_out_df = bot.make_dataframe("paper")
-    review_out_df = bot.make_dataframe("review")
-    human_out_df = bot.make_dataframe("human")
+    # this test is redundant as the read_paper_book above calls make_dataframe()
+    # print("Make dataframes")
+    # paper_out_df = bot.make_dataframe("paper")
+    # review_out_df = bot.make_dataframe("review")
+    # human_out_df = bot.make_dataframe("human")
 
     print("Count former co-authors")
     bot.count_former_coauthors()
